@@ -550,8 +550,10 @@ pre {
   margin-bottom: 1.5625rem; }
 
 code {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   line-height: 1.2;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
   background-color: rgba(0,0,0,0.04);
   border-radius: 3px;
   }
