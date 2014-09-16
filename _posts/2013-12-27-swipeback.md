@@ -20,12 +20,15 @@ The Samsung Galaxy Nexus was one of the first device without hardware buttons fo
 </div>
 
 How Pinterest implement that? They use a single Activity and a ViewPager with custom page transformer. Something like this:
+
 <div style="width=100%;" align="center">
+
 <video class="play-on-hover" autoplay="">
     <source src="http://developer.android.com/training/animation/anim_page_transformer_depth.mp4" type="video/mp4">
     <source src="http://developer.android.com/training/animation/anim_page_transformer_depth.webm" type="video/webm">
     <source src="http://developer.android.com/training/animation/anim_page_transformer_depth.ogv" type="video/ogg">
   </video>
+  
 </div>
 
 
