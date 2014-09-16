@@ -53,6 +53,7 @@ My approach can be used for activities. It does pretty the same as the android m
 <iframe width="640" height="480" src="//www.youtube.com/embed/T6mbg_wqlkc?rel=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
+
 ## How to use it
 You simply have to set it up in you Activities onCreate() method.
 Instead of `Activity.setContentView()` call `SwipeBack.setContentView()`. It's not supported yet to build it from xml.
