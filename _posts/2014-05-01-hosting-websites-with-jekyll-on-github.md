@@ -40,3 +40,5 @@ In this next few steps I will describe how easy it is to setup jekyll and to set
 Now you have to wait until the previous DNS entry expires (TTL = Time To Live) to open the github hosted website with your browser. In the meantime you can check your setup from console with the following command:
 
 > dig yourdomain.com +nostats +nocomments +nocmd
+
+**Thank you github for free hosting!**
