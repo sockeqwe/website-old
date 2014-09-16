@@ -102,7 +102,7 @@ html, body, .notepad-post-container, .notepad-post-header {
       font-weight: 800;
       font-size: 2.5rem;
       margin: 0 auto;
-      line-height: 1.1;
+      line-height: 1.4;
       text-transform: uppercase; }
       @media only screen and (min-width: 40.063em) {
         .post-template .notepad-post-title h1 {

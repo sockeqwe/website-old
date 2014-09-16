@@ -6,9 +6,10 @@ mathjax: false
 featured: false
 comments: true
 headline: Hosting websites with jekyll on github
-categories: 
+categories:
   - personal
 tags: personal
+imagefeature: cover_github_family.jpg
 ---
 
 Finally I have found time to setup my own website with blog. To be honest, I had to buy a domain for maven central to be able to upload my libraries with the groupid _"com.hannesdorfmann"_. Since I own now this domain I guess it's a good idea to provide some content.
@@ -25,11 +26,11 @@ In this next few steps I will describe how easy it is to setup jekyll and to set
    1. You have to add and commit a `CNAME` file (with all caps!) to the root folder in your master branch. The CNAME file contains a single line with your domain. For instance my CNAME looks as follows:
 `hannesdorfmann.com`. You can also use subdomains in you CNAME file like `blog.hannesdorfmann.com`.
    2. As last step you have to configure your DNS provider: Add an `A record` or `CNAME record`. Note that not every DNS provider allows to setup `A records`.
-   
+
    - `A record` Mine (http://inwx.com/) allows to setup A records. So remove previous A records and point _@_ to the following ip addresses (Note that ip addresses may change in the future. Check [github](https://help.github.com/articles/tips-for-configuring-an-a-record-with-your-dns-provider) page to get the current ones):
    > @: 192.30.252.153
    > @: 192.30.252.154
-   
+
    - `CNAME` is something like an alias to link to another url. You have to link your domain to username.github.io. **(Note the trailing full stop)**. The CNAME records looks like this:
    > www: username.github.io.
 
