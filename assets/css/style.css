@@ -258,7 +258,7 @@ main, .notepad-share-icons, .notepad-disqus {
     .notepad-content .notepad-index-post .notepad-post-header .notepad-post-title a {
       color: black; }
 
-    .notepad-content .notepad-index-post .notepad-post-header .notepad-post-title a:hover {
+    .notepad-post-title a:hover {
       color: #e51843;
       }
 
