@@ -21,11 +21,9 @@ public class MyFragment extends Fragment {
   private String title;
 
   public static MyFragment newInstance(int id, String title) {
-
     MyFragment f = new MyFragment();
     f.id = id;
     f.title = title;
-
     return f;
   }
 
@@ -35,9 +33,7 @@ public class MyFragment extends Fragment {
 
             Toast.makeText(getActivity(), "Hello " + title.substring(0, 3),
                 Toast.LENGTH_SHORT).show();
-
       }
-
 }
 {% endhighlight %}
 
@@ -67,26 +63,20 @@ public class MyFragment extends Fragment {
   private String title;
 
   public static MyFragment newInstance(int id, String title) {
-
     MyFragment f = new MyFragment();
-
     Bundle b = new Bundle();
     b.putInt(KEY_ID, id);
     b.putString(KEY_TITLE, title);
-
     f.setArguments(b);
-
     return f;
   }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
-
       // onCreate it's a good point to read the arguments
       Bundle b = getArguments();
       this.id = b.getInt(KEY_ID);
       this.title = b.getString(KEY_TITLE);
-
   }
 
   @Override
@@ -96,9 +86,7 @@ public class MyFragment extends Fragment {
             // No NullPointer here, because onCreate() is called before this
             Toast.makeText(getActivity(), "Hello " + title.substring(0, 3),
                 Toast.LENGTH_SHORT).show();
-
       }
-
 }
 {% endhighlight %}
 
@@ -130,9 +118,7 @@ public class MyFragment extends Fragment {
 
       		Toast.makeText(getActivity(), "Hello " + title,
       			Toast.LENGTH_SHORT).show();
-
       }
-
 }
 {% endhighlight %}
 
@@ -140,7 +126,7 @@ public class MyFragment extends Fragment {
 
 For example:
 
-```java
+{% highlight java %}
 public class MyActivity extends Activity {
 
 	public void onCreate(Bundle savedInstanceState){
@@ -154,16 +140,14 @@ public class MyActivity extends Activity {
 			new MyFragmentBuilder(id, title)
 			.build();
 
-
 		// Fragment Transaction
 		getFragmentManager()
 			.beginTransaction()
 			.replace(R.id.container, fragment)
 			.commit();
-
 	}
 
 }
-```
+{% endhighlight %}
 
 If you want to use it in your android application check out the [FragmentArgs project on github](https://github.com/sockeqwe/fragmentargs) where you will find more inforamtion about the api and how to use it. FragmentArgs is available on maven central.
