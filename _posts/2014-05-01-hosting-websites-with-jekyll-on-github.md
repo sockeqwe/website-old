@@ -29,12 +29,13 @@ In this next few steps I will describe how easy it is to setup jekyll and to set
 
    - **A record** Mine (http://inwx.com/) allows to setup A records. So remove previous A records and point _@_ to the following ip addresses (Note that ip addresses may change in the future. Check [github](https://help.github.com/articles/tips-for-configuring-an-a-record-with-your-dns-provider) page to get the current ones):
 
- > @: 192.30.252.153
- > @: 192.30.252.154
+> @: 192.30.252.153
+> @: 192.30.252.154
 
    - **CNAME** is something like an alias to link to another url. You have to link your domain to username.github.io. **(Note the trailing full stop)**. The CNAME records looks like this:
 
- > www: username.github.io.
+> www: username.github.io.
 
 Now you have to wait until the previous DNS entry expires (TTL = Time To Live) to open the github hosted website with your browser. In the meantime you can check your setup from console with the following command:
-  > dig yourdomain.com +nostats +nocomments +nocmd
+
+> dig yourdomain.com +nostats +nocomments +nocmd
