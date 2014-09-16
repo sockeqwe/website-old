@@ -3,10 +3,10 @@ layout: post
 title: SwipeBack
 description: "SwipeBack for Android Activities to do pretty the same as the android "back-button" will do, but in a really intuitive way by using a swipe gesture"
 modified: 2013-12-27
-headline: Hosting websites with jekyll on github
+headline: SwipeBack
 categories:
   - android
-tags: [android ui ux]
+tags: android
 comments: true
 share: true
 ----
