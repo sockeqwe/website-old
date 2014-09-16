@@ -7,9 +7,8 @@ featured: false
 comments: true
 headline: Hosting websites with jekyll on github
 categories:
-  - personal
-tags: personal
-imagefeature: cover_github_family.jpg
+  - github
+tags: github
 ---
 
 Finally I have found time to setup my own website with blog. To be honest, I had to buy a domain for maven central to be able to upload my libraries with the groupid _"com.hannesdorfmann"_. Since I own now this domain I guess it's a good idea to provide some content.
