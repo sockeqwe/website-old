@@ -258,10 +258,6 @@ main, .notepad-share-icons, .notepad-disqus {
     .notepad-content .notepad-index-post .notepad-post-header .notepad-post-title a {
       color: black; }
 
-    .notepad-post-title a:hover {
-      color: #e51843;
-      }
-
   @media only screen and (min-width: 40.063em) {
     .notepad-content .notepad-index-post .notepad-post-header .notepad-post-title {
       text-align: left;
