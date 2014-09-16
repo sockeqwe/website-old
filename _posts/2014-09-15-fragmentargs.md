@@ -9,6 +9,7 @@ headline: FragmentArgs
 categories:
   - android
 tags: android
+imagefeature: cover3.jpg
 ---
 
 Developing for Android is sometimes painful. You have to write lot of code to do simple things like setting up a Fragment. Fortunately java have supports a powerfull tool: **Annotation Processors**
