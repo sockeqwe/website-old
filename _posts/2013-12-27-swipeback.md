@@ -15,15 +15,18 @@ SwipeBack for Android Activities does pretty the same as the android "back-butto
 
 The Samsung Galaxy Nexus was one of the first device without hardware buttons for "back", "home" and "app switching (multitasking)" but used the androids navigation bar on screen (introduced in Android 4.0). The navigation bar was at least in my opinion a big step forward, especially on screen rotation from landscape to portrait and vice versa. But I asked myself, do we really need a navigation bar? I mean the navigation bar takes ca. 10 % of the whole screen. Even at the home screen the "back" and "home" button are useless (because they do nothing). So I thought to myself: Why do we not use swipe gestures instead of a navigation bar? But maybe this idea is to futuristic and not suitable for all kind of android user. A few years later apple introduced the swipe back gesture in iOS 7. Why doesn't Android Apps use swipe gesture as alternative to the back button. Pinterest and Tumblr do so:
 
-<iframe width="853" height="480" src="//www.youtube.com/embed/eVcSCWetnTA?list=UUxOw1jypdnu_LL17diJdsXw" frameborder="0" allowfullscreen></iframe>
+<div>
+<iframe width="640" height="480" src="//www.youtube.com/embed/eVcSCWetnTA?list=UUxOw1jypdnu_LL17diJdsXw" frameborder="0" allowfullscreen></iframe>
+</div>
 
 How Pinterest implement that? They use a single Activity and a ViewPager with custom page transformer. Something like this:
-
+<div style="width=100%;" align="center">
 <video class="play-on-hover" autoplay="">
     <source src="http://developer.android.com/training/animation/anim_page_transformer_depth.mp4" type="video/mp4">
     <source src="http://developer.android.com/training/animation/anim_page_transformer_depth.webm" type="video/webm">
     <source src="http://developer.android.com/training/animation/anim_page_transformer_depth.ogv" type="video/ogg">
   </video>
+</div>
 
 
 The problems with this approach are:
@@ -37,9 +40,13 @@ My approach can be used for activities. It does pretty the same as the android m
 
 [kicker app](https://play.google.com/store/apps/details?id=com.netbiscuits.kicker)
 
+<div>
 <iframe width="640" height="480" src="//www.youtube.com/embed/-QgECTWOoa0?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
 
+<div>
 <iframe width="640" height="480" src="//www.youtube.com/embed/T6mbg_wqlkc?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
 
 ## How to use it
 You simply have to set it up in you Activities onCreate() method.
