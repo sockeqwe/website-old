@@ -27,12 +27,13 @@ In this next few steps I will describe how easy it is to setup jekyll and to set
 `hannesdorfmann.com`. You can also use subdomains in you CNAME file like `blog.hannesdorfmann.com`.
    2. As last step you have to configure your DNS provider: Add an `A record` or `CNAME record`. Note that not every DNS provider allows to setup `A records`.
 
-   - **A record** Mine (http://inwx.com/) allows to setup A records. So remove previous A records and point _@_ to the following ip addresses (Note that ip addresses may change in the future. Check [github](https://help.github.com/articles/tips-for-configuring-an-a-record-with-your-dns-provider) page to get the current ones):
 
-> @: 192.30.252.153
+- **A record** Mine (http://inwx.com/) allows to setup A records. So remove previous A records and point _@_ to the following ip addresses (Note that ip addresses may change in the future. Check [github](https://help.github.com/articles/tips-for-configuring-an-a-record-with-your-dns-provider) page to get the current ones):
+
+> @: 192.30.252.153 <br/>
 > @: 192.30.252.154
 
-   - **CNAME** is something like an alias to link to another url. You have to link your domain to username.github.io. **(Note the trailing full stop)**. The CNAME records looks like this:
+- **CNAME** is something like an alias to link to another url. You have to link your domain to username.github.io. **(Note the trailing full stop)**. The CNAME records looks like this:
 
 > www: username.github.io.
 
