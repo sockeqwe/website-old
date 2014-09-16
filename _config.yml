@@ -50,7 +50,7 @@ timezone:    Asia/Dhaka
 future:      true
 highlighter: pygments
 markdown:    kramdown
-paginate:    5
+paginate:    7
 paginate_path: "page:num"
 
 # https://github.com/mojombo/jekyll/wiki/Permalinks
@@ -61,10 +61,10 @@ kramdown:
   footnote_nr: 1
   entity_output: as_char
   toc_levels: 1..6
-  use_coderay: false
+  use_coderay: true
 
   coderay:
-    coderay_line_numbers: True
+    coderay_line_numbers: true
     coderay_line_numbers_start: 1
     coderay_tab_width: 4
     coderay_bold_every: 10
@@ -73,7 +73,7 @@ kramdown:
 prose:
   rooturl: '_posts'
   siteurl: 'http://www.hannesdorfmann.com/'
-  relativeLinks: 'http://www.hannesdorfmann.com/links.jsonp'
+  relativeLinks: 'http://www.hannesdorfmann.com/  links.jsonp'
   media: 'images'
   metadata:
     _posts:
