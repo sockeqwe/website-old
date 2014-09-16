@@ -197,7 +197,12 @@ html, body, .notepad-post-container, .notepad-post-header {
         color: #e51843; }
       .post-template .notepad-post-content > div:not(.notepad-post-title) ul, .post-template .notepad-post-content > div:not(.notepad-post-title) ol {
         padding-left: 1.25rem;
-        font-size: 1.125rem; }
+        font-size: 1.3rem; }
+
+.notepad-post-content > div:not(.notepad-post-title) ol > li {
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+}
       .post-template .notepad-post-content > div:not(.notepad-post-title) h1, .post-template .notepad-post-content > div:not(.notepad-post-title) h2, .post-template .notepad-post-content > div:not(.notepad-post-title) h3, .post-template .notepad-post-content > div:not(.notepad-post-title) h4, .post-template .notepad-post-content > div:not(.notepad-post-title) h5, .post-template .notepad-post-content > div:not(.notepad-post-title) h6 {
         font-weight: bold; }
       .post-template .notepad-post-content > div:not(.notepad-post-title) h1, .post-template .notepad-post-content > div:not(.notepad-post-title) h2, .post-template .notepad-post-content > div:not(.notepad-post-title) h3, .post-template .notepad-post-content > div:not(.notepad-post-title) h4, .post-template .notepad-post-content > div:not(.notepad-post-title) h5, .post-template .notepad-post-content > div:not(.notepad-post-title) h6, .post-template .notepad-post-content > div:not(.notepad-post-title) ul, .post-template .notepad-post-content > div:not(.notepad-post-title) ol, .post-template .notepad-post-content > div:not(.notepad-post-title) blockquote, .post-template .notepad-post-content > div:not(.notepad-post-title) pre, .post-template .notepad-post-content > div:not(.notepad-post-title) hr {
@@ -207,7 +212,7 @@ html, body, .notepad-post-container, .notepad-post-header {
       .post-template .notepad-post-content > div:not(.notepad-post-title) p {
         margin: 0 auto 2em auto;
         max-width: 56.25rem;
-        font-size: 1.125rem; }
+        font-size: 1.3rem; }
         .post-template .notepad-post-content > div:not(.notepad-post-title) p:first-child {
           font-size: 1.375rem;
           font-weight: 300; }
@@ -642,10 +647,4 @@ iframe {
     font-size: 10px;
     vertical-align: super;
     color: black;
-}
-
-
-.notepad-post-content > ol > li {
-  margin-top: 20px;
-  margin-bottom:20px;
 }
