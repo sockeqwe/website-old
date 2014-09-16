@@ -254,6 +254,10 @@ main, .notepad-share-icons, .notepad-disqus {
     margin: 0;
     padding: 0;
     line-height: 1.1; }
+
+.notepad-post-title > a:hover {
+    color: #e51843
+  }
     .notepad-content .notepad-index-post .notepad-post-header .notepad-post-title a {
       color: black; }
   @media only screen and (min-width: 40.063em) {
