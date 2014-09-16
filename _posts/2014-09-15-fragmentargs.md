@@ -9,10 +9,9 @@ headline: FragmentArgs
 categories:
   - android
 tags: android
-imagefeature: cover3.jpg
 ---
 
-Developing for Android is sometimes painful. You have to write lot of code to do simple things like setting up a Fragment. Fortunately java have supports a powerfull tool: **Annotation Processors**
+Developing for Android is sometimes painful. You have to write lot of code to do simple things like setting up a Fragment. Fortunately java have supports a powerful tool: **Annotation Processors**
 
 The Problem with Fragments is that you have to set arguments (the parameters) for a fragment to make them work correctly. Many new android developers that write the first fragment do something like this:
 {% highlight java %}
@@ -44,11 +43,11 @@ It may have worked, but did you try to rotate your device from landscape to port
 
 > It's ok, my app is locked in portrait. So I never will run into this problem.
 
-You will! Android is a real multitasking operating system. Multiple apps run at the same time and the android os will destory activities (and the containing fragments) if memory is needed. Probably you will never notice that durring your daily app development. However you user will once the app is published in the play store. They will use multiple apps at the same time and it's likely that your app is going to be destroyed in the background. For Instance: a user of the app ones your app and _MyFrament_ is displayed on screen. Next the user will press the home button (your app is going in the background) and opens some other apps. Your app will be destroyed in background to free memory. Some time later the user wants to come back to your app. He presses the multitasking button and chooses your app to come back in the foreground. So what does Android do right now? Android restores the previous app state and restores _MyFragment_ . And that's the problem, because now the fragment tries to access _title_ which is null, because it has not been stored persistent in a bundle.
+**You will!** Android is a real multitasking operating system. Multiple apps run at the same time and the android os will destroy activities (and the containing fragments) if memory is needed. Probably you will never notice that during daily app development. However your user will notice once the app is published in the play store. They will use multiple apps at the same time and it's very likely that your app is going to be destroyed in the background. Example: a user of your app opens your app and _MyFrament_ is displayed on screen. Next the user will press the home button (your app is going in the background) and opens any other app. Your app will be destroyed in background to free memory. Some time later the user wants to come back to your app. He presses the multitasking button and chooses your app to come back in the foreground. So what does Android do right now? Android restores the previous app state and restores _MyFragment_ . And that's the problem, because now the fragment tries to access _title_ which is null, because it has not been restore since it was not stored persistent in a bundle.
 
 > I see, so I have to save them in onSaveInstanceState(Bundle)
 
-The answer is **NO**. The official docs are a little bit unclear, but `onSaveInstanceState(Bundle)` should be used exactly the same way you do with `Activity.onSaveInstanceState(Bundle)`: you use this method to save the instance state "temporarly", for instance to handle screen orientation changes (from portrait to landscape and vice versa). That means it's not stored persistently which is required when the app is killed in the background and restored when the app comes in foreground again. It's pretty the same as how activities work. `Activity.onSaveInstanceState(Bundle)` is used for "temporarly" saving the instance state, while the long persistent parameters are passed through the intent extra data.
+**The answer is NO**. The official docs are a little bit unclear, but `onSaveInstanceState(Bundle)` should be used exactly the same way you do with `Activity.onSaveInstanceState(Bundle)`: you use this method to save the instance state "temporarly", for instance to handle screen orientation changes (from portrait to landscape and vice versa). That means it's not stored persistently which is required when the app is killed in the background and restored when the app comes in foreground again. It's pretty the same as how activities work. `Activity.onSaveInstanceState(Bundle)` is used for "temporarly" saving the instance state, while the long persistent parameters are passed through the intent extra data.
 
 > So should I save these Fragment arguments in the Activities Intent?
 
