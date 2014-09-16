@@ -643,3 +643,9 @@ iframe {
     vertical-align: super;
     color: black;
 }
+
+
+.notepad-post-content > ol > li {
+  margin-top: 20px;
+  margin-bottom:20px;
+}
