@@ -7,7 +7,7 @@ dropcap:			true
 # Change url to your domain. Leave localhost server or blank when working locally.
 # or use the hint from http://jekyllrb.com/docs/github-pages/ to keep this the same
 # whether working locally or remotely. Start Jekyll with: jekyll serve --baseurl ''
-url:        	  http://0.0.0.0:4000/
+url:        	  http://www.hannesdorfmann.com/
 
 # Owner/author information
 owner:
@@ -72,8 +72,8 @@ kramdown:
 
 prose:
   rooturl: '_posts'
-  siteurl: 'http://0.0.0.0:4000/'
-  relativeLinks: 'http://0.0.0.0:4000/links.jsonp'
+  siteurl: 'http://www.hannesdorfmann.com/'
+  relativeLinks: 'http://www.hannesdorfmann.com/links.jsonp'
   media: 'images'
   metadata:
     _posts:
