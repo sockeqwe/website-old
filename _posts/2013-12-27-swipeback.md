@@ -1,4 +1,4 @@
----
+----
 layout: post
 title: SwipeBack
 description: "SwipeBack for Android Activities to do pretty the same as the android "back-button" will do, but in a really intuitive way by using a swipe gesture"
@@ -7,8 +7,8 @@ category: android
 tags: [android ui ux]
 comments: true
 share: true
----
-
+----
+-
 SwipeBack for Android Activities does pretty the same as the android "back-button" does, but in a really intuitive way by using a swipe gesture
 
 [kicker app](https://play.google.com/store/apps/details?id=com.netbiscuits.kicker)
