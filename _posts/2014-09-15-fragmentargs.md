@@ -162,9 +162,7 @@ public class BaseFragment extends Fragment {
         FragmentArgs.inject(this); // read @Arg fields
     }
 }
-{% endhighlight %}
 
-{% highlight java %}
 public class MyFragment extends BaseFragment {
 
   @Arg
