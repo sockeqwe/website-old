@@ -11,7 +11,7 @@ categories:
 tags: android
 ---
 
-Developing for Android is sometimes painful. You have to write lot of code to do simple things like setting up a Fragment. Fortunately java have supports a powerful tool: **Annotation Processors**
+Developing for Android is sometimes painful. You have to write lot of code to do simple things like setting up a Fragment. Fortunately java supports a powerful tool: **Annotation Processors**
 
 The Problem with Fragments is that you have to set arguments (the parameters) for a fragment to make them work correctly. Many new android developers that write the first fragment do something like this:
 {% highlight java %}
@@ -90,7 +90,7 @@ public class MyFragment extends Fragment {
 }
 {% endhighlight %}
 
-I hope you can understand now what I mean with "painful". There's a lot of code you have to write for any single fragment in your application. Wouldn't it be nice if someone could write that setting and reading arguments code for you? Fortunately we can thanks to Annotation Processing. Annotation Processing allows you to generate java code for you at compile time. Note that we are not talking about evaluating annotations at run time by using reflections.
+I hope you can understand now what I mean with "painful". There's a lot of code you have to write for any single fragment in your application. Wouldn't it be nice if someone else could write that code for you? Annotation Processing allows you to generate java code for you at compile time. Note that we are not talking about evaluating annotations at run time by using reflections.
 
 `FragmentArgs` it's a lightweight simple library that will do exactly this for you. It generates javacode for your fragment arguments. Have a look at this code:
 
@@ -122,6 +122,7 @@ public class MyFragment extends Fragment {
 }
 {% endhighlight %}
 
+
 `FragmentArgs` generates the boilerplate code for you just by annotating fields of your Fragment class. In your Activity you will use the generated `Builder` class _(the name of your fragment with "Builder" suffix)_ instead of `new MyFragment()` or a static `MyFragment.newInstance(int id, String title)` method.
 
 For example:
@@ -150,4 +151,34 @@ public class MyActivity extends Activity {
 }
 {% endhighlight %}
 
-If you want to use it in your android application check out the [FragmentArgs project on github](https://github.com/sockeqwe/fragmentargs) where you will find more inforamtion about the api and how to use it. FragmentArgs is available on maven central.
+You may have noticed this line of code `FragmentArgs.inject(this);` in  `Fragment.onCreate(Bundle)`. This is the important thing where your fragment gets connected to the generated code. You may ask yourself: _"Do I have to override onCreate(Bundle)in every Fragment to add the the inject() method call?"_ . The answer is no. A powerful feature is that `FragmentArgs.inject(this);` supports inheritance. Simply add this line in your _base fragment_ and make all your fragments extends base fragment:
+
+{% highlight java %}
+public class BaseFragment extends Fragment {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        FragmentArgs.inject(this); // read @Arg fields
+    }
+}
+{% endhighlight %}
+
+{% highlight java %}
+public class MyFragment extends BaseFragment {
+  @Arg
+  String title;
+
+  @Override
+  public View onCreateView(LayoutInflater inflater,
+    ViewGroup container, Bundle savedInstanceState) {
+
+      Toast.makeText(getActivity(), "Hello " + title,
+        Toast.LENGTH_SHORT).show();
+  }
+
+}
+{% endhighlight %}
+
+
+If you want to learn more about `FragmentArgs` check out the [FragmentArgs project on github](https://github.com/sockeqwe/fragmentargs) where you will find more information about the api and how to use it. FragmentArgs is available on maven central.
