@@ -166,6 +166,7 @@ public class BaseFragment extends Fragment {
 
 {% highlight java %}
 public class MyFragment extends BaseFragment {
+
   @Arg
   String title;
 
