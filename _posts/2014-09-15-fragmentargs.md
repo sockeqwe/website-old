@@ -94,7 +94,7 @@ I hope you understand now what I mean with "painful". There's a lot of code you 
 
 ##FragmentArgs
 
-FragmentArgs is a lightweight library that generates that java code for your fragments. Have a look at this code:
+FragmentArgs is a lightweight library that generates exactly this java code for your fragments. Have a look at this code:
 
 {% highlight java %}
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
