@@ -78,15 +78,16 @@ Description: Awesome dude, awesome life
         {% if page.imagefeature %}<article class="notepad-post-content post">{% else %}<article class="notepad-post-content post tag-simple">{% endif %}
             <div>{{ content }}
             </div>
+
+            <div class="row text-center">
+                    <strong>Tags:</strong> {% assign tagsize = page.tags.size %}{% if tagsize != 0 %} {% for tag in page.tags %}<a href="{{ site.url }}/tags/index.html#{{ tag | cgi_encode }}" data-toggle="tooltip" title="Posts tagged with {{ tag }}" rel="tag">{{ tag }}</a>{% unless forloop.last %}&comma;&nbsp;{% endunless %}{% endfor %}{% endif %}
+            </div>
+
         </article>
+
+
         <div class="cf"></div>
 {% if site.share %}{% include share.html %}{% endif %}
-        <div class="cf"></div>
-
-<div class="row text-center">
-        <strong>Tags:</strong> {% assign tagsize = page.tags.size %}{% if tagsize != 0 %} {% for tag in page.tags %}<a href="{{ site.url }}/tags/index.html#{{ tag | cgi_encode }}" data-toggle="tooltip" title="Posts tagged with {{ tag }}" rel="tag">{{ tag }}</a>{% unless forloop.last %}&comma;&nbsp;{% endunless %}{% endfor %}{% endif %}
-</div>
-
         <div class="cf"></div>
 
 
