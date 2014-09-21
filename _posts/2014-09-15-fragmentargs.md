@@ -47,7 +47,7 @@ It may have worked, but did you try to rotate your device from portrait to lands
 
 > I see, so I have to save them in onSaveInstanceState(Bundle)?
 
-**NO**. The official docs are a little bit unclear, but `onSaveInstanceState(Bundle)` should be used exactly the same way you do with `Activity.onSaveInstanceState(Bundle)`: you use this method to save the instance state "temporarly", for instance to handle screen orientation changes (from portrait to landscape and vice versa). That means the fragments instance state is not stored persistently which is required when the app is killed in the background and restored when the app comes in foreground again. It's pretty the same as how activities work: `Activity.onSaveInstanceState(Bundle)` is used for "temporarly" saving the instance state, while the long persistent parameters are passed through the intent extra data.
+**NO**. The official docs are a little bit unclear, but `onSaveInstanceState(Bundle)` should be used exactly the same way you do with `Activity.onSaveInstanceState(Bundle)`: you use this method to save the instance state "temporarly", for instance to handle screen orientation changes (from portrait to landscape and vice versa). That means the fragments instance state is not stored persistently which is required when the app is killed in the background and restored when it comes back to the foreground again. It's pretty the same as how activities work: `Activity.onSaveInstanceState(Bundle)` is used for "temporarly" saving the instance state, while the long persistent parameters are passed through the intent extra data.
 
 > So should I save these Fragment arguments in the Activities Intent?
 
