@@ -17,7 +17,9 @@ The Samsung Galaxy Nexus was one of the first device without hardware buttons fo
 
 <div style="width=100%;" align="center">
 
-[![Pinterest](http://img.youtube.com/vi/eVcSCWetnTA/0.jpg)](https://www.youtube.com/watch?v=eVcSCWetnTA)
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=eVcSCWetnTA
+" target="_blank"><img src="http://img.youtube.com/vi/eVcSCWetnTA/0.jpg"
+alt="pinterest" width="240" height="180" border="10" /></a>
 
 </div>
 
@@ -49,7 +51,9 @@ The [kicker app](https://play.google.com/store/apps/details?id=com.netbiscuits.k
 
 <div style="width=100%;" align="center">
 
-[![Kicker app](http://img.youtube.com/vi/-QgECTWOoa0/0.jpg)](http://www.youtube.com/watch?v=-QgECTWOoa0)
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=-QgECTWOoa0
+" target="_blank"><img src="http://img.youtube.com/vi/-QgECTWOoa0/0.jpg"
+alt="kicker" width="240" height="180" border="10" /></a>
 
 </div>
 
