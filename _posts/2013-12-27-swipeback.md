@@ -27,7 +27,7 @@ How Pinterest implement that? They use a single Activity and a ViewPager with cu
 
 <div style="width=100%;" align="center">
 
-<video class="play-on-hover" autoplay="">
+<video class="play-on-hover" loop autoplay="true">
     <source src="http://developer.android.com/training/animation/anim_page_transformer_depth.mp4" type="video/mp4">
     <source src="http://developer.android.com/training/animation/anim_page_transformer_depth.webm" type="video/webm">
     <source src="http://developer.android.com/training/animation/anim_page_transformer_depth.ogv" type="video/ogg">
