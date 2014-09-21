@@ -51,7 +51,7 @@ It may have worked, but did you try to rotate your device from portrait to lands
 
 > So should I save these Fragment arguments in the Activities Intent?
 
-No, Fragment has it's own mechanism for this. There are two methods: `Fragment.setArguments(Bundle)` and `Fragment.getArguments()` and you have to use these methods to ensure that the arguments will be stored persistently, even if the app is destroyed and restored. But that's the painful part I have mentioned above. It's a lot of code you have to write. First, you have to create a `Bundle`, then you have to set the key / value pairs and finally to call `Fragment.setArguments()`. But you are not done yet. You have to read the values out of the Bundle with `Fragment.getArguments()`. Something like this:
+No, Fragment has it's own mechanism for this. There are two methods: `Fragment.setArguments(Bundle)` and `Fragment.getArguments()` and you have to use these methods to ensure that the arguments will be stored persistently, even if the app is destroyed and restored. But that's the painful part I have mentioned above. It's a lot of code you have to write. First, you have to create a `Bundle`, then you have to set the key / value pairs and finally to call `Fragment.setArguments()`. Unfortunately you are not done yet but you have to read the values out of the Bundle with `Fragment.getArguments()`. Something like this:
 
 {% highlight java %}
 public class MyFragment extends Fragment {
