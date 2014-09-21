@@ -153,7 +153,7 @@ public class MyActivity extends Activity {
 }
 {% endhighlight %}
 
-You may have noticed the statement `FragmentArgs.inject(this);` in  `Fragment.onCreate(Bundle)`. In this call your fragment gets connected to the generated code. You may ask yourself: _"Do I have to override onCreate(Bundle) in every Fragment to add the inject() method call?"_ . The answer is no. A powerful feature is that `FragmentArgs.inject(this);` supports inheritance. You simply need to insert this line into your _base fragment_ and make all your fragments extending this base fragment:
+You may have noticed the statement `FragmentArgs.inject(this);` in  `Fragment.onCreate(Bundle)`. In this call your fragment gets connected to the generated code. You may ask yourself: _"Do I have to override onCreate(Bundle) in every Fragment to add the inject() method call?"_ . The answer is no. A powerful feature is that `FragmentArgs.inject(this);` supports inheritance. You simply need to insert this line into your _base fragment_ and extend all your fragments from this base fragment:
 
 {% highlight java %}
 public class BaseFragment extends Fragment {
