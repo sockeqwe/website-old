@@ -8,7 +8,6 @@ comments: true
 headline: FragmentArgs
 categories:
   - android
-  - annotation_processing
 tags: [android, annotation-processing]
 ---
 
