@@ -90,7 +90,7 @@ public class MyFragment extends Fragment {
 }
 {% endhighlight %}
 
-I hope you can understand now what I mean with "painful". There's a lot of code you have to write for any single fragment in your application. Wouldn't it be nice if someone else could write that code for you? Annotation Processing allows you to generate java code for you at compile time. Note that we are not talking about evaluating annotations at run time by using reflections.
+I hope you understand now what I mean with "painful". There's a lot of code you have to write for any single fragment in your application. Wouldn't it be nice if someone else could write that code for you? Annotation Processing allows you to generate java code for you at compile time. Note that we are not talking about evaluating annotations at run time by using reflections.
 
 ##FragmentArgs
 
