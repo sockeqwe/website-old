@@ -181,5 +181,6 @@ public class MyFragment extends BaseFragment {
 }
 {% endhighlight %}
 
+If you want to learn more about `FragmentArgs` check out the [FragmentArgs project on github](https://github.com/sockeqwe/fragmentargs) where you will find more information about the API and how to use it. FragmentArgs is available on maven central.
 
-If you want to learn more about `FragmentArgs` check out the [FragmentArgs project on github](https://github.com/sockeqwe/fragmentargs) where you will find more information about the api and how to use it. FragmentArgs is available on maven central.
+**Credits:** Parts of the annotation processing code are based on Hugo Visser's [Bundle](https://bitbucket.org/hvisser/bundles) project.
