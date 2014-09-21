@@ -8,7 +8,7 @@ comments: true
 headline: FragmentArgs
 categories:
   - android
-  - annotation-processing
+  - annotation_processing
 tags: [android, annotation-processing]
 ---
 
@@ -46,13 +46,13 @@ It may have worked, but did you try to rotate your device from landscape to port
 
 **You will!** Android is a real multitasking operating system. Multiple apps run at the same time and the android os will destroy activities (and the containing fragments) if memory is needed. Probably you will never notice that during daily app development. However your user will notice once the app is published in the play store. They will use multiple apps at the same time and it's very likely that your app is going to be destroyed in the background. Example: a user of your app opens your app and _MyFrament_ is displayed on screen. Next the user will press the home button (your app is going in the background) and opens any other app. Your app will be destroyed in background to free memory. Some time later the user wants to come back to your app. He presses the multitasking button and chooses your app to come back in the foreground. So what does Android do right now? Android restores the previous app state and restores _MyFragment_ . And that's the problem, because now the fragment tries to access _title_ which is null, because it has not been restore since it was not stored persistent in a bundle.
 
-> I see, so I have to save them in onSaveInstanceState(Bundle)
+> I see, so I have to save them in onSaveInstanceState(Bundle)?
 
-**The answer is NO**. The official docs are a little bit unclear, but `onSaveInstanceState(Bundle)` should be used exactly the same way you do with `Activity.onSaveInstanceState(Bundle)`: you use this method to save the instance state "temporarly", for instance to handle screen orientation changes (from portrait to landscape and vice versa). That means it's not stored persistently which is required when the app is killed in the background and restored when the app comes in foreground again. It's pretty the same as how activities work. `Activity.onSaveInstanceState(Bundle)` is used for "temporarly" saving the instance state, while the long persistent parameters are passed through the intent extra data.
+**NO**. The official docs are a little bit unclear, but `onSaveInstanceState(Bundle)` should be used exactly the same way you do with `Activity.onSaveInstanceState(Bundle)`: you use this method to save the instance state "temporarly", for instance to handle screen orientation changes (from portrait to landscape and vice versa). That means it's not stored persistently which is required when the app is killed in the background and restored when the app comes in foreground again. It's pretty the same as how activities work: `Activity.onSaveInstanceState(Bundle)` is used for "temporarly" saving the instance state, while the long persistent parameters are passed through the intent extra data.
 
 > So should I save these Fragment arguments in the Activities Intent?
 
-No, Fragment has it's own mechanism for this. There are two methods: `Fragment.setArguments(Bundle)` and `Fragment.getArguments()` and you have to use this two methods to ensure that the arguments will be stored persistently, even if the app is destroyed and restored. But that's the painful part I have mentioned above. It's a lot of code you have to write. You have to create a `Bundle`, next you have to set the key / value pairs and finally to call `Fragment.setArguments()`. But you are not done yet. You have to read the values out of the Bundle with `Fragment.getArguments()`. Something like this:
+No, Fragment has it's own mechanism for this. There are two methods: `Fragment.setArguments(Bundle)` and `Fragment.getArguments()` and you have to use this two methods to ensure that the arguments will be stored persistently, even if the app is destroyed and restored. But that's the painful part I have mentioned above. It's a lot of code you have to write. First, you have to create a `Bundle`, next you have to set the key / value pairs and finally to call `Fragment.setArguments()`. But you are not done yet. You have to read the values out of the Bundle with `Fragment.getArguments()`. Something like this:
 
 {% highlight java %}
 public class MyFragment extends Fragment {
