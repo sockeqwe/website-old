@@ -69,7 +69,7 @@ Description: Awesome dude, awesome life
                     <div class="small-12 columns">
                         <div class="notepad-post-meta-simple">
                             <h1>{{ page.title }}</h1>
-                            <p>by <strong>{{ site.owner.name }}</strong> &#8212; {% assign tagsize = page.tags.size %}{% if tagsize != 0 %}on {% for tag in page.tags %}<a href="{{ site.url }}/tags/index.html#{{ tag | cgi_encode }}" data-toggle="tooltip" title="Posts tagged with {{ tag }}" rel="tag">{{ tag }}</a>{% unless forloop.last %}&nbsp;&comma;&nbsp;{% endunless %}{% endfor %}{% endif %} <strong><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %b %Y" }}</time></strong></p>
+                            <p>by <strong>{{ site.owner.name }}</strong> &#8212; <strong><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d %b %Y" }}</time></strong></p>
                         </div>
                     </div>
                 </div>
@@ -82,6 +82,11 @@ Description: Awesome dude, awesome life
         <div class="cf"></div>
 {% if site.share %}{% include share.html %}{% endif %}
         <div class="cf"></div>
+
+        <strong>Tags:</strong> {% assign tagsize = page.tags.size %}{% if tagsize != 0 %}on {% for tag in page.tags %}<a href="{{ site.url }}/tags/index.html#{{ tag | cgi_encode }}" data-toggle="tooltip" title="Posts tagged with {{ tag }}" rel="tag">{{ tag }}</a>{% unless forloop.last %}&nbsp;&comma;&nbsp;{% endunless %}{% endfor %}{% endif %}
+
+        <div class="cf"></div>
+
 
 {% include signoff.html %}
 
