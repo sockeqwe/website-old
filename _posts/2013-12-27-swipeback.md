@@ -49,7 +49,7 @@ The [kicker app](https://play.google.com/store/apps/details?id=com.netbiscuits.k
 
 <div style="width=100%;" align="center">
 
-[![Pinterest](http://img.youtube.com/vi/-QgECTWOoa0/0.jpg)](https://www.youtube.com/watch?v=-QgECTWOoa0)
+[![Kicker app](http://img.youtube.com/vi/-QgECTWOoa0/0.jpg)](http://www.youtube.com/watch?v=-QgECTWOoa0)
 
 </div>
 
