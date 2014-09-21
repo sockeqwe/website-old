@@ -84,9 +84,7 @@ Description: Awesome dude, awesome life
         <div class="cf"></div>
 
 <div class="row text-center">
-    <section class="notepad-post-share">
-        <strong>Tags:</strong> {% assign tagsize = page.tags.size %}{% if tagsize != 0 %} {% for tag in page.tags %}<a href="{{ site.url }}/tags/index.html#{{ tag | cgi_encode }}" data-toggle="tooltip" title="Posts tagged with {{ tag }}" rel="tag">{{ tag }}</a>{% unless forloop.last %}&nbsp;&comma;&nbsp;{% endunless %}{% endfor %}{% endif %}
-      </section>
+        <strong>Tags:</strong> {% assign tagsize = page.tags.size %}{% if tagsize != 0 %} {% for tag in page.tags %}<a href="{{ site.url }}/tags/index.html#{{ tag | cgi_encode }}" data-toggle="tooltip" title="Posts tagged with {{ tag }}" rel="tag">{{ tag }}</a>{% unless forloop.last %}&comma;&nbsp;{% endunless %}{% endfor %}{% endif %}
 </div>
 
         <div class="cf"></div>
