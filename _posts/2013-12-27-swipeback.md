@@ -15,7 +15,7 @@ SwipeBack for Android Activities does pretty the same as the android "back-butto
 
 The Samsung Galaxy Nexus was one of the first device without hardware buttons for "back", "home" and "app switching (multitasking)" but used the androids navigation bar on screen (introduced in Android 4.0). The navigation bar was at least in my opinion a big step forward, especially on screen rotation from landscape to portrait and vice versa. But I asked myself, do we really need a navigation bar? I mean the navigation bar takes ca. 10 % of the whole screen. Even at the home screen the "back" and "home" button are useless (because they do nothing). So I thought to myself: Why do we not use swipe gestures instead of a navigation bar? But maybe this idea is to futuristic and not suitable for all kind of android user. A few years later apple introduced the swipe back gesture in iOS 7. Why doesn't Android Apps use swipe gesture as alternative to the back button. Pinterest and Tumblr do so:
 
-<div style="width=100%;" align="center">
+<div style="width=100%; margin-bottom: 40px;" align="center">
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=eVcSCWetnTA
 " target="_blank"><img src="http://img.youtube.com/vi/eVcSCWetnTA/0.jpg"
@@ -25,9 +25,10 @@ alt="pinterest" width="240" height="180" border="10" /></a>
 
 How Pinterest implement that? They use a single Activity and a ViewPager with custom page transformer. Something like this:
 
-<div style="width=100%;" align="center">
+<div style="width=100%; margin-bottom: 40px;" align="center">
 
-<video class="play-on-hover" loop autoplay="true">
+
+<video class="play-on-hover" loop autoplay>
     <source src="http://developer.android.com/training/animation/anim_page_transformer_depth.mp4" type="video/mp4">
     <source src="http://developer.android.com/training/animation/anim_page_transformer_depth.webm" type="video/webm">
     <source src="http://developer.android.com/training/animation/anim_page_transformer_depth.ogv" type="video/ogg">
@@ -49,7 +50,8 @@ My approach can be used for activities. It does pretty the same as the android m
 
 The [kicker app](https://play.google.com/store/apps/details?id=com.netbiscuits.kicker) for android uses SwipeBack.
 
-<div style="width=100%;" align="center">
+<div style="width=100%; margin-bottom: 40px;" align="center">
+
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=-QgECTWOoa0
 " target="_blank"><img src="http://img.youtube.com/vi/-QgECTWOoa0/0.jpg"
