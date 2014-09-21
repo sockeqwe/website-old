@@ -57,7 +57,7 @@ No, Fragment has it's own mechanism for this. There are two methods: `Fragment.s
 public class MyFragment extends Fragment {
 
   private static String KEY_ID ="key.id";
-  private static String KEY_TITLE = "key.id";
+  private static String KEY_TITLE = "key.title";
 
   private int id;
   private String title;
