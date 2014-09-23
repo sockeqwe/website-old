@@ -185,4 +185,4 @@ public class MyFragment extends BaseFragment {
 
 
 ##Update:
-Like mentioned above many parts of the annotation processing code are based on Hugo Visser's [Bundles](https://bitbucket.org/hvisser/bundles) project. Hence Hugo and me have decided to merge the changes of FragmentArgs into [Bundles](https://bitbucket.org/hvisser/bundles) in the near future. Stay tuned.
+Like mentioned above many parts of the annotation processing code are based on Hugo Visser's [Bundles](https://bitbucket.org/hvisser/bundles) project. Hence Hugo and I have decided to merge the changes of FragmentArgs into [Bundles](https://bitbucket.org/hvisser/bundles) in the near future. Stay tuned.
