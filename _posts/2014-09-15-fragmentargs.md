@@ -181,6 +181,8 @@ public class MyFragment extends BaseFragment {
 }
 {% endhighlight %}
 
-If you want to learn more about `FragmentArgs` check out the FragmentArgs project on [github](https://github.com/sockeqwe/fragmentargs) where you will get more information about the API and how to use it. FragmentArgs is available on maven central.
+**Credits:** Parts of the annotation processing code are based on Hugo Visser's [Bundles](https://bitbucket.org/hvisser/bundles) project.
 
-**Credits:** Parts of the annotation processing code are based on Hugo Visser's [Bundle](https://bitbucket.org/hvisser/bundles) project.
+
+##Update:
+Like mentioned above many parts of the annotation processing are based on Hugo Visser's [Bundles](https://bitbucket.org/hvisser/bundles) project. Hence Hugo and me have decided to merge the changes of FragmentArgs into [Bundles](https://bitbucket.org/hvisser/bundles) in the near future. Stay tuned.
