@@ -183,6 +183,7 @@ public class MyFragment extends BaseFragment {
 
 **Credits:** Parts of the annotation processing code are based on Hugo Visser's [Bundles](https://bitbucket.org/hvisser/bundles) project.
 
-
 ##Update:
 Like mentioned above many parts of the annotation processing code are based on Hugo Visser's [Bundles](https://bitbucket.org/hvisser/bundles) project. Hence Hugo and I have decided to merge the changes of FragmentArgs into [Bundles](https://bitbucket.org/hvisser/bundles) in the near future. Stay tuned.
+
+In my [next blog post](http://hannesdorfmann.com/android/ParcelablePlease/) I want to compare annotation processors for generating Parcelable's and tell you why I ended up writing my own Annotation Processor called [ParcelablePlease](https://github.com/sockeqwe/ParcelablePlease)
