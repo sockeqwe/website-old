@@ -11,7 +11,7 @@ categories:
 tags: [android, annotation-processing]
 ---
 
-In my last blog I introduced [FragmentArgs](http://hannesdorfmann.com/android/fragmentargs) an  **Annotation Processor** for Fragments that reduces writing boilerplate code. In this post I want to talk about a similar problem android developer face: Writing boilerplate code for **Parcelable**
+In my last blog post I have introduced [FragmentArgs](http://hannesdorfmann.com/android/fragmentargs) an  **Annotation Processor** for Fragments that reduces writing boilerplate code. In this post I want to talk about a similar problem android developer face: Writing boilerplate code for **Parcelable**
 
 Parcelable is a extreme fast way to serialize objects on Android. Unfortunately the developer has to implement both the `Parcelable interface` and the `CREATOR` for each model class. You may ask yourself: "Does not someone else could write that code for me?". Annotation processing can be used to generate java code and it is possible to generate `Parcelable` code. There are already two good libraries that are doing this job: [Parceler](https://github.com/johncarl81/parceler) and [AutoParcel](https://github.com/frankiesardo/auto-parcel). However I ended up by writing my own annotation processor called [ParcelablePlease](https://github.com/sockeqwe/ParcelablePlease) and I want to explain why.
 
