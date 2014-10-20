@@ -22,6 +22,7 @@ Furthermore not every view cell should look the same and you probably have multi
 
 #AnnotatedAdapter
 At this point I started thinking to myself: _"could that be generated with an annotation processor?"_ Finally I came to the conclusion: _Yes it can_ and here is how this will be done with `AnnotatedAdapter`. For example lets assume we want to display two different view cells in a RecyclerView, one with just a TextView and one with a TextView and an ImageView (icon). I know for such simple layouts we would not need two different view types but could simply show or hide the imageview. But lets keep this example simple just to give you an idea of how AnnotatedAdapter works. So our model class looks like this;
+
 {% highlight java %}
 class Item {
   public String text;
@@ -143,7 +144,7 @@ public class SampleAdapter extends SupportAnnotatedAdapter
        vh.text.setText(item.text);
      }
 }
-% endhighlight %}
+{% endhighlight %}
 
 At first look you have noticed that there is less code. However AnnotatedAdapter can't read your mind. Therefore we have to give some information by using `@ViewType` annotation. In short: less code, more annotations. With the `@ViewType` annotation we specify the view types integer constant, the xml layout we want to inflate for this view type and with @Field how the generated view holder class should look like. Have a look at the `int iconRow = 1`:
 {% highlight java %}
@@ -182,7 +183,7 @@ class IconRowViewHolder extends RecyclerView.ViewHolder {
    }
 
 }
-% endhighlight %}
+{% endhighlight %}
 
  - `@Field ( type = ... )` specifies the class of the view in the view holde
  - `@Field ( name = ... )` specifies the name of the field for this subview in the viewholder
