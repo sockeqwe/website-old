@@ -13,6 +13,8 @@ tags: [android, annotation-processing]
 
 Developing for Android is sometimes painful. You have to write lot of code to do simple things like setting up a Fragment. Fortunately java supports a powerful tool: **Annotation Processors**
 
+> This post is part of a series of posts about useful annotation processors like [ParcelablePlease](http://hannesdorfmann.com/android/parcelableplease) or [AnnotatedAdapter](http://hannesdorfmann.com/android/annotatedadapter)
+
 The Problem with Fragments is that you have to set arguments (the parameters) for a fragment to make them work correctly. Many new android developers that write the first fragment do something like this:
 {% highlight java %}
 public class MyFragment extends Fragment {

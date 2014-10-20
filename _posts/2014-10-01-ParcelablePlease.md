@@ -13,6 +13,8 @@ tags: [android, annotation-processing]
 
 In my last blog post I have introduced [FragmentArgs](http://hannesdorfmann.com/android/fragmentargs) an  **Annotation Processor** for Fragments that reduces writing boilerplate code. In this post I want to talk about a similar problem android developer face: Writing boilerplate code for **Parcelable**
 
+  > This post is part of a series of posts about useful annotation processors like [FragmentArgs](http://hannesdorfmann.com/android/fragmentargs) or [AnnotatedAdapter](http://hannesdorfmann.com/android/annotatedadapter)
+
 Parcelable is a extreme fast way to serialize objects on Android. Unfortunately the developer has to implement both the `Parcelable interface` and the `CREATOR` for each model class. You may ask yourself: "Does not someone else could write that code for me?". Annotation processing can be used to generate java code and it is possible to generate `Parcelable` code. There are already two good libraries that are doing this job: [Parceler](https://github.com/johncarl81/parceler) and [AutoParcel](https://github.com/frankiesardo/auto-parcel). However I ended up by writing my own annotation processor called [ParcelablePlease](https://github.com/sockeqwe/ParcelablePlease) and I want to explain why.
 
 ##Parceler
@@ -137,3 +139,5 @@ Note that java.util.Date is already supported by ParcelablePlease. The example a
 
 ##Conclusion
 Annotation Processor can reduce writing boilerplate code to make a class `Parcelable`. `AutoParcel` is a very promising approach. Unfortunately there are issues with other third party libraries. I really would love to use `AutoParcel` but right now (from my point of view) it's not the best solution for the most of my apps. In the meantime you may find `ParcelablePlase` useful. However, I will keep an eye on you AutoParcel!
+
+In my next post I want to talk about [AnnotatedAdapter](http://hannesdorfmann.com/android/annotatedadapter), an annotation processor for RecyclerView's adapter.
