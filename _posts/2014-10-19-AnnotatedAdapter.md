@@ -11,7 +11,7 @@ categories:
 tags: [android, annotation-processing]
 ---
 
-With [FragmentArgs](http://hannesdorfmann.com/android/fragmentargs) and [ParcelablePlease](http://hannesdorfmann.com/android/parcelableplease) I have already shown that **Annotation Processor** is really helpful to speedup development by reducing writing boilerplate code. Regarding Android I found one scenario where I find myself writing nearly the same code ever and ever again. I'm looking at you `Adapter` with your **ViewHolders**, layout inflating code and view types. In this blog post I want to announce [AnnotatedAdapter](https://github.com/sockeqwe/AnnotatedAdapter)
+With [FragmentArgs](http://hannesdorfmann.com/android/fragmentargs) and [ParcelablePlease](http://hannesdorfmann.com/android/ParcelablePlease/) I have already shown that **Annotation Processor** is really helpful to speedup development by reducing writing boilerplate code. Regarding Android I found one scenario where I find myself writing nearly the same code ever and ever again. I'm looking at you `Adapter` with your **ViewHolders**, layout inflating code and view types. In this blog post I want to announce [AnnotatedAdapter](https://github.com/sockeqwe/AnnotatedAdapter)
 
 In nearly every app you will find a `RecyclerView` (or `ListView` or `GridView`). Under the hood Adapter classes are used to inflate and fill the view cell of `RecyclerView` and to bind the data to it's graphical representation (view cell) within the RecyclerView. There are serval things you as developer have to implement:
 
