@@ -33,7 +33,9 @@ class Item {
 
 }
 {% endhighlight %}
+
 If `Item` has no icon then the iconRes will be **0**. In this case we want to use the view type and layout with just one TextView. Otherwise we use the other layout (TextView and ImageView). The xml layouts look like this:
+
 {% highlight xml %}
 <FrameLayout
   android:layout_width="match_parent"
@@ -68,6 +70,7 @@ If `Item` has no icon then the iconRes will be **0**. In this case we want to us
 {% endhighlight %}
 
 Every Adapter in `AnnotatedAdapter` must extend from `SupportAnnotatedAdapter` (for RecyclerView) or `AbsListAnnotatedAdapter` (for AbsListView widgets like ListView or GridView). This important because this base adapters are respoinsible to stick the generated code together with your handwritten data-binding code and the internal view cell recycling mechanism. Let's have a look at the complete Adapter by using AnnotatedAdapter. Afterwars we will go through the code line by line:
+
 {% highlight java %}
 public class SampleAdapter extends SupportAnnotatedAdapter
                           implements SampleAdapterBinder {
@@ -160,9 +163,10 @@ At first look you have noticed that there is less code. However AnnotatedAdapter
     }
 )
 public final int iconRow = 1;
-% endhighlight %}
+{% endhighlight %}
 
 Annotated adpate will generate a view holder class called `IconRowViewHolder` that looks like this:
+
 {% highlight java %}
 class IconRowViewHolder extends RecyclerView.ViewHolder {
 
@@ -201,8 +205,7 @@ Last you notice that there are methods `bindViewHolder()`. In this methods you b
 I can guaranty that by doing so you will write your next adapter within 5 minutes (creating xml layouts excluded). **Note** that you only have to trigger `Build -> Rebuild Project` only at the very first time you create a new adapter class. Once this is done you can add, remove view types and the adapters code how you want and the interface will be regenerated automatically every time you install your app on your device.
 
 # I need your help
-From my point of view `AnnotatedAdapter` reduces writing boilerplate code a lot. However, it's not perfect, since you have to write `@Field` annotations to generate the ViewHolder. I want to remove this Annotation an make AnnotatedApder parse the layout xml files to retrieve all needed informations to generate the view holder. Unfortunately that's not as simple as it sounds, but Im pretty sure there are smarter people than me out there. If you have an idea of how to solve that problem please use [this issue on github]() to get in touch with me.
-
+From my point of view `AnnotatedAdapter` reduces writing boilerplate code a lot. However, it's not perfect, since you have to write `@Field` annotations to generate the ViewHolder. I want to remove this Annotation an make AnnotatedApder parse the layout xml files to retrieve all needed informations to generate the view holder. Unfortunately that's not as simple as it sounds, but I'm  sure that there are smarter people than me out there. If you have an idea of how to solve that problem please use [this issue on github](https://github.com/sockeqwe/AnnotatedAdapter/issues/4) to get in touch with me.
 
 
 AnnotatedAdapter supports also `AbsListView` widgets and other little features you may find useful. You can find more information about [AnnotatedAdapter on github](https://github.com/sockeqwe/AnnotatedAdapter)
