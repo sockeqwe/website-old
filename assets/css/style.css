@@ -542,7 +542,7 @@ figcaption {
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
-.highlight { background-color: #f6f6f6; padding-top:0.5em; padding-bottom:0.5em; }
+.highlight { background-color: #f6f6f6; padding-top:0.5em; padding-bottom:0.5em; margin-top: 0.7em; margin-bottom: 0.7em; }
 .highlight .c { color: #3F6B5B; font-weight: bold} /* Comment */
 .highlight .err { color: #000000} /* Error */
 .highlight .g { color: #000000} /* Generic */
