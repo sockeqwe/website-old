@@ -197,7 +197,6 @@ html, body, .notepad-post-container, .notepad-post-header {
           margin: -10% auto 0; } }
       .post-template .notepad-post-content > div:not(.notepad-post-title) a, .post-template .notepad-post-content > div:not(.notepad-post-title) code {
         color: #e51843;
-        background-color:#f4f4f4;
         }
 
 .notepad-post-content > div:not(.notepad-post-title) a:hover {
@@ -216,7 +215,10 @@ html, body, .notepad-post-container, .notepad-post-header {
       .post-template .notepad-post-content > div:not(.notepad-post-title) h1, .post-template .notepad-post-content > div:not(.notepad-post-title) h2, .post-template .notepad-post-content > div:not(.notepad-post-title) h3, .post-template .notepad-post-content > div:not(.notepad-post-title) h4, .post-template .notepad-post-content > div:not(.notepad-post-title) h5, .post-template .notepad-post-content > div:not(.notepad-post-title) h6, .post-template .notepad-post-content > div:not(.notepad-post-title) ul, .post-template .notepad-post-content > div:not(.notepad-post-title) ol, .post-template .notepad-post-content > div:not(.notepad-post-title) blockquote, .post-template .notepad-post-content > div:not(.notepad-post-title) pre, .post-template .notepad-post-content > div:not(.notepad-post-title) hr {
         max-width: 56.25rem;
         margin-left: auto;
-        margin-right: auto; }
+        margin-right: auto;
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        }
       .post-template .notepad-post-content > div:not(.notepad-post-title) p {
         margin: 0 auto 2em auto;
         max-width: 56.25rem;
@@ -482,7 +484,7 @@ html, body, .notepad-post-container, .notepad-post-header {
     padding-right: 1.875rem; }
     .notepad-page-content > div:not(.notepad-page-title) a, .notepad-page-content > div:not(.notepad-page-title) code {
       color: #e51843;
-      background-color:#f4f4f4; }
+      }
     .notepad-page-content > div:not(.notepad-page-title) ul, .notepad-page-content > div:not(.notepad-page-title) ol {
       padding-left: 1.25rem;
       font-size: 1.125rem; }
