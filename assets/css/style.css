@@ -542,13 +542,13 @@ figcaption {
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
-.highlight { background: #f4f4f4 }
+.highlight { background: #f9f9f9; padding-top:1em; padding-bottom:1em; }
 .highlight .c { color: #3F6B5B; font-weight: bold} /* Comment */
 .highlight .err { color: #000000} /* Error */
 .highlight .g { color: #000000} /* Generic */
-.highlight .k { color: #F06F00; font-weight: bold} /* Keyword */
+.highlight .k { color: #011993; font-weight: bold} /* Keyword */
 .highlight .l { color: #000000} /* Literal */
-.highlight .n { color: #000000} /* Name */
+.highlight .n { color: #7b238d} /* Name */
 .highlight .o { color: #000000} /* Operator */
 .highlight .x { color: #000000} /* Other */
 .highlight .p { color: #000000} /* Punctuation */
@@ -579,7 +579,7 @@ figcaption {
 .highlight .nb { color: #000000} /* Name.Builtin */
 .highlight .nc { color: #000000} /* Name.Class */
 .highlight .no { color: #B91F49;} /* Name.Constant */
-.highlight .nd { color: #000000} /* Name.Decorator */
+.highlight .nd { color: #929000} /* Name.Decorator */
 .highlight .ni { color: #ee0000; font-weight: bold} /* Name.Entity */
 .highlight .ne { color: #000000} /* Name.Exception */
 .highlight .nf { color: #000000} /* Name.Function */
