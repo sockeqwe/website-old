@@ -835,6 +835,8 @@ We could write our generated code as concatination of Strings. Fortunately, Squa
 
 > **Tipp:** Since JavaWriter is very very popular there are many other processors, libraries and tools depending on JavaWriter. This maybe will cause problems if you use dependency management tools like maven or gradle if one library depends on a newer version of JavaWriter as another one. Therefore I recommend to copy and repackage JavaWriter directly into your annotation processor code base (it's just one java file).
 
+**Update:** It seems that JavaWriter has been replaced with [JavaPoet](https://github.com/square/javapoet).
+
 ## Processing Rounds
 Annotation Processing maybe takes more than one processing round. The official javadoc define processing like as follows:
 
