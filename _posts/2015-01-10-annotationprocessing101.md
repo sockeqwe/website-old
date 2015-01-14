@@ -11,7 +11,7 @@ categories:
 tags: [annotation-processing]
 ---
 
-After having written some annotation processors  some people asked me if I could explain how to write an annotation processor. So here is my tutorial. Before we start writing an annotation processor you need to know what annotation processing is, what you can do with that powerful tool and more important what you can't do. Afterwards we will go step by step through the most important API of annotation processor by implementing our own annotation processor.
+After having written some annotation processors  some people asked me if I could explain how to write an annotation processor. So here is my tutorial. Before we start writing an annotation processor you need to know what annotation processing is, what you can do with that powerful tool and more important what you can't do. Afterwards we will implement together a simple annotation processor step by step.
 
 
 # The Basics
