@@ -774,7 +774,7 @@ public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment 
 }
 
 {% endhighlight %}
-Writing a java file is pretty the same as writing any other file in java. We use an `Writer` provided by `Filer`:
+Writing a java file is pretty the same as writing any other file in java. We use an `Writer` provided by `Filer`. We could write our generated code as concatination of Strings. Fortunately, Square Inc. well known for plenty awesome open source projects gives us with [JavaWriter](https://github.com/square/javawriter) a high level library for generating Java Code:
 
 {% highlight java %}
 public class FactoryGroupedClasses {
@@ -833,7 +833,6 @@ public class FactoryGroupedClasses {
   }
 }
 {% endhighlight %}
-We could write our generated code as concatination of Strings. Fortunately, Square Inc. well known for plenty awesome open source projects gives us with [JavaWriter](https://github.com/square/javawriter) a high level library for generating Java Code.
 
 > **Tipp:** Since JavaWriter is very very popular there are many other processors, libraries and tools depending on JavaWriter. This maybe will cause problems if you use dependency management tools like maven or gradle if one library depends on a newer version of JavaWriter as another one. Therefore I recommend to copy and repackage JavaWriter directly into your annotation processor code base (it's just one java file).
 
