@@ -731,7 +731,8 @@ Once we have checked `isValidClass()` we continue with adding `FactoryAnnotatedC
           factoryClasses.put(qualifiedGroupName, factoryClass);
         }
 
-        // Checks if id is conflicting with another @Factory annotated class with the same id
+        // Throws IdAlreadyUsedException if id is conflicting with
+        // another @Factory annotated class with the same id
         factoryClass.add(annotatedClass);
       } catch (IllegalArgumentException e) {
         // Another approach of handling exceptions and printing error messages
@@ -739,7 +740,7 @@ Once we have checked `isValidClass()` we continue with adding `FactoryAnnotatedC
         return true;
       } catch (IdAlreadyUsedException e) {
         FactoryAnnotatedClass existing = e.getExisting();
-        // Alredy existing
+        // Already existing
         error(annotatedElement,
             "Conflict: The class %s is annotated with @%s with id ='%s' but %s already uses the same id",
             typeElement.getQualifiedName().toString(), Factory.class.getSimpleName(),
