@@ -351,7 +351,7 @@ For instance if you have a `TypeElement` representing `public class Foo` you cou
 
 {% highlight java %}
 TypeElement fooClass = ... ;
-for (Element e : fooClass.getEnclosedElements()){
+for (Element e : fooClass.getEnclosedElements()){ // iterate over children
 	Element parent = e.getEnclosingElement();  // parent == fooClass
 }
 {% endhighlight %}
@@ -387,7 +387,7 @@ public class FactoryProcessor extends AbstractProcessor {
 
 }
 {% endhighlight %}
-No rocket science here. `roundEnv.getElementsAnnotatedWith(Factory.class))` returnes a list of Elements annotated with `@Factory`. You may have noted that I have avoited saying *"returns list of classes annotated with @Factory"*, because it really returns list of `Element`. Remember: `Element` can be a class, method, variable etc. So what we have to do as next is check if the Element is a class:
+No rocket science here. `roundEnv.getElementsAnnotatedWith(Factory.class))` returnes a list of Elements annotated with `@Factory`. You may have noted that I have avoited saying *"returns list of classes annotated with @Factory"*, because it really returns list of `Element`. Remember: `Element` can be a class, method, variable etc. So what we have to do next is to check if the Element is a class:
 
 {% highlight java %}
 @Override
@@ -407,7 +407,7 @@ No rocket science here. `roundEnv.getElementsAnnotatedWith(Factory.class))` retu
 What's going on here? We want to ensure that only elements of type class are processed by our processor. Previously we have learned that classes are `TypeElements`. So why don't we check `if (! (annotatedElement instanceof TypeElement) )`. That's a wrong assumption because interfaces are TypeElement as well. So in annoation processing you should avoid *instanceof* but rather us [ElementKind](http://docs.oracle.com/javase/7/docs/api/javax/lang/model/element/ElementKind.html) or [TypeKind](http://docs.oracle.com/javase/7/docs/api/javax/lang/model/type/TypeKind.html) with TypeMirror.
 
 ## Error Handling
-In `init()` we also retrieve a reference to `Messager`. A Messager provides the way for an annotation processor to report error messages, warnings and other notices. It's not a logger for you, the developer of the annotation processor (even thought it can be used for that during development of the processor). Messager is used to write messages to the third party developer who uses your annotation processor in their projects. There are different levels of messages described in the [official docs](http://docs.oracle.com/javase/7/docs/api/javax/tools/Diagnostic.Kind.html). Very important is [Kind.ERROR](http://docs.oracle.com/javase/7/docs/api/javax/tools/Diagnostic.Kind.html#ERROR) because this kind of message is used to indicate that our annotation processor has failed processing. Probably the third party developer is misusing our `@Factory` annotation (i.e. annotated an interface wit @Factory). The concept is a little bit different from traditional java application where you would throw an `Exception`. If you throw an exception in `process()` then the third party developer who is using our FactoryProcessor will get an error from javac with a hardly understandable Exception, because it contains the stacktrace with information from FactoryProcessor which is kind of blackbox to third party developers. Therefore Annotation Processor has this `Messager` class. It prints a pretty error message. Additionaly, you can   link to the element who has raised this error. In modern IDEs like IntelliJ the third party developer can click on this error message and the IDE will jump to the source file and line of the third party developers project where error source is.
+In `init()` we also retrieve a reference to `Messager`. A Messager provides the way for an annotation processor to report error messages, warnings and other notices. It's not a logger for you, the developer of the annotation processor (even thought it can be used for that during development of the processor). Messager is used to write messages to the third party developer who uses your annotation processor in their projects. There are different levels of messages described in the [official docs](http://docs.oracle.com/javase/7/docs/api/javax/tools/Diagnostic.Kind.html). Very important is [Kind.ERROR](http://docs.oracle.com/javase/7/docs/api/javax/tools/Diagnostic.Kind.html#ERROR) because this kind of message is used to indicate that our annotation processor has failed processing. Probably the third party developer is misusing our `@Factory` annotation (i.e. annotated an interface with @Factory). The concept is a little bit different from traditional java application where you would throw an `Exception`. If you throw an exception in `process()` then the jvm which runs annotation processing crashs (like any other java application) and the third party developer who is using our FactoryProcessor will get an error from javac with a hardly understandable Exception, because it contains the stacktrace of FactoryProcessor. Therefore Annotation Processor has this `Messager` class. It prints a pretty error message. Additionaly, you can   link to the element who has raised this error. In modern IDEs like IntelliJ the third party developer can click on this error message and the IDE will jump to the source file and line of the third party developers project where the error source is.
 
 Back to implementing the `process()` method. We raise a error message if the user has annotated a non class with @Factory:
 
@@ -443,7 +443,7 @@ private void error(Element e, String msg, Object... args) {
 ## Datamodel
 Before we continue with checking if classes annotated with @Factory observe our five rules (see above) we are going to introduce data structures which makes it easier for us to continue. Sometimes the problem or processor seems to be so simple that programmers tend to write the whole processor in a procedural manner. **But you know what? An Annotation Processor is still a java application. So use object oriented programming, interfaces, design patterns and anything else you would use in any other java application!**
 
-Our FactoryProcessor is quite simple but there are some information we want to store as objects.
+Our FactoryProcessor is quite simple but there are some information we want to store as objects.  With `FactoryAnnotatedClass` we store the annotated class data like qualified class name along with the data of the @Factory annotation itself. So we store the TypeElement and evaluate the @Factory annotation:
 
 {% highlight java %}
 public class FactoryAnnotatedClass {
@@ -513,7 +513,8 @@ public class FactoryAnnotatedClass {
 }
 {% endhighlight %}
 
-Let's discuss `FactoryAnnotatedClass`. The primary goal is to store the annotated class data like qualified class name along with the data of the @Factory annotation itself. So we store the TypeElement and evaluate the @Factory annotation. Have a look at the constructor:
+Lot of code, but the most important thing happens ins the constructor where you find the following lines of code:
+
 {% highlight java %}
 Factory annotation = classElement.getAnnotation(Factory.class);
 id = annotation.id(); // Read the id value (like "Calzone" or "Tiramisu")
@@ -524,7 +525,7 @@ if (StringUtils.isEmpty(id)) {
               Factory.class.getSimpleName(), classElement.getQualifiedName().toString()));
     }
 {% endhighlight %}
-We access the @Factory annotation and check if the id is not empty. We will throw an IllegalArgumentException. You may be confused now because previously we said that we are not throwing exceptions but rather use `Messager`. That's still correct. We throw an exception here internally and we will catch that one in `process()` as you will see later. We do that for two reasons:
+Here we access the @Factory annotation and check if the id is not empty. We will throw an IllegalArgumentException if id is empty. You may be confused now because previously we said that we are not throwing exceptions but rather use `Messager`. That's still correct. We throw an exception here internally and we will catch that one in `process()` as you will see later. We do that for two reasons:
 
  1. I want to demonstrate that you should still code like in any other java application. Throwing and catching exceptions is considered as good practice in java.
  2. If we want to print a message right from `FactoryAnnotatedClass` we also have to pass the `Messager` and as already mentioned in "Error Handling" (scroll up) the processor has to terminate successfully to make `Messager` print the error message.
