@@ -49,7 +49,7 @@ links:
 
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-timezone:    Asia/Dhaka
+timezone:    Europe/Berlin
 future:      true
 highlighter: pygments
 markdown:    kramdown
