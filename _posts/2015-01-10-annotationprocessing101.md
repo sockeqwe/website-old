@@ -735,7 +735,7 @@ Once we have checked `isValidClass()` we continue with adding `FactoryAnnotatedC
         // another @Factory annotated class with the same id
         factoryClass.add(annotatedClass);
       } catch (IllegalArgumentException e) {
-        // Another approach of handling exceptions and printing error messages
+        // @Factory.id() is empty --> printing error message
         error(typeElement, e.getMessage());
         return true;
       } catch (IdAlreadyUsedException e) {
