@@ -528,7 +528,7 @@ if (StringUtils.isEmpty(id)) {
 Here we access the @Factory annotation and check if the id is not empty. We will throw an IllegalArgumentException if id is empty. You may be confused now because previously we said that we are not throwing exceptions but rather use `Messager`. That's still correct. We throw an exception here internally and we will catch that one in `process()` as you will see later. We do that for two reasons:
 
  1. I want to demonstrate that you should still code like in any other java application. Throwing and catching exceptions is considered as good practice in java.
- 2. If we want to print a message right from `FactoryAnnotatedClass` we also have to pass the `Messager` and as already mentioned in "Error Handling" (scroll up) the processor has to terminate successfully to make `Messager` print the error message.
+ 2. If we want to print a message right from `FactoryAnnotatedClass` we also have to pass the `Messager` and as already mentioned in "Error Handling" (scroll up) the processor has to terminate successfully to make `Messager` print the error message. So if we would write an error message by using `Messager` how do we "notify" `process()` that an error has occurred? The easiest and from my point of view most intuitive way is to throw an Exception and let `process()` chatch this one.
 
 Next we want to get the `type` field of the `@Factory` annotation.  We are interessted in the full qualified name.
 {% highlight java %}
@@ -547,7 +547,7 @@ Next we want to get the `type` field of the `@Factory` annotation.  We are inter
 That's a little bit tricky, because the type is `java.lang.Class`. That means, that this is a real Class object. Since annotation processing runs before compiling java source code we have to consider two cases:
 
  1. **The class is already compiled**: This is the case if a third party .jar contains compiled .class files with `@Factory` annotations. In that case we can directly access the Class like we do in the `try-block`.
- 2. **The class is not compiled yet**: This will be the case if we try to compile our source code which has @Factory annotations. Trying to  access the Class directly throws a `MirroredTypeException`. Fortunately MirroredTypeException contains a `TypeMirror` representation of our not yet compiled class. Since we know that it must be type of class (we have already checked that before) we can cast it to `DeclaredType` and create `TypeElement` where we can access the qualified name.
+ 2. **The class is not compiled yet**: This will be the case if we try to compile our source code which has @Factory annotations. Trying to  access the Class directly throws a `MirroredTypeException`. Fortunately MirroredTypeException contains a `TypeMirror` representation of our not yet compiled class. Since we know that it must be type of class (we have already checked that before) we can cast it to `DeclaredType` and access `TypeElement` to read the qualified name.
 
 Alright, now we need one more datastructure named `FactoryGroupedClasses` which basically groups all `FactoryAnnotatedClasses` together.
 
@@ -583,7 +583,7 @@ As you see it's basically just a `Map<String, FactoryAnnotatedClass>`. This map 
 
 
 ## Matching Criteria
-Let's proceed with the implementation of `process()`. Next we want to check if the annotated class has at least one public constructor, is not an abstract class, inherits of specified type and is a public class (visibility) :
+Let's proceed with the implementation of `process()`. Next we want to check if the annotated class has at least one public constructor, is not an abstract class, inherits the specified type and is a public class (visibility):
 
 {% highlight java %}
 public class FactoryProcessor extends AbstractProcessor {
