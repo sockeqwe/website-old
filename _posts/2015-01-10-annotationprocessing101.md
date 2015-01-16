@@ -902,7 +902,7 @@ I know there are other ways to deal with that problem i.e. we could also set a b
 If you have looked at the [git repository](https://github.com/sockeqwe/annotationprocessing101/tree/master/factory) of our factory processor you will see that we have orgranized our repository in two maven modules. We did that, because we want to give the user of our Factory example the possibility to compile just the annotation in his own project and to include the processor module just for compilation. Confused? I.e. if we would have just one single artifact another developer who wants to use our factory processor in his own project would include both the `@Factory` annotation and the whole `FactoryProcessor` code (incl. FactoryAnnotatedClass and FactoryGroupedClasses) in his project build. I'm pretty sure that the other one won't have the processor class in his compiled project. If you are an android developer maybe you have heard of the 65k method limit (a android .dex file can only address 65.000 methods). If we would have used guava in FactoryProcessor and would provide just a single artifact containing annotation and processor code, then the android apk would not only contain FactoryProcessor code but the whole guava code as well. Guava has about 20.000 methods. Therefore a separation of annotation and processor makes sense.
 
 ## Instantiation Of Generated Classes
-As you have seen in `PizzaStore` sample the generated class `MealFactory` is a normal java class as any other handwritten class. Furthermore you have to instantiate it by hand (like any other java object).
+As you have seen in `PizzaStore` sample the generated class `MealFactory` is a normal java class as any other handwritten class. Furthermore, you have to instantiate it by hand (like any other java object).
 {% highlight java %}
 public class PizzaStore {
 
@@ -916,7 +916,7 @@ public class PizzaStore {
 
 }
 {% endhighlight %}
-If you are an android developer you should be familar with a great annotation processors called [Butterknife](http://jakewharton.github.io/butterknife/). In ButterKnife you annotate android Views with `@InjectView`. The ButterKnifeProcessor generates a class `MyActivity$$ViewInjector`. But in ButterKnife you don't have to instantiate the ButterKnife injector by hand by calling `new MyActivity$$ViewInjector()` but you can use `Butterknife.inject(activity)`. ButterKnife internally uses reflections to instantiate `MyActivity$$ViewInjector()`:
+If you are an android developer you should be familar with a great annotation processors called [ButterKnife](http://jakewharton.github.io/butterknife/). In ButterKnife you annotate android Views with `@InjectView`. The ButterKnifeProcessor generates a class `MyActivity$$ViewInjector`. But in ButterKnife you don't have to instantiate the ButterKnife injector by hand by calling `new MyActivity$$ViewInjector()` but you can use `Butterknife.inject(activity)`. ButterKnife internally uses reflections to instantiate `MyActivity$$ViewInjector()`:
 
 {% highlight java %}
 try {
@@ -924,7 +924,7 @@ try {
 } catch (ClassNotFoundException e) { ... }
 {% endhighlight %}
 
-But is reflection not slow and didn't we tried to get rich of reflections performance issues by using annotation processing which generates native code? Yes, reflection brings perfomance issues. However, it speeds up development because the developer has not to instantiate object by hand. ButterKnife uses a HashMap to "cache" the instantiated objects. So `MyActivity$$ViewInjector` is only instantiated once by using reflections. Next time `MyActivity$$ViewInjector` is needed it will be retrieved fom the HashMap.
+But is reflection not slow and didn't we tried to get rich of reflections performance issues by using annotation processing which generates native code? Yes, reflection brings perfomance issues. However, it speeds up development because the developer has not to instantiate objects by hand. ButterKnife uses a HashMap to "cache" the instantiated objects. So `MyActivity$$ViewInjector` is only instantiated once by using reflections. Next time `MyActivity$$ViewInjector` is needed it will be retrieved from the HashMap.
 
 [FragmentArgs](https://github.com/sockeqwe/fragmentargs) works similar to ButterKnife. It uses reflection to instantiate things that otherwise the developer who uses FragmentArgs has to do. But FragmentArgs generates a special class while annotation processing which is kind of HashMap. So the whole FragmentArgs library executes only one reflection call at the very first time to instantiate this special HashMap class. Once this class is instantiated with `Class.forName()` all fragment arguments injection runs in native java code.
 
