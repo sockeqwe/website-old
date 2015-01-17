@@ -11,14 +11,14 @@ categories:
 tags: [annotation-processing]
 ---
 
-After having written some annotation processors  some people asked me if I could explain how to write an annotation processor. So here is my tutorial. Before we start writing an annotation processor you need to know what annotation processing is, what you can do with that powerful tool and more important what you can't do. Afterwards we will implement together a simple annotation processor step by step.
+In this blog entry I would like to explain how to write an annotation processor. So here is my tutorial. First, I am going to explain to you what annotation processing is, what you can do with that powerful tool and finally what you cannot do with it. In a second step I will implement a simple annotation processor step by step. 
 
 
 # The Basics
 
 To clarify a very important thing from the very beginning: we are not talking about evaluating annotations by using reflections at runtime (run time = the time when the application runs). Annotation processing takes place at compile time (compile time = the time when the java compiler compiles your java source code).
 
-Annotation processing is like the name suggested a tool build in javac for scanning and processing annotations **at compile time**. You can register your own annotation processor for certain annotations. At this point I assume that you already know what an annotation is and how to declare an annotation type. If you are not familar with annotations you can find more information in the [official java documentation](http://docs.oracle.com/javase/tutorial/java/annotations/index.html). Annotation processing is already available since Java 5, but a useable API is available since Java 6 (released in December 2006). However, it took some time until the java world realized the power of annotation processing. So it has become popular in the last few years.
+Annotation processing is a tool build in javac for scanning and processing annotations **at compile time**. You can register your own annotation processor for certain annotations. At this point I assume that you already know what an annotation is and how to declare an annotation type. If you are not familar with annotations you can find more information in the [official java documentation](http://docs.oracle.com/javase/tutorial/java/annotations/index.html). Annotation processing is already available since Java 5 but a useable API is available since Java 6 (released in December 2006). It took some time until the java world realized the power of annotation processing. So it has become popular in the last few years.
 
 An annotation processor for a certain annotation takes java code (or compiled byte code) as input and generate files (usually .java files) as output. What does that exactly means? You can generate java code! The generated java code is in a generated `.java` file. So you **can not** manipulate an existing java class for instance adding a method. The generated java file will be compiled by javac as any other hand written java source file.
 
