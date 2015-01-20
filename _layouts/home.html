@@ -1,20 +1,5 @@
 <!DOCTYPE html>
 <html>
-<!--
-====================================================
-    __  ____  ______________  _______ ___    __ 
-   / / / /  |/  / ____/   \ \/ / ___//   |  / / 
-  / /_/ / /|_/ / /_  / /| |\  /\__ \/ /| | / /  
- / __  / /  / / __/ / ___ |/ /___/ / ___ |/ /___
-/_/ /_/_/  /_/_/   /_/  |_/_//____/_/  |_/_____/
-                                                     
-====================================================
-Owner Name: Hossain Mohammad Faysal
-Profile: https://www.facebook.com/hmfaysal
-Version: 1.1
-Description: Awesome dude, awesome life
-====================================================
--->
 <head>
 {% include head.html %}
 </head>
@@ -22,9 +7,9 @@ Description: Awesome dude, awesome life
 <header class="notepad-site-head">
     <div class="notepad-site-head-menu">
         <a class="notepad-blog-logo" href="{{ site.url }}"><img src="{{ site.url }}/images/{{ site.logo }}" alt="Blog Logo" /></a>
-        
-        
-        <div class="notepad-blog-menu">      
+
+
+        <div class="notepad-blog-menu">
     <div class="notepad-mobile-menu show-for-small">
         <a href="#"><i class="fa fa-bars"></i></a>
     </div>
@@ -38,7 +23,7 @@ Description: Awesome dude, awesome life
             {% else %}
             <a href="{{ site.url }}{{ link.url }}">{{ link.title }}</a>
             {% endif %} </li>
-{% endfor %}            
+{% endfor %}
            <li><a href="{{ site.url }}/feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
     </ul>
 </div>
@@ -62,6 +47,6 @@ Description: Awesome dude, awesome life
 </main>
     {% include footer.html %}
 
-{% include scripts.html %}  
+{% include scripts.html %}
 </body>
 </html>
