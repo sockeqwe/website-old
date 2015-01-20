@@ -11,7 +11,7 @@ categories:
 tags: [annotation-processing]
 ---
 
-In this blog entry I would like to explain how to write an annotation processor. So here is my tutorial. First, I am going to explain to you what annotation processing is, what you can do with that powerful tool and finally what you cannot do with it. In a second step I will implement a simple annotation processor step by step.
+In this blog entry I would like to explain how to write an annotation processor. So here is my tutorial. First, I am going to explain to you what annotation processing is, what you can do with that powerful tool and finally what you cannot do with it. In a second step we will implement a simple annotation processor step by step.
 
 
 # The Basics
@@ -360,7 +360,7 @@ As you see Elements are representing source code. TypeElement represent type ele
 
 
 ## Searching For @Factory
-So lets fullfill `process()` method step by step. First we start with searching for classes annotated with `@Factory`:
+So lets implement the `process()` method step by step. First we start with searching for classes annotated with `@Factory`:
 
 
 {% highlight java %}
