@@ -11,7 +11,7 @@ categories:
 tags: [annotation-processing]
 ---
 
-In this blog entry I would like to explain how to write an annotation processor. So here is my tutorial. First, I am going to explain to you what annotation processing is, what you can do with that powerful tool and finally what you cannot do with it. In a second step I will implement a simple annotation processor step by step. 
+In this blog entry I would like to explain how to write an annotation processor. So here is my tutorial. First, I am going to explain to you what annotation processing is, what you can do with that powerful tool and finally what you cannot do with it. In a second step I will implement a simple annotation processor step by step.
 
 
 # The Basics
@@ -345,7 +345,7 @@ public class Foo {		// TypeElement
 }
 {% endhighlight %}
 
-You have to change the way you see source code. It's just structured text. It's not executable. You can think of it like a XML file you try to parse. Like in XML parsers there is some kind of DOM with elements. You can navigate from Element to it's parent or child Element.
+You have to change the way you see source code. It's just structured text. It's not executable. You can think of it like a XML file you try to parse (or an abstract syntax tree in compiler construction). Like in XML parsers there is some kind of DOM with elements. You can navigate from Element to it's parent or child Element.
 
 For instance if you have a `TypeElement` representing `public class Foo` you could iterate over its children like that:
 
@@ -359,7 +359,7 @@ for (Element e : fooClass.getEnclosedElements()){ // iterate over children
 As you see Elements are representing source code. TypeElement represent type elements in the source code like classes. However, TypeElement does not contain information about the class itself. From TypeElement you will get the name of the class, but you will not get information about the class like the superclass. This is kind of information are accessible through a `TypeMirror`. You can access the TypeMirror of an Element by calling `element.asType()`.
 
 
-## Searching For @Factor
+## Searching For @Factory
 So lets fullfill `process()` method step by step. First we start with searching for classes annotated with `@Factory`:
 
 
