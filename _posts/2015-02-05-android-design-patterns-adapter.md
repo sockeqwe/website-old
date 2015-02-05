@@ -7,7 +7,7 @@ featured: false
 comments: true
 headline: Annotation Processing 101
 categories:
-  - Android Design Patterns
+  - Android-Design-Patterns
 tags: [design-patterns, android]
 ---
 
