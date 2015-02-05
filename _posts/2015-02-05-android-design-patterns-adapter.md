@@ -7,10 +7,10 @@ featured: false
 comments: true
 headline: Annotation Processing 101
 categories:
-  - Android-Design-Patterns
+  - android
 tags: [design-patterns, android]
 ---
 
 In this blog post is part of a series of posts about software design patterns for android applications. The source code can be found at github.
 
-The **Adapter** pattern is used 
+The **Adapter** pattern is used
