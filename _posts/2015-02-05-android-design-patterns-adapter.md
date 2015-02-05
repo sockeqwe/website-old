@@ -1,11 +1,11 @@
 ---
 layout: post
 published: true
-title: Android Design Patterns: Adapter
+title: Adapter Pattern
 mathjax: false
 featured: false
 comments: true
-headline: Annotation Processing 101
+headline: Android Design Patterns: Adapter
 categories:
   - android
 tags: [design-patterns, android]
