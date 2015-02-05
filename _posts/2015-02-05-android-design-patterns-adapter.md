@@ -5,10 +5,10 @@ title: Adapter Pattern
 mathjax: false
 featured: false
 comments: true
-headline: Android Design Patterns: Adapter
+headline: Adapter Pattern
 categories:
   - android
-tags: [design-patterns, android]
+tags: [design-patterns]
 ---
 
 In this blog post is part of a series of posts about software design patterns for android applications. The source code can be found at github.
