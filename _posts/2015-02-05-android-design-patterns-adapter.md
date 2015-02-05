@@ -7,8 +7,8 @@ featured: false
 comments: true
 headline: Adapter Pattern
 categories:
-  - android
-tags: [design-patterns]
+  - android-design-patterns
+tags: [design-patterns, android]
 ---
 
 In this blog post is part of a series of posts about software design patterns for android applications. The source code can be found at github.
