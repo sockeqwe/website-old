@@ -746,7 +746,7 @@ Alright, now you should have an idea what the difference between a view state (i
 
 Let's have a look at the mail sample app. Here we can find some custom view states that extend from already existing ones. `AuthParcelableDataViewState` for instance is an extension of  `LceViewState` and has four states:
 
-![Inbox-States](/images/mosby/inbox_states.png)
+![Inbox-States](/images/mosby/inbox_states.jpg)
 
 Adding an additional state is quite easy. Internally `LceViewstate` (from which `AuthParcelableDataViewState` inherits) has a field `int state` that is used for saving the current state. We simply use that field to add a new state for the case the user is not authenticated as shown below:
 
