@@ -534,6 +534,7 @@ public interface LoginView extends MvpView {
 
 At first glance you might assume that `LoginView` is a `MvpLceView` with just having `showContent()` renamed to `showLoginForm()`. Have a closer look at `MvpLceView` definition:
 
+{% highlight java %}
 public interface MvpLceView<M> extends MvpView {
 
   public void showLoading(boolean pullToRefresh);
