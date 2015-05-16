@@ -50,7 +50,7 @@ To say it from the very beginning: I'm not the biggest fan of inheritance. Why? 
  # Rule 3: Don't see MVP as an MVC variant
  Some people find it hard to understand what the Presenter exactly is, if you say to try to explain that MVP is a variant of MVC (Model-View-Controller). Especially iOS developer having a hard to understand the difference of Controller and Presenter because the "grew up" with the fixed idea and definition of an iOS controller. From my point of view MVP is not a variant of MVC but it wraps around MVP. Take a look at your MVC powered app. Typically you have your View and a Controller (i.e. a `Fragment` on Android  or `UIViewController` on iOS) which handles click events, binds data and observers ListView (or implements a `UITableViewDelegate` for `UITableView` on iOS`) and so on. If you have this picture in mind now take a step back and try to imagine that the controller is part of the view and not connected directly to your model (business logic). The presenter sits in the middle between controller and model like this:
 
- ![MVP with Controller](/images/mosby/inbox_states.png)
+ ![MVP with Controller](/images/mosby/mvp-controller.png)
 
  I want to explain that with an example I already used in my previous blog post. In this example you you want to display a list of users queried from a database. The action starts when the user clicks on the load button, displays a ProgressBar while querying the database (async) and displays the ListView with the items afterwards. The workflow looks like this:
 
@@ -438,7 +438,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
  </p>
 
 
- # Rule 7: MVP scales
+# Rule 7: MVP scales
  Most of the time you have have one View (and Presenter) filling the whole screen. But that doesn't has to be the case. Typically Fragments are a good candidate for splitting your screen into modular decoupled Views with his own Presenter. The sample mail client implents this as well when you open a profile by clicking on the senders image (avatar):
 
 <p>
@@ -501,10 +501,10 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 Loading `List<ProfileScreen>` takes 2 seconds (simulates loading the screens for the viewpager dynamically from a backend). So basically we have a LCE (Loading-Content-Error) and therfore we can use Mosby's `MvpLceViewStateActivity`. Next every Fragment in the ViewPager is a MVP View and hast it's own presenter. I guess you get the overall picture: A MVP View can contain indipendent MVP Views.
 
- # Rule 8: Not every screen needs MVP
+# Rule 8: Not every screen needs MVP
  This might be obvious but once you are in the "I'm a super software architect" mode you may forget about that there are screens and informations that just display static content. Does content does not need MVP.
 
- # Rule 9: Only display one Model per MVP view
+# Rule 9: Only display one Model per MVP view
  Mosby assumes that every MVP view displays exactly one model (Note that displaying a list of items is still displaying one model, the list). Why? Because dealing with differnt models in the same view increases complexity dramatically and we clearly want to avoid spaghetti code. In the sample app I faced that problem in the menu. I haven't refactored that yet to give you the possiblity to understand with a concrete code sample. Have a look at the screenshot of the menu:
 
  ![Menu](/images/mosby/mail-menu.png)
