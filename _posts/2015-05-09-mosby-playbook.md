@@ -47,7 +47,7 @@ To say it from the very beginning: I'm not the biggest fan of inheritance. Why? 
 
  The inheritance hierarchy might be correct, but do you really think that someone who recently joined the team who is developing the Mosby mail app would pick the right base class to implement a new feature XY? I doubt that I would pick the right class (and I am the author of this inheritance hierarchy) for the new feature XY. In java it's all about interfaces and so it should be on android. I, personally, prefer interfaces and delegation over inheritance.
 
- # Rule 3: Don't see MVP as an MVC variant
+# Rule 3: Don't see MVP as an MVC variant
  Some people find it hard to understand what the Presenter exactly is, if you say to try to explain that MVP is a variant of MVC (Model-View-Controller). Especially iOS developer having a hard to understand the difference of Controller and Presenter because the "grew up" with the fixed idea and definition of an iOS controller. From my point of view MVP is not a variant of MVC but it wraps around MVP. Take a look at your MVC powered app. Typically you have your View and a Controller (i.e. a `Fragment` on Android  or `UIViewController` on iOS) which handles click events, binds data and observers ListView (or implements a `UITableViewDelegate` for `UITableView` on iOS`) and so on. If you have this picture in mind now take a step back and try to imagine that the controller is part of the view and not connected directly to your model (business logic). The presenter sits in the middle between controller and model like this:
 
  ![MVP with Controller](/images/mosby/mvp-controller.png)
@@ -368,7 +368,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
   A common use case where EventBus is useful is when implementig navigation drawer. If you click on a menu item the Activity should replace the current main fragment with the other fragment associated with the clicked menu item. It turns out that Android itself already offers an EventBus you already use: `Intents`. Instead of using an external EventBus you could use Intent like I did in the mail sample. I set `MainActivity` to `android:launchMode="singleTop"` and check in `onNewIntent()` for the navigation events. The advantage with Intents is that this kind of Navigation can be used system wide (and not app wide like EventBus). For instance when a new Mail is received a Notification will be shown in the StatusBar. Clicking on the Notification would open the Mail to read it. There could be a Button in Notification that opens the Inbox by clicking on it. If you use a EventBus for navigation in your app, then you might get in the problem that you have to deal with intent and with Event fired through EventBus. You should think about that scenario. If your app can not run into this scenario then using an EventBus for navigation is fine as well.
 
- # Rule 6: Optimistic propagation
+# Rule 6: Optimistic propagation
  Let's have a look at the mail app. When you star or unstar a Mail the star icon changes immediately. However, saving that a mail has changed takes two seconds and can fail. For a better user experience we say we are optimistic and assume that changing the stared mail will be successful. It gives the user of your app an immediately feedback and the feeling that your app works lightning fast.
 
  <p>
