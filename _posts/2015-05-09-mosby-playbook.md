@@ -1,6 +1,6 @@
 ---
 layout: post
-published: true
+published: false
 title: Stinson's Playbook for Mosby
 mathjax: false
 featured: false
