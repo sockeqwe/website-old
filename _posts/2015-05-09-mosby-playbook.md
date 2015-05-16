@@ -9,7 +9,7 @@ headline: Stinson's Playbook for Mosby
 categories:
   - Android
 tags: [android, software-architecture, design-patterns]
-imagefeature: mosby/playbook.jpg
+imagefeature: mosby/playbook.png
 ---
 
 In my [previous](hannesdorfmann.com/android/mosby/) blog post I introduced Mosby, a **M**odel-**V**iew-**P**resenter library for android. This time I'm going to discuss some more details about MVP in general and how to use Mosby. I have implemented a mail client sample which can be found on [Github](https://github.com/sockeqwe/mosby/tree/master/sample-mail) which is used in this blog entry to describe how to use Mosby correctly and to answer some of the common questions I have been asked after having released Mosby.
