@@ -331,7 +331,8 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
  An `EventBus` allows you to inter-communicate between decoupled components by posting and receiving  events. I assume that you already are familar with the concept of an `EventBus`. EventBus is not MVP related. I first came in touch with MVP and EventBus with GWT in late 2009 and it was just mind blowing. From now on I never used MVP without EventBus anymore. Of course I still use EventBus quite a lot in Android. With RxJava some things previously done by an EventBus has been replaced with RxJava's observer "push updates mechanism" (have a look at [SqlBrite](https://github.com/square/sqlbrite) for a concrete use case). The difference between RxJava's push mechanism  and EventBus is that in RxJava you explicitly have to subscribe on an observable and you need to have a reference to that observable wheras an EventBus is a little bit more loosely coupled since you just have to know the event you are listening for. So when I'm talking here about an EventBus you can think of every other push based update mechanism as well.
 
  I see two use cases for Eventbus:
-  1.**EventBus for business logic events:** The Events related to the business logic are posted to the EventBus. As we have discussed previously the View shouldn't have any knowledge of the business logic. Therefore, the presenter is the component that listens for business logic events through the Eventbus. In Mosby you should regitster and unregister the presenter from EventBus in `attachView()` and `detachView()` respectively. Why not registering in the constructor of the Presenter? Because if you have retaining Views (like retaining Fragment) the Presenter gets created only once, but the view still gets attached and reattached to the presenter during orientation changes.
+
+   1. **EventBus for business logic events:** The Events related to the business logic are posted to the EventBus. As we have discussed previously the View shouldn't have any knowledge of the business logic. Therefore, the presenter is the component that listens for business logic events through the Eventbus. In Mosby you should regitster and unregister the presenter from EventBus in `attachView()` and `detachView()` respectively. Why not registering in the constructor of the Presenter? Because if you have retaining Views (like retaining Fragment) the Presenter gets created only once, but the view still gets attached and reattached to the presenter during orientation changes.
 
   In the mail sample I use EventBus quite a lot. The first thing you may have noticed in the video is that after the login was successful all views automatically beginn to load data. You can see this even better if you start the mail app on a tablet.
 
@@ -344,7 +345,8 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 ![Inbox-States](/images/mosby/login-eventbus.jpg)
 
- 2. **EventBus for UI Events:** Another usecase is to use the EventBus in your UI or to communicate between Fragments and Activities. The official [docs recommandation](http://developer.android.com/training/basics/fragments/communicating.html) to do a communicate between fragments and the host activity is to define a listener interface and cast the Activity in fragments `onAttach()` method to the listener:
+
+  2. **EventBus for UI Events:** Another usecase is to use the EventBus in your UI or to communicate between Fragments and Activities. The official [docs recommandation](http://developer.android.com/training/basics/fragments/communicating.html) to do a communicate between fragments and the host activity is to define a listener interface and cast the Activity in fragments `onAttach()` method to the listener:
 
  {% highlight java %}
   @Override
