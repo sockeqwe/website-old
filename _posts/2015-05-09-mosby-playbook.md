@@ -35,7 +35,7 @@ Take your time to make the right decision. A clean software architecture is nece
 # Rule 2: Use inheritance wisely
 To say it from the very beginning: I'm not the biggest fan of inheritance. Why? Inheritance is good to add properties and functionality. Unfortunately I see many developers using it wrong. For instance you are working in a team on a certain app. You have written a MVP View that implements pull-to-refresh on a ListView. This is the base MVP View you use or extend from in almost every screen in your app. It's super handy, all you have to do to implement a new screen is to subclass from that base class and to kick in a custom adapter and you are ready to go. One day one of your teammates has to implement a ListView without pull-to-refresh. So instead of writing a completely new class many developers make the wrong decision and extend from your pull-to-refresh ListView and try to find a hacky workaround to "remove" the pull-to-refresh feature. This may lead to unmaintainable code, you may see methods overriden with empty implementation and last but not least you introduce some kind of tight coupling from pull-to-refresh ListView to the new class since you can't change the base pull-to-refresh ListView implementation without having to fear that you break the non pull-to-refresh ListView class. One possible solution your teammate should have done is to refactor the original pull-to-refresh ListView class and pull out a ListView class without pull-to-refresh and make the pull-to-refresh ListView class extend from it. However, if you decide to going this way you may end up having a large inheritance hierarchy, because every subclass adds a little feature like `B extends A` (adds feature X), `C extends B` (adds feature Y), `D extends C` (adds feature Z) and so on. You see pretty the same in the sample mail app:
 
-  -`AuthFragment`: an LCE (Loading-Content-Error) Fragment with an additional state to display a "not authenticated - sign in" button.
+  - `AuthFragment`: an LCE (Loading-Content-Error) Fragment with an additional state to display a "not authenticated - sign in" button.
 
   - `AuthRefreshFragment`: An extension of `AuthFragment` that uses `SwipeRefreshLayout` as main content view. So one could say: "It's a AuthFragment with pull-to-refresh support".
 
@@ -60,7 +60,7 @@ In my opinion the **Presenter does not replace the controller** rather the prese
 
 By the way: Yes, I think that MVP suits quite well on iOS as well!
 
- # Rule 4: Take separation of Model, View and Presenter serious
+# Rule 4: Take separation of Model, View and Presenter serious
  That might be obvious but to achieve a clean, modular, reusable and maintainable codebase you should really look over your code and ask yourself what that line of code is doing. Is that line of code related to View (UI component or UI controller like OnClickListener) or doing presenters job (coordinating the views state) or business logic (i.e. loading data). The following (pseudeo) code snipped shows a [BLOB](http://www.antipatterns.com/briefing/sld024.htm) Fragment (all things in one huge class) that displays a form to do a login (similar to the mail sample login):
 
  {% highlight java %}
@@ -296,10 +296,10 @@ public class LoginPresenter extends MvpBasePresenter<LoginView> {
 
 So instead of having one huge Fragment with over 300 lines of code now we have two classes with about 100 lines of code each. Moreover, now we have reusable, maintainable code and a clear separation of responsibilities.
 
- # Rule 5: Navigation is a UI thing
+# Rule 5: Navigation is a UI thing
  In some other MVP libraries like single page html sides (javascript) it's the presenter who gets instantiated as fist compoenent and the presenter creates the view. This is not the case on Android (or at least not if you use Mosby) since the Android Framework defines Activity as entrypoint and Actiyity is seen as part of the View layer. So it doesn't make sense to let the Presenter start the Intent for launching a new Activity.
 
- # Rule 6: What about onActivityResult()
+# Rule 6: What about onActivityResult()
  First try to avoid `onActivityResult()` for inner app communication. If you just want to propagate a result from one activity to antoher then an `EventBus` might by a better choice. However, there a  situation where you have to use `onActivityResult()` for instance if you want to communicate with other apps like the cammera app. Should you forward the result to the presenter? It depends: If you simply want to display the taken foto as it is in an `ImageView` then there is no need to forward that to the Presenter. Remember, the presenter is responsible to coordinate the state. So displaying just that Image in a ImageView most of the time doesn't change the state and can be done directly.
 
  {% highlight java %}
@@ -327,7 +327,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 {% endhighlight %}
 
 
- # Rule 5: MVP and EventBus: A match made in heaven
+# Rule 5: MVP and EventBus: A match made in heaven
  An `EventBus` allows you to inter-communicate between decoupled components by posting and receiving  events. I assume that you already are familar with the concept of an `EventBus`. EventBus is not MVP related. I first came in touch with MVP and EventBus with GWT in late 2009 and it was just mind blowing. From now on I never used MVP without EventBus anymore. Of course I still use EventBus quite a lot in Android. With RxJava some things previously done by an EventBus has been replaced with RxJava's observer "push updates mechanism" (have a look at [SqlBrite](https://github.com/square/sqlbrite) for a concrete use case). The difference between RxJava's push mechanism  and EventBus is that in RxJava you explicitly have to subscribe on an observable and you need to have a reference to that observable wheras an EventBus is a little bit more loosely coupled since you just have to know the event you are listening for. So when I'm talking here about an EventBus you can think of every other push based update mechanism as well.
 
  I see two use cases for Eventbus:
@@ -516,7 +516,7 @@ Loading `List<ProfileScreen>` takes 2 seconds (simulates loading the screens for
  ![Menu](/images/mosby/menu-refactored.png)
 
 
- # Rule 10: Use LCE only if you have LCE Views
+# Rule 10: Use LCE only if you have LCE Views
 LCE stands for Loading-Content-Error. Mosby ships with `MvpLceViewStateFragment implements MvpLceView` which displays either the content (like a list of mails) or loading (like a progressbar) or an error view (like a TextView displaying an error message). This might be handy, because you don't have to implement the switching of displaying content, displaying error, displaying loading by your own, but you shouldn't use it as base class for everything. Only use it if your view can reach all three view states (showing loading, content and error). Have a look at the sign in view:
 
 {% highlight java %}
