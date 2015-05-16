@@ -35,10 +35,14 @@ Take your time to make the right decision. A clean software architecture is nece
 # Rule 2: Use inheritance wisely
 To say it from the very beginning: I'm not the biggest fan of inheritance. Why? Inheritance is good to add properties and functionality. Unfortunately I see many developers using it wrong. For instance you are working in a team on a certain app. You have written a MVP View that implements pull-to-refresh on a ListView. This is the base MVP View you use or extend from in almost every screen in your app. It's super handy, all you have to do to implement a new screen is to subclass from that base class and to kick in a custom adapter and you are ready to go. One day one of your teammates has to implement a ListView without pull-to-refresh. So instead of writing a completely new class many developers make the wrong decision and extend from your pull-to-refresh ListView and try to find a hacky workaround to "remove" the pull-to-refresh feature. This may lead to unmaintainable code, you may see methods overriden with empty implementation and last but not least you introduce some kind of tight coupling from pull-to-refresh ListView to the new class since you can't change the base pull-to-refresh ListView implementation without having to fear that you break the non pull-to-refresh ListView class. One possible solution your teammate should have done is to refactor the original pull-to-refresh ListView class and pull out a ListView class without pull-to-refresh and make the pull-to-refresh ListView class extend from it. However, if you decide to going this way you may end up having a large inheritance hierarchy, because every subclass adds a little feature like `B extends A` (adds feature X), `C extends B` (adds feature Y), `D extends C` (adds feature Z) and so on. You see pretty the same in the sample mail app:
 
- -`AuthFragment`: an LCE (Loading-Content-Error) Fragment with an additional state to display a "not authenticated - sign in" button.
- - `AuthRefreshFragment`: An extension of `AuthFragment` that uses `SwipeRefreshLayout` as main content view. So one could say: "It's a AuthFragment with pull-to-refresh support".
+  -`AuthFragment`: an LCE (Loading-Content-Error) Fragment with an additional state to display a "not authenticated - sign in" button.
+
+  - `AuthRefreshFragment`: An extension of `AuthFragment` that uses `SwipeRefreshLayout` as main content view. So one could say: "It's a AuthFragment with pull-to-refresh support".
+
   - `AuthRefreshRecyclerFragment`: Puts a `RecyclerView` into the `SwipeRefreshLayout`.
+
   - `BaseMailsFragment`: An abstract class to displays a list of mails (`List<Mail>`) by using the `RecyclerView`
+
   - There are serval concrete classes that extend from `BaseMailsFragment` like `MailsFragment`, `SearchFragment` and `ProfileMailsFragment`
 
  The inheritance hierarchy might be correct, but do you really think that someone who recently joined the team who is developing the Mosby mail app would pick the right base class to implement a new feature XY? I doubt that I would pick the right class (and I am the author of this inheritance hierarchy) for the new feature XY. In java it's all about interfaces and so it should be on android. I, personally, prefer interfaces and delegation over inheritance.
