@@ -793,7 +793,7 @@ We simply call `showLoginForm()` and we check if the ViewState is `STATE_SHOW_LO
 You could also test if `LoginFragment` handles screen orientation changes correctly by writing instrumentation test (i.e. with espresso), but the point is that in Mosby you have this clear separation between view and view state. Hence, you can test the view state independently, which usually requires less testing code to be written (compare the code above with an instrumentation test).
 
 
-## Tip 17: ViewStates and ViewState variants
+## Tip 17: ViewState variants
 Maybe it is still not clear what `ViewState` exactly is. Probably it's easier to explain the `ViewState` concept with an example: For instance showing a loading view (ProgressBar) instead of the content view (ListView displaying items). That are clearly two different view states: the view should display either loading view or content view. But what if we add pull-to-refresh support to the content view (SwipeRefreshLayout around ListView). If the user triggers a pull-to-refresh action we show the ListView (content view) and a loading indicator at the same time. The question is: Which state is that? The view always is in exactly one state (that's the definition of view state). So during pull-to-refresh the view's state is not in "showing content" and "showing loading" at the same time. Internally the view is still in exactly one state. There are two possibilities:
 
   1. Introduce a **new state** for pull-to-refresh (displaying ListView and ProgressBar at the same time).
