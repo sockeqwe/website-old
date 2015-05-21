@@ -1159,7 +1159,7 @@ We assign each view a unique id. With this id we can find the presenter in `pres
 Whenever Barney Stinson leaves MacLaren's pub at midnight with a big smile on his face and a beautiful woman next to him he knows that he has not succeeded because of the playbook. Actually he succeeded because he has a lot of experience in talking to woman (and wears suits!). Of course some tips and advices are helpful but at the end everyone has to make his own experience (including failing). The same is true when writing apps: you learn while developing and with every app you have developed your experience level increase and your next app will benefit from your experience. In this sense: Happy hacking!
 
 
-I want to thank [Kirill Boyarshinov](https://twitter.com/naghtarr) very much for his great help and assistance while migrating the mail sample app to Dagger2.
+I want to thank [Kirill Boyarshinov](https://twitter.com/naghtarr) very much for helping me.
 
 
 The source code of the sample mail app can be found on [Github](https://github.com/sockeqwe/mosby/tree/master/sample-mail). If you have any question don't hesitate to leave a comment below.
