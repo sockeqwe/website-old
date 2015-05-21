@@ -556,7 +556,7 @@ In that sample from the mail app shown in the video above the activity itself is
 Loading List of ProfileScreen takes 2 seconds (simulates loading the "screens displayed as tabs" for the ViewPager dynamically from a backend). So basically we have a LCE (Loading-Content-Error) and therfore we can use Mosby's MvpLceViewStateActivity. Next every Fragment in the ViewPager is a MVP View and hast it's own presenter. I guess you get the overall picture: A MVP View can contain indipendent MVP Views.
 
 ## Tip 11: Not every View needs MVP
-This might be obvious but once you are in the "I'm a super software architect" mode you may forget  that there are Views that just display static content. Static content does not need MVP.
+This might be obvious but once you are in the _" I'm a super software architect"_  mode you may forget  that there are Views that just display static content. Static content does not need MVP.
 
 ## Tip 12: Only display one Model per MVP view
 Mosby assumes that every MVP view displays exactly one model (note that displaying a list of items is still displaying one model, the list). Why? Because dealing with different models in the same view increases complexity dramatically and we clearly want to avoid spaghetti code. In the sample app I faced that problem in the menu. I haven't refactored that yet to give you the possibility to understand the problem with a concrete code sample. Have a look at the screenshot of the menu:
