@@ -1162,4 +1162,4 @@ Whenever Barney Stinson leaves MacLaren's pub at midnight with a big smile on hi
 I want to thank [Kirill Boyarshinov](https://twitter.com/naghtarr) very much for his great help and assistance while migrating the mail sample app to Dagger2.
 
 
-The code of the sample mail app can be found on [Github](https://github.com/sockeqwe/mosby/tree/master/sample-mail). If you have any question don't hesitate to leave a comment below.
+The source code of the sample mail app can be found on [Github](https://github.com/sockeqwe/mosby/tree/master/sample-mail). If you have any question don't hesitate to leave a comment below.
