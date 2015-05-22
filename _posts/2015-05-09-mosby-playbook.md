@@ -39,7 +39,7 @@ To say it from the very beginning: I'm not the biggest fan of inheritance. Why? 
   - `AuthRefreshFragment`: An extension of `AuthFragment` that uses `SwipeRefreshLayout` as main content view. So one could say: "It's a AuthFragment with pull-to-refresh support".
   - `AuthRefreshRecyclerFragment`: Puts a `RecyclerView` into the `SwipeRefreshLayout`.
   - `BaseMailsFragment`: An abstract class to displays a list of mails (`List<Mail>`) by using the `RecyclerView`
-  - There are serval concrete classes that extend from `BaseMailsFragment` like `MailsFragment`, `SearchFragment` and `ProfileMailsFragment`
+  - There are some concrete classes that extend from `BaseMailsFragment` like `MailsFragment`, `SearchFragment` and `ProfileMailsFragment`
 
  The inheritance hierarchy might be correct, but do you really think that someone who recently joined your team would pick the right base class to implement a new feature XY? In java it's all about interfaces and so it should be on android. I, personally, prefer interfaces and delegation over inheritance.
 
@@ -48,7 +48,7 @@ To say it from the very beginning: I'm not the biggest fan of inheritance. Why? 
 
  ![MVP with Controller](/images/mosby/mvp-controller.png)
 
- I want to explain that with an example I already used in my previous blog post. In this example you you want to display a list of users queried from a database. The action starts when the user clicks on the "load button". While querying the database (async) a ProgressBar is displayed and a ListView with the queried items afterwards. The workflow looks like this:
+ I want to explain that with an example I already used in my previous blog post. In this example you want to display a list of users queried from a database. The action starts when the user clicks on the "load button". While querying the database (async) a ProgressBar is displayed and a ListView with the queried items afterwards. The workflow looks like this:
 
  ![MVP with Controller](/images/mosby/mvp-workflow.png)
 
@@ -57,7 +57,7 @@ In my opinion the **Presenter does not replace the Controller.** Rather the Pres
 By the way: Yes, I think that MVP suits quite well on iOS too!
 
 ## Tip 4: Take separation of Model, View and Presenter serious
- That might be obvious but to achieve a clean, modular, reusable and maintainable codebase you should really look over your code and ask yourself what that line of code is doing. Is that line of code related to View (UI component or UI controller like OnClickListener) or doing presenters job (coordinating the views state) or business logic (i.e. loading data). The following (pseudeo) code snipped shows a [BLOB](http://www.antipatterns.com/briefing/sld024.htm) Fragment (all things in one huge class) that displays a form to sign in (similar to the mail sample login):
+ That might be obvious but to achieve a clean, modular, reusable and maintainable codebase you should really look over your code and ask yourself what that line of code is doing. Is that line of code related to View (UI component or UI controller like OnClickListener) or doing presenters job (coordinating the views state) or business logic (i.e. loading data). The following (pseudo) code snipped shows a [BLOB](http://www.antipatterns.com/briefing/sld024.htm) Fragment (all things in one huge class) that displays a form to sign in (similar to the mail sample login):
 
  {% highlight java %}
  public class LoginFragment extends Fragment {
@@ -139,7 +139,7 @@ By the way: Yes, I think that MVP suits quite well on iOS too!
  }
  {% endhighlight %}
 
- I already have added comments with pointing out responsibilities in MVP. Lets refactor that single huge class and apply the Model-View-Presenter pattern. The Model is the `AccountManager`. The view should have no knowledge of the Model, so pull that out. Everything that coordinates the Views state should be moved into a Presenter. So AsyncTask is moved to the Presenter. The Presenter must be able to coordinate the view. Therefore we introduce a interface for the view `LoginView` where we define the methods `showError()`, `loginSuccessful()` and `showLoading()`. By defining an interface we keep the Presenter as platform independent as possible (Presenter has no Android SDK related code). Furthermore it makes writing unit test more easy (read more about that in my previous blog post). As we have discussed in the previous tip the Fragment is a Controller and therefore part of the View. So the fragment at the end should only contain code controlling UI components. The refactored code (with Mosby View State support) looks like this:
+ I already have added comments with pointing out responsibilities in MVP. Lets refactor that single huge class and apply the Model-View-Presenter pattern. The Model is the `AccountManager`. The view should have no knowledge of the Model, so pull that out. Everything that coordinates the Views state should be moved into a Presenter. So AsyncTask is moved to the Presenter. The Presenter must be able to coordinate the view. Therefore we introduce an interface for the view `LoginView` where we define the methods `showError()`, `loginSuccessful()` and `showLoading()`. By defining an interface we keep the Presenter as platform independent as possible (Presenter has no Android SDK related code). Furthermore it makes writing unit test more easy (read more about that in my previous blog post). As we have discussed in the previous tip the Fragment is a Controller and therefore part of the View. So the fragment at the end should only contain code controlling UI components. The refactored code (with Mosby View State support) looks like this:
 
  {% highlight java %}
  public class LoginFragment extends MvpViewStateFragment<LoginView, LoginPresenter>
