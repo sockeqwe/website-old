@@ -553,7 +553,7 @@ In that sample from the mail app shown in the video above the activity itself is
 {% endhighlight %}
 
 
-Loading List of ProfileScreen takes 2 seconds (simulates loading the "screens displayed as tabs" for the ViewPager dynamically from a backend). So basically we have a LCE (Loading-Content-Error) and therfore we can use Mosby's MvpLceViewStateActivity. Next every Fragment in the ViewPager is a MVP View and hast it's own presenter. I guess you get the overall picture: A MVP View can contain indipendent MVP Views.
+Loading List of ProfileScreen takes 2 seconds (simulates loading the "screens displayed as tabs" for the ViewPager dynamically from a backend). So basically we have a LCE (Loading-Content-Error) and therfore we can use Mosby's MvpLceViewStateActivity. Next every Fragment in the ViewPager is a MVP View and has it's own presenter. I guess you get the overall picture: A MVP View can contain indipendent MVP Views.
 
 ## Tip 11: Not every View needs MVP
 This might be obvious but once you are in the _" I'm a super software architect "_  mode you may forget  that there are Views that just display static content. Static content does not need MVP.
@@ -799,7 +799,7 @@ Maybe it is still not clear what `ViewState` exactly is. Probably it's easier to
   1. Introduce a **new state** for pull-to-refresh (displaying ListView and ProgressBar at the same time).
   2. Extending "show loading view state": Additionally we store the information that a pull-to-refresh was triggered (i.e. a boolean flag) and that the ListView should be displayed as well. Using an existing ViewState and extending that one with additional info (i.e. a boolean flag for pull-to-refresh) is called a **Variant of ViewState**. We extend the "show loading view state" by adding the boolean pull-to-refresh flag which results in having two variants of the "show loading view state". The first variant is where pull-to-refresh flag is true (view should display ListView and pull-to-refresh indicator) and the second variant is where pull-to-refresh flag is false (view should display a ProgressBar only).
 
- It doesn't make any difference which one of this two options you use, it's just an internal implementation detail. The point with ViewState is that there is exactly one view state the view is in. However, one view state can have few variants. Having variants may require multiple information to be stored and multiple view methods to be invoked to restore this view state variant. Mosby's default `MvpLceViewState` implementation uses apraoch number 2 which looks like this:
+ It doesn't make any difference which one of this two options you use, it's just an internal implementation detail. The point with ViewState is that there is exactly one view state the view is in. However, one view state can have few variants. Having variants may require multiple information to be stored and multiple view methods to be invoked to restore this view state variant. Mosby's default `MvpLceViewState` implementation uses approach number 2 which looks like this:
  {% highlight java %}
 
  private boolean pullToRefresh;
@@ -822,7 +822,7 @@ Maybe it is still not clear what `ViewState` exactly is. Probably it's easier to
 }
  {% endhighlight %}
 
- However, I recommend to not having more than two variants of a ViewState and only prefer variants over defining a new view state if a variant is simple and doesn't not require complex restoring (in `apply()`).
+ However, I recommend to not having more than two variants of a ViewState and only prefer variants over defining a new view state if a variant is simple and doesn't require complex restoring (in `apply()`).
 
 Alright, now you should have an idea what the difference between a view state (i.e. show loading) and a view state variant (i.e. show loading with pull-to-refresh) is.
 
@@ -858,7 +858,7 @@ public class AuthParcelableDataViewState<D extends Parcelable, V extends AuthVie
 }
 {% endhighlight %}
 
-The code should be self explaining. An example of how to implement **ViewState with Variants** can be found in `SearchFragment implements SerachView`, where I have implemented pagination (displaying a list of mails by loading the whole list in chunks, i.e. display 20 mails and if the user has scrolled to the end of the list then load the next 20 mails). Basically `SearchView` displays a list of mails, loading and displaying an error view. Therefore we can use a LCE based view state implementation. The question is which ViewState  to use to add a Variant to it: "show loading" or "show content"? In that case it depends a little bit on your implementation. What I did to display "loading more" is I added an additional ViewType to `SearchResultAdapter` which displays the list of mails matching the search criteria in a RecyclerView (content view). So the last item the RecyclerView displays is a row displaying a ProgressBar. Since triggering a "load more action" requires to scroll the content view (RecyclerView) it feels more natural to me to add the view state variant to "showing content" instead of "showing loading". Also is the "load more indicator" part of the RecyclerViews (content view) adapter. To implement a Variant of "showing content" we simple add a boolean flag `loadingMore` as you can see in `SearchViewState`:
+The code should be self explaining. An example of how to implement **ViewState with Variants** can be found in `SearchFragment implements SerachView`, where I have implemented pagination (displaying a list of mails by loading the whole list in chunks, i.e. display 20 mails and if the user has scrolled to the end of the list then load the next 20 mails). Basically `SearchView` displays a list of mails, loading and displaying an error view. Therefore we can use a LCE based view state implementation. The question is which ViewState  to use to add a Variant to it: "show loading" or "show content"? In that case it depends a little bit on your implementation. What I did to display "loading more" is I added an additional ViewType to `SearchResultAdapter` which displays the list of mails matching the search criteria in a RecyclerView (content view). So the last item the RecyclerView displays is a row displaying a ProgressBar. Since triggering a "load more action" requires to scroll the content view (RecyclerView) it feels more natural to me to add the view state variant to "showing content" instead of "showing loading". Also is the "load more indicator" part of the RecyclerViews (content view) adapter. To implement a Variant of "showing content" we simply add a boolean flag `loadingMore` as you can see in `SearchViewState`:
 
 {% highlight java %}
 // AuthCastedArrayListViewState is a LCE ViewState with an additional "not authenticated" state
@@ -948,7 +948,7 @@ Mosby uses delegation since the very beginning (version 1.0.0). However, this de
 Alright so far we have covered how to bring Mosby MVP support to your custom Activity, Fragment or ViewGroup. For supporting ViewState you have to use the following delegates instead of the delegates discussed above (ViewState delegates already include functionality of MVP delegates):
 
   - `MvpViewStateDelegateCallback`: This interface extends from `MvpDelegateCallback` and defines the method you have to implement like `createViewState()`.
-  - `ActivityMvpViewStateDelegateImpl`: This delegate is an extension of `ActivityMvpDelegateImpl` and works exactly the same way as shown in the previous code snipped: you have to call the delegates method from the corresponding activity lifecycle method. Like shown above your custom activity has to implement `MvpViewStateDelegateCallback` and use a `ActivityMvpViewStateDelegateImpl` instead of the non ViewState related ones:
+  - `ActivityMvpViewStateDelegateImpl`: This delegate is an extension of `ActivityMvpDelegateImpl` and works exactly the same way as shown in the previous code snippet: you have to call the delegates method from the corresponding activity lifecycle method. Like shown above your custom activity has to implement `MvpViewStateDelegateCallback` and use a `ActivityMvpViewStateDelegateImpl` instead of the non ViewState related ones:
   {% highlight java %}
   public abstract class MyViewStateActivity extends Activity implements MvpViewStateDelegateCallback<> {
 
