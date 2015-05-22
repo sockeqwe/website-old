@@ -945,7 +945,7 @@ Mosby uses delegation since the very beginning (version 1.0.0). However, this de
   - `ViewGroupMvpDelegate`: This delegate is used for `ViewGroup` like `FrameLayout` etc. to bring Mosby MVP support to your custom `ViewGroup`. The lifecycle methods are simpler compared to Fragments ones: `onAttachedToWindow()` and `onDetachedFromWindow()`. The default implementation is `ViewGroupMvpDelegateImpl`.
 
 
-Alright so far we have covered how to bring Mosby MVP support to your custom Activity, Fragment or ViewGroup. For supporting ViewState you have to use the following delegates instead of the delegates discussed above (ViewState delegate already includes functionality of MVP delegates):
+Alright so far we have covered how to bring Mosby MVP support to your custom Activity, Fragment or ViewGroup. For supporting ViewState you have to use the following delegates instead of the delegates discussed above (ViewState delegates already include functionality of MVP delegates):
 
   - `MvpViewStateDelegateCallback`: This interface extends from `MvpDelegateCallback` and defines the method you have to implement like `createViewState()`.
   - `ActivityMvpViewStateDelegateImpl`: This delegate is an extension of `ActivityMvpDelegateImpl` and works exactly the same way as shown in the previous code snipped: you have to call the delegates method from the corresponding activity lifecycle method. Like shown above your custom activity has to implement `MvpViewStateDelegateCallback` and use a `ActivityMvpViewStateDelegateImpl` instead of the non ViewState related ones:
