@@ -399,7 +399,7 @@ An `EventBus` allows you to communicate between decoupled components by posting 
 ![Inbox-States](/images/mosby/login-eventbus.jpg)
 
 
-  - **EventBus for UI Events:** Another use case is to use the EventBus in your UI or to communicate between Fragments and Activities. The official [docs recommandation](http://developer.android.com/training/basics/fragments/communicating.html) to do a communicate between fragments and the host activity is to define a listener interface and cast the Activity in fragments `onAttach()` method to the listener:
+  - **EventBus for UI Events:** Another use case is to use the EventBus in your UI or to communicate between Fragments and Activities. The official [docs recommandation](http://developer.android.com/training/basics/fragments/communicating.html) to implement communication between fragments and the host activity is to define a listener interface and cast the Activity in fragments `onAttach()` method to the listener:
 
  {% highlight java %}
   @Override
