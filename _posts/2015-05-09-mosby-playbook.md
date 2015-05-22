@@ -684,7 +684,7 @@ public class LoginViewState implements ViewState<LoginView> {
 }
 {% endhighlight %}
 
-We simply store the current view state as an integer `state`. The method `apply()` gets called from Mosby internally and this is the point where we restore the view state to the associated view.
+We simply store the current view state internally as an integer `state`. The method `apply()` gets called from Mosby internally and this is the point where we restore the view state to the associated view.
 You may wonder how the ViewState is connected to your Fragment or Activity. `MvpViewStateFragment` has a method `createViewState()` called by Mosby internally, which you have to implement. You just have to return a `LoginViewState` instance. However, you have to set the LoginViewState's' internal state by hand. Typically you do that in the methods defined by `LoginView` interface as shown below:
 {% highlight java %}
 
