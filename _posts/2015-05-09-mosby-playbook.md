@@ -299,7 +299,7 @@ In a perfect world we would get the data (Model) exactly the way optimized for d
 
 Nothing new here. `List<User>` gets loaded and the GUI displays the Users in a `ListView` by using  `UserAdapter`. I'm pretty sure that you have used `ListView` and `Adapter` million times before, but have you ever thought about the idea behind `Adapter`? Adapter makes your model displayable through android UI widgets. This is the [adapter design pattern](https://sourcemaking.com/design_patterns/adapter), hence the name. What if we want to support phones and tablets but both display items in a different way? We implement two adapters: `PhoneUserAdapter` and `TabletUserAdapter` and we pick the right one at runtime.
 
-That is the "perfect world" scenario. What if we have to sort the user list or display some things that has to be calculated in a more complex (and CPU intensive) way? We can't do that in the UserAdapter because you will notice scroll performance issues because the hard work is done on the  main UI thread. Therefore, we do that in a separated thread. There are two questions: The first is how do we transform that? Do we take our User class and add some additional fields to User class? Do we override values of the User class?
+That is the "perfect world" scenario. What if we have to sort the user list or display some things that has to be calculated in a more complex (and CPU intensive) way? We can't do that in the UserAdapter because you will notice scroll performance issues because the hard work is done on the  main UI thread. Therefore, we do that in a separated thread. There are two questions: The first is how do we transform the data? Do we take our User class and add some additional fields to User class? Do we override values of the User class?
 
 {% highlight java %}
 public class User {
@@ -308,7 +308,7 @@ public class User {
 }
 {% endhighlight %}
 
-Let's assume that our `UserView` displays the full name and calculates a ranking the user list get sorted accordingly:
+Let's assume that our `UserView` wants to display the full name and calculates a ranking the list get sorted accordingly:
 
 {% highlight java %}
 public class User {
