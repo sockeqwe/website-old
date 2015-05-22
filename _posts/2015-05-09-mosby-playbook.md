@@ -733,7 +733,7 @@ public class LoginFragment extends MvpViewStateFragment<LoginView, LoginPresente
 }
 {% endhighlight %}
 
-Sometimes you have to know if the method gets called from presenter or because of the restoring  view state, typically when working with animations. You can check that with `isRestoringViewState()` like `showError()` does (see above).
+Sometimes you have to know if the method gets called from presenter or because of restoring  view state, typically when working with animations. You can check that with `isRestoringViewState()` like `showError()` does (see above).
 
 ## Tip 16: Testing custom ViewState
 Since `LoginView` and `LoginViewState` are plain old java classes with no dependencies to the android framework, you can simply write plain old java unit test for `LoginViewState`:
