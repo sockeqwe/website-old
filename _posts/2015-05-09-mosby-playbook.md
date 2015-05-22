@@ -337,7 +337,7 @@ public class UserPresentationModel {
 
 By doing so we are sure that `ranking` is always set to a concrete value and that fullname doesn't get computed while scrolling the ListView (PresentationModel gets instantiated in separated thread). UserView now displays `List<UserPresentationModel>` instead of `List<User>`.
 
-The second major question is: Where to do that async transformation? View, Model or Presenter?
+The second question is: Where to do that async transformation? View, Model or Presenter?
 It would be obvious that the View does that transformation because the View knows best how things get displayed on screen.
 
 
