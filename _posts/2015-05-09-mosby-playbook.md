@@ -901,7 +901,7 @@ I'm sure all of you have heard about how bad Fragment's lifecycle is and that it
 
 
 ## Tip 21: Mosby supports MVP for ViewGroups
-If you simply want to avoid Fragments in general you can do that. Mosby offers the same MVP scaffold as for Activities and Fragments for ViewGroups, inclusive ViewState support. The API is the same as for Activity and Fragment. Some default implementation are already available like `MvpViewStateFrameLayout`, `MvpViewStateLinearLayout` and `MvpViewStateRelativeLayout`.
+If you want to avoid Fragments in general you can do that. Mosby offers the same MVP scaffold as for Activities and Fragments for ViewGroups, inclusive ViewState support. The API is the same as for Activity and Fragment. Some default implementation are already available like `MvpViewStateFrameLayout`, `MvpViewStateLinearLayout` and `MvpViewStateRelativeLayout`.
 This ViewGroup implementation are also useful if you want to have subviews in fragment (since you should avoid child fragment). The mail sample uses that when you want to reassign the label of a mail:
 
 <p>
