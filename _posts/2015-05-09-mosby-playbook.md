@@ -563,7 +563,7 @@ Mosby assumes that every MVP view displays exactly one model (note that displayi
 
  ![Menu](/images/mosby/mail-menu.png)
 
-The header displays the current authenticated user, represented as `Account`, while the clickable menu items are a `List<Label>` (just ignore statistics). So we have two Models displayed in the same MVP View namely `MenuFragment`. The problem is that it makes your code more complex and harder to maintain if you work with two Models in the same View. Things get even more complex if you decide to use Mosby's ViewState. Because, now you not only have to store the state showing Labels, loading labels and error while loading labels, additionally you also have to store whether the user is authenticate or not.
+The header displays the current authenticated user, represented as `Account`, while the clickable menu items are a `List<Label>` (just ignore statistics). So we have two Models displayed in the same MVP View namely `MenuFragment`. The problem is that it makes your code more complex and harder to maintain if you work with two Models in the same View. Things get even more complex if you decide to use Mosby's ViewState. Because, now you not only have to store the state showing labels, loading labels and error while loading labels, but you also have to store whether the user is authenticate or not.
 
 The solution to this problem is to split the one big MVP View into two views with its own Presenter and own ViewState:
 
