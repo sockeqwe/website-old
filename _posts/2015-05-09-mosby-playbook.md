@@ -57,7 +57,7 @@ In my opinion the **Presenter does not replace the Controller.** Rather the Pres
 By the way: Yes, I think that MVP suits quite well on iOS too!
 
 ## Tip 4: Take separation of Model, View and Presenter serious
- That might be obvious but to achieve a clean, modular, reusable and maintainable codebase you should really look over your code and ask yourself what that line of code is doing. Is that line of code related to View (UI component or UI controller like OnClickListener) or doing presenters job (coordinating the views state) or business logic (i.e. loading data). The following (pseudeo) code snipped shows a [BLOB](http://www.antipatterns.com/briefing/sld024.htm) Fragment (all things in one huge class) that displays a form to do a login (similar to the mail sample login):
+ That might be obvious but to achieve a clean, modular, reusable and maintainable codebase you should really look over your code and ask yourself what that line of code is doing. Is that line of code related to View (UI component or UI controller like OnClickListener) or doing presenters job (coordinating the views state) or business logic (i.e. loading data). The following (pseudeo) code snipped shows a [BLOB](http://www.antipatterns.com/briefing/sld024.htm) Fragment (all things in one huge class) that displays a form to sign in (similar to the mail sample login):
 
  {% highlight java %}
  public class LoginFragment extends Fragment {
