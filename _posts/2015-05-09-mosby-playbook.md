@@ -978,7 +978,7 @@ Alright so far we have covered how to bring Mosby MVP support to your custom Act
   - `FragmentMvpViewStateDelegateImpl`: Extension from `FragmentMvpDelegateImpl` to add ViewState support.
   - `ViewGroupMvpViewStateDelegateImpl`: The delegate for `ViewGroups` like FrameLayout to add ViewState support.
 
-The advantage of delegation is that you can add Mosby MVP and ViewState support to any other `Activity`, `Fragment` or `ViewGroup` not natively included in the Mosby library like `DialogFragment`. In the main menu of the mail example you see "statistics" menu item. If you click on it a DialogFragment get's displayed. This is implemented like this:
+The advantage of delegation is that you can add Mosby MVP and ViewState support to any other `Activity`, `Fragment` or `ViewGroup` not included in the Mosby library like `DialogFragment`. In the main menu of the mail example you see "statistics" menu item. If you click on it a DialogFragment get's displayed. This is implemented like this:
 
 {% highlight java %}
 public class StatisticsDialog extends DialogFragment
