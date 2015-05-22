@@ -1071,7 +1071,7 @@ public class StatisticsDialog extends DialogFragment
 
 Delegation allows you to add functionality to any class inclusive third party frameworks like [RoboGuice](https://github.com/roboguice/roboguice). Mosby's ships with support Fragment (Fragments from support library). With delegation as described above you can use "native" `android.app.Fragment` as well.
 
-Another advantage of delegation is that you can change Mosbys default behavior easily by using a custom Delegate implementation. For example: Mosby's default implementation of how to handle Presenter during orientation changes is to recreate the presenter and to restart the requests (excepted retaining Fragments where the Presenter survives). You could write another `ActivityMvpDelegate` or `FragmentMvpDelegate` that internally uses a `HashMap<Integer, MvpPresenter>` to store an already existing Presenter and reuse it when the View gets recreated after orientation changes (instead of creating a new one and restart requests):
+Another advantage of delegation is that you can change Mosby's default behavior by implementing a custom Delegate. For example: Mosby's default implementation of how to handle Presenter during orientation changes is to recreate the presenter and to restart the requests (excepted retaining Fragments where the Presenter survives). You could write another `ActivityMvpDelegate` or `FragmentMvpDelegate` that internally uses a `HashMap<Integer, MvpPresenter>` to store an already existing Presenter and reuse it when the View gets recreated after orientation changes (instead of creating a new one and restart requests):
 
 {% highlight java %}
 public interface IdBasedMvpView extends MvpView {
