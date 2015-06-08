@@ -936,3 +936,9 @@ I hope you have a deeper understanding of annotation processing now. I have to s
 **Please note that parts of the code of FactoryProcessor has some edges and pitfalls. These "mistakes" are placed explicit by me to struggle through them as I explain common mistakes while writing annotation processors (like  "Attempt to recreate a file"). If you start writing your own annotation processor based on FactoryProcessor DON'T copy and paste this pitfalls. Instead you should avoid them from the very beginning.**
 
 In a future blog post (Annotation Processing 102) I will write about unit testing annotation processors. However, my next blog post will be about software architecture in android. Stay tuned.
+
+### Update
+I talked about Annotation Processing at droidcon Germany 2015. The video of my talk can be found at youtube:
+<div>
+<iframe width="853" height="480" src="https://www.youtube.com/embed/43FFfTyDYEg?rel=0" frameborder="0" allowfullscreen></iframe>
+</div>
