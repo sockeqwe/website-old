@@ -938,7 +938,7 @@ I hope you have a deeper understanding of annotation processing now. I have to s
 In a future blog post (Annotation Processing 102) I will write about unit testing annotation processors. However, my next blog post will be about software architecture in android. Stay tuned.
 
 ### Update
-I talked about Annotation Processing at droidcon Germany 2015. The video of my talk can be found at youtube:
-<div>
+I talked about Annotation Processing at droidcon Germany 2015. The video of my talk can be found at [youtube](https://www.youtube.com/watch?v=43FFfTyDYEg):
+<p>
 <iframe width="853" height="480" src="https://www.youtube.com/embed/43FFfTyDYEg?rel=0" frameborder="0" allowfullscreen></iframe>
-</div>
+</p>
