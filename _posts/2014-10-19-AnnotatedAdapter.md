@@ -83,7 +83,7 @@ public class SampleAdapter extends SupportAnnotatedAdapter
 
   @ViewType(
     layout = R.layout.cell_simple,
-    fields = @Field(
+    views = @ViewField(
         type = TextView.class,
         name = "text",
         id = R.id.textView
@@ -94,13 +94,13 @@ public class SampleAdapter extends SupportAnnotatedAdapter
 
     @ViewType(
       layout = R.layout.cell_with_icon,
-      fields = {
-        @Field(
+      views = {
+        @ViewField(
           type = TextView.class,
           name = "text",
           id = R.id.textView
           ),
-        @Field(
+        @ViewField(
           type = ImageView.class,
           name = "icon",
           id = R.id.iconImageView
@@ -151,17 +151,17 @@ public class SampleAdapter extends SupportAnnotatedAdapter
 }
 {% endhighlight %}
 
-At first look you have noticed that there is less code. However AnnotatedAdapter can't read your mind. Therefore we have to give some information by using `@ViewType` annotation. In short: less code, more annotations. With the `@ViewType` annotation we specify the view types integer constant, the xml layout we want to inflate for this view type and with `@Field` you define the view holder class. Have a look at the `int iconRow = 1`:
+At first look you have noticed that there is less code. However AnnotatedAdapter can't read your mind. Therefore we have to give some information by using `@ViewType` annotation. In short: less code, more annotations. With the `@ViewType` annotation we specify the view types integer constant, the xml layout we want to inflate for this view type and with `@ViewField` you define the view holder class. Have a look at the `int iconRow = 1`:
 {% highlight java %}
 @ViewType(
   layout = R.layout.cell_with_icon,
-  fields = {
-    @Field(
+  views = {
+    @ViewField(
       type = TextView.class,
       name = "text",
       id = R.id.textView
       ),
-    @Field(
+    @ViewField(
       type = ImageView.class,
       name = "icon",
       id = R.id.iconImageView
@@ -176,23 +176,75 @@ AnnotatedAdapter will generate a view holder class called `IconRowViewHolder` th
 {% highlight java %}
 class IconRowViewHolder extends RecyclerView.ViewHolder {
 
-  public android.widget.TextView text;
-  public android.widget.ImageView icon;
+  public TextView text;
+  public ImageView icon;
 
   public RowWithPicViewHolder(View view) {
 
      super(view);
 
-     text = (android.widget.TextView) view.findViewById(R.id.textView);
-     icon = (android.widget.ImageView) view.findViewById(R.id.iconImageView);
+     text = (TextView) view.findViewById(R.id.textView);
+     icon = (ImageView) view.findViewById(R.id.iconImageView);
    }
 
 }
 {% endhighlight %}
 
- - `@Field ( type = ... )` specifies the class of the view in the view holde
- - `@Field ( name = ... )` specifies the name of the field for this subview in the viewholder
- - `@Field ( id = ... )` specifies the id of to get the subview instance by using `findViewById()`
+ - `@ViewField ( type = ... )` specifies the class of the view in the view holde
+ - `@ViewField ( name = ... )` specifies the name of the field for this subview in the viewholder
+ - `@ViewField ( id = ... )` specifies the id of to get the subview instance by using `findViewById()`
+
+
+You can also specify non UI related fields (not bound by `findViewById()` ), for instance a `OnClickListener`, as part of the generated view holder. You can do that by using `@Field` like this:
+
+{% highlight java %}
+@ViewType(
+  layout = R.layout.cell_with_icon,
+  views = {
+    @ViewField(
+      type = TextView.class,
+      name = "text",
+      id = R.id.textView
+      ),
+    @ViewField(
+      type = ImageView.class,
+      name = "icon",
+      id = R.id.iconImageView
+      )
+    },
+  fields = {
+    @Field(
+      type = OnClickListener.class,
+      name = "clickListener"
+      )
+    }
+
+)
+public final int iconRow = 1;
+{% endhighlight %}
+
+Then the generated `IconRowViewHolder` contains this `@Field` as well:
+
+{% highlight java %}
+class IconRowViewHolder extends RecyclerView.ViewHolder {
+
+  public TextView text;
+  public ImageView icon;
+
+  public OnClickListener clickListener;
+
+  public RowWithPicViewHolder(View view) {
+
+     super(view);
+
+     text = (TextView) view.findViewById(R.id.textView);
+     icon = (ImageView) view.findViewById(R.id.iconImageView);
+   }
+
+}
+{% endhighlight %}
+
+
 
 Next you see two methods that you already know if you ever have written an Adapter by hand:
 
@@ -206,14 +258,14 @@ Last you notice that there are `bindViewHolder()` methods. In this methods you b
 Yes, that's all, **but** there is one thing you have to know about android studio (I assume the most of you are using Android Studio): Since the interface `AdapterBinder` is generated at compile time this interface is not available when you start creating a brand new Adapter. The interface is  available only after compiling at least once. Hence I would consider the following step as best practice when creating a brand new adpater class using `AnnotatedAdapter`:
 
 1. Create the new java file for your adapter and let the adapter class extends `SupportAnnotatedAdapter`.
-2. Define your view types by using `@ViewType` and `@Field`
+2. Define your view types by using `@ViewType` and `@ViewField`
 3. In Android Studio: Main Menu Bar -> `Build -> Rebuild Project`. This will force the compiler to  generate the `AdapterBinder` interface.
 4. Let your adapter class implement the binder interface and implement all binder methods
 
 I can guaranty that by following this instructions you will write your next adapter in less than 5 minutes (creating xml layouts excluded). **Note** that you have to trigger `Build -> Rebuild Project` only at the very first time you create a brand new adapter class. Once done you can change your adapters code, you can add or remove view types and the interface will be regenerated automatically every time you compile/install your app on your device.
 
 # I need your help
-From my point of view `AnnotatedAdapter` reduces writing boilerplate code a lot. However, it's not perfect, since you have to use `@Field` annotations to define the ViewHolder. I want to remove this  and make AnnotatedAdapter by parse the xml layout files to retrieve all needed informations to generate the view holder classes. Unfortunately that's not as simple as it sounds, but I'm sure that there are smarter people than me out there. If you have an idea of how to solve that problem please use [this issue on github](https://github.com/sockeqwe/AnnotatedAdapter/issues/4) to get in touch with me.
+From my point of view `AnnotatedAdapter` reduces writing boilerplate code a lot. However, it's not perfect, since you have to use `@ViewField` annotations to define the ViewHolder. I want to remove this  and make AnnotatedAdapter by parse the xml layout files to retrieve all needed informations to generate the view holder classes. Unfortunately that's not as simple as it sounds, but I'm sure that there are smarter people than me out there. If you have an idea of how to solve that problem please use [this issue on github](https://github.com/sockeqwe/AnnotatedAdapter/issues/4) to get in touch with me.
 
 
 AnnotatedAdapter supports also `AbsListView` widgets, inheritance and other little features you may find useful. You can find more information about [AnnotatedAdapter on github](https://github.com/sockeqwe/AnnotatedAdapter)
