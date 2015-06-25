@@ -176,8 +176,7 @@ public class ChatMessageDao extends Dao {
 
           chatId // Argument that replaces "?" in WHERE
         )
-        .map(new Func1<SqlBrite.Query, List<ChatMessage>>() {  // Converts SqlBrite.Query to List<ChatMessage>
-
+        .map(new Func1<SqlBrite.Query, List<ChatMessage>>() {  // SqlBrite.Query to List<ChatMessage>
           @Override public List<ChatMessage> call(SqlBrite.Query query) {
             Cursor cursor = query.run();
             return ChatMessageMapper.list(cursor);  // Generated Mapper class
@@ -186,12 +185,12 @@ public class ChatMessageDao extends Dao {
       }
 
 
-  public Observable<Long> addMessage(String id, String sender, String message, long timestamp, String chatId ) {
+  public Observable<Long> addMessage(String id, String sender, String msg, long ts, String chatId ) {
     ContentValues values = ChatMessageMapper.contentValues()
                          .id(id)
                          .sender(sender)
-                         .message(message)
-                         .timestamp(timestamp)
+                         .message(msg)
+                         .timestamp(ts)
                          .chatId(chatId)
                          .build();
 
