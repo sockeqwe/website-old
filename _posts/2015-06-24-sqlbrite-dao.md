@@ -11,7 +11,7 @@ categories:
 tags: [android, software-architecture, annotation-processing]
 ---
 
-Earlier this year, one day before Valentine's day to be precise, I had the glorious idea to surprise my lovely girlfriend with a special android app. Who said computer science can't be romantic?
+Earlier this year, one day before Valentine's day to be precise, I had the glorious idea to surprise my lovely girlfriend with a special android app on Valentine's day. Who said computer science can't be romantic?
 
 The idea was simple: I wanted to build an android app that imitates and looks like [Tinder](https://play.google.com/store/apps/details?id=com.tinder&hl=de) but instead of displaying real people nearby, I faked everything so that only my profile gets displayed so she only can choose me. Nearly everything was hard coded except the messaging part. To save time and effort I didn't want to build my own backend to store messages and provide a REST api. Instead I decided to use GCM to send and deliver chat messages form my girlfriend's phone to my phone and vice versa. That required to store the received chat messages on a local SQLite database on the users device. Therefore a database library was needed.
 
