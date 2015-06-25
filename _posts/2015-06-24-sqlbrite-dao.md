@@ -33,7 +33,7 @@ In this fake Tinder app you can open `ChatActivity` which displays a `List<ChatM
 SQLBrite is still in it's early days (Version 0.1.0 while writing this blog post). As already said the main focus of SQLBrite is set on providing a wrapper arround `SQLite`. No ORM and no type-safe query mechanism are provided. So by using SQLBrite you have to work with `Cursor` and `ContentValues`. That was a little bit annoying while developing the fake Tinder app. Therefore, I decided to write an [annotation processor](hannesdorfmann.com/annotation-processing/annotationprocessing101/) for "very simple" object mapping and [DAO](https://en.wikipedia.org/wiki/Data_access_object) (Data Access Object) on top of SQLBrite. SQLBrite Dao can be found on [Github](https://github.com/sockeqwe/sqlbrite-dao).
 
 ###Object mapping
-Please note that this is not an ORM. The only thing it does is take a `Cursor` and read the column into the model class pojo. Only primitives are allowed, no relations like 1:n (1 `Chat` has many `ChatMessage`s can't be modeled and resolved ). It's more like serializing data then object mapping. You have to annotate your model class with `@ObjectMappable` and the desired fields with `@Column` with the table column name as parameter:
+Please note that this is not an ORM. The only thing it does is take a `Cursor` and read the column into the model class pojo. Only primitives are allowed, no relations like 1:n (1 `Chat` has many `ChatMessages` can't be modeled and resolved ). It's more like serializing data then object mapping. You have to annotate your model class with `@ObjectMappable` and the desired fields with `@Column` with the table column name as parameter:
 
 {% highlight java %}
 @ObjectMappable
