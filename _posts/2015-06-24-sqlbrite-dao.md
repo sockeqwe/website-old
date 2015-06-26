@@ -142,7 +142,7 @@ ContentValues cv = ChatMessageMapper.contentValues()
                         .build();
 {% endhighlight %}
 
-It's just a helper class that makes working with `Cursor` or `ContentValues` more convenient.
+`ChatMessageMapper` is just a generated helper class that makes working with `Cursor` or `ContentValues` more convenient.
 
 ###DAO
 Create your own **D**ata **A**ccess **O**bject  (DAO) where you define methods to manipulate or query your database table. `Dao` provides SQL grammar so you don't have to deal that much with String concatenation and can use IDE's auto completion to build your sql statements. Usually a DAO represents a database table as following:
