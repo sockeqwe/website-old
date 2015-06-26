@@ -159,7 +159,7 @@ public class ChatMessageDao extends Dao {
         ChatMessage.COL_TIMESTAMP + " INTEGER",
         ChatMessage.COL_CHAT_ID+" TEXT"
       )
-        .execute(database);
+      .execute(database);
 
   }
 
