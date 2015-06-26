@@ -67,6 +67,7 @@ public class ChatMessage {
   @Column(COL_CHAT_ID)
   String chatId;
 
+
   public ChatMessage() {
   }
 
