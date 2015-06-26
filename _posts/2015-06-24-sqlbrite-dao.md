@@ -52,11 +52,20 @@ public class ChatMessage {
   //
   // Fields mapped to database columns
   //
-  @Column(COL_ID) String id;
-  @Column(COL_SENDER_NAME) String sender;
-  @Column(COL_MESSAGE) String message;
-  @Column(COL_TIMESTAMP) long timestamp;
-  @Column(COL_CHAT_ID) String chatId;
+  @Column(COL_ID)
+  String id;
+
+  @Column(COL_SENDER_NAME)
+  String sender;
+
+  @Column(COL_MESSAGE)
+  String message;
+
+  @Column(COL_TIMESTAMP)
+  long timestamp;
+
+  @Column(COL_CHAT_ID)
+  String chatId;
 
   public ChatMessage() {
   }
