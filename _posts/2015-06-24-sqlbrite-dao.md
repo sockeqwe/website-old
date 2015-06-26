@@ -83,7 +83,7 @@ public class ChatMessage {
 }
 {% endhighlight %}
 
-An annotation processor then generates `ChatMessageMapper` class. That geberated class (takes the original class name annoated with `@ObjectMappable` and appends "Mapper" suffix) looks like this:
+An annotation processor then generates `ChatMessageMapper` class. That generated class (takes the original class name annoated with `@ObjectMappable` and appends "Mapper" suffix) looks like this:
 
 {% highlight java %}
 public final class ChatMessageMapper {
