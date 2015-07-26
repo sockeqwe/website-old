@@ -19,4 +19,4 @@ I've received a lot of positive feedback from the community (have I ever said ho
 
 This is not a farewell. I will still post about Mosby here on my personal blog. Those blog posts may also be merged into Mosby's Github Pages. Another advantage of Github Pages is that everybody can contribute easily by creating a pull request. Interior designers (also known as contributors) are very welcome!
 
-Therefore, I'm not saying good bye Mosby. Rather I say _see you later_ in your new house, which hopefully one day will be the skyscraper you were always dreaming of.
+Therefore, I'm not saying _&raquo;good bye Mosby&laquo;_. Rather I say _&raquo;see you later&laquo;_ in your new house, which hopefully one day will be the skyscraper you were always dreaming of.
