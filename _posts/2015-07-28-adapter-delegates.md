@@ -97,7 +97,7 @@ public class PetFoodTipAdapter extends RecyclerView.Adapter {
 
 His project manager was happy since he was able to deliver in time. MyLittelZoo 2.0 was released on Play Store successfully.
 
-A few weeks later product manager came to Joe and told him that business hadn't developed as expected. To earn money the company decided to sign a contract with a big advertisement company. The advertisement company could display banners in MyLittleZoo android app. In other words: they sold their soul to the devil. Joe's job was to include advertisement banner in the app by using a provided advertisement sdk. The clock ticked, the company needed money (revenue from advertisement). The update had to be published as soon as possible. Since advertisement banner should be displayed along with other items in a RecyclerView Joe decided to create a new base adapter class called `AdvertismentAdapter`:
+A few weeks later product manager came to Joe and told him that business hadn't developed as expected. To earn money the company decided to sign a contract with a big advertisement company. The advertisement company could display banners in MyLittleZoo android app. In other words: they sold their soul to the devil. Joe's job was to include advertisement banner in the app by using a provided advertisement sdk. The clock ticked, the company needed money (revenue from advertisement). The app update had to be published as soon as possible. Since advertisement banner should be displayed along with other items in a RecyclerView Joe decided to create a new base adapter class called `AdvertismentAdapter`:
 
 {% highlight java %}
 public class AdvertismentAdapter extends RecyclerView.Adapter {
