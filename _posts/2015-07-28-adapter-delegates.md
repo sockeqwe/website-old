@@ -366,4 +366,4 @@ Actually, Joe was so happy that he had decided to put `AdapterDelegates` in a ow
 
 [You can find AdapterDelegates on Github](https://github.com/sockeqwe/AdapterDelegates) and is available in maven central.
 
-**Disclaimer:** Joe is not real person nor is MyLittleZoo Inc. a real company. Both are creature of my imagination. Please note also that the code snippets shown in this blog post may not compile. It's kind of java alike pseudo code to give you an idea of how the code could look like.
+**Disclaimer:** Joe is not real person nor is MyLittleZoo Inc. a real company. Both are creatures of my imagination. Please note also that the code snippets shown in this blog post may not compile. It's kind of java alike pseudo code to give you an idea of how the code could look like.
