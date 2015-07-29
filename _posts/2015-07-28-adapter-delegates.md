@@ -146,7 +146,7 @@ Damn, and then he get the overall picture:
 
 So many times he had agreed on "Favor composition over inheritance" while discussing with other developers. Until now it was just a good slogan but he never really have build something according this principle. So an empty Adapter is the fundament. ViewTypes are the reusable components(Lego pieces).
 
-So Joe defined the Lego pieces for `NewsTipAdapter` (the adapter for the new app) as follows:
+So Joe started to define reusable Lego pieces called `NewsTeaserAdapterDelegate` and `PedFoodTipAdapterDelegate`:
 
 {% highlight java %}
 public class NewsTeaserAdapterDelegate {
@@ -210,7 +210,7 @@ public class PedFoodTipAdapterDelegate {
 }
 {% endhighlight %}
 
-And then he took the fundament, an empty adapter, and put the Lego pieces on top of it:
+And then he took the fundament, an empty adapter, and put the Lego pieces on top of it to create the `NewsTipAdapter` which will be used in the new app:
 
 {% highlight java %}
 public class NewsTipAdapter extends RecyclerView.Adapter{
