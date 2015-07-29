@@ -245,7 +245,7 @@ public class NewsTipAdapter extends RecyclerView.Adapter{
       return newsTeaserDelegate.onCreateViewHolder(parent);
     }
     else if (foodTipDelegate.getViewType() == viewType){
-      return foodTipDelegate.getViewType();
+      return foodTipDelegate.onCreateViewHolder(parent);
     }
 
     throw new IllegalArgumentException("No delegate found");
