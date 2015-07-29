@@ -264,7 +264,7 @@ public class NewsTipAdapter extends RecyclerView.Adapter{
 }
 {% endhighlight %}
 
-I guess you get the point. Instead of inheriting Joe defines delegates that will do the job. As you have seen in the code snipped above, there is a lot of boilerplate code to write. Joe found a smart plugin solution for that:
+I guess you get the point. Instead of inheriting Joe had defined a delegate for each view type. Each delegate was responsible for creating and binding a view holder. As you have noticed in the code snipped above, there is a lot of boilerplate code to write. Joe found a smart plugin solution for that:
 
 {% highlight java %}
 /**
