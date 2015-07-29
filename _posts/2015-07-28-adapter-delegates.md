@@ -361,7 +361,7 @@ I guess you can imagine how other adapters of MyLittleZoo app looks now. There i
 Joe was happy, the product manager was happy, the users of the app was happy. Everybody was happy.
 Actually, Joe was so happy that he had decided to put `AdapterDelegates` in a own library and open source it.
 
-[You can find AdapterDelegates on Github](https://github.com/sockeqwe/mosby) and is available in maven central.
+[You can find AdapterDelegates on Github](https://github.com/sockeqwe/AdapterDelegates) and is available in maven central.
 
 <small>
 Please note that the code snippets shown in this blog post may not compile. It's kind of java alike pseudo code to give you an idea of how the code could look like.
