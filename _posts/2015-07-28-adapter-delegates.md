@@ -144,7 +144,7 @@ Damn, and then he get the overall picture:
 
  > Favor composition over inheritance
 
-So many times he had agreed on "Favor composition over inheritance" while discussing with other developers. Until now it was just a good slogan but he never really have build something according this principle. So an empty Adapter is the fundament. ViewTypes are the reusable components like a Lego piece.
+So many times he had agreed on "Favor composition over inheritance" while discussing with other developers. Until now it was just a good slogan but he never really have build something according this principle. So an empty Adapter is the fundament. ViewTypes are the reusable components(Lego pieces).
 
 So Joe defined the Lego pieces for `NewsTipAdapter` (the adapter for the new app) as follows:
 
