@@ -138,15 +138,15 @@ Then Joe was about to start moving things into the library when he realized the 
 
 Oh boy, Joe was depressed. Then panic followed depression. How should he fix that? How should he fix that without having to fix it again a month later when a new feature (a new view type) must be implemented?
 
-So Joe started to draw on a whiteboard his requirements. But not a single good idea came out. He was so sad, he thought back to the days when he was a little child. How easy was life during childhood. The only thing he had to worry those days was to clean up his room after he had finished to play lego. Lego? Wait, wait, wait! Joe had a brilliant idea: What he really needs is to built adapter like building a lego house: Take an empty fundament and then stick together that lego pieces you really need. If you need a window in your lego house, take a window piece. If you need a roof slope take the corresponding lego piece. If your lego house needs a backyard, take a lego flower.
+So Joe started to draw on a whiteboard his requirements. But not a single good idea came out. He was so sad, he thought back to the days when he was a little child. How easy was life during childhood. The only thing he had to worry those days was to clean up his room after he had finished to play Lego. Lego? Wait, wait, wait! Joe had a brilliant idea: What he really needs is to built adapter like building a Lego house: Take an empty fundament and then stick together that Lego pieces you really need. If you need a window in your Lego house, take a window piece. If you need a roof slope take the corresponding Lego piece. If your Lego house needs a backyard, take a Lego flower.
 
 Damn, and then he get the overall picture:
 
  > Favor composition over inheritance
 
-So many times he had agreed on "Favor composition over inheritance" while discussing with other developers. Until now it was just a good slogan but he never really have build something according this principle. So an empty Adapter is the fundament. ViewTypes are the reusable components like a lego piece.
+So many times he had agreed on "Favor composition over inheritance" while discussing with other developers. Until now it was just a good slogan but he never really have build something according this principle. So an empty Adapter is the fundament. ViewTypes are the reusable components like a Lego piece.
 
-So Joe defined the lego pieces for `NewsTipAdapter` (the adapter for the new app) as follows:
+So Joe defined the Lego pieces for `NewsTipAdapter` (the adapter for the new app) as follows:
 
 {% highlight java %}
 public class NewsTeaserAdapterDelegate {
@@ -210,7 +210,7 @@ public class PedFoodTipAdapterDelegate {
 }
 {% endhighlight %}
 
-And then he took the fundament, an empty adapter, and put the lego pieces on top of it:
+And then he took the fundament, an empty adapter, and put the Lego pieces on top of it:
 
 {% highlight java %}
 public class NewsTipAdapter extends RecyclerView.Adapter{
