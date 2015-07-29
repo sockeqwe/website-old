@@ -329,7 +329,7 @@ public class AdapterDelegatesManager<T> {
 }
 {% endhighlight %}
 
-The idea is to register `AdapterDelegates` to an `AdapterDelegatesManager`. The `AdapterDelegatesManager` internally has the logic to determine the correct adapter delegate for the given view type and to call the corresponding delegate method. So applying that to `NewsTipAdapter` the code looks like this:
+The idea is to register `AdapterDelegates` to an `AdapterDelegatesManager`. The `AdapterDelegatesManager` internally has the logic to determine the right `AdapterDelegate` for the given view type and to call the corresponding delegate methods. So applying that to `NewsTipAdapter` the code looks like this:
 {% highlight java %}
 public class NewsTipAdapter extends RecyclerView.Adapter{
 
