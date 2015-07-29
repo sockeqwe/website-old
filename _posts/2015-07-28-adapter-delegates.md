@@ -359,7 +359,7 @@ public class NewsTipAdapter extends RecyclerView.Adapter{
 }
 {% endhighlight %}
 
-I guess you can imagine how other adapters of MyLittleZoo app looks now. There is an `AdvertisementAdapterDelegate`, `NewsTeaserAdapterDelegate`, `PedFoodTipAdapterDelegate` and `AccessoryAdapterDelegate`. The Adapters then can be composed with that kind of AdapterDelegates that you really want or in other words with that view types you really need. Another advantage is that you also have a moved out the functionality of inflating layout, creating view holder and binding view holder into separated, modular and resuable AdapterDelegates. Have you noticed how slick adapters code looks now and that you have a separation of concerns that makes things more extendable and more decoupled?
+I guess you can imagine how other adapters of MyLittleZoo app looks now. There is an `AdvertisementAdapterDelegate`, `NewsTeaserAdapterDelegate`, `PedFoodTipAdapterDelegate` and `AccessoryAdapterDelegate`. From now on adapters can be composed with that view types (AdapterDelegates) that are really need. Another advantage is that you also have a moved out the functionality of inflating layout, creating view holder and binding view holder into separated, modular and reusable AdapterDelegates. Have you noticed how slick adapters code looks now and that you have a separation of concerns that makes things more extendable and more decoupled?
 
 Joe was happy, the product manager was happy, the users of the app was happy. Everybody was happy.
 Actually, Joe was so happy that he had decided to put `AdapterDelegates` in a own library and open source it.
