@@ -131,7 +131,7 @@ Then the smart marketing guy at MyLittleZoo had the brilliant idea to launch a s
 
 Then Joe was about to start moving things into the library when he realized the mess he was facing: Do you remember the inheritance hierarchy of the adapters?
 
- 1. Every Adapter extends from `AdvertisementAdapter`. But no advertisement should be displayed in the new app. Moreover, the provided advertisement sdk to display banners is really buggy, causes memory leaks and crashes quite often. Even if no advertisement banner get's displayed the advertisement sdk does a lot of crap in the background. Therefore, including the advertisement sdk in the new app was not acceptable.
+ 1. Every Adapter extends from `AdvertisementAdapter`. But no advertisement should be displayed in the new app. Moreover, the provided advertisement sdk to display banners is really buggy, causes memory leaks and crashes quite often. Even if no advertisement banner was displayed the advertisement sdk did a lot of crap in the background. Therefore, including the advertisement sdk in the new app was not acceptable.
  2. There is no adapter that he can reuse that can display `NewsTeaser` (part of `HomeAdapter`) and `PetFoodTip` (part of `PetFoodTipAdapter`). What should Joe do? He could create a new Adapter called `NewsTipAdapter` that  extends from `HomeAdapter` and then he has to add the `PedFoodTip` as new view type. But that would mean that he has two Adapters to maintain for the same view type `PedFoodTip`.
 
  > Welcome to the adapter hell Joe!
