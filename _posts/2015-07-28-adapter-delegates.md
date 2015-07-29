@@ -118,6 +118,7 @@ public class AdvertismentAdapter extends RecyclerView.Adapter {
 {% endhighlight %}
 
 From then on, every other Adapter extends from `AdvertisementAdapter`:
+
  - `AccessoiresAdapter extends AdvertisementAdapter`
  - `HomeAdapter extends AccessoiresAdapter extends AdvertisementAdapter`
  - `PetFoodTipAdapter extends AdvertisementAdapter`
