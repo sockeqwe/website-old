@@ -47,7 +47,7 @@ public class AccessoiresAdapter extends RecyclerView.Adapter {
 
 So far so good, MyLittelZoo android app 1.0 was published on Play Store. Everything was cool.
 
-Then MyLittelZoo grew, so did the app. Joe had to implement a new starting Activity where different items could be displayed: `NewsTeaser` should now be displayed together with `Accessories`. Since `HomeAdapter` should display `Accessories` as well he decides to reuse `AccessoriesAdapter` by inheriting from that one:
+Then MyLittelZoo grew, so did the app. Joe had to implement a new starting Activity where different items could be displayed: `NewsTeaser` should now be displayed together with `Accessories`. Since `HomeAdapter` should display `Accessories` as well he decided to reuse `AccessoriesAdapter` by inheriting from that one:
 
 {% highlight java %}
 public class HomeAdapter extends AccessoriesAdapter {
