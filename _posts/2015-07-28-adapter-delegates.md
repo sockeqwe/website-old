@@ -134,8 +134,8 @@ Joe was about to start moving things into the library when he realized the mess 
  1. Every Adapter extends from `AdvertisementAdapter`. But no advertisement should be displayed in the new app. Moreover, the provided advertisement sdk to display banners is really buggy, causes memory leaks and crashes quite often. Even if no advertisement banner was displayed the advertisement sdk did a lot of crap in the background. Therefore, including the advertisement sdk in the new app was not acceptable.
  2. There is no adapter that he can reuse that can display `NewsTeaser` (part of `HomeAdapter`) and `PetFoodTip` (part of `PetFoodTipAdapter`). What should Joe do? He could create a new Adapter called `NewsTipAdapter` that  extends from `HomeAdapter` and then he would had to add the `PedFoodTip` as new view type. But that would mean that he would had two Adapters to maintain for the same view type `PedFoodTip`.
 
- > **Welcome to the adapter hell Joe!**
 
+# Welcome to the adapter hell Joe!
 Oh boy, Joe was depressed. Then panic followed depression. How should he fix that? How should he fix that without having to fix it again a month later when a new feature (a new view type) must be implemented?
 
 So Joe started to write down his requirements on a whiteboard. But not a single good idea came out. He was so sad, he thought back to the days when he was a little child. How easy was life during childhood. The only thing he had to worry those days was to clean up his room after he had finished to play Lego. Lego? Wait, wait, wait! Joe had a brilliant idea: What he really needs is to built adapter like building a Lego house: Take an empty fundament and then stick together that Lego pieces you really need. If you need a window in your Lego house, take a window piece. If you need a roof slope take the corresponding Lego piece. If your Lego house needs a backyard, take a Lego flower.
