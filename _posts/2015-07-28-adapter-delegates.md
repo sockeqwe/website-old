@@ -127,14 +127,14 @@ Version 3.0 was published on Play Store with advertisement banner everywhere. On
 
 A half year later again the product manager knocked on Joe's door to tell him that things had changed. Surprisingly it turned out that the user of MyLittleZoo android app didn't liked the blinking advertisement banner introduced in version 3.0 and the app got huge negative reviews on play store. User sessions dropped dramatically and company didn't earn money anymore. But MyLittleZoo couldn't simply remove advertisement from the app since they have signed a valid longterm contract with the devil, ehm I mean the advertisement company of course.
 
-Then the smart marketing guy at MyLittleZoo had the brilliant idea to launch a second app with just displaying `NewsTeaser` and `PedFoodTip` in a RecyclerView. No advertisement, no offers. The plan was to regain the confidence of the users. Furthermore, product manager told Joe that the app had to be published within next two days because at the upcoming weekend was a big pet fair where the app should be presented. Joe thought it was doable. He already had the xml layouts for `NewsTeaser` and `PedFoodTip` and the adapter were already implemented. So all Joe had to do is to move that into an android library to share them between original MyLittleZoo app and the new advertisement free app.
+Then the smart marketing guy at MyLittleZoo had the brilliant idea to launch a second app with just displaying `NewsTeaser` and `PetFoodTip` in a RecyclerView. No advertisement, no offers. The plan was to regain the confidence of the users. Furthermore, product manager told Joe that the app had to be published within next two days because at the upcoming weekend was a big pet fair where the app should be presented. Joe thought it was doable. He already had the xml layouts for `NewsTeaser` and `PetFoodTip` and the adapter were already implemented. So all Joe had to do is to move that into an android library to share them between original MyLittleZoo app and the new advertisement free app.
 
 Joe was about to start moving things into the library when he realized the mess he was facing: Do you remember the inheritance hierarchy of the adapters?
 
  1. Every Adapter extends from `AdvertisementAdapter`. But no advertisement should be displayed in the new app. Moreover, the provided advertisement sdk to display banners is really buggy, causes memory leaks and crashes quite often. Even if no advertisement banner was displayed the advertisement sdk did a lot of crap in the background. Therefore, including the advertisement sdk in the new app was not acceptable.
- 2. There is no adapter that he can reuse that can display `NewsTeaser` (part of `HomeAdapter`) and `PetFoodTip` (part of `PetFoodTipAdapter`). What should Joe do? He could create a new Adapter called `NewsTipAdapter` that  extends from `HomeAdapter` and then he would had to add the `PedFoodTip` as new view type. But that would mean that he would had two Adapters to maintain for the same view type `PedFoodTip`.
+ 2. There is no adapter that he can reuse that can display `NewsTeaser` (part of `HomeAdapter`) and `PetFoodTip` (part of `PetFoodTipAdapter`). What should Joe do? He could create a new Adapter called `NewsTipAdapter` that  extends from `HomeAdapter` and then he would had to add the `PetFoodTip` as new view type. But that would mean that he would had two Adapters to maintain for the same view type `PetFoodTip`.
 
-<br /> 
+<br />
 
 ## Welcome to the adapter hell Joe!
 Oh boy, Joe was depressed. Then panic followed depression. How should he fix that? How should he fix that without having to fix it again a month later when a new feature (a new view type) must be implemented?
@@ -147,7 +147,7 @@ Damn, and then he get the overall picture:
 
 So many times he had agreed on "Favor composition over inheritance" while discussing with other developers. Until now it was just a good slogan but he never really have build something according this principle. So an empty Adapter is the fundament. ViewTypes are the reusable components (Lego pieces).
 
-So Joe started to define the reusable Lego pieces like `NewsTeaserAdapterDelegate` and `PedFoodTipAdapterDelegate`:
+So Joe started to define the reusable Lego pieces like `NewsTeaserAdapterDelegate` and `PetFoodTipAdapterDelegate`:
 
 {% highlight java %}
 public class NewsTeaserAdapterDelegate {
@@ -181,7 +181,7 @@ public class NewsTeaserAdapterDelegate {
 {% endhighlight %}
 
 {% highlight java %}
-public class PedFoodTipAdapterDelegate {
+public class PetFoodTipAdapterDelegate {
 
   private int viewType;
 
@@ -194,16 +194,16 @@ public class PedFoodTipAdapterDelegate {
   }
 
   public boolean isForViewType(List items, int position) {
-    return  items.get(position) instanceof PedFoodTip;
+    return  items.get(position) instanceof PetFoodTip;
   }
 
   public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent) {
-    return new PedFoodTipViewHolder(inflater.inflate(R.layout.item_pet_food, parent, false));
+    return new PetFoodTipViewHolder(inflater.inflate(R.layout.item_pet_food, parent, false));
   }
 
   public void onBindViewHolder(List items, int position, RecyclerView.ViewHolder holder) {
-      PedFoodTip tip = (PedFoodTip) items.get(position);
-      PedFoodTipViewHolder vh = (NewsTeaserViewHolder) vh;
+      PetFoodTip tip = (PetFoodTip) items.get(position);
+      PetFoodTipViewHolder vh = (NewsTeaserViewHolder) vh;
 
       vh.image.setImageRes(tip.getImage());
       vh.text.setText(tip.getText());
@@ -220,13 +220,13 @@ public class NewsTipAdapter extends RecyclerView.Adapter{
   final int VIEW_TYP_FOOD_TIP = 1;
 
   NewsTeaserAdapterDelegate newsTeaserDelegate;
-  PedFoodTipAdapterDelegate foodTipDelegate;
+  PetFoodTipAdapterDelegate foodTipDelegate;
 
   List items;
 
   public NewsTipAdapter(){
     newsTeaserDelegate = new NewsTeaserAdapterDelegate(VIEW_TYP_NEWS_TEASER);
-    foodTipDelegate = new PedFoodTipAdapterDelegate(VIEW_TYP_FOOD_TIP);
+    foodTipDelegate = new PetFoodTipAdapterDelegate(VIEW_TYP_FOOD_TIP);
   }
 
   @Override public int getItemViewType(int position) {
@@ -343,7 +343,7 @@ public class NewsTipAdapter extends RecyclerView.Adapter{
 
   public NewsTipAdapter(){
     delegates.add(new NewsTeaserAdapterDelegate(VIEW_TYP_NEWS_TEASER));
-    delegates.add(new PedFoodTipAdapterDelegate(VIEW_TYP_FOOD_TIP));
+    delegates.add(new PetFoodTipAdapterDelegate(VIEW_TYP_FOOD_TIP));
   }
 
   @Override public int getItemViewType(int position) {
@@ -360,7 +360,7 @@ public class NewsTipAdapter extends RecyclerView.Adapter{
 }
 {% endhighlight %}
 
-I guess you can imagine how other adapters of MyLittleZoo app looks now. There is an `AdvertisementAdapterDelegate`, `NewsTeaserAdapterDelegate`, `PedFoodTipAdapterDelegate` and `AccessoryAdapterDelegate`. From now on adapters can be composed with that view types (AdapterDelegates) that are really needed. Another advantage is that you also have moved out the functionality of inflating layout, creating view holder and binding view holder from one huge  adapter class (spagehtti code? god object anti pattern?) into separated, modular and reusable AdapterDelegates. Have you noticed how slim adapters code looks now and that you have a separation of concerns that makes things more extendable and more decoupled? Another nice side effect is that more team members can work in parallel together on the same "adapter" without fearing complex merge conflicts because not everybody is touching the huge adapter file but rather team members can work on dedicated AdapterDelegate files simultaneously.
+I guess you can imagine how other adapters of MyLittleZoo app looks now. There is an `AdvertisementAdapterDelegate`, `NewsTeaserAdapterDelegate`, `PetFoodTipAdapterDelegate` and `AccessoryAdapterDelegate`. From now on adapters can be composed with that view types (AdapterDelegates) that are really needed. Another advantage is that you also have moved out the functionality of inflating layout, creating view holder and binding view holder from one huge  adapter class (spagehtti code? god object anti pattern?) into separated, modular and reusable AdapterDelegates. Have you noticed how slim adapters code looks now and that you have a separation of concerns that makes things more extendable and more decoupled? Another nice side effect is that more team members can work in parallel together on the same "adapter" without fearing complex merge conflicts because not everybody is touching the huge adapter file but rather team members can work on dedicated AdapterDelegate files simultaneously.
 
 Joe was happy, the product manager was happy and the users of the app were happy. Everybody was happy.
 Actually, Joe was so happy that he had decided to put `AdapterDelegates` in an own library and open source it. All's well that ends well.
@@ -378,7 +378,7 @@ public class NewsTipAdapter extends ListDelegationAdapter {
   public NewsTipAdapter(){
     // delegatesManager is a field defined in super class
     delegatesManager.add(new NewsTeaserAdapterDelegate(VIEW_TYP_NEWS_TEASER));
-    delegatesManager.add(new PedFoodTipAdapterDelegate(VIEW_TYP_FOOD_TIP));
+    delegatesManager.add(new PetFoodTipAdapterDelegate(VIEW_TYP_FOOD_TIP));
   }
 
 }
