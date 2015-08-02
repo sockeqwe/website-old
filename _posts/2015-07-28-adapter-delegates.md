@@ -185,7 +185,7 @@ public class PetFoodTipAdapterDelegate {
 
   private int viewType;
 
-  public NewsTeaserAdapterDelegate(int viewType){
+  public PetFoodTipAdapterDelegate(int viewType){
     this.viewType = viewType;
   }
 
