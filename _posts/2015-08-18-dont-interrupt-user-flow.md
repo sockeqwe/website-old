@@ -47,7 +47,7 @@ As you have seen in the video shown above, we are animating the items of the `Re
  </FrameLayout>
  {% endhighlight %}
 
- Then the ViewHolder in the RecyclerView will have a reference to _"normalMode"_ and _"tipMode"_ layout. Flipping the views is simply a `rotationX()` animation like as shown below (don't forget to set the visibility from "visible" to "invisbible" and vice versa):
+ Then the ViewHolder in the RecyclerView will have a reference to _"normalMode"_ and _"tipMode"_ layout. Flipping the views is simply a `rotationX()` animation like as shown below (don't forget to set the visibility from "visible" to "invisible" and vice versa):
 {% highlight java %}
 public void animateToTipMode(TipViewHolder holder, int delay){
  int duration = 100;
