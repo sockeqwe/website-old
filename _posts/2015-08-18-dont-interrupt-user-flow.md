@@ -326,6 +326,6 @@ A disadvantage of our swipe approach is that the user can not decrease the guess
 Another advantage of using different view types for both modes is that we can compose adapters by using [AdapterDelegates](hannesdorfmann.com/android/adapter-delegates/) (favor composition over inheritance) and so we are able to bring the flip animation to switch between normal and tip mode to alomost all RecyclerViews in our whole app without having code clones.
 
 ## Conclusion
-The less the user's flow is interrupted, the better their experience! Whether or not you like our flip animation approach I hope you get an idea how things like ItemAnimator or OnTouchListener could be used to with RecyclerView, i.e. to create an user experience that tries to interrupt the user fliw as less as possible.
+The less the user's flow is interrupted, the better their experience! Whether or not you like our flip animation approach I hope you get an idea how things like ItemAnimator or OnTouchListener could be used with RecyclerView, i.e. to create an user experience that tries to interrupt the user flow as less as possible.
 
 _PS: The credit for this user experience goes to the whole Tickaroo team. We  have developed this user experience together. Our designer has had some initial thoughts and ideas, the iOS developers put some things into and we android developer as well during prototyping._
