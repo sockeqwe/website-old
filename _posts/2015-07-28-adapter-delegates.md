@@ -203,7 +203,7 @@ public class PetFoodTipAdapterDelegate {
 
   public void onBindViewHolder(List items, int position, RecyclerView.ViewHolder holder) {
       PetFoodTip tip = (PetFoodTip) items.get(position);
-      PetFoodTipViewHolder vh = (NewsTeaserViewHolder) vh;
+      PetFoodTipViewHolder vh = (PetFoodTipViewHolder) vh;
 
       vh.image.setImageRes(tip.getImage());
       vh.text.setText(tip.getText());
