@@ -329,4 +329,4 @@ Another advantage of using different view types for both modes is that we can co
 The less the user's flow is interrupted, the better their experience! Sounds so simple, but may takes some time to implement because also the little details count. So ask yourself: Do you want to deliver an out standing user experience or are you just to lazy to write more code than required?
 
 
-_PS: The credit for this user experience goes to the whole Tickaroo team. We  have developed this user experience together. Our awesome designer has had some initial thoughts and ideas, the iOS developers put some things into and we android developer as well during prototyping._
+_PS: The credit for this user experience goes to the whole Tickaroo team. We  have developed this user experience together. Our designer has had some initial thoughts and ideas, the iOS developers put some things into and we android developer as well during prototyping._
