@@ -1,11 +1,11 @@
 ---
 layout: post
 published: true
-title: Don't interrupt the users's flow
+title: Don't interrupt the user's flow
 mathjax: false
 featured: false
 comments: true
-headline: Don't interrupt the users's flow
+headline: Don't interrupt the user's flow
 categories:
   - Android
 tags: [android, ui, ux, RecyclerView]
