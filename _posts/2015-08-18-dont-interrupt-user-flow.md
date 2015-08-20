@@ -188,7 +188,7 @@ Next you may be wondering how you can submit a tip. We started by implementing a
 
 
 ## Guessing in a rush
-However, a Dialog is still interrupting the user experience. There must be a better way! So we came up with the idea to use swipe gestures. This allows the user to guess results on the fly without interrupting the user's flow by displaying a Dialog. Have a look at the final result:
+However, a Dialog is still interrupting the user experience. So we came up with the idea to use swipe gestures. This allows the user to guess results on the fly without interrupting the user's flow by displaying a Dialog. Have a look at the final result:
 
 <p>
 <iframe width="420" height="315" src="https://www.youtube.com/embed/ZOXh1KWzTWk" frameborder="0" allowfullscreen></iframe>
@@ -326,6 +326,6 @@ A disadvantage of our swipe approach is that the user can not decrease the guess
 Another advantage of using different view types for both modes is that we can compose adapters by using [AdapterDelegates](hannesdorfmann.com/android/adapter-delegates/) (favor composition over inheritance) and so we are able to bring the flip animation to switch between normal and tip mode to alomost all RecyclerViews in our whole app without having code clones.
 
 ## Conclusion
-The less the user's flow is interrupted, the better their experience! Whether or not you like our flip animation approach I hope you get an idea how things like ItemAnimator or OnTouchListener could be used with RecyclerView, i.e. to create an user experience that tries to interrupt the user flow as less as possible.
+The less the user's flow is interrupted, the better their experience. Whether or not you like our flip animation approach I hope you get an idea how things like `ItemAnimator` or `OnTouchListener` could be used together with `RecyclerView`, i.e. to create an user experience that tries to interrupt the user's flow as less as possible. Btw. the app looks much better on a real device than on a youtube video.
 
 _PS: The credit for this user experience goes to the whole Tickaroo team. We  have developed this user experience together. Our designer has had some initial thoughts and ideas, the iOS developers put some things into and we android developer as well during prototyping._
