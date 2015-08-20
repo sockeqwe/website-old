@@ -188,13 +188,13 @@ Next you may be wondering how you can submit a tip. We started by implementing a
 
 
 ## Guessing in a rush
-However, a Dialog is still interrupting the user experience. So we came up with the idea to use swipe gestures. This allows the user to guess results on the fly without interrupting the user's flow by displaying a Dialog. Have a look at the final result:
+However, a Dialog is still interrupting the user's experience. So we came up with the idea to use swipe gestures. This allows the user to guess results on the fly without interrupting the user's flow by displaying a Dialog. Have a look at the final result:
 
 <p>
 <iframe width="420" height="315" src="https://www.youtube.com/embed/ZOXh1KWzTWk" frameborder="0" allowfullscreen></iframe>
 </p>
 
-By swiping the item to the right the user can increase the score of the home team while swiping the item left increases the away team score. Implementing that is also straight forward if you have ever worked with `MotionEvents` on Android. In android there are basically two methods that get called during dispatching MotionEvents: In `boolean onInterceptTouchEvent()` you get some MotionEvents to decide if that view should intercept and consume all MotionEvents afterwards in `void onTouchEvent()`. It's like ordering a good bottle of wine in a restaurant. The waiter brings you the bottle and a wine glass and offers you a sip of the ordered wine . After taking a small sniff, inspecting the color, swirl the wine in your glass you decide whether to take the wine or not (returning true or false in `onInterceptTouchEvent()`). If yes, you consume the wine (`onTouchEvent()`). Working with `RecyclerView` is not different. Fortunately, you don't have to override that methods of RecyclerView because those methods are used to detect scroll and fling events. RecyclerView offers you to add an `OnItemTouchListener` to intercept `MotionEvents` for items displayed in the RecyclerView.
+By swiping the item to the right the user can increase the score of the home team while swiping the item left increases the away team score. Implementing that is straight forward if you have ever worked with `MotionEvents` on android. In android there are basically two methods that get called during dispatching MotionEvents: In `boolean onInterceptTouchEvent()` you get some MotionEvents to decide if that view should intercept and consume all MotionEvents afterwards in `void onTouchEvent()`. It's like ordering a good bottle of wine in a restaurant. The waiter brings you the bottle and a wine glass and offers you a sip of the ordered wine. After taking a small sniff, inspecting the color, swirling the wine in the glass you decide whether to keep the wine or not (returning true or false in `onInterceptTouchEvent()`). If yes, you consume the wine (`onTouchEvent()`). Working with `RecyclerView` is not different. Fortunately, you don't have to subclass RecyclerView and override that methods because those methods are already used to detect scroll and fling events. RecyclerView offers you to add an `OnItemTouchListener` to intercept `MotionEvents` on the displayed itmes in the RecyclerView.
 
 {% highlight java %}
 public abstract class TipSwipeListener implements RecyclerView.OnItemTouchListener {
@@ -230,7 +230,7 @@ public abstract class TipSwipeListener implements RecyclerView.OnItemTouchListen
       return false;
     }
 
-    // We begin to move the finger on the screen (not released finger from screen)
+    // Move the finger on the screen (not released finger from screen yet)
     if (action == MotionEvent.ACTION_MOVE && startViewHolder != null) {
 
       float xDif = Math.abs(xStart - e.getX());
@@ -277,9 +277,9 @@ public abstract class TipSwipeListener implements RecyclerView.OnItemTouchListen
       // Released or Canceled swipe gesture
       if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL) {
         if (xDif < -increaseMaxSwipeDistance) {
-          onIncreaseAwaySwipe(); // Swiped far enough
+          onIncreaseAwayScoreSwipe(); // Swiped far enough
         } else if (xDif > increaseMaxSwipeDistance) {
-          onIncreaseHomeSwipe(); // Swiped far enough
+          onIncreaseHomeScoreSwipe(); // Swiped far enough
         } else {
           animateToStartState(xDif);
         }
@@ -287,19 +287,21 @@ public abstract class TipSwipeListener implements RecyclerView.OnItemTouchListen
   }
 
 
-  private void onIncreaseAwaySwipe() {
+  private void onIncreaseAwayScoreSwipe() {
+    // Increment away team's score
     ...
     reset();
   }
 
-  private void onIncreaseHomeSwipe() {
+  private void onIncreaseHomeScoreSwipe() {
+    // Increment home team's score
     ...
     reset();
   }
 
 
   private void animateToStartState(float xDif) {
-    // Just animate the X translation back to 0
+    // animate the X translation back to 0
     ...
 
     reset();
@@ -315,7 +317,7 @@ public abstract class TipSwipeListener implements RecyclerView.OnItemTouchListen
 }
 {% endhighlight %}
 
-Most of the code should be really self explaining. We simply start in `onInterceptTouchEvent()` by checking if the user is touching on a `Tip` Item by querying the touched view  `recyclerView.findChildViewUnder(x, y)` and then check if the corresponding ViewHolder is a `TipViewHolder` by using `recyclerView.getChildViewHolder(view)`. Next we check if the user is moving his finger to left or right. Please note that `onInterceptTouchEvent()` is called multiple times and we need to inspect more than `MotionEvent` passed as parameter to this method to determine if the user is moving his finger to left or right (wine tasting). If the finger has been moved on x-achsis beyond a threshold, we return `true` to claim that we want continue to consume this gesture in `onTouchEvent()`.
+Most of the code should be self explaining. We simply start in `onInterceptTouchEvent()` by checking if the user is touching on a `Tip` Item by querying the touched view  `recyclerView.findChildViewUnder(x, y)` and then check if the corresponding ViewHolder is a `TipViewHolder` by using `recyclerView.getChildViewHolder(view)`. Next we check if the user is moving his finger to left or right. Please note that `onInterceptTouchEvent()` is called multiple times and we need to inspect more than `MotionEvent` passed as parameter to this method to determine if the user is moving his finger to left or right (wine tasting). If the finger has been moved on x-achsis beyond a threshold, we return `true` to claim that we want continue to consume this gesture in `onTouchEvent()`.
 
 In `onTouchEvent()` we simply set `translationX` property according the distance and direction the user has moved his finger (max distance is increaseMaxSwipeDistance which is half of the width of the box displaying the guessed result). And where does the _+1_ comes from while swiping? This is just a TextView which always was there hidden behind the box displaying the guessed result. By translating the view on x-achsis this TextView becomes visible. Actually, in our app we have overridden `onDraw()` of a custom parent layout to keep the layout hierarchy flat.
 
