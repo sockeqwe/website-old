@@ -11,11 +11,11 @@ categories:
 tags: [android, ui, ux, RecyclerView]
 ---
 
-From my point of view user experience is a very important topic but sometimes doesn't get the attention it deserves. In this blog post I want to show you how to use **RecyclerView** to build an outstanding user experience by not interrupting the user's flow.
+From my point of view user experience is a very important topic but sometimes doesn't get the attention it deserves. In this blog post I want to show you how to use **RecyclerView** to build an user experience that is not interrupting the user's flow.
 
-I'm very lucky to work in a very talented team at [Tickaroo](https://www.tickaroo.com) where we are building and maintaining the android and iOS apps for kicker, one of the most important football magazine in Europe (even though the main language is German). The app basically displays news about football (but also about other sports), live scores & live updates (push notifications), statistics, videos, photo galleries and so on and so forth. A few days ago we published an update for the [kicker android app](https://play.google.com/store/apps/details?id=com.netbiscuits.kicker) where we integrated a new interactive feature: tip game (betting game, footy tipping, tip guessing or whatever the word for that is in your local area). So the idea is that the users of the kicker app try to guess the results of football games and get points when the guessed results are correct.
+I'm very lucky to work in a very talented team at [Tickaroo](https://www.tickaroo.com) where we are building and maintaining the android and iOS apps for kicker, one of the most important football magazine in Europe (even though the main language is German). The app basically displays news about football (but also about other sports), live scores & live updates (push notifications), statistics, videos, photo galleries and so on and so forth. A few days ago we published an update for the [kicker android app](https://play.google.com/store/apps/details?id=com.netbiscuits.kicker) where we integrated a new interactive feature: tip game (betting game, footy tipping, tip guessing or whatever the name for that is in your local area). So the idea is that the users of the kicker app try to guess the results of football games and get points when the guessed results are correct.
 
-When starting the kicker app you see a `RecyclerView` displaying different items, amongst others news articles, game results and upcoming games. The first question is how do we integrate the new tip game feature? Next, how does the user can submit "tips" (try to guess the result) for a game? We could have made our life easy (from developers point of view) and just start a new Activity to display a list of games the user can submit "tips" (try to guess the result) for. But we decided to implement two _"modes"_ as we already display the games the user can guess results in the RecyclerView: The _"normal"_ mode where our users see the upcoming games or results of the last games and the _"tip"_ mode where users can submit a tip (guess the result) and see if their guess was correct after the game is finished. So the final result looks like this:
+When starting the kicker app you see a `RecyclerView` displaying different items, amongst others news articles, game results and upcoming games. The first question is how do we integrate the new tip game feature? Next, how does the user can submit "tips" (try to guess the result) for a game? We could have made our life easy (from developers point of view) and just start a new Activity to display a list of games the user can submit "tips" for (try to guess the result). But we decided to implement two _"modes"_ because we already display the last results and upcoming games in the RecyclerView: The _"normal"_ mode where our users see the upcoming games or results of the last games and the _"tip"_ mode where users can submit a tip (guess the result) and see if their guess was correct after the game is finished. So the final result looks like this:
 
 <p>
 <iframe width="420" height="315" src="https://www.youtube.com/embed/7XAe3zd0fdU" frameborder="0" allowfullscreen></iframe>
@@ -26,7 +26,7 @@ Instead of interrupting the users flow by starting a new Activity we decided to 
 How did we implement that? Obviously I can't share the whole source code, but I will give you some insights and pitfalls we have faced.
 
 ## Flip items
-As you have seen in the video shown above, we are animating the items of the `RecyclerView`. We started by using a layout file containing both child layouts, normal mode and tip mode, like this:
+As you have seen in the video shown above we are animating the items of the `RecyclerView`. We started by using a layout file containing both child layouts for normal mode and tip mode, like this:
  {% highlight xml %}
  <FrameLayout>
     <LinearLayout
@@ -47,7 +47,7 @@ As you have seen in the video shown above, we are animating the items of the `Re
  </FrameLayout>
  {% endhighlight %}
 
- Then the ViewHolder in the RecyclerView will have a reference to _"normalMode"_ and _"tipMode"_ layout. Flipping the views is simply a `rotationX()` animation like as shown below (don't forget to set the visibility from "visible" to "invisible" and vice versa):
+ Then the ViewHolder in the RecyclerView will have a reference to _"normalMode"_ and _"tipMode"_ layout. Flipping the views is simply a `rotationX()` animation as shown below (don't forget to set the visibility from "visible" to "invisible" and vice versa):
 {% highlight java %}
 public void animateToTipMode(TipViewHolder holder, int delay){
  int duration = 100;
@@ -78,7 +78,7 @@ public void animateToTipMode(TipViewHolder holder, int delay){
 }
 {% endhighlight %}
 
-So basically the animation runs from 0 to 90 for animating view out and from -90 to 0 for animating the view in. The wave alike execution of the flip animation is done by adding a start delay and increase the start delay for each cell. So all we have to do is to collect those items above the button that triggers the switch between both modes. `TipViewHolder` is the ViewHolder for the xml layout containing normalMode and tipMode child layouts. In the old days of `ListView` we would have done that simply by iterating over its children with `ListView.getChildAt(index)`, but `RecyclerView` internally handles its children different (with a LayoutManager). Hence, `RecyclerView.getChildAt(index)` doesn't return the views as the `ListView`does.
+So basically the animation runs from 0 to 90 for animating view out and from -90 to 0 for animating the view in. The wave alike execution of the flip animation is done by adding a start delay and increase that delay for each item. So all we have to do is to collect those items above the button that triggers the switch between both modes. `TipViewHolder` is the ViewHolder for the xml layout containing normalMode and tipMode child layouts. In the old days of `ListView` we would have done that simply by iterating over its children with `ListView.getChildAt(index)`, but `RecyclerView` internally handles its children different (with a LayoutManager). Hence, `RecyclerView.getChildAt(index)` doesn't return the views in the expected order as the `ListView` does.
 When working with `RecyclerView` you have to work with `ViewHolder` as well. `ViewHolder` is not just a plain old class to hold references to the child views and reduces `findViewById()` operations, no, `ViewHolder` knows more about how its used internally used in the parent `RecyclerView`. So you can query the current adapter position of a ViewHolder with `ViewHolder.getAdapterPosition()`. We use that to get the adapter position of the button that starts the flip animation (have a look at the video shown above: there is a button to start the flip animation to switch between "normal mode" and "tip mode"). In our app we know that all  games (`TipViewHolder`) are above the clicked button, so we just have to iterate from button position up in adapters dataset:
  {% highlight java %}
  public void onSwitchToTipModeClicked(ViewHolder buttonViewHolder){
