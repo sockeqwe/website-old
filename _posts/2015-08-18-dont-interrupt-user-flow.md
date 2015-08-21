@@ -325,7 +325,7 @@ Adding an `ItemTouchListener` to a RecyclerView is quite easy: `recyclerView.add
 
 A disadvantage of our swipe approach is that the user can not decrease the guessed score since both x-achsis directions are already used. So we decided to keep the Dialog for that use case and for those not nimble-fingered users.
 
-Another advantage of using different view types for both modes is that we can compose adapters by using [AdapterDelegates](hannesdorfmann.com/android/adapter-delegates/) (favor composition over inheritance) and so we were able to bring the flip animation to switch between normal and tip mode to almost all RecyclerViews in our whole app without having code clones.
+Just a side note: By using [AdapterDelegates](hannesdorfmann.com/android/adapter-delegates/) (favor composition over inheritance) we were able to bring the flip animation to switch between normal and tip mode to almost all RecyclerViews in our whole app without having code clones.
 
 ## Conclusion
 The less the user's flow is interrupted, the better the experience. Whether or not you like our flip animation approach I hope you get an idea how `ItemAnimator` or `OnTouchListener` could be used together with `RecyclerView` to create an user experience that tries to interrupt the user's flow as less as possible. By the way, the [kicker app](https://play.google.com/store/apps/details?id=com.netbiscuits.kicker) looks much better on a real device than on a youtube video.
