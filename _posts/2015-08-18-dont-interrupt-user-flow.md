@@ -330,9 +330,9 @@ Another advantage of using different view types for both modes is that we can co
 ## Conclusion
 The less the user's flow is interrupted, the better the experience. Whether or not you like our flip animation approach I hope you get an idea how `ItemAnimator` or `OnTouchListener` could be used together with `RecyclerView` to create an user experience that tries to interrupt the user's flow as less as possible. By the way, the [kicker app](https://play.google.com/store/apps/details?id=com.netbiscuits.kicker) looks much better on a real device than on a youtube video.
 
-_PS: The credit for this user experience goes to the whole Tickaroo team and not only to me. We  have developed this user experience together. Our designer had some initial thoughts and ideas, the iOS developers put some things into and we android developers as well during prototyping._
-
-
 ### Resources
  - RecyclerView Animations [Part1](http://www.birbit.com/recyclerview-animations-part-2-behind-the-scenes/) [Part2](http://www.birbit.com/recyclerview-animations-part-1-how-animations-work/)
  - Get some inspiration how to write a custom ItemAnimator [on Github](https://github.com/wasabeef/recyclerview-animators)
+
+
+ _PS: The credit for this user experience goes to the whole Tickaroo team and not only to me. We  have developed this user experience together. Our designer had some initial thoughts and ideas, the iOS developers put some things into and we android developers as well during prototyping._
