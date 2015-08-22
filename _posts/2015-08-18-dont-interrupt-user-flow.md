@@ -328,7 +328,7 @@ A disadvantage of our swipe approach is that the user can not decrease the guess
 **Side note:** By using [AdapterDelegates](hannesdorfmann.com/android/adapter-delegates/) (favor composition over inheritance) we were able to bring the flip animation to switch between normal and tip mode to almost all RecyclerViews in our whole app without having code clones.
 
 ## Conclusion
-The less the user's flow is interrupted, the better the experience. Whether or not you like our flip animation approach I hope you get an idea how `ItemAnimator` or `OnTouchListener` could be used together with `RecyclerView` to create an user experience that tries to interrupt the user's flow as less as possible. By the way, the [kicker app](https://play.google.com/store/apps/details?id=com.netbiscuits.kicker) looks much better on a real device than on a youtube video.
+The less the user's flow is interrupted, the better the experience. Another great example follwing this principle is the [Google Photos](https://play.google.com/store/apps/details?id=com.google.android.apps.photos) and [Inbox](https://play.google.com/store/apps/details?id=com.google.android.apps.inbox) app. Whether or not you like our flip animation approach I hope you get an idea how `ItemAnimator` or `OnTouchListener` could be used together with `RecyclerView` to create an user experience that tries to interrupt the user's flow as less as possible. By the way, the [kicker app](https://play.google.com/store/apps/details?id=com.netbiscuits.kicker) looks much better on a real device than on a youtube video.
 
 ## Resources
  - RecyclerView Animations [Part1](http://www.birbit.com/recyclerview-animations-part-1-how-animations-work/) [Part2](http://www.birbit.com/recyclerview-animations-part-2-behind-the-scenes/)
