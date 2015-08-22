@@ -336,4 +336,4 @@ The less the user's flow is interrupted, the better the experience. Other great 
  - [Managing Touch Events in a ViewGroup](https://developer.android.com/training/gestures/viewgroup.html)
 
 <br /> <br />
- _PS: The credit for this user experience goes to the whole Tickaroo team and not only to me. We  have developed this user experience together. Our designer had some initial thoughts and ideas, the iOS developers put some things into and we android developers as well during prototyping._
+ _PS: The credit for the described user experience in this blog post goes to the whole Tickaroo team and not only to me. We  have developed this user experience together. Our designer had some initial thoughts and ideas, the iOS developers put some things into and we android developers as well during prototyping._
