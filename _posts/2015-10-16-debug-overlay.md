@@ -36,6 +36,7 @@ windowManager.addView(listView, windowParams);
 {% endhighlight %}
 
 I used the same idea to put a `ListView` in an dedicated window and a service to add log messages to that `ListView`. I have also added a close button to remove the `ListView`:
+
 {% highlight java %}
 windowManager.removeView(listView)
 service.stopSelf();
@@ -47,7 +48,9 @@ At the end I put this simple service in a library and create a facade `DebugOver
 DebugOverlay.with(context).log("Hello World");
 {% endhighlight %}
 
-Now you may ask how do I ensure that this is just added to debug builds and not to our release builds. I have packed a second library artifact with the same `DebugOverlay` facade API but does nothing on method calls. Now I can use it in our apps with gralde build types to achieve that: {% highlight groovy %}
+Now you may ask how do I ensure that this is just added to debug builds and not to our release builds. I have packed a second library artifact with the same `DebugOverlay` facade API but does nothing on method calls. Now I can use it in our apps with gralde build types to achieve that:
+
+{% highlight groovy %}
 debugCompile('com.hannesdorfmann:debugoverlay:0.2.0') // Starts the service and displays the overlay
 releaseCompile('com.hannesdorfmann:debugoverlay-noop:0.2.0') // Does nothing
 {% endhighlight %}
