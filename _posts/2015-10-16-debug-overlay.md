@@ -11,7 +11,7 @@ categories:
 tags: [android, ui, ux, RecyclerView]
 ---
 
-Lately I was looking for a way to display some app internal information to an external staff  that is not a developer. I haven't found a library that fit my needs. Hence I have written my own tiny library called `debugoverlay` to do this job.
+Lately I was looking for a way to display some app internal information to an external staff  that is not a developer. I haven't found a library that fit my needs. Hence I have written my own tiny library called `DebugOverlay` to do this job.
 
 Basically I was looking for a way to display some app internal debug information on screen for other non developers you typically would log to logcat `Log.d()`. In my concrete use case I was looking for a way to display the tracking information on screen to allow external staff (not developers) to validate that the app was tracking the right information as the string to be tracked is computed dynamically (plenty of parameters and conditions) for each screen.
 
