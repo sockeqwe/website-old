@@ -69,6 +69,8 @@ releaseCompile('com.hannesdorfmann:debugoverlay-noop:0.2.0') // Does nothing
 
 I use gralde build types to include the `debugoverlay` dependency that do display the debug overlay window in debug builds and use the other `debugoverlay-noop` dependency for release builds.
 
-The `debugoverlay-noop` adds 1 class and 3 methods to your release dex file, which from my point of view is an acceptable compromise while the is used only in the debug builds. **Please note** that `com.hannesdorfmann:debugoverlay:0.2.0` will add `android.permission.SYSTEM_ALERT_WINDOW` to your `apk`. Hence you should avoid to use that dependency in your release `.apk`
+The `debugoverlay-noop` adds 1 class and 3 methods to your release dex file, which from my point of view is an acceptable compromise.
+
+**Please note** that `com.hannesdorfmann:debugoverlay:0.2.0` will add `android.permission.SYSTEM_ALERT_WINDOW` permission to your `apk`. Hence you should avoid to use that dependency in your release `.apk`
 
 You can find this tiny library on [github](https://github.com/sockeqwe/debugoverlay) and is available on maven central.
