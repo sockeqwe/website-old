@@ -24,6 +24,10 @@ What I really want is having a independent window just for displaying tracking i
  How to implement such a window? It's easier than you might have thought before. I guess you have already heard or already used [facebook's chat heads](https://www.facebook.com/help/android-app/101495056700254?rdrhc). I'm sure there are plenty tutorials and blog post out there describe how to implement something similar. In a nutshell: Implement your own android `Service` and access the `WindowManager` to add a View. Yes, services can have Views:
 
 {% highlight java %}
+FrameLayout rootLayout = new FrameLayout();
+rootLayout.addView(listView);
+rootLayout.addView(closeButton);
+
 WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 
 WindowManager.LayoutParams windowParams = new WindowManager.LayoutParams(
@@ -32,13 +36,14 @@ WindowManager.LayoutParams windowParams = new WindowManager.LayoutParams(
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
             PixelFormat.TRANSLUCENT);
 
-windowManager.addView(listView, windowParams);
+windowManager.addView(rootLayout, windowParams);
 {% endhighlight %}
 
 I used the same idea to put a `ListView` in an dedicated window and a service to add log messages to that `ListView`. I have also added a close button to remove the `ListView`:
 
 {% highlight java %}
-windowManager.removeView(listView)
+// called when the close button has been clicked
+windowManager.removeView(rootLayout)
 service.stopSelf();
 {% endhighlight %}
 
@@ -55,6 +60,6 @@ debugCompile('com.hannesdorfmann:debugoverlay:0.2.0') // Starts the service and 
 releaseCompile('com.hannesdorfmann:debugoverlay-noop:0.2.0') // Does nothing
 {% endhighlight %}
 
-The `debugoverlay-noop` adds 1 class and 3 methods to your realase dex file, which from my point of view is an acceptable compromise while the real `debugoverlay` is used only in the debug builds.
+The `debugoverlay-noop` adds 1 class and 3 methods to your realase dex file, which from my point of view is an acceptable compromise while the real `debugoverlay` is used only in the debug builds. **Please note** that `com.hannesdorfmann:debugoverlay:0.2.0` will add `android.permission.SYSTEM_ALERT_WINDOW` to your `apk`. Hence you should avoid to use that dependency in your release `.apk`
 
 You can find this tiny library on [github](https://github.com/sockeqwe/debugoverlay) and is available on maven central.
