@@ -21,7 +21,7 @@ What I really want is having a independent window just for displaying tracking i
 
 ![Debug Overlay](/images/debugoverlay.png)
 
- Why an indipendent window? Because I want avoid side effects on my production. How to implement such a window? It's easier than you might have thought before. I guess you have already heard or already used [facebook's chat heads](https://www.facebook.com/help/android-app/101495056700254?rdrhc). I'm sure there are plenty tutorials and blog post out there describing how to implement something like that. In a nutshell: Implement your own android `Service` and use the `WindowManager` to add a View. Yes, services can have Views:
+ Why an indipendent window? Because I want avoid side effects on my production code. How to implement such a window? It's easier than you might have thought before. I guess you have already heard or already used [facebook's chat heads](https://www.facebook.com/help/android-app/101495056700254?rdrhc). I'm sure there are plenty tutorials and blog post out there describing how to implement something like that. In a nutshell: Implement your own android `Service` and use the `WindowManager` to add a View. Yes, services can have Views:
 
 {% highlight java %}
 class DebugOverlayService extends Service {
