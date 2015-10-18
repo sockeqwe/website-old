@@ -26,6 +26,7 @@ What I really want is having a independent window just for displaying tracking i
 {% highlight java %}
 class DebugOverlayService extends Service {
 
+  @Override
   public void onCreate(){
     FrameLayout rootLayout = new FrameLayout();
     rootLayout.addView(listView);
@@ -52,7 +53,7 @@ windowManager.removeView(rootLayout)
 service.stopSelf();
 {% endhighlight %}
 
-At the end I put this simple service in a library and have created a facade class called `DebugOverlay` as public API. This class is also responsible to start and bind the service and to submit new log message to this service. So from any Activity or Fragment we can use the `DebugOverlay` like this:
+At the end I put this simple service in a library and have created a facade class called `DebugOverlay` as public API. This class is also responsible to start and bind the service and to submit new log message to this service. So we can use the `DebugOverlay` like this:
 
 {% highlight java %}
 DebugOverlay.with(context).log("Hello World");
