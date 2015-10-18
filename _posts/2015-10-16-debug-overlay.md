@@ -18,11 +18,11 @@ In my concrete use case I was looking for a way to display tracking information 
 
 Obviously, we can and should write unit tests for that (Robolectric powered unit tests could do that job much faster as instrumentation tests). However, there is a lot of money depending on the correctness of the tracking (advertisement contracts are negated on the reach of the app) and therefore an external staff has to verify manually that the tracking works correctly. As already said this external staff is not a developer. Hence he need a comfortable way to get displayed this information directly in the app. So how could we display the tracking information? The simplest way is to display a `Toast`, but that doesn't work well when navigating fast in the app like swiping in a `ViewPager`. An alternative could be to add a `TextView` dynamically on each Activity and Fragment's root layout. The problem with that approach is that this leads to fragile code.
 
-What I really want is having a independent window just for displaying tracking information in a logcat alike fashion, something like this:
+What I really want is having an independent window just for displaying tracking information in a logcat alike fashion, something like this:
 
 ![Debug Overlay](/images/debugoverlay.png)
 
- Why an indipendent window? Because I want avoid side effects on my production code. How to implement such a window? It's easier than you might have thought before. I guess you have already heard or already used [facebook's chat heads](https://www.facebook.com/help/android-app/101495056700254?rdrhc). I'm sure there are plenty tutorials and blog post out there describing how to implement something like that. In a nutshell: Implement your own android `Service` and use the `WindowManager` to add a View. Yes, services can have Views:
+ Why an independent window? Because I want avoid side effects on my production code. How to implement such a window? It's easier than you might have thought before. I guess you have already heard or already used [facebook's chat heads](https://www.facebook.com/help/android-app/101495056700254?rdrhc). I'm sure there are plenty tutorials and blog post out there describing how to implement something like that. In a nutshell: Implement your own android `Service` and use the `WindowManager` to add a View. Yes, services can have Views:
 
 {% highlight java %}
 class DebugOverlayService extends Service {
