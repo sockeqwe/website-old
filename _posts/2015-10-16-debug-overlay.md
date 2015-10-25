@@ -74,3 +74,10 @@ The `debugoverlay-noop` adds 1 class and 3 methods to your release dex file, whi
 **Please note** that `com.hannesdorfmann:debugoverlay:0.2.0` will add `android.permission.SYSTEM_ALERT_WINDOW` permission to your `apk`. Hence you should avoid to use that dependency in your release `.apk`
 
 You can find this tiny library on [github](https://github.com/sockeqwe/debugoverlay) and is available on maven central.
+
+### Update
+It seems that I have missed some already existing libraries that coulddo the same job as `DebugOverlay`:
+
+  - [GhostLog](https://github.com/jgilfelt/GhostLog) by Jeff Gilfelt
+  - [Galgo](https://github.com/inaka/galgo) by Inaka
+  - [Lynx](https://github.com/pedrovgs/Lynx) by Pedro Vicente Gómez Sánchez
