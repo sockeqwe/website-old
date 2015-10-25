@@ -76,8 +76,10 @@ The `debugoverlay-noop` adds 1 class and 3 methods to your release dex file, whi
 You can find this tiny library on [github](https://github.com/sockeqwe/debugoverlay) and is available on maven central.
 
 ### Update
-It seems that I have missed some already existing libraries that coulddo the same job as `DebugOverlay`:
+It seems that I have missed some already existing libraries that could do the same job as `DebugOverlay`:
 
   - [GhostLog](https://github.com/jgilfelt/GhostLog) by Jeff Gilfelt
   - [Galgo](https://github.com/inaka/galgo) by Inaka
   - [Lynx](https://github.com/pedrovgs/Lynx) by Pedro Vicente Gómez Sánchez
+
+Thanks to everyone for reporting these libraries.
