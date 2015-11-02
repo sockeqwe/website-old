@@ -8,7 +8,7 @@ comments: true
 headline: Debug Overlay
 categories:
   - Android
-tags: [android, ui, ux, RecyclerView]
+tags: [android, ui, ux]
 ---
 
 Lately I was looking for a way to display some app internal information to an external staff  that is not a developer. I haven't found a library that fit my needs. Hence I have written my own tiny library called `DebugOverlay` to do this job.
