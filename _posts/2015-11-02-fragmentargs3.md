@@ -10,7 +10,7 @@ categories:
   - Android
 tags: [android, annotation-processing]
 ---
-I finally found some time last weekend to update [FragmentArgs](https://github.com/sockeqwe/fragmentargs) and to release a new major version **3.0**. Here is an overview of new features and bug fixes.
+I finally found some time last weekend to work on [FragmentArgs](https://github.com/sockeqwe/fragmentargs) and to release a new major version **3.0**. Here is an overview of new features and bug fixes.
 
 ## Migration
 The good news first: FragmentArgs 3.0 is completely backward compatible to all previous versions (down to `1.0`). So basically you have to do nothing. However, I recommend to add the `@FragmentWithArgs` annotations to your Fragments that contain `@Arg` annotations. Why? See _What's new_ section and _Bugfixes_ sections.
