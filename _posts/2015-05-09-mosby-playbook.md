@@ -14,7 +14,7 @@ imagefeature: mosby/playbook3.jpg
 
 In my [previous blog post](http://hannesdorfmann.com/android/mosby) I introduced Mosby, a **M**odel-**V**iew-**P**resenter library for android. This time I'm going to discuss some more details about MVP in general and Mosby. I have implemented a mail client sample which can be found on [Github](https://github.com/sockeqwe/mosby/tree/master/sample-mail) which is used in this blog entry to describe how to use Mosby and to answer some of the common questions I have been asked after having released Mosby.
 
-**UPDATE:** Mosby has it's own [github page](http://hannesdorfmann.com/mosby/) with details information about MVP and how to use Mosby to build an android app. The following blog post has been written for Mosby 1.0 and is no longer up to date since Mosby 2.0 has been released. You should definitely continue reading the [github pages](http://hannesdorfmann.com/mosby/)!
+**UPDATE:** Mosby has it's own [github page](http://hannesdorfmann.com/mosby/) with details information about MVP and how to use Mosby to build an android app. The following blog post has been written for Mosby 1.0 and is outdated since Mosby 2.0 has been released. You should definitely continue reading the [github pages](http://hannesdorfmann.com/mosby/)!
 
 While I have written the sample app I have improved Mosby as well. I'm very happy to announce that I have released [Mosby 1.1.0](https://github.com/sockeqwe/mosby/releases/tag/1.1.0). Like you already know (or have suggested) the name Mosby comes from one of my favorite tv shows: _How I met your Mother_. In this blog post I will give you some tips about MVP and Mosby in Barney Stinson's _legen ... wait for it ... dary_ playbook style.
 
