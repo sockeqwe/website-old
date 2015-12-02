@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: Refactoring Plaid App - A reactive MVP Approach (Part 1)
 mathjax: false
 featured: false
@@ -17,14 +17,12 @@ Nick Butcher has open sourced on [github](https://github.com/nickbutcher/plaid) 
 
 # A fist look
 The overall user experience and user interface is pretty awesome. I can't describe it even better than this tweet:
-<p>
-<blockquote class="twitter-tweet" data-cards="hidden" lang="de"><p lang="en" dir="ltr">If you think Material Design is all about cards and shadows, take a look at Plaid and think again <a href="https://t.co/IYO3QnxkFu">https://t.co/IYO3QnxkFu</a></p>&mdash; Luis G. Valle (@lgvalle) <a href="https://twitter.com/lgvalle/status/661509155455410176">3. November 2015</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-</p>
+  <p>
+    <blockquote class="twitter-tweet" data-cards="hidden" lang="de"><p lang="en" dir="ltr" style="text-align:center;">If you think Material Design is all about cards and shadows, take a look at Plaid and think again <a href="https://t.co/IYO3QnxkFu">https://t.co/IYO3QnxkFu</a></p>&mdash; Luis G. Valle (@lgvalle) <a href="https://twitter.com/lgvalle/status/661509155455410176">3. November 2015</a></blockquote>
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </p>
 
-It's a joy to use the app. The UI / UX is truly an inspiration for every developer and designer.
-
-However, after playing around a little bit more with the app I faced some visual bugs:
+It's a joy to use the app. The UI / UX is truly an inspiration for every developer and designer. However, after playing around a little bit more with the app I faced some visual bugs:
 
 - Displaying a loading indicator and error message at the same time:
   <p>
@@ -32,14 +30,14 @@ However, after playing around a little bit more with the app I faced some visual
   <p/>
 
 - In the app you can apply some "filters" or in other words: You can specify which "sources" of Dribbble, Designer News and Product Hunt you want to display. If you deselect such sources while loading an http request is currently running you can run into the state where the app displays items, but shouldn't since no sources are selected:
-<p>
-<iframe width="420" height="315" src="https://www.youtube.com/embed/nJ3VUjpW0N0" frameborder="0" allowfullscreen></iframe>
-</p>
+  <p>
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/nJ3VUjpW0N0" frameborder="0" allowfullscreen></iframe>
+  </p>
 
 - Also the app doesn't handle screen orientation changes properly. It simply rebuilds the entire screen so that after each orientation change you see the loading indicator again, and re-execute the http calls:
-<p>
-<iframe width="420" height="315" src="https://www.youtube.com/embed/tuIDrtvL0lg" frameborder="0" allowfullscreen></iframe>
-</p>
+  <p>
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/tuIDrtvL0lg" frameborder="0" allowfullscreen></iframe>
+  </p>
 
 Typically such "issues" are a first indicator for spaghetti code and a moderate software architecture. So let's take a look under the hood and check out the source code and the components for displaying a list of items: The [HomeActivity](https://github.com/nickbutcher/plaid/blob/master/app/src/main/java/io/plaidapp/ui/HomeActivity.java) (about 750 lines of code) handles the visibility of UI elements like displaying the `RecylcerView` or the `ProgressBar`. This activity also decides when to display the Source-Filters-Drawer (on the right side). Furthermore, in it's `onActivityResults()` it does a lot of things inclusive posting new post to designers news. Last but not least it also loads the data for the selected filters by using a [DataManager](https://github.com/nickbutcher/plaid/blob/master/app/src/main/java/io/plaidapp/data/DataManager.java). You see, the `HomeActivity` has many responsibilities, probably too many. The `DataManager` basically uses a combination of `Retrofit` and `AsyncTasks` to execute http calls to load the data. The tricky thing here is pagination. Whenever the end of the `RecyclerView` has been reached, more (older) items are loaded. `DataManager` uses internally a HashMap to track the current page each source (backend endpoint like "Dribbble Popular" or "Dribbble Recent" or "Designer News Popular") is currently displaying. The items are displayed in a RecyclerView by using [FeedAdapter](https://github.com/nickbutcher/plaid/blob/master/app/src/main/java/io/plaidapp/ui/FeedAdapter.java). The [SearchActivity](https://github.com/nickbutcher/plaid/blob/master/app/src/main/java/io/plaidapp/ui/SearchActivity.java) is working quite similar as `HomeActivity`: It uses a `DataManager` and a `FeedAdapter` as well.
 
@@ -53,22 +51,12 @@ So with MVP + passive view we split the responsibilities into two classes: `Home
 
 {% highlight kotlin %}
 interface HomeView : MvpView {
-
     fun showLoading()
-
     fun showContent()
-
     fun showError()
-
-    fun setContentItems(items: List<PlaidItem>)
-
     fun showLoadingMore(showing: Boolean)
-
     fun showLoadingMoreError(t: Throwable)
-
     fun addOlderItems(items: List<PlaidItem>)
-
-    fun showNoFiltersSelected();
 }
 {% endhighlight %}
 
@@ -77,11 +65,9 @@ From now on the job of `HomeActivity` is to manage the UI elements (visibility, 
 {% highlight kotlin %}
 class HomePresenter(private val itemsLoader: ItemsLoader<List<PlaidItem>>) : RxPresenter<HomeView, List<PlaidItem>>() {
 
-
     fun loadItems() {
 
         view?.showLoading()
-
         subscribe(
                 itemsLoader.firstPage(),
                 { // onError
@@ -96,8 +82,8 @@ class HomePresenter(private val itemsLoader: ItemsLoader<List<PlaidItem>>) : RxP
     }
 
     fun loadMore() {
-        view?.showLoadingMore(true)
 
+        view?.showLoadingMore(true)
         subscribe(
                 itemsLoader.olderPages(),
                 { // onError
@@ -112,7 +98,7 @@ class HomePresenter(private val itemsLoader: ItemsLoader<List<PlaidItem>>) : RxP
 }
 {% endhighlight %}
 
-If you haven't noticed yet: We use [Kotlin](https://kotlinlang.org/) as programming language, mainly because I like the language and to have the chance to see how development with kotlin works in a "real world" application. Thanks to the kotlin's interoperability I can easily reuse Nick Butcher's java source code, mainly for UI / View things.
+If you haven't noticed yet: We use [kotlin](https://kotlinlang.org/) as programming language, mainly because I like the language and to have the chance to see how development with kotlin works in a "real world" application. Thanks to the kotlin's interoperability I can easily reuse Nick Butcher's java source code, mainly for UI / View things.
 
 For implementing MVP we use [Mosby](http://hannesdorfmann.com/mosby/), a MVP library, which also allows us to keep the presenters during screen orientation changes. So we don't have to restart with loading data and we don't see the `ProgressBar` after screen orientation changes. Mosby allows us to keep the views state as before the orientation change.
 
@@ -123,21 +109,12 @@ As already said, running a search is very similar to `HomeActivity`. It displays
 
 {% highlight java %}
 public interface SearchView extends MvpView {
-
   void showLoading();
-
   void showContent();
-
   void showError(Throwable t);
-
-  void setContentItems(List<PlaidItem> items);
-
   void showLoadingMore(boolean showing);
-
   void showLoadingMoreError(Throwable t);
-
   void addOlderItems(List<PlaidItem> items);
-
   void showSearchNotStarted();
 }
 {% endhighlight %}
@@ -157,7 +134,7 @@ class SearchPresenter(private val itemsLoaderFactory: SearchItemsLoaderFactory) 
         subscribe(itemsLoader!!.firstPage(), { // Error handling
             view?.showError(it)
         }, { // onNext
-            view?.setContentItems(it)
+            view?.addOlderItems(it)
         }, {
             view?.showContent()
         })
@@ -186,7 +163,7 @@ class SearchPresenter(private val itemsLoaderFactory: SearchItemsLoaderFactory) 
 }
 {% endhighlight %}
 
-The only thing that you might have noticed is that `SearchPresenter` takes a `SearchItemsLoaderFactory` as constructor parameter and creates a `ItemsLoader` dynamically for each search query. We will see how this works in a minute.
+The only different compared to `HomePresenter` is that `SearchPresenter` takes a `SearchItemsLoaderFactory` as constructor parameter and creates a `ItemsLoader` dynamically for each search query. We will see how this works in a minute.
 
 # ItemsLoader and Pagination
 So far we have covered View and Presenter. Now lets discuss how we could refactor the "Model" or  use case / interactor if you want to compare it with uncle bobs clean architecture.
@@ -196,6 +173,7 @@ Before we start: There is a class called `PlaidItem` (holds properties like titl
 - `Shot extends PlaidItem` for an item loaded from Dribbble
 - `Story extends PlaidItem` for an item loaded from Designer News
 - `Post extends PlaidItem` for an item loaded from Product Hunt
+
 
 So now let's discuss how we rewrite `DataManager` more efficiently by using RxJava. I don't use RxJava because I think it's cool and all the cool kids have to use RxJava nowadays. You will (hopefully) see the benefits of using RxJava afterwards (especially in the second part of this blog post series).
 
@@ -370,15 +348,12 @@ abstract class Page<T>(val routeCalls: Observable<List<RouteCaller<T>>>) {
     /**
      * Return an observable for this page
      */
-    @RxLogObservable
     fun asObservable(): Observable<T?> {
 
         return routeCalls.flatMap { routeCalls ->
 
             backendCallsCount = routeCalls.size
-
             val observables = arrayListOf<Observable<T>>()
-
             routeCalls.forEach { call ->
                     val observable = getRouteCall(call).onErrorResumeNext { error ->
                       // Suppress errors as long as not all fail
@@ -459,7 +434,7 @@ As you see, we can use Dagger to configure our `Router` and `ItemsLoader`. For t
 You might have noticed the `SourceDao` class in the code shown above. We will talk about that in the second part of this blog series when we are going "truly reactive".
 
 # Conclusion of Part 1
-This is the first part of a series of blog post tree parts. In this first part we have build the fundament by applying Model-View-Presenter and have refactored the way how the app loads data from the backend endpoints. The main idea is to cut this huge and complex task down into several smaller and reusable components like `ItemsLoader`, `Page`, `Router` and `RouteCaller` which follows more the SOLID principle.
+This is the first part of a series of blog post tree parts. In this first part we have build the fundament by applying Model-View-Presenter and have refactored the way how the app loads data from the backend endpoints. The main idea is to cut this huge and complex task down into several smaller and reusable components like `ItemsLoader`, `Page`, `Router` and `RouteCaller` which follows more the SOLID principle as Nick Butcher's `DataManager` implementation.
 
 As always, there are better ways to implement such an app. Especially, the `ItemsLoader` can be done entirely different. My first intention was to create an unlimited Observable for load older pages by using RxJava's `switchOnNext()` or `merge` operators as described by [Matthias Käppler](https://gist.github.com/mttkay/24881a0ce986f6ec4b4d), but I came to the conclusion that some things regarding UI and error handling are slightly easier to implement if I can split the single observable into two observables (one for first page, one for older page).
 
