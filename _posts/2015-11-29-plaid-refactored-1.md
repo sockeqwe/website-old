@@ -1,6 +1,6 @@
 ---
 layout: post
-published: true
+published: false
 title: Refactoring Plaid App - A reactive MVP Approach (Part 1)
 mathjax: false
 featured: false
