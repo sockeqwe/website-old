@@ -1,11 +1,11 @@
 ---
 layout: post
 published: true
-title: Refactoring Plaid App: A reactive MVP Approach (Part 1)
+title: Refactoring Plaid App - A reactive MVP Approach (Part 1)
 mathjax: false
 featured: false
 comments: true
-headline: Refactoring Plaid App: A reactive MVP Approach (Part 1)
+headline: Refactoring Plaid App - A reactive MVP Approach (Part 1)
 categories:
   - Android
 tags: [android, software-architecture, design-patterns]
