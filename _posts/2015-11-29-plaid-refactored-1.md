@@ -17,20 +17,15 @@ Nick Butcher has open sourced on [github](https://github.com/nickbutcher/plaid) 
 
 # A fist look
 The overall user experience and user interface is pretty awesome. I can't describe it even better than this tweet:
-<style>
-  #outPopUp{
-       position:absolute;
-       width:300px;
-       height:200px;
-       z-index:15;
-       top:50%;
-       left:50%;
-       margin:-100px 0 0 -150px;
-       background:red;
-  }
-</style>
   <p>
-  <div id="outPopUp">
+  <div style="position:relative;
+  width:400px;
+  height:300px;
+  z-index:15;
+  top:50%;
+  left:35%;
+  margin: -200px 10 0 -150px;">
+
     <blockquote class="twitter-tweet" data-cards="hidden" lang="de"><p lang="en" dir="ltr" style="text-align:center;">If you think Material Design is all about cards and shadows, take a look at Plaid and think again <a href="https://t.co/IYO3QnxkFu">https://t.co/IYO3QnxkFu</a></p>&mdash; Luis G. Valle (@lgvalle) <a href="https://twitter.com/lgvalle/status/661509155455410176">3. November 2015</a></blockquote>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
