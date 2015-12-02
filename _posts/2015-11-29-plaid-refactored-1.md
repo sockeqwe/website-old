@@ -333,7 +333,7 @@ class ItemsLoader<T>(protected val router: Router<T>) {
 }
 {% endhighlight %}
 
-`The ItemsLoader` takes a `Router` as constructor parameter and offers two methods:
+The `ItemsLoader` takes a `Router` as constructor parameter and offers two methods:
  - `firstPage()`: Returns an Observable representing the first page.
  - `olderPages()`: Returns an Observable to load older pages.
 
