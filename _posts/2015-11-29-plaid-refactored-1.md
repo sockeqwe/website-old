@@ -438,7 +438,7 @@ public class HomeModule {
 }
 {% endhighlight %}
 
-As you see, we can use Dagger to configure our `Router` and `ItemsLoader`. For the `SearchPresenter` we configure an `ItemsLoader` and `Router` in `SearchModule`. The advantage is that if we one day  would like to add another "source", like reddit, to display items from reddit, the only thing we have to do is to define a `RedditService` (Retrofit), a `RedditCallerFactoy` and add this CallerFactory to the Router. We can do that in Dagger without having to touch another already existing component's source code ([Open-Closed principle](https://en.wikipedia.org/wiki/Open/closed_principle)). In other words: we have build a "plugin system".
+As you see, we can use Dagger to configure our `Router` and `ItemsLoader`. For the `SearchPresenter` we configure an `ItemsLoader` and `Router` in `SearchModule`. The advantage is that if we one day  would like to add another "source", like reddit, to display items from reddit, the only thing we have to do is to define a `RedditService` (Retrofit), a `RedditCallerFactoy` and add this CallerFactory to the Router. We can do that in the concrete dagger module without having to touch another already existing component's source code ([Open-Closed principle](https://en.wikipedia.org/wiki/Open/closed_principle)). In other words: we have build a "plugin system" configureable through dependency injection.
 
 You might have noticed the `SourceDao` class in the code shown above. We will talk about that in the second part of this blog series when we are going "truly reactive".
 
