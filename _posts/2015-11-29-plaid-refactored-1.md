@@ -445,7 +445,7 @@ You might have noticed the `SourceDao` class in the code shown above. We will ta
 # Conclusion of Part 1
 This is the first part of a series of blog post. In this first part we have built the fundament by applying Model-View-Presenter and have refactored the way how the app loads data from the backend endpoints. The main idea is to cut this huge and complex task down into several smaller and reusable components like `ItemsLoader`, `Page`, `Router` and `RouteCaller` which follows more the SOLID principle as Nick Butcher's `DataManager` implementation.
 
-As always, there are better ways to implement such an app. Especially, the `ItemsLoader` can be done entirely different. My first intention was to create an unlimited Observable for load older pages by using RxJava's `switchOnNext()` or `merge` operators as described by [Matthias Käppler](https://gist.github.com/mttkay/24881a0ce986f6ec4b4d), but I came to the conclusion that some things regarding UI and error handling are slightly easier to implement if I can split the single observable into two observables (one for first page, one for older page).
+As always, there are better ways to implement such an app. Especially, the `ItemsLoader` can be done entirely different. My first intention was to create an unlimited Observable for load older pages by using RxJava's `switchOnNext()` or `merge` operators as [described](https://gist.github.com/mttkay/24881a0ce986f6ec4b4d) by Matthias Käppler, but I came to the conclusion that some things regarding UI and error handling are slightly easier to implement if I can split the single observable into two observables (one for first page, one for older page).
 
 As always, feedback and suggestions are very welcome!
 
