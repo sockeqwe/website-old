@@ -15,7 +15,7 @@ Nick Butcher has open sourced on [github](https://github.com/nickbutcher/plaid) 
 
 **Preface:** I started the refactoring with the strong belief that I can refactor the whole app. Surprisingly (ironic), it turns out that I was a very naive man. I simply have underestimated the complexity of the app and the number of features. I discovered some features only after having spent some hours with Nick Buchter's code, which were not "visible" to me just by using the app. In short: I realized that I don't have the time to put all my thoughts into action. Hence my "refactoring" is focused on the apps "homepage" and the "search screen", which I have refactored mostly. Nevertheless, I want discuss (in theory) some more things that could be refactored, but I didn't because of time constraints. My refactored code can be found on [github](https://github.com/sockeqwe/plaid) as well.
 
-# A fist look
+# A first look
 The overall user experience and user interface is pretty awesome. I can't describe it even better than this tweet:
   <p>
   <div style="position:relative;
