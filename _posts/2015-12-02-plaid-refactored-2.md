@@ -397,7 +397,7 @@ class HomeDribbbleCallerFactory(private val backend: DribbbleService, sourceDao:
 As you see, our `HomeDribbbleCallerFactory` is observing our database (`sourceDao.getSourcesForBackend()`) and whenever the database has been changed because the user has enabled/disabled a Source or have added a new one (custom search) `sources.map(mapSourcesToBackendCalls)` will be called again and emits a new `List<RouteCaller>` with the current Routes to call. Next the `ItemsLoader` (via `Router` and `FirstPage`) will reacting on the new emitted `List<RouteCaller>` and load new Items which finally triggers `HomePresenter's onNext()` callback with the new loaded items. It sounds more complicated as it actually is. Have a look at the following graphically representation:
 
 <p>
-<iframe width="420" height="315" src="https://www.youtube.com/embed/QkjdBAjSNqk" frameborder="0" allowfullscreen></iframe>
+<iframe width="420" height="315" src="https://www.youtube.com/embed/pmWjwrLVDdA" frameborder="0" allowfullscreen></iframe>
 </p>
 
 The yellow circle represents the data flow. You see that SQLBrite will rerun all queries and inform the subscribers. Since `HomeDribbbleCallerFactory` is an subscriber to the database this component gets notified when a `Source` has been enabled/dispable and automatically adjust the Router. Thanks to RxJava and SQLBrite we can build a **truly reactive application** where the app reacts on changes and at the end updates the UI "magically" by still having an unidirectional data flow (unlikely using an EventBus).
