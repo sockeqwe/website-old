@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity
 # Presentation Model
 I guess you get the point, but how is this related to the presentation model and MVP? In MVP the Presenter generates (optional) a `PresentationModel` which is yet another data model optimized for the view containing all the information the view needs to know so that the view can simply take this presentation model and can display it directly without having to calculate things. More information can be found [here](https://github.com/sockeqwe/mosby/issues/85).
 
-So lets assume we are building an app for a newspaper by applying MVP, using Retrofit to load a list of NewsItems and use RxJava to connect the dots. Instead of passing a `List<NewsItem>` directly from Presenter to View we introduce a `NewsItemsPresentationModel` that looks like this:
+So lets assume we are building an app for a newspaper by applying MVP, Retrofit to load a list of NewsItems and use RxJava to connect the dots. Instead of passing a `List<NewsItem>` directly from Presenter to View we introduce a `NewsItemsPresentationModel` that looks like this:
 
 {% highlight java %}
 class NewsItemsPresentationModel {
