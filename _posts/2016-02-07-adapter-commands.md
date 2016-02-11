@@ -239,7 +239,8 @@ Let's compare two lists:
 Basically we have inserted `B2`, removed `D` and moved `E` and inserted `H` at the end of the list:
 
 {% highlight java %}
-> B2  2
+
+ > B2  2
  < D   3
  < E   4  
  > E   6  
