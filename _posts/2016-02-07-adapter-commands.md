@@ -215,7 +215,7 @@ class NewsItemsActivity extends Activity implements NewsItemView, OnRefreshListe
 }
 {% endhighlight %}
 
-Hopefully, you see now that the View is pretty dumb, easier to maintain and to test.
+Hopefully, you see now that the View is pretty dumb, decoupled, easier to maintain and to test.
 
 # Behind the scenes
 You might think that you don't need a third party library to do that. Indeed, this is true for simple use cases where you know that lists are chronological ordered and items from the new list will be always added on top (or at the end) of the old list. In that case you simply would write `diff = newList - oldList` and then call `adapter.notifyItemRangeInserted(0, diff.size())`, right? Also in this use case you could use this library simply to not write command classes and command processor again by yourself. But what if you implement such a newspaper app as described above and news items title that are already in the old list has been changed compared to the new list, so that `adapter.notifyItemChanged(position)` must be called? Or what if lists are not always sorted the same way? What if an item has been removed?
