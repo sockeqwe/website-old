@@ -178,7 +178,7 @@ class NewsItemsPresenter extends MvpBasePresenter<NewsItemView> {
 
 As you can see, with RxJava we can use `map()` operator to transform the model into a presentation model. Another nice thing to note is that this transformation and the calculation of the difference runs on the background thread (Schedulers.io()).
 
-The View can now be very stupid:
+The View is now very stupid simple and contains not such complex calculations like where to insert new items from the list and so on:
 
 {% highlight java %}
 class NewsItemsActivity extends Activity implements NewsItemView, OnRefreshListener {
