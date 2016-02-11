@@ -218,7 +218,7 @@ class NewsItemsActivity extends Activity implements NewsItemView, OnRefreshListe
 Hopefully, you see now that the View is pretty dumb, easier to maintain and to test.
 
 # Behind the scenes
-You might think that you don't need a third party library to do that. Actually, this is true for simple use cases where you know that lists are chronological ordered and items from the new list will be always added on top (or at the end) of the old list. In that case you simply would write `diff = newList - oldList` and then call `adapter.notifyItemRangeInserted(0, diff.size())`, right? Also in this use case you could use this library simply to not write command classes and command processor again by yourself. But what if you implement such a newspaper app as described above and news items title can be changed so that `adapter.notifyItemChanged()` has to be called? Or what if lists are not always sorted the same way?
+You might think that you don't need a third party library to do that. Indeed, this is true for simple use cases where you know that lists are chronological ordered and items from the new list will be always added on top (or at the end) of the old list. In that case you simply would write `diff = newList - oldList` and then call `adapter.notifyItemRangeInserted(0, diff.size())`, right? Also in this use case you could use this library simply to not write command classes and command processor again by yourself. But what if you implement such a newspaper app as described above and news items title can be changed so that `adapter.notifyItemChanged()` has to be called? Or what if lists are not always sorted the same way?
 
 In that case `DiffCommandsCalculator` is the drop in solution. But how does it actually works?
 Let's compare two lists:
