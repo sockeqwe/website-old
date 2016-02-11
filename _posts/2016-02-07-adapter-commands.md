@@ -183,7 +183,6 @@ The View is now very stupid simple and contains not such complex calculations li
 {% highlight java %}
 class NewsItemsActivity extends Activity implements NewsItemView, OnRefreshListener {
 
-
   @Bind(R.id.recyclerView) RecyclerView recyclerView;  
    NewsItemsPresenter presenter;
    AdapterCommandProcessor commandProcessor;
