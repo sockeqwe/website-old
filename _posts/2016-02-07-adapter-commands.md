@@ -56,7 +56,7 @@ public class AdapterCommandProcessor {
 {% endhighlight %}
 
 I know, it's not that impressive at first glance. So what is the advantage of this pattern?
-Quite often a app displays a list of items in a RecyclerView and the underlying dataset gets changed, i.e. in combination with `SwipeRefreshLayout` the user can reload an updated list of items (i.e. load items from backend). What do we do with the new list? Just call `adapter.notifyDatasetChanged()` to inform that the new list of items should be displayed? But what about the `ItemAnimator`? This `AdapterCommands` library offers `DiffCommandsCalculator` class. This class calculates the difference of the old list and the new list and returns a `List<AdapterCommand>` that then can be executed by an `AdapterCommandProcessor`. Let's have a look at the demo:
+Quite often an app displays a list of items in a RecyclerView and the underlying dataset gets changed, i.e. in combination with `SwipeRefreshLayout` the user can reload an updated list of items (i.e. load items from backend). What do we do with the new list? Just call `adapter.notifyDatasetChanged()` to inform that the new list of items should be displayed? But what about the `ItemAnimator`? This `AdapterCommands` library offers `DiffCommandsCalculator` class. This class calculates the difference of the old list and the new list and returns a `List<AdapterCommand>` that then can be executed by an `AdapterCommandProcessor`. Let's have a look at the demo:
 
 <p>
 <iframe width="420" height="315" src="https://www.youtube.com/embed/z05IK8ejERM" frameborder="0" allowfullscreen></iframe>
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity
 {% endhighlight %}
 
 # Presentation Model
-I guess you get the point, but how is this related to the presentation model and MVP? In MVP the Presenter generates (optional) a `PresentationModel` which is a data model optimized for the view containing all the information the view needs to know so that the view can simply take this presentation model and can display it directly without having to calculate things. More information can be found [here](https://github.com/sockeqwe/mosby/issues/85).
+I guess you get the point, but how is this related to the presentation model and MVP? In MVP the Presenter generates (optional) a `PresentationModel` which is yet another data model optimized for the view containing all the information the view needs to know so that the view can simply take this presentation model and can display it directly without having to calculate things. More information can be found [here](https://github.com/sockeqwe/mosby/issues/85).
 
 So lets assume we are building an app for a newspaper by applying MVP, using Retrofit to load a list of NewsItems and use RxJava to connect the dots. Instead of passing a `List<NewsItem>` directly from Presenter to View we introduce a `NewsItemsPresentationModel` that looks like this:
 
