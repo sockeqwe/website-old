@@ -235,7 +235,7 @@ Let's compare two lists:
                 H
 {% endhighlight %}
 
-We have inserted `B2`, removed `D` and moved `E` and inserted `H` at the end of the list:
+We have inserted `B2`, removed `D` and moved `E` and inserted `H` at the end of the list. Let's compute the difference:
 
 {% highlight java %}
 
