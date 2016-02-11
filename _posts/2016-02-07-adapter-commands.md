@@ -55,7 +55,7 @@ public class AdapterCommandProcessor {
 }
 {% endhighlight %}
 
-I know, it's not that impressive at first glance. So what is now the advantage of this pattern?
+I know, it's not that impressive at first glance. So what is the advantage of this pattern?
 Quite often a app displays a list of items in a RecyclerView and the underlying dataset gets changed, i.e. in combination with `SwipeRefreshLayout` the user can reload an updated list of items (i.e. load items from backend). What do we do with the new list? Just call `adapter.notifyDatasetChanged()` to inform that the new list of items should be displayed? But what about the `ItemAnimator`? This `AdapterCommands` library offers `DiffCommandsCalculator` class. This class calculates the difference of the old list and the new list and returns a `List<AdapterCommand>` that then can be executed by an `AdapterCommandProcessor`. Let's have a look at the demo:
 
 <p>
