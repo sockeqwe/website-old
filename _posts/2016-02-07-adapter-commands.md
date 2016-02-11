@@ -218,7 +218,7 @@ class NewsItemsActivity extends Activity implements NewsItemView, OnRefreshListe
 
 Hopefully, you see now that the View is pretty dumb, easier to maintain and to test.
 
-# Behind the scenes of DiffCommandsCalculator
+# Behind the scenes
 You might think that you don't need a third party library to do that. Actually, this is true for simple use cases where you know that lists are chronological ordered and items from the new list will be always added on top (or at the end) of the old list. In that case you simply would write `diff = newList - oldList` and then call `adapter.notifyItemRangeInserted(0, diff.size())`, right? Also in this use case you could use this library simply to not write command classes and command processor again by yourself. But what if you implement such a newspaper app as described above and news items title can be changed so that `adapter.notifyItemChanged()` has to be called? Or what if lists are not always sorted the same way?
 
 In that case `DiffCommandsCalculator` is the drop in solution. But how does it actually works?
@@ -240,10 +240,10 @@ Basically we have inserted `B2`, removed `D` and moved `E` and inserted `H` at t
 
 {% highlight java %}
 > B2  2
-< D   3
-< E   4  
-> E   6  
-> H   7
+ < D   3
+ < E   4  
+ > E   6  
+ > H   7
 {% endhighlight %}
 
 The first columns indicates whether it was an insertion `>` or a deletion `<`. The second column is the item and the last column the index of the list item (beginning by zero). This schemes seems familiar, doesn't it? You see something like almost everyday if you use `git` and `diff` (command line tool, GUIs also available) to detect and resolve merge conflicts. `DiffCommandsCalculator` basically implements the same algorithm as `diff`. This kind of problem is called [longest common subsequence problem](https://en.wikipedia.org/wiki/Longest_common_subsequence_problem). On arbitrary number of input data solving this problem is [NP-hard](https://en.wikipedia.org/wiki/NP-hardness). Fortunately, we have fixed size of list and items count. Therefore, we can implement an algorithm that uses the concept of [dynamic programming](https://en.wikipedia.org/wiki/Dynamic_programming) that solves this problem in polynomial time `O(n*m)` (where n is the number of elements in oldList and m the number of elements in newList). That sounds really theoretically, right? Actually, it is simpler to implement than you might have thought. I found [this youtube video](https://www.youtube.com/watch?v=P-mMvhfJhu8) helpful.
