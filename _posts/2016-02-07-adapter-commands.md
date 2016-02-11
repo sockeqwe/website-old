@@ -224,7 +224,7 @@ You might think that you don't need a third party library to do that. Actually, 
 In that case `DiffCommandsCalculator` is the drop in solution. But how does it actually works?
 Let's compare two lists:
 
-{% highlight %}
+{% highlight java %}
   oldList     newList
     A           A
     B           B
@@ -238,7 +238,7 @@ Let's compare two lists:
 
 Basically we have inserted `B2`, removed `D` and moved `E` and inserted `H` at the end of the list:
 
-{% highlight %}
+{% highlight java %}
 > B2  2
 < D   3
 < E   4  
