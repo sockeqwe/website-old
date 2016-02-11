@@ -240,7 +240,7 @@ Basically we have inserted `B2`, removed `D` and moved `E` and inserted `H` at t
 
 {% highlight java %}
 
- > B2  2
+> B2   2
  < D   3
  < E   4  
  > E   6  
