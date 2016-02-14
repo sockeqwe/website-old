@@ -58,7 +58,7 @@ We will refactor that by applying a Model-View-Presenter with a passive view. Th
 ## HomeActivity in MVP
 So with MVP + passive view we split the responsibilities into two classes: `HomeActivity implements HomeView` is now considered as View (passive view) and implements this interface:
 
-{% highlight kotlin %}
+{% highlight java %}
 interface HomeView : MvpView {
     fun showLoading()
     fun showContent()
@@ -71,7 +71,7 @@ interface HomeView : MvpView {
 
 From now on the job of `HomeActivity` is to manage the UI elements (visibility, coordinate animations, etc.) but only after the presenter told to do so. So the state of the View is managed by the `HomePresenter`. The `HomePresenter` looks like this:
 
-{% highlight kotlin %}
+{% highlight java %}
 class HomePresenter(private val itemsLoader: ItemsLoader<List<PlaidItem>>) : RxPresenter<HomeView, List<PlaidItem>>() {
 
     fun loadItems() {
@@ -128,7 +128,7 @@ public interface SearchView extends MvpView {
 }
 {% endhighlight %}
 
-{% highlight kotlin %}
+{% highlight java %}
 class SearchPresenter(private val itemsLoaderFactory: SearchItemsLoaderFactory) : RxPresenter<SearchView, List<PlaidItem>>() {
 
     private var itemsLoader: ItemsLoader<List<PlaidItem>>? = null
@@ -190,7 +190,7 @@ The hard part of loading items is that we support pagination and loading items f
 
 We call that component `RouteCaller`:
 
-{% highlight kotlin %}
+{% highlight java %}
 class RouteCaller<T>(private val startPage: Int = 0,
                      private val itemsPerPage: Int,
                      private val backendMethodToCall: (Int, Int) -> Observable<T>) {
@@ -248,7 +248,7 @@ For executing a search we have two backends to query `DesignerNewsService` and `
 
 The next question is: How do we instantiate a `RouteCaller`? We define a `RouteCallerFactory` for each backend, which basically offers a method `getAllBackendCallers()` where we get an Observable `List<RouteCaller>` we should execute to load items.
 
-{% highlight kotlin %}
+{% highlight java %}
 interface RouteCallerFactory<T> {
 
     /**
@@ -260,7 +260,7 @@ interface RouteCallerFactory<T> {
 
 For executing a search we have `DesignerNewsSearchCallerFactory` and `DribbbleSearchCallerFactory`: The `DesignerNewsSearchCallerFactory` looks like this:
 
-{% highlight kotlin %}
+{% highlight java %}
 class DesignerNewsSearchCallerFactory(private val searchQuery: String, private val backend: DesignerNewsService) : RouteCallerFactory<List<PlaidItem>> {
 
     val extractPlaidItemsFromStory = fun(story: StoriesResponse): List<PlaidItem> {
@@ -285,7 +285,7 @@ At first glance `DesignerNewsSearchCallerFactory` looks a little bit strange if 
 
 The reason why we do this is testability: Recently I have watched the fireside chat of Android Dev Summit 2015 where the guys from the Android Team has been asked when they will add Java 8 support. Then Reto Meier, from the Android Team, answered that many developers are mainly interessted in lambdas and asked the audience if they could raise the hand if they want lambdas for android development: Almost the whole audience has raised the hand. I think that there is a general misunderstanding with lambdas: the real power of programming language that offer lambdas are not lambdas itself, is higher order functions and the ability to passing method references. Lambdas are just kind of anonymous functions. Actually, lambdas are not testable, because they are hardcoded. For example if I would have implemented something like this:
 
-{% highlight kotlin %}
+{% highlight java %}
 RouteCaller(0, 100, { pageOffset, limit -> backend.search(searchQuery, pageOffset) })
 {% endhighlight %}
 
@@ -301,7 +301,7 @@ Please note that for the search `getAllBackendCallers()` returns a list containi
 
 Next we introduce a `Router` which is responsible to combine all `RouteCaller` from different `RouteCallerFactories` to one single Observable list:
 
-{% highlight kotlin %}
+{% highlight java %}
 class Router<T>(private val routeFactories: List<RouteCallerFactory<T>>) {
 
     fun getAllRoutes(): Observable<List<RouteCaller<T>>> {
@@ -329,7 +329,7 @@ As you see the `Router` takes a list of `RouteCallerFactory`, in other words: a 
 
 Ok, so far we have covered the "routing part". So at the end the `Router` offers an `Observable<List<RouteCaller<T>>>`. But when do we finally load items to display them in the `RecyclerView`. This is the responsibility of `ItemsLoader`. As the name already suggests this component loads items:
 
-{% highlight kotlin %}
+{% highlight java %}
 class ItemsLoader<T>(protected val router: Router<T>) {
 
     fun firstPage(): Observable<T> {
@@ -348,7 +348,7 @@ The `ItemsLoader` takes a `Router` as constructor parameter and offers two metho
 
 A `Page` represents a page of items displayed in the RecyclerView. If we scroll to the end of the RecyclerView we load the next page containing older items. Let's have a look at the `FirstPage extends Page` and `OlderPage extends Page` classes:
 
-{% highlight kotlin %}
+{% highlight java %}
 abstract class Page<T>(val routeCalls: Observable<List<RouteCaller<T>>>) {
 
     private var failed = AtomicInteger()
