@@ -443,7 +443,7 @@ class NewDesignerNewsStory : PlaidItem {
 
 Furthermore, we implement `StoryDao` which is responsible to insert a `NewDesignerNewsStory`, update the state of a `NewDesignerNewsStory`. I'm not going to show the code for that because I guess you know how this SQL statements will look like. Next we will refactor `PostStoryService` to use `StoryDao` to query the local database for not submitted Posts and post them:
 
-{% highlight kotlin %}
+{% highlight java %}
 class PostStoryService : IntentService ("PostStoryService") {
 
    @Inject lateinit var storyDao : StoryDao
@@ -472,7 +472,7 @@ Nick Butcher has already implemented a `PostNewDesignerNewsStoryActivity` to hav
 
 All right, but you might ask yourself now: How the hack do we display that items from database in our HomeActivity? Well, it's easier than you might have thought. We already have implemented a very flexible routing mechanism which we are already using in `HomeActivity`. So we will simply add another route to our Router: But rather then making http calls to a backend we add a route to our local (offline) database. All it takes is to define a `RouteCallerFactory`:
 
-{% highlight kotlin %}
+{% highlight java %}
 class OfflineStoryCallerFactory (private val storyDao : StoryDao) : RouteCallerFactory<List<PlaidItem>>{
 
   private val callers = arrayListOf(RouteCaller(0, 100, callFunc))
