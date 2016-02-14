@@ -33,7 +33,7 @@ Let's refactor that and replace `SharedPreferences` with a `SQLiteDatabase`. Dat
 Hence, we will use [SQLBrite](https://github.com/square/sqlbrite) from Square which is a lightweight wrapper around `SQLiteOpenHelper` with support for RxJava. We don't want to deal with `Cursors` and `ContentValues`. Therefore, we use [SQLBrite-DAO](https://github.com/sockeqwe/sqlbrite-dao) which provides some abstractions like DAO (Data Access Object) and an annotation processor based tiny object mapper (Cursor to object, not ORM) and `ContentValues` generator. If you are looking for a more high level solution with similar functionality you should have a look at [StorIO](https://github.com/pushtorefresh/storio), but I'm more a low level guy so we will use `SQLBrite + SQLBrite-DAO`.
 
 We define a class `Source` like this:
-```kotlin
+```java
 @ObjectMappable
 class Source() { // Unfortunately data class are not supported yet by sqlbrite-dao
 
