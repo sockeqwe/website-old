@@ -34,7 +34,7 @@ Hence, we will use [SQLBrite](https://github.com/square/sqlbrite) from Square wh
 
 We define a class `Source` like this:
 
-```kotlinlang
+```java
 @ObjectMappable
 class Source() { // Unfortunately data class are not supported yet by sqlbrite-dao
 
