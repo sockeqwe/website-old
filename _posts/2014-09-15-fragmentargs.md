@@ -13,7 +13,7 @@ tags: [android, annotation-processing]
 
 Developing for Android is sometimes painful. You have to write lot of code to do simple things like setting up a Fragment. Fortunately java supports a powerful tool: **Annotation Processors**
 
-> This post is part of a series of posts about useful annotation processors like [ParcelablePlease](http://hannesdorfmann.com/android/ParcelablePlease/) or [AnnotatedAdapter](http://hannesdorfmann.com/android/AnnotatedAdapter/)
+> This post is part of a series of posts about useful annotation processors like [ParcelablePlease](http://hannesdorfmann.com/android/ParcelablePlease) or [AnnotatedAdapter](http://hannesdorfmann.com/android/AnnotatedAdapter)
 
 The Problem with Fragments is that you have to set arguments (the parameters) for a fragment to make them work correctly. Many new android developers that write the first fragment do something like this:
 {% highlight java %}
@@ -186,4 +186,4 @@ public class MyFragment extends BaseFragment {
 
 **Credits:** Parts of the annotation processing code are based on Hugo Visser's [Bundles](https://bitbucket.org/hvisser/bundles) project.
 
-In my [next blog post](http://hannesdorfmann.com/android/ParcelablePlease/) I want to compare annotation processors for generating Parcelable's and tell you why I ended up writing my own Annotation Processor called [ParcelablePlease](https://github.com/sockeqwe/ParcelablePlease)
+In my [next blog post](http://hannesdorfmann.com/android/ParcelablePlease) I want to compare annotation processors for generating Parcelable's and tell you why I ended up writing my own Annotation Processor called [ParcelablePlease](https://github.com/sockeqwe/ParcelablePlease)

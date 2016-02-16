@@ -11,12 +11,12 @@ categories:
 tags: [android, software-architecture, design-patterns]
 ---
 
-This is the second part of how we could refactor the [Plaid](https://github.com/nickbutcher/plaid) app open sourced by Nick Butcher. In this part we are going to enhance the MVP architecture described in the [first part](http://hannesdorfmann.com/android/plaid-refactored-1/) to become truly reactive.
+This is the second part of how we could refactor the [Plaid](https://github.com/nickbutcher/plaid) app open sourced by Nick Butcher. In this part we are going to enhance the MVP architecture described in the [first part](http://hannesdorfmann.com/android/plaid-refactored-1) to become truly reactive.
 
 **Preface:** I started the refactoring with the strong belief that I can refactor the whole app. Surprisingly (ironic), it turns out that I was a very naive man. I simply have underestimated the complexity of the app and the number of features. Therefore, I have started writing this blog post even if not everything described here is implemented (refactored). I just want to give some ideas how this could be implemented. My refactored code can be found on [github](https://github.com/sockeqwe/plaid) as well.
 
 # Recap from first part
-This is the second part of a blog series about refactoring plaid app. In the [first part](http://hannesdorfmann.com/android/plaid-refactored-1/) we have applied Model-View-Presenter and have introduced an `ItemsLoader` for loading items from different backend endpoints by invoking `RouteCallers`. Please read the [first part](http://hannesdorfmann.com/android/plaid-refactored-1/) for more details.
+This is the second part of a blog series about refactoring plaid app. In the [first part](http://hannesdorfmann.com/android/plaid-refactored-1) we have applied Model-View-Presenter and have introduced an `ItemsLoader` for loading items from different backend endpoints by invoking `RouteCallers`. Please read the [first part](http://hannesdorfmann.com/android/plaid-refactored-1) for more details.
 
 People also aksed me if there is a need for yet another MVP blog post as there are already many of them availabale. Well, my intention is not write about MVP. Rather I want to discuss how to build a "truly reactive" app (with MVP on top). Let's continue where we left off.
 
@@ -269,7 +269,7 @@ What actually happens under the hood with SQLBrite + RxJava is pretty the same a
 ![Recap](/images/plaid/inserting-source.png)
 
 ## Reactive Routing
-As already said: this is the second part of a blog series about refactoring plaid app. In the [first part](http://hannesdorfmann.com/android/plaid-refactored-1/) we have applied Model-View-Presenter and have introduced an `ItemsLoader` for loading items from different backend endpoints by invoking `RouteCallers`. Please read the [first part](http://hannesdorfmann.com/android/plaid-refactored-1/) if you haven't yet for more details. Summarizing, the home screen is build like this:
+As already said: this is the second part of a blog series about refactoring plaid app. In the [first part](http://hannesdorfmann.com/android/plaid-refactored-1) we have applied Model-View-Presenter and have introduced an `ItemsLoader` for loading items from different backend endpoints by invoking `RouteCallers`. Please read the [first part](http://hannesdorfmann.com/android/plaid-refactored-1) if you haven't yet for more details. Summarizing, the home screen is build like this:
 
 ![Recap](/images/plaid/part1-recap.png)
 
@@ -488,7 +488,7 @@ class OfflineStoryCallerFactory (private val storyDao : StoryDao) : RouteCallerF
 }
 {% endhighlight %}
 
-Easy right? Let's add the `OfflineStoryCallerFactory` to the `Router` used for the home screen. In [part 1](http://hannesdorfmann.com/android/plaid-refactored-1/) we have already discussed that we can do that configuration in the corresponding dagger module:
+Easy right? Let's add the `OfflineStoryCallerFactory` to the `Router` used for the home screen. In [part 1](http://hannesdorfmann.com/android/plaid-refactored-1) we have already discussed that we can do that configuration in the corresponding dagger module:
 
 {% highlight java %}
 @Module(

@@ -1,4 +1,4 @@
----
+hannesdorfmann.com---
 layout: post
 published: true
 title: Mosby has moved into his own house
@@ -11,7 +11,7 @@ categories:
 tags: [android, software-architecture, design-patterns]
 ---
 
-Exactly four months ago I have published a [blog post](http://hannesdorfmann.com/android/mosby/) to introduce Mosby, a Model-View-Presenter library for android.
+Exactly four months ago I have published a [blog post](http://hannesdorfmann.com/android/mosby) to introduce Mosby, a Model-View-Presenter library for android.
 
 Four months and 500 stars on Github later I have decided that it's time for Mosby to move out of home and move into his own house. Today I'm delighted to announce that Mosby now has it's own [Github Pages](http://hannesdorfmann.com/mosby/) as central resource for all Mosby related things like documentation, architectural explanations, getting started page, sample code and javadoc.
 
