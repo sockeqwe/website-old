@@ -170,8 +170,8 @@ public class ChatMessageDao extends Dao {
           .WHERE(ChatMessage.COL_CHAT_ID + " = ? ")
         )
         .args(chatId) // Argument that replaces "?" in WHERE
-        .run() // Executes query
-        .mapToList(ChatMessage.MAPPER); // The generated
+        .run() // Executes query, return Rx Observable
+        .mapToList(ChatMessage.MAPPER); // The generated Rx Func1
       }
 
 
