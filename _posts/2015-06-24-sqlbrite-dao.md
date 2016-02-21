@@ -99,22 +99,8 @@ An annotation processor (not reflections) then generates `ChatMessageMapper` cla
 public final class ChatMessageMapper {
   private ChatMessageMapper() {
   }
-
-  /**
-   * Retrieves the first element from  Cursor by scanning for @Column annotated fields.
-   * @param cursor The Cursor
-   * @return null if Cursor is empty or a single ChatMessage fetched from the Cursor
-   */
-  public static ChatMessage single(Cursor cursor) {
-      ...
-  }
-
-  /**
-   * Fetches a list of ChatMessage from a Cursor by scanning for @Column annotated fields.
-   * @param cursor The Cursor
-   * @return An empty List if cursor is empty or a list of ChatMessage items fetched from the Cursor
-   */
-  public static List<Customer> list(Cursor cursor) {
+  // A RxJava Func1 that maps a row from Cursor to c ChatMessage
+  public static final Func1<Cursor, ChatMessage> MAPPER = new Func1<>() {
     ...
   }
 
@@ -130,7 +116,7 @@ public final class ChatMessageMapper {
 }
 {% endhighlight %}
 
-So you can call `ChatMessage msg = ChatMessageMapper.single(Cursor)` or `List<ChatMessage> messages = ChatMessageMapper.list(Cursor)` to read the Cursor and save the cursor column values into the corresponding fields of the model class. You may have also noticed that there is a `ContentValuesBuilder` that can be used as type-safe builder for `ContentValues` like this:
+As you see a `Func1<Cursor, ChatMessage> MAPPER` will be generated. We use that afterwards with RxJava `map()` operator to create a `ChatMessage` instance (more details in next chapter). You may have also noticed that there is a `ContentValuesBuilder` that can be used as type-safe builder for `ContentValues` like this:
 
 {% highlight java %}
 ContentValues cv = ChatMessageMapper.contentValues()
@@ -174,24 +160,18 @@ public class ChatMessageDao extends Dao {
 
   public Observable<List<ChatMessage>> getMessages(String chatId) {
         return query(
-
-        SELECT(
+          SELECT(
             ChatMessage.COL_ID,
             ChatMessage.COL_SENDER_NAME,
             ChatMessage.COL_MESSAGE,
             ChatMessage.COL_TIMESTAMP
             )
           .FROM(ChatMessage.TABLE_NAME)
-          .WHERE(ChatMessage.COL_CHAT_ID + " = ? ") ,
-
-          chatId // Argument that replaces "?" in WHERE
+          .WHERE(ChatMessage.COL_CHAT_ID + " = ? ")
         )
-        .map(new Func1<SqlBrite.Query, List<ChatMessage>>() {  // SqlBrite.Query to List<ChatMessage>
-          @Override public List<ChatMessage> call(SqlBrite.Query query) {
-            Cursor cursor = query.run();
-            return ChatMessageMapper.list(cursor);  // Generated Mapper class
-          }
-        });
+        .args(chatId) // Argument that replaces "?" in WHERE
+        .run() // Executes query
+        .mapToList(ChatMessage.MAPPER); // The generated
       }
 
 
