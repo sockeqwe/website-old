@@ -16,7 +16,6 @@ Earlier this year, one day before Valentine's Day to be precise, I had the glori
 The idea was simple: I wanted to build an android app that imitates and looks like [Tinder](https://play.google.com/store/apps/details?id=com.tinder&hl=de) but instead of displaying real people nearby, I faked everything so that only my profile gets displayed so she only can choose me. Nearly everything was hard coded except the messaging part. To save time and effort I didn't want to build my own backend to store messages and provide a REST api. Instead I decided to use GCM to send and deliver chat messages form my girlfriend's phone to my phone and vice versa. That required to store the received chat messages on a local SQLite database on the users device. Therefore a database library was needed.
 
 # Database
-
 To cut a long story short - I didn't managed to implement that fake Tinder app in time. One of the reasons was that I hadn't found a good and simple database abstraction layer library. I could pick just a popular one to get the job done, but that wasn't what I wanted to do. Moreover, I was looking for a library that matched the following criteria:
 
  - **Native SQL:** I don't like ORM libraries because usually they require to learn their own query language and declarative table schemas. To build efficient queries I have to learn how to use that ORM library (I look at you Hibernate!). If I change ORM library one day, I have to learn how to write efficient queries again for the new ORM library. Moreover, ORM libraries has their own implementations how to save and resolve relations. Sometimes, you have to adjust your model (pojo) classes to make efficient queries possible just because of an ORM implementation detail. I'm very familiar with SQL which is universal useable (obviously also outside of the android world). I already know how to build efficient queries in SQL. Therefore, I want to write my queries in pure native SQL. Finally, I came to the conclusion that hiding SQL is not the best idea.
@@ -25,17 +24,15 @@ To cut a long story short - I didn't managed to implement that fake Tinder app i
 
  I know that this may sounds like an overkill for such a simple app like the fake Tinder app is. It just stores chat messages into a database. Whenever I build an app, I want to ensure that it's build the best way and even more important, with every new app (even with such a little app like the fake Tinder app) I improve my skills and learn new things.
 
-#SQLBrite
-
+# SQLBrite
 Don't finishing the app in time also had its advantages: A few days after Valentine's Day the guys over at square (who else?) open sourced [SQLBrite](https://github.com/square/sqlbrite) which seems to be the database layer I am dreaming of: It's a lightweight wrapper around `SQLiteOpenHelper` and `ContentResolver`, it doesn't hide SQLite or SQL API, supports transactions and multithreading and last but not least it introduces reactive stream semantics to queries. Especially, the latter one is worth mentioning: Whenever a row of a sql database table gets updated, inserted or removed SQLBrite triggers a notification to inform queries, which are subscribed for table dataset changes. So I decided to use SQLBrite in the fake Tinder app.
 
 In this fake Tinder app you can open `ChatActivity` which displays a `List<ChatMessage>` queried from the local SQLite database. As already mentioned before I use GCM to send and receive chat messages. Whenever the app receives a GCM Push notification containing a chat message, the app stores the `ChatMessage` into the local database. The big advantage of using SQLBrite is that by inserting a new `ChatMessage` into the local database `ChatActivity` gets updated automatically because as long as `ChatActivity` is not destroyed the original query executed in `ChatActivity.onCreate()` to retrieve `List<ChatMessage>` is still subscribed (query is  Rx Subscriber) to the underlying database table (database table is Rx Observable). But the really cool thing is that you get that update mechanism for free. You don't have to add a single line of code. SQLBrite and RxJava "magically" do that. No `EventBus` to start a re-query manually, pure reactive programming power. So whenever the app receives a GCM push notification containing a `ChatMessage` it stores this `ChatMessage` into the local SQLite database. If `ChatActivity` is open while receiving the GCM push notification SQLBrite will automatically deliver the database changes to `ChatActivity`. It's that easy to keep `ChatActivity` up to date. This Activity don't even have a pull-to-refresh mechanism like a `SwipeRefreshLayout` because updates are pushed from SQLBrite automatically. Therefore, there is no reason to implement a pull mechanism.
 
-#SQLBrite Dao
-
+# SQLBrite Dao
 SQLBrite is still in it's early days (Version 0.1.0 while writing this blog post). As already said the main focus of SQLBrite is set on providing a wrapper arround `SQLite`. No ORM and no type-safe query mechanism are provided. So by using SQLBrite you have to work with `Cursor` and `ContentValues`. That was a little bit annoying while developing the fake Tinder app. Therefore, I decided to write an [annotation processor](hannesdorfmann.com/annotation-processing/annotationprocessing101) for "very simple" object mapping and [DAO](https://en.wikipedia.org/wiki/Data_access_object) (Data Access Object) on top of SQLBrite. SQLBrite Dao can be found on [Github](https://github.com/sockeqwe/sqlbrite-dao).
 
-###Object mapping
+### Object mapping
 Please note that this is not an ORM. The only thing it does is take a `Cursor` and read the column into the model class pojo. Only primitives are allowed, no relations like 1:n (1 `Chat` has many `ChatMessages`) can't be modeled and resolved. It's more like deserializing data than object mapping. You have to annotate your model class with `@ObjectMappable` and the desired fields with `@Column` with the table column name (String) as parameter:
 
 {% highlight java %}
@@ -147,7 +144,7 @@ ContentValues cv = ChatMessageMapper.contentValues()
 
 `ChatMessageMapper` is just a generated helper class that makes working with `Cursor` or `ContentValues` more convenient.
 
-###DAO
+### DAO
 Create your own **D**ata **A**ccess **O**bject  (DAO) where you define methods to manipulate or query your database table. `Dao` provides SQL grammar so you don't have to deal that much with String concatenation and can use IDE's auto completion to build your sql statements. Usually a DAO represents a database table as following:
 
 {% highlight java %}
