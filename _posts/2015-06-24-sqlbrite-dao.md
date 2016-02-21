@@ -199,7 +199,7 @@ ChatDao chatDao = new ChatDao();
 DaoManager.with(context)
            .databaseName("Chat.db")
            .version(1)
-           .add(charDao)
+           .add(chatDao)
            .logging(true)
            .build();
 {% endhighlight %}
@@ -213,7 +213,7 @@ SQLBrite Dao provides an additional layer on top of SQLBrite:
  - A `Dao` is representing a table of a database. You define a public API for other software components of your App like `getMessages()` or `addMessage()` to query and manipulate the data of the underlying table.
 
 
- I have build this "DAO" and "ObjectMapper" to make things easier while working with SQLBrite by providing a little bit more high level APIs around SQLBrite. As already said SQLBrite is still under development and I think (and hope) that some of this things like "simple" object mapping or SQL grammar will be part of `SQLBrite 1.0`. So why do I have built this additional library? Working with `Cursor` and  `ContentValues` was annoying and also writing SQL statements by using String concatenation isn't really ahead of time. I really like SQLBrite but until now (end of June 2015) such things are not provided (yet) by SQLBrite. The annotation processor based `ObjectMapper` should definitely be improved to something like [AutoValue](https://github.com/google/auto/tree/master/value) (I'm a big fan of AutoValue) to support real Immutability. 
+ I have build this "DAO" and "ObjectMapper" to make things easier while working with SQLBrite by providing a little bit more high level APIs around SQLBrite. As already said SQLBrite is still under development and I think (and hope) that some of this things like "simple" object mapping or SQL grammar will be part of `SQLBrite 1.0`. So why do I have built this additional library? Working with `Cursor` and  `ContentValues` was annoying and also writing SQL statements by using String concatenation isn't really ahead of time. I really like SQLBrite but until now (end of June 2015) such things are not provided (yet) by SQLBrite. The annotation processor based `ObjectMapper` should definitely be improved to something like [AutoValue](https://github.com/google/auto/tree/master/value) (I'm a big fan of AutoValue) to support real Immutability.
 
  SQLBrite Dao can be found on [Github](https://github.com/sockeqwe/sqlbrite-dao)
 
