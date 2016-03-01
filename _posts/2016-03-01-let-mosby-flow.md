@@ -155,7 +155,7 @@ class AtlasAppKeyParceler : KeyParceler {
 
 <small>Please note that the type `Any` is kotlins equivalent to java.lang.Object
 
-With `.defaultKey(CountriesScreen())` we tell flow which is our start key / screen:
+With `.defaultKey(CountriesScreen())` we tell Flow which is our start key / screen:
 
 ```java
 class CountriesScreen : Parcelable // Doesn't have any data, it's just an empty object
