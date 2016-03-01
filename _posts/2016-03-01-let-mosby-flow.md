@@ -303,8 +303,9 @@ Depending on your app, Flow may requires you to write a lot of code (especially 
 
 If you are looking for something more lightweight then Flow you might be interested in [Pancakes](https://github.com/mattlogan/Pancakes) which is also a navigation stack library but not as powerful as Flow. With `Pancakes` you would provide a `ViewFactory` for each "screen" like this:
 
+
 ```java
-class CountriesListFactory implements ViewFactory {
+class CountriesListLayoutFactory implements ViewFactory {
     @Override
     public View createView(Context context, ViewGroup container) {
         return LayoutInflater.from(context).inflate(R.layout.screen_countries, container, false);
