@@ -190,7 +190,7 @@ class CountriesListLayout(c: Context, atts: AttributeSet) : CountriesView, MvpVi
       })
 
   init {
-    // infaltes the layout containing a SwipeRefreshLayout, RecyclerView, ProgressBar etc.
+    // inflates the layout containing a SwipeRefreshLayout, RecyclerView, ProgressBar etc.
     LayoutInflater.from(context).inflate(R.layout.recycler_swiperefresh_view, this, true)
 
     recyclerView.adapter = adapter
