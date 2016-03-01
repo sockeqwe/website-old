@@ -318,7 +318,7 @@ The aim of this blog post was to demonstrate that we can build an app without Fr
 
 Depending on your app, Flow may requires you to write a lot of code (especially for `Dispatcher`). Nevertheless, Flow is really powerful (still in 1.0-alpha) and we haven't discussed all features of Flow in detail like complex dispatchers with views on top of each other like dialogs or cases where you don't have a single "container" to display a view but rather something similar as child-fragments (Fragment's in Fragments) with back button support  or Flow services or how does Flow save the instance state (you have to save and restore that manually, see `AtlasAppDispatcher`). Also "keys" have to override `equals()` and `hashCode()` properly. In a nutshell: Flow is not designed for android dev beginners, but the benefit of Flow is huge (if you hate fragments)!
 
-If you are looking for something more simple then Flow you might found  [Pancakes](https://github.com/mattlogan/Pancakes) interesting which is also a navigation stack library but not as powerful as Flow. With `Pancakes` you would provide a `ViewFactory` for each "screen" like this:
+If you are looking for something more simple then Flow you might find  [Pancakes](https://github.com/mattlogan/Pancakes) interesting which is also a navigation stack library but not as powerful as Flow. With `Pancakes` you would provide a `ViewFactory` for each "screen" like this:
 
 
 ```java
