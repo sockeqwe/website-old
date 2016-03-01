@@ -155,6 +155,7 @@ class AtlasAppKeyParceler : KeyParceler {
 <small>Please note that the type `Any` is kotlins equivalent to java.lang.Object
 
 So to sum it: To install Flow in our Activity we have to do the following:
+
 ```java
 class MainActivity : AppCompatActivity() {
 
@@ -169,7 +170,9 @@ class MainActivity : AppCompatActivity() {
   ...
 }
 ```
+
 With `.defaultKey(CountriesScreen())` we tell flow which is our start key / screen:
+
 ```java
 class CountriesScreen : Parcelable // Doesn't have any data, it's just an empty object
 ```
@@ -185,6 +188,7 @@ One of the most loved features of Mosby is that Presenters can survive screen or
 If you have used Mosby 2.0 before this is nothing new to you. This feature was already available for Activities and Fragments. With Mosby 3.0 this feature is now fully supported for subclasses of android.view.ViewGroup like FrameLayout, RelativeLayout and so on (there was already partial support for that in Mosby 2.0).
 
 Let's have a look how we have implemented the screen that displays a list of countries:
+
 ```java
 class CountriesListLayout(c: Context, atts: AttributeSet) : CountriesView, MvpViewStateFrameLayout<CountriesView, CountriesPresenter>(
     c, atts) {
@@ -313,6 +317,7 @@ The aim of this blog post was to demonstrate that we can build an app without Fr
 Depending on your app, Flow may requires you to write a lot of code (especially for `Dispatcher`). Nevertheless, Flow is really powerful (still in 1.0-alpha) and we haven't discussed all features of Flow in detail like complex dispatchers with views on top of each other like dialogs or cases where you don't have a single "container" to display a view but rather something similar as child-fragments (Fragment's in Fragments) with back button support  or Flow services.
 
 If you are looking for something more lightweight then Flow you might be interested in [Pancakes](https://github.com/mattlogan/Pancakes) which is also a navigation stack library but not as powerful as Flow. With `Pancakes` you would provide a `ViewFactory` for each "screen" like this:
+
 ```java
 class CountriesListFactory implements ViewFactory {
     @Override
