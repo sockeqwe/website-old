@@ -155,7 +155,7 @@ class AtlasAppKeyParceler : KeyParceler {
 
 <small>Please note that the type `Any` is kotlins equivalent to java.lang.Object </small>
 
-To sum it up, to use Mosby in our Activity we have to do:
+To sum it up, to use Flow in our Activity we have to do:
 
 ```java
 class MainActivity : AppCompatActivity() {
