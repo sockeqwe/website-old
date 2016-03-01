@@ -11,11 +11,11 @@ categories:
 tags: [android, software-architecture, design-patterns]
 ---
 
-The usage of Fragments in Android apps is highly controversial. While some developers love them, others hate them. In this blog post I will give you a short introduction of how to use Mosby 3.0 (SNAPSHOT) to build MVP base screens and square's Flow as navigation stack.
+The usage of Fragments in Android apps is highly controversial. While some developers love them, others hate them. In this blog post I will give you a short introduction of how to use Mosby 3.0 (SNAPSHOT) to build MVP base screens and square's Flow library as navigation stack.
 
 **Preface:** Usually I use Fragments in my apps and 99% of the time they work well. However, I do understand developers who are advocating against Fragments. We want build the best apps we are able to and if Fragments are a source for errors then this 1% is probably to much.
 
-In this blog post I will show you how to write a little atlas app entirely without Fragments by using [Mosby](https://github.com/sockeqwe/mosby) and [Flow](https://github.com/square/flow). Our app basically has just two screens: A list of countries and a details screen where information about a certain country is displayed. Let's have a look at a short demo video (please note that this demo app is able to deal with screen orientation changes):
+In this blog post I will show you how to write a little **atlas app** entirely without Fragments by using [Mosby](https://github.com/sockeqwe/mosby) and [Flow](https://github.com/square/flow). Our app has just two screens: A list of countries and a details screen where information about a certain country is displayed. Let's have a look at a short demo video (please note that this demo app is able to deal with screen orientation changes):
 <p>
 <iframe width="420" height="315" src="https://www.youtube.com/embed/lNG1odHSNXg" frameborder="0" allowfullscreen></iframe>
 </p>
