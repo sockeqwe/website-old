@@ -205,7 +205,6 @@ class CountriesListLayout(c: Context, atts: AttributeSet) : CountriesView, MvpVi
     }
   }
 
-
   fun loadData(pullToRefresh: Boolean) = presenter.loadCountries(pullToRefresh)
 
   override fun createPresenter(): CountriesPresenter =
