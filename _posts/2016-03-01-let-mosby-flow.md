@@ -329,6 +329,9 @@ class CountriesListLayoutFactory implements ViewFactory {
 }
 ```
 
-Mosby should work with Pancakes as great as with Flow and make handling screen orientation changes much simpler.
+Mosby should work with Pancakes  (and any other navigation stack library) as great as with Flow.
 
 One last thing: people asked me why Mosby doesn't provide it's own navigation stack implementation? The reason is that Mosby should and will ever be that tiny little MVP library and that's what Mosby is the best at. Take Mosby as a base scaffold to build your app on top of it with that development stack you like the most (like Flow or Pancakes for navigation or even with Fragments). Furthermore, implementing a clean navigation stack library is not that easy as it seems or why do you think that the brilliant guys over at square took quite a long time to design and implement Flow?
+
+
+<small>Please note that for better readability the code shown in this blog post has been cut down a little bit. Check the demo repository for the complete code</small>
