@@ -152,6 +152,7 @@ class AtlasAppKeyParceler : KeyParceler {
   override fun toKey(parcelable: Parcelable) : Any = parcelable
 }
 ```
+
 <small>Please note that the type `Any` is kotlins equivalent to java.lang.Object
 
 So to sum it: To install Flow in our Activity we have to do the following:
