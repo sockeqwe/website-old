@@ -174,6 +174,7 @@ If you have used Mosby 2.0 before this is nothing new to you. This feature was a
 
 Let's have a look how we have implemented the screen that displays a list of countries:
 
+
 ```java
 class CountriesListLayout(c: Context, atts: AttributeSet) : CountriesView, MvpViewStateFrameLayout<CountriesView, CountriesPresenter>(
     c, atts) {
