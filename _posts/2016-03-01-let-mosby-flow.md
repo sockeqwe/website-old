@@ -22,6 +22,7 @@ In this blog post I will show you how to write a little **atlas app** entirely w
 
 # Flow for navigation
 The app itself will be a single Activity. As already said, there are basically two screens the user can navigate to:
+
 - `CountriesListLayout`: Displays a list of countries. The user can click on a country to display details about this country.
 - `CountryDetailsLayout`: Displays details about a certain country like population, currency and some photos.
 
