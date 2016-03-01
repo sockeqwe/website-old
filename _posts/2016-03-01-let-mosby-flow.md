@@ -282,7 +282,7 @@ public abstract class MvpViewStateFrameLayout<V, P>
 }
 ```
 
-The `CountriesPresenter` loads a List<Country> from `Atlas` (business logic, injected by dagger 2) and we use RxJava to connect the dots:
+The `CountriesPresenter` loads a List<Country> from Atlas (business logic, injected by dagger 2) and we use RxJava to connect the dots:
 
 ```java
 class CountriesPresenter @Inject constructor(val atlas: Atlas) : MvpBasePresenter<CountriesView>() {
