@@ -11,7 +11,7 @@ categories:
 tags: [android, software-architecture, design-patterns]
 ---
 
-The usage of Fragments in Android apps is highly controversial. While some developers love them, others hate them. In this blog post I will give you a short introduction of how to use Mosby 3.0 (SNAPSHOT) to build MVP base screens and square's Flow library as navigation stack.
+The usage of Fragments in Android apps is highly controversial. While some developers love them, others hate them. In this blog post I will give you a short introduction of how to use Mosby 3.0 (SNAPSHOT) to build MVP base screens and square's Flow library as navigation stack replacement.
 
 **Preface:** Usually I use Fragments in my apps and 99% of the time they work well. However, I do understand developers who are advocating against Fragments. We want build the best apps we are able to and if Fragments are a source for errors then this 1% is probably to much.
 
@@ -153,9 +153,25 @@ class AtlasAppKeyParceler : KeyParceler {
 }
 ```
 
-<small>Please note that the type `Any` is kotlins equivalent to java.lang.Object
+<small>Please note that the type `Any` is kotlins equivalent to java.lang.Object </small>
 
-With `.defaultKey(CountriesScreen())` we tell Flow which is our start key / screen:
+To sum it up, to use Mosby in our Activity we have to do:
+```java
+class MainActivity : AppCompatActivity() {
+
+  override fun attachBaseContext(baseContext: Context) {
+    val newBase = Flow.configure(baseContext, this)
+        .dispatcher(AtlasAppDispatcher(this))
+        .defaultKey(CountriesScreen())
+        .keyParceler(AtlasAppKeyParceler())
+        .install()
+    super.attachBaseContext(newBase)
+  }
+  ...
+}
+```
+
+With `.defaultKey(CountriesScreen())` we specify what is our start key / screen:
 
 ```java
 class CountriesScreen : Parcelable // Doesn't have any data, it's just an empty object
