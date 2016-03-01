@@ -155,23 +155,6 @@ class AtlasAppKeyParceler : KeyParceler {
 
 <small>Please note that the type `Any` is kotlins equivalent to java.lang.Object
 
-So to sum it: To install Flow in our Activity we have to do the following:
-
-```java
-class MainActivity : AppCompatActivity() {
-
-  override fun attachBaseContext(baseContext: Context) {
-    val flowContextWrapper = Flow.configure(baseContext, this)
-        .dispatcher(AtlasAppDispatcher(this))
-        .defaultKey(CountriesScreen())
-        .keyParceler(AtlasAppKeyParceler())
-        .install()
-    super.attachBaseContext(flowContextWrapper)
-  }
-  ...
-}
-```
-
 With `.defaultKey(CountriesScreen())` we tell flow which is our start key / screen:
 
 ```java
