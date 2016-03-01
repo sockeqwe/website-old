@@ -120,7 +120,7 @@ val layoutRes = when (destination) {
   else -> throw IllegalStateException("Unknown screen $destination")
 }
 ```
-You may ask yourself "what is a key"? Basically everything (java.lang.Object) can be used as a key for a screen in Flow. It seems to be good practice that "keys" are named with "Screen" suffix. In our atlas app we have two "screens" we can navigate to. Hence we have two "key" classes named `CountriesScreen` and `CountryDetailsScreen`. This "key" classes have two responsibilities: First, as already discussed a key maps to an android view, and second the key contains all the required data the screen needs to display. I think that can be compared to fragment arguments. For example the `CountryDetailsScreen` stores an id (country id) which then is used in the corresponding view to load the data for the given country id.
+You may ask yourself "what is a key"? Basically everything (java.lang.Object) can be used as a key for a screen in Flow. It seems to be good practice that "keys" are named with "Screen" suffix. In our atlas app we have two "screens" we can navigate to. Hence we have two "key" classes named `CountriesScreen` and `CountryDetailsScreen`. This "key" classes have two responsibilities: First, as already discussed a key maps to an android view, and second the key contains all the required data the screen needs to display. I think that can be compared to fragment arguments. For example the `CountryDetailsScreen` contains an id (country id) which then is used in the corresponding view to load the data for the given country id.
 
 ```java
 class CountryDetailsScreen(val countryId: Int) : Parcelable {
