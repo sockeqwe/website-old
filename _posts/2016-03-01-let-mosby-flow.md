@@ -167,6 +167,7 @@ We haven't discussed yet how to build the UI without Fragments. We simply write 
 
 Mosby is a Model-View-Presenter (MVP) library for Android. For our atlas app we will use Mosby 3.0, which is not released at the time of writing this blog post. However, 3.0.0-SNAPSHOT is available and changes until the final 3.0 release will mainly be "under the hood". In other words, the API is mostly stable (and compatible to Mosby 2.0).
 
+## Screen orientation changes
 One of the most loved features of Mosby is that Presenters can survive screen orientation changes. Additionally, Mosby has a tiny companion object to the Presenter and View called `ViewState`. Typically, in MVP (passive view) the Presenter coordinates the View. So the Presenter tells the View to display a ProgressBar like `view.showLoading()` while loading data and then the RecyclerView `view.showContent()` once the data has been loaded. Mosby's ViewState is some kind of hook sitting between Presenter and View and keeps track of all the methods the presenter has invoked on the view. The idea is that after a screen orientation change we can "apply" the ViewState and invoke the same methods on the View to get back to the UI state as before the screen orientation change.
 
 If you have used Mosby 2.0 before this is nothing new to you. This feature was already available for Activities and Fragments. With Mosby 3.0 this feature is now fully supported for subclasses of android.view.ViewGroup like FrameLayout, RelativeLayout and so on (there was already partial support for that in Mosby 2.0).
