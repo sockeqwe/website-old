@@ -185,7 +185,7 @@ class CountriesListLayout(c: Context, atts: AttributeSet) : CountriesView, MvpVi
   private val loadingView: View by bindView(R.id.loadingView)
 
   private val adapter = CountriesAdapter(
-      { // On click listener, navigates to details screen
+      { // OnClickListener, navigates to details screen
         country ->
         Flow.get(this).set(CountryDetailsScreen(country.id))
       })
