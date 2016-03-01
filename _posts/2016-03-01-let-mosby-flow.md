@@ -156,6 +156,7 @@ class AtlasAppKeyParceler : KeyParceler {
 <small>Please note that the type `Any` is kotlins equivalent to java.lang.Object </small>
 
 To sum it up, to use Mosby in our Activity we have to do:
+
 ```java
 class MainActivity : AppCompatActivity() {
 
@@ -315,7 +316,7 @@ The screen displaying a country details is basically the same and therefore not 
 # Summary
 The aim of this blog post was to demonstrate that we can build an app without Fragments by using Flow for Navigation and Mosby for MVP and screen orientation changes. Both, Flow and Mosby can deal with process deaths (Activity destroyed in background), however, Mosby requires to make the ViewState parcelable (that means that the loaded data, i.e. list of country, has to implement parcelable as well, see [documentation](hannesdorfmann.com/mosby/)). I, personally, think that in 95% app developers just want that their app survive screen orientation changes painlessly and therefore a "simple view state" (not implementing parcelable) is enough (if process death occurs then data will be reloaded entirely).
 
-Depending on your app, Flow may requires you to write a lot of code (especially for `Dispatcher`). Nevertheless, Flow is really powerful (still in 1.0-alpha) and we haven't discussed all features of Flow in detail like complex dispatchers with views on top of each other like dialogs or cases where you don't have a single "container" to display a view but rather something similar as child-fragments (Fragment's in Fragments) with back button support  or Flow services.
+Depending on your app, Flow may requires you to write a lot of code (especially for `Dispatcher`). Nevertheless, Flow is really powerful (still in 1.0-alpha) and we haven't discussed all features of Flow in detail like complex dispatchers with views on top of each other like dialogs or cases where you don't have a single "container" to display a view but rather something similar as child-fragments (Fragment's in Fragments) with back button support  or Flow services. Also "keys" have to override `equals()` and `hashCode()` correctly.
 
 If you are looking for something more lightweight then Flow you might be interested in [Pancakes](https://github.com/mattlogan/Pancakes) which is also a navigation stack library but not as powerful as Flow. With `Pancakes` you would provide a `ViewFactory` for each "screen" like this:
 
