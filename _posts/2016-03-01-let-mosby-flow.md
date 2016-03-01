@@ -144,7 +144,7 @@ class CountryDetailsScreen(val countryId: Int) : Parcelable {
 }
 ```
 
-I guess I know your next question: "Why do we need to implement the parcelable interface?". I have said earlier that "everything" can be a key and that's still true. However, at some point (during process death, i.e. activity gets destroyed while in background) Flow has to save your keys persistently in a Bundle (as Parcelable) to be able to restore the navigation stack history after your activity gets restarted (i.e. activity comes in the foreground again). Therefore, we have to provide a `KeyParceler` to Flow which is responsible to write and read a "key" to a parcelable. The easiest way to do so is to make the "key" like `CountryDetailsScreen` itself parcelable because then our `KeyParceler` implementation is basically just casting the "key" object like we do in our atlas app:
+I guess I know your next question: "Why do we need to implement the parcelable interface?". I have said earlier that "everything" can be a key and that's still true. However, at some point (during process death, i.e. activity gets destroyed while in background) Flow has to save your keys persistently in a Bundle (as Parcelable) to be able to restore the navigation stack history after your activity gets restarted (i.e. activity comes in the foreground again). Therefore, we have to provide a `KeyParceler` to Flow which is responsible to write and read a "key" as parcelable. The easiest way to do so is to make the "key" like `CountryDetailsScreen` itself parcelable because then our `KeyParceler` implementation is basically just casting the "key" object like we do in our atlas app:
 
 ```java
 class AtlasAppKeyParceler : KeyParceler {
