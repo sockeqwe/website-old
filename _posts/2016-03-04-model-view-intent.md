@@ -375,9 +375,9 @@ class SearchPresenter @Inject constructor(
 What's wrong with that code? I mean we do that in MVP all the time? The problem is, that now our whole system has two states: The view's state and the state of the model itself. Moreover, the view's state is caused by a side effect. Remember the definition of `model()` function? Only the model function is allowed to change the internal application state (with side effects). But the code shown above contradicts with that principle.
 
 So how to solve that? From my point of view there are two options:
-The first is to create a MVI flow just for `LoadingView`. We talked about MVC's original definition by Reenskaug. Do you remember? Every GUI widget has it's own Controller. But who says that every controller has to be his own model? We could share the Model. Guess what, sharing an Observable is pretty easy in RxJava, because there is an operator for that called `.share()`. So we could have our own MVI / MVP flow with just the `ProgressBar` as View. In general: **we should stop thinking that the whole screen is one huge view with one controller / presenter and one model**.
+**The first option** is to create a MVI flow just for `LoadingView`. We talked about MVC's original definition by Reenskaug. Do you remember? Every GUI widget has it's own Controller. But who says that every controller has to be his own model? We could share the Model. Guess what, sharing an Observable is pretty easy in RxJava, because there is an operator for that called `.share()`. So we could have our own MVI / MVP flow with just the `ProgressBar` as View. In general: **we should stop thinking that the whole screen is one huge view with one controller / presenter and one model**.
 
-The second option, and in my opinion the best option, would be to have one Model that also propagates his stat changes, i.e. before loading data from github the `modelFun()` would change the model to it's internal state "loading":
+**The second option** and in my opinion the better option, would be to have one Model that also propagates his stat changes, i.e. before loading data from github the `modelFun()` would change the model to it's internal state "loading":
 
 ```java
 data class SearchModel(
