@@ -313,14 +313,14 @@ class SearchPresenter @Inject constructor(
 }
 ```
 
-That's it. we still have `view( model( intent() ) )`, but this time the presenter is super slim, decoupled, testable and maintainable.
+That's it. we still have `view( model( intent() ) )`, but this time the view, presenter and "business logic" is super slim, decoupled, testable and maintainable.j
 
 # The problem with side effects
 Are we done now? Almost. We haven't discussed yet who is responsible to display and hide the `ProgressBar` while loading in background data. In MVP it would be the responsibility from `Presenter` to coordinate the view's state ... ah, the View's state ... do you hear the  alarm bells ringing?
 
-Let's see, how could we do that in mvp? We would simply add a method to the MVP View interface like this:
+Let's see, how could we do that in MVP? We would simply add a method to the MVP View interface like this:
 
-```java
+```javako
 interface SearchView : MvpView {
   ...
   fun showLoading(): (Any) -> Unit  // RxJava Action1
@@ -372,7 +372,7 @@ class SearchPresenter @Inject constructor(
 }
 ```
 
-What's wrong with that code? I mean we do that in MVP all the time? The problem is, that now our whole system has two states: The view's state and the state from the model itself. Moreover, the view's state is caused by a side effect. Remember the definition of `model()` function? Only the model function is allowed to change the internal state (with side effects). But the code shown above contradicts with that principle.
+What's wrong with that code? I mean we do that in MVP all the time? The problem is, that now our whole system has two states: The view's state and the state of the model itself. Moreover, the view's state is caused by a side effect. Remember the definition of `model()` function? Only the model function is allowed to change the internal application state (with side effects). But the code shown above contradicts with that principle.
 
 So how to solve that? From my point of view there are two options:
 The first is to create a MVI flow just for `LoadingView`. We talked about MVC's original definition by Reenskaug. Do you remember? Every GUI widget has it's own Controller. But who says that every controller has to be his own model? We could share the Model. Guess what, sharing an Observable is pretty easy in RxJava, because there is an operator for that called `.share()`. So we could have our own MVI / MVP flow with just the `ProgressBar` as View. In general: **we should stop thinking that the whole screen is one huge view with one controller / presenter and one model**.
