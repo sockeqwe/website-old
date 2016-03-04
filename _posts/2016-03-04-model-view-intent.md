@@ -179,6 +179,7 @@ class SearchActivity : SearchView, MvpActivity<SearchView, SearchPresenter>() {
   override fun createPresenter(): SearchPresenter = App.getComponent(this).searchPresenter()
 }
 ```
+
 Ah, looks much better now, doesn't it? Let's continue with the Presenter.
 The Presenters responsibility is to coordinate the view and to be the "bridge" to the business logic. In Mosby, a Presenter has two methods, `attachView()` (called from activity.onCreate() ) and `detachView()` (called from activity.onDestroy()).
 
@@ -190,7 +191,7 @@ class SearchPresenter : MvpBasePresenter<SearchView>() {
   override fun attachView(view: SearchView) {
     super.attachView(view)
 
-    subscription = view.getSearchIntent()
+    subscription = view.getSearchIntent() // intent()
           .startWith("")  // model() function, same as before
           .flatMap { queryString ->
             if (queryString.isEmpty())
@@ -213,7 +214,7 @@ class SearchPresenter : MvpBasePresenter<SearchView>() {
 }
 ```
 
-Alright, so now the Presenter uses the View's `serachIntent()` method and connects it to the model. Are we done? No, now the presenter has the business logic code as well. So there is one separation of concern still missing. We will refactor that in a minute. Let's continue with this little statement first: `.subscribe(view.showData(), view.showError())`. Well, in MVP the Presenter tells the view what to display. So what are this two methods? This methods are part of the `SearchView` interface that I have omitted before:
+Alright, so now the Presenter uses the View's `serachIntent()` method and connects it to the model. Are we done? No, the presenter contains the "business logic" code (model() function). So there is one separation of concern still missing. We will refactor that in a minute. Let's continue with this little statement first: `.subscribe(view.showData(), view.showError())`. Well, in MVP the Presenter tells the view what to display. So what are this two methods? This methods are part of the `SearchView` interface that I have omitted before:
 
 ```java
 interface SearchView : MvpView {
@@ -241,7 +242,7 @@ class SearchActivity : SearchView, MvpActivity<SearchView, SearchPresenter>() {
 }
 ```
 
-So what we now have and what we didn't had before doing the refactoring is a entirely decoupled View. All the View has to provide is an `Observable<String>` as `intent()` function. Today the result comes from a `SearchView` and has a `debounce()` operator. Tomorrow it could be something entirely different (i.e. a dropdown menu with a list of strings) and you don't have to touch (and therefore can't break) anything but `SearchActivity`. The same for the way how the view is "rendered" / displayed. All that code lives in `SearchActivity` as well. So today it is uses a `RecyclerView`, but tomorrow it could be another custom UI widget or a ListView. I guess you get the point.
+So what we now have and what we didn't had before doing the refactoring is a entirely decoupled View. All the View has to provide is an `Observable<String>` as `intent()` function. Today the output of `searchIntent()` comes from a `EditText` widget and use `debounce()` operator. Tomorrow it could be something entirely different (i.e. a dropdown menu with a list of strings to chose from) and you don't have to touch (and therefore can't break) anything of your existing source code except the View, `SearchActivity`. The same is valid for the way how the view is "rendered" / displayed. All that code lives in `SearchActivity` as well. So today it is uses a `RecyclerView`, but tomorrow it could be another custom UI widget or a ListView. I guess you get the point.
 
 Back to our Presenter source code: as already said, the `Presenter` has all the business logic. One of the main pitfalls with that is that presenter is not testable (how to mock parts of our busines logic) and we can't reuse that business logic for other Presenter because it's hard coded. Let's refactor that code. First we introduce a `SearchEngine`:
 
