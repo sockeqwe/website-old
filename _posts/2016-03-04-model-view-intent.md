@@ -39,18 +39,18 @@ However, in the original MVC the controller may or may not also manipulate the v
 
 <small>Source: cycle.js.org</small>
 
-Do you see the unidirectional flow, the circle? The next question is how do we establish such a circle? Well, as you have seen above, the computer takes an input and converts it to an output (display / view). The human, sees the output from computer and takes it as Input and produces Output (UI widgets events like a click on a button) which then will be again the input for the computer. So the concept of taking a input and have an output seems to be familiar, doesn't it? Yes it's a (mathematically) function. We can establish that with **functional programming**.
+Do you see the unidirectional flow, the cycle? The next question is how do we establish such a circle? Well, as you have seen above, the computer takes an input and converts it to an output (display / view). The human, sees the output from computer and takes it as Input and produces Output (UI widgets events like a click on a button) which then will be again the input for the computer. So the concept of taking a input and have an output seems to be familiar, doesn't it? Yes it's a (mathematically) function. We can establish that with **functional programming**.
 
 So what we basically want to have is a chain of functions like this:
 
 ![MVI](/images/mvi/mvi-func1.png)
 
 
-- `intent()` This function takes the input from the user (i.e. UI events, like click listener) and translate it to "something" that will be passed as parameter to `model()` function. This could be a simple string to set a value of the model or something more complex data structure like an `Action` or `Command`.
-- `model()` The model function takes the output from `intent()` as input and manipulates the model. The output of this function is a new (state changed) model. So it should not update an already existing model. **We want immutability!** We don't change an already existing one. We copy the existing one and change the state (and afterwards it can not be changed anymore). This function is the only peace of your code that is allowed to change a Model object. Then this new immutable Model is the output of this function.
-- `view()` This method takes the model returned from `model()` function and gives it as input to the  `view()` function. Then the view simply displays this model somehow.
+- `intent()`: This function takes the input from the user (i.e. UI events, like click listener) and translate it to "something" that will be passed as parameter to `model()` function. This could be a simple string to set a value of the model to or more complex data structure like an `Actions` or `Commands`.here in this blog post we will stick with the word `Action`
+- `model(): The model function takes the output from `intent()` as input and manipulates the model. The output of this function is a new (state changed) model. So it should not update an already existing model. **We want immutability!** We don't change an already existing one. We copy the existing one and change the state (and afterwards it can not be changed anymore). This function is the only peace of your code that is allowed to change a Model object. Then this new immutable Model is the output of this function.
+- `view()`: This method takes the model returned from `model()` function and gives it as input to the  `view()` function. Then the view simply displays this model somehow.
 
- But what about the circle, one might ask? This is where reactive programming (RxJava, observer pattern) comes in.
+But what about the cycle, one might ask? This is where reactive programming (RxJava, observer pattern) comes in.
 
 ![MVI](/images/mvi/mvi-func2.png)
 
