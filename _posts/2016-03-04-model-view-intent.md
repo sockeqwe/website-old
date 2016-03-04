@@ -381,7 +381,7 @@ So how to solve that? From my point of view there are two options:
 
 ```java
 data class SearchModel(
-      val isLoading: Boolean, // true before loading data, false when done
+      val isLoading: Boolean, // true while loading data, false when done
       val searchTerm: String,
       val results: List<GithubRepo>)
 ```
