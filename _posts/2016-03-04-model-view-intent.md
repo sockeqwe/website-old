@@ -402,4 +402,4 @@ See the thing with MVI is like with any other software architecture: MVI gives y
 
 > Stay hungry, stay foolish, think outside the box!
 
-The source code for the sample shown in this blog post can be found on [Github](https://github.com/sockeqwe/Model-View-Intent-Android)
+The source code for the sample app shown in this blog post can be found on [Github](https://github.com/sockeqwe/Model-View-Intent-Android)
