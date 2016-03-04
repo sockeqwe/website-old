@@ -139,7 +139,7 @@ You get it, this code is basically  a common android developer beginner mistake:
 
 Nevertheless, we can do it better. So let's refactor this code.
 As you might already know I'm a fan of MVP. So lets combine the best of both, MVP and MVI.
-In this sample we will use Mosby, the MVP library. Before we start, let's talk about the separation of concerns a little bit. What is the responsibility of the View in MVP? Right, just display the data, and doing what the Presenter "commands" to display. In MVI what should the GUI do? Exactly, the GUI triggers UI events and the `intent()` function will translate that to "actions" to manipulate the model afterwards.
+In this sample we will use Mosby, an MVP library. Before we start, let's talk about separation of concerns a little bit. What is the responsibility of the View in MVP? Right, just display the data, and doing what the Presenter "commands" to display. In MVI what should the GUI do? Exactly, the GUI triggers UI events and the `intent()` function will translate that to "actions" to manipulate the model afterwards.
 
 So the MVP View Interface will offer a `intent()` function, in our case we call this method `searchIntent()` function:
 
