@@ -56,7 +56,7 @@ But what about the cycle, one might ask? This is where reactive programming (RxJ
 
 So the view will generate "events" (observer pattern) that are passed to the `intent()` function again.
 
-Sounds quite complex, I know, but once you are into it it's not that hard anymore. Let's say we want to build a simple android app to search github (rest api) for repositories with a certain name. Something like this:
+Sounds quite complex, I know, but once you are into it it's not that hard anymore. Let's say we want to build a simple android app to search github (rest api) for repositories matching a certain name. Something like this:
 
 <p>
 <iframe width="420" height="315" src="https://www.youtube.com/embed/ZXwDQML5IXQ" frameborder="0" allowfullscreen></iframe>
