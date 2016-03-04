@@ -398,3 +398,5 @@ TL;DR: There might be "workarounds", but I can't recommend you a clean solution 
 
 # Summary
 Model-View-Intent is a very clean way how to deal with states and UI changes in your application. Having a unidirectional data flow (cycle) with immutability is awesome. Composing functions leads to clean and reusable code.
+
+The source code for the sample shown in this blog post can be found on [Github](https://github.com/sockeqwe/Model-View-Intent-Android)
