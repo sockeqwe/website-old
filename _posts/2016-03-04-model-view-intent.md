@@ -258,7 +258,7 @@ class SearchEngine(private val githubBackend: GithubBackend) {
 }
 ```
 
-`SearchEngine` get a `GithubBackend` and offes a `search(String) : Observable<SearchModel>` for the ourside. This basically is our `model()` function, responsible to change the model. However, we don't want to hardcode that again in our presenter. So we use Dagger to provide and inject a `modelFunc()` to other components, in our case to the `searchPresenter`:
+`SearchEngine` get a `GithubBackend` and offers a `search(String) : Observable<SearchModel>` for the outside. This basically is our `model()` function, responsible to change the model. However, we don't want to hardcode that again in our presenter. So we use Dagger to provide and inject a `modelFunc()` to other components, in our case to the `SearchPresenter`:
 
 ```java
 @Module
