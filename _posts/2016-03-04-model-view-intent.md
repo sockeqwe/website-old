@@ -11,7 +11,7 @@ categories:
 tags: [android, software-architecture, design-patterns]
 ---
 
-As developers we should always think outside the box. Some weeks ago Artem Zinnatullin and I discussed some architectural trends in his Podcast [The Context](https://github.com/artem-zinnatullin/TheContext-Podcast) on other platforms, like .NET and javascript. A few days later [Christina Lee](https://twitter.com/RunChristinaRun) gave an awesome lightning talk [Redux-ing UI Bugs](https://www.youtube.com/watch?v=UsuzhTlccRk) during square's **The Journey of Android Engineers** event. She also talked about one of my favorite js libraries: [Cycle.js](http://cycle.js.org/), which defines itself as **Model-View-Intent (MVI)** library. After watching Christina Lee's inspiring talk I finally found motivation to take the time to write down my thoughts about MVI on android.
+As developers we should always think outside the box. Some weeks ago Artem Zinnatullin and I have discussed some architectural trends on android and on other platforms, like .NET and javascript, in his Podcast [The Context](https://github.com/artem-zinnatullin/TheContext-Podcast) . A few days later [Christina Lee](https://twitter.com/RunChristinaRun) gave an awesome lightning talk [Redux-ing UI Bugs](https://www.youtube.com/watch?v=UsuzhTlccRk) during square's **The Journey of Android Engineers** event. She also talked about one of my favorite js libraries: [Cycle.js](http://cycle.js.org/), which defines itself as **Model-View-Intent (MVI)** library. After watching Christina Lee's inspiring talk I finally found motivation to take the time to write down my thoughts about MVI on android.
 
 **Preface:** Model-View-Intent relies heavily on reactive and functional programming (RxJava). Believe me, many people won't understand MVI at the first time. I was in the same situation. A year ago, I definitely gave up and started again several times to understand it, but guess what: that's completely fine! If you don't understand this blog post at the first go, it's ok, relax, take it easy and retry it a few days later again.
 
@@ -39,7 +39,7 @@ However, in the original MVC the controller may or may not also manipulate the v
 
 <small>Source: cycle.js.org</small>
 
-Do you see the unidirectional flow, the cycle? The next question is how do we establish such a circle? Well, as you have seen above, the computer takes an input and converts it to an output (display / view). The human, sees the output from computer and takes it as Input and produces Output (UI widgets events like a click on a button) which then will be again the input for the computer. So the concept of taking a input and have an output seems to be familiar, doesn't it? Yes it's a (mathematically) function. We can establish that with **functional programming**.
+Do you see the unidirectional flow? the cycle? The next question is how do we establish such a circle? Well, as you have seen above, the computer takes an input and converts it to an output (display / view). The human, sees the output from computer and takes it as Input and produces Output (UI widgets events like a click on a button) which then will be again the input for the computer. So the concept of taking a input and have an output seems to be familiar, doesn't it? Yes it's a (mathematically) function. We can establish that with **functional programming**.
 
 So what we basically want to have is a chain of functions like this:
 
