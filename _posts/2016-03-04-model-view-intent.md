@@ -398,7 +398,7 @@ TL;DR: There might be "workarounds" for screen orientation changes, but by now I
 # Summary
 Model-View-Intent is a very clean way to deal with application states and UI changes. An unidirectional data flow (cycle), predictable states and immutability are the exciting thing about MVI. Composing functions leads to clean and reusable code. I think we can mix MVI with MVP as we did in this example, because I still think that MVP helps to separate your concerns. Furthermore, I can't highlight enough the importance of an [Presentation Model](http://hannesdorfmann.com/android/adapter-commands) and transforming the Model into a Presentation Model is quite easy with RxJava (just add an `.map()`) but improves your code quality a lot and reduces complexity.
 
-Last but not least it's like with every architecture: One can add as many layers as you want to. The `model()` function for example could internally be composed from multiple smaller `method()` functions. One can add `Action` data structures to decouple things between `intent()` and `model()` even more. But keep in mind: **don't over-engineering things!** Software architecture is a continuous evolution.
+Last but not least MVI is like with any other software architecture: One can add as many layers as you want to. The `model()` function for example could internally be composed from multiple smaller `method()` functions (one might also call them use cases or interactors). One can add `Action` data structures to decouple things between `intent()` and `model()` even more. But keep in mind: **don't over-engineering things!** Software architecture is a continuous evolution.
 
 > Stay hungry, stay foolish, think outside the box!
 
