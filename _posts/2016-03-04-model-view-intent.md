@@ -320,7 +320,7 @@ Are we done now? Almost. We haven't discussed yet who is responsible to display 
 
 Let's see, how could we do that in MVP? We would simply add a method to the MVP View interface like this:
 
-```javako
+```java
 interface SearchView : MvpView {
   ...
   fun showLoading(): (Any) -> Unit  // RxJava Action1
@@ -393,7 +393,7 @@ Now `SearchEngine` who provides the `model()` function would first change the mo
 
 MVI makes no difference here. On screen orientation changes everything will get lost. So that means that our `Model` which is representative for the state of an MVI powered app will be lost. We could put that in a retaining Fragment somehow and put it back in right place after screen orientation change. But that only solves half of the problem, because whenever the activity gets destroyed we also have to unsubscribe our observable chain otherwise we will run into memory leaks (we use `view.searchIntent()`). So what if we start a async background task and want to ensure that it doesn't get canceled in our `model()` function? Well we could use `.cache()` operator or `Subjects` like `ReplaySubject` or keep a static map as cache for background tasks. In a nutshell, yes there are ways (I would rather call them workarounds) but I'm not very happy with those solutions. We also have to take into account that our `model()` function may have to distinguish between initial empty state (`.startWith("")`) and state after screen orientation changes and process deaths (do we have to make our model Parcelable to save it persistently in a Bundle?). You see, it's getting out of hand very quickly and introduces more complexity than it has to be.
 
-TL;DR: There might be "workarounds" for screen orientation changes, but by now I can't recommend you a clean solution of how to deal with screen orientation changes in android.
+TL;DR: There might be "workarounds" for screen orientation changes, but I can't recommend a clean solution for dealing with screen orientation changes on android.
 
 # Summary
 Model-View-Intent is a very clean way to deal with application states and UI changes. An unidirectional data flow (cycle), predictable states and immutability are the exciting thing about MVI. Composing functions leads to clean and reusable code. I think we can mix MVI with MVP as we did in this example, because I still think that MVP helps to separate your concerns. Furthermore, I can't highlight enough the importance of an [Presentation Model](http://hannesdorfmann.com/android/adapter-commands) and transforming the Model into a Presentation Model is quite easy with RxJava (just add an `.map()`) but improves your code quality a lot and reduces complexity.
