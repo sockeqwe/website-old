@@ -183,7 +183,7 @@ class SearchActivity : SearchView, MvpActivity<SearchView, SearchPresenter>() {
 Ah, looks much better now, doesn't it? Let's continue with the Presenter.
 The Presenters responsibility is to coordinate the view and to be the "bridge" to the business logic. In Mosby, a Presenter has two methods, `attachView()` (called from activity.onCreate() ) and `detachView()` (called from activity.onDestroy()).
 
-```
+```java
 class SearchPresenter : MvpBasePresenter<SearchView>() {
 
   lateinit var subscription: Subscription
