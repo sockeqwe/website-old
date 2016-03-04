@@ -132,7 +132,7 @@ Great, we have a unidirectional data flow. Even better, we have immutability and
 So are we done?
 
 
-# The big picture
+# The Big Picture
 What about all the other things we have learned from amongst others MVP like separation of concerns, decoupled & maintainable code, testability, reusability, single responsibility and so on?
 
 You get it, this code is basically almost a the same as android beginners write (just without RxJava), all in one activity. Well it has a structure thanks to MVI and (mainly RxJava), but is it good code? It's not spaghetti code (maybe reacitve spaghetti code, that's a matter of opinion).
