@@ -135,7 +135,7 @@ So are we done?
 # The Big Picture
 What about all the other things we have learned from other architectural design patterns like MVP? What about concepts they offer like separation of concerns, decoupled & maintainable code, testability, reusability, single responsibility and so on?
 
-You get it, this code is basically almost a the same as android beginners write (just without RxJava), all in one activity. Well it has a structure thanks to MVI and (mainly RxJava), but is it good code? It's not spaghetti code (maybe reacitve spaghetti code, that's a matter of opinion).
+You get it, this code is basically  a common android developer beginner mistake: Put everything in one huge Activity ([God object](https://en.wikipedia.org/wiki/God_object)). Well, it has a structure thanks to MVI and (mainly RxJava), but is it good code? It's not spaghetti code (maybe reacitve spaghetti code, that's a matter of opinion), but is it good code?
 
 Nevertheless, we can do it better. So let's refactor this code.
 As you might already know I'm a fan of MVP. So lets combine the best of both, MVP and MVI.
