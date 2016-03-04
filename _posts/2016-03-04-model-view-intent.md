@@ -125,7 +125,7 @@ class SearchActivity : AppCompatActivity() {
 ```
 
 That's a lot of code isn't it. I hope you could follow that code and find my comments helpful.
-In a nutshell `intent()` function basically listens to SearchView Text changes and gives the query string (kind of action to tell the model to search for that string) to the `model()` function.
+In a nutshell: `intent()` function basically listens to SearchView Text changes and gives the query string (kind of action to tell the model to search for that string) to the `model()` function.
 The `model()` function is responsible to manage the "model". with `startWith()` we ensure that the first time we subscribe to an "empty" search result gets forwarded (in other words, we setup the initial state). Otherwise we use retrofit to load a `GithubResponse` that we than have to transform to a `SearchModel`. Last the `view()` gets the SearchModel as result (RxJava Observer) and is responsible to "render" and display the SearchModel.
 
 
