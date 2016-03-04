@@ -133,7 +133,7 @@ So are we done?
 
 
 # The Big Picture
-What about all the other things we have learned from amongst others MVP like separation of concerns, decoupled & maintainable code, testability, reusability, single responsibility and so on?
+What about all the other things we have learned from other architectural design patterns like MVP? What about concepts they offer like separation of concerns, decoupled & maintainable code, testability, reusability, single responsibility and so on?
 
 You get it, this code is basically almost a the same as android beginners write (just without RxJava), all in one activity. Well it has a structure thanks to MVI and (mainly RxJava), but is it good code? It's not spaghetti code (maybe reacitve spaghetti code, that's a matter of opinion).
 
