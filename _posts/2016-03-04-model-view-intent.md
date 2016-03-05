@@ -15,7 +15,7 @@ As developers we should always think outside the box. A month ago Artem Zinnatul
 
 **Preface:** Model-View-Intent relies heavily on reactive and functional programming (RxJava). Believe me, many people won't understand MVI at the first time. I was in the same situation. A year ago, I definitely gave up and started again several times to understand it, but guess what: that's completely fine! If you don't understand this blog post at the first go, it's ok, relax, take it easy and retry it a few days later again.
 
-So what is Model-View-Intent? Yet another architecture for user interfaces? Well, I would recommend you to watch the following video about cycle.js presented by the inventor [André Staltz](https://twitter.com/andrestaltz) himself at JSConf Budapest in May 2015 (at least the first 10 minutes) to get a better understanding of the motivation behind MVI:
+So what is Model-View-Intent? Yet another architecture for user interfaces? Well, I recommend you to watch the following video about cycle.js presented by the inventor [André Staltz](https://twitter.com/andrestaltz) at JSConf Budapest in May 2015 (at least the first 10 minutes) to get a better understanding of the motivation behind MVI:
 
 <p>
 <iframe width="420" height="315" src="https://www.youtube.com/embed/1zj7M1LnJV4" frameborder="0" allowfullscreen></iframe>
