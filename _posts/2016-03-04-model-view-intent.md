@@ -387,7 +387,7 @@ data class SearchModel(
       val results: List<GithubRepo>)
 ```
 
-Now `SearchEngine` would first change the model to `SearchModel (true, ...)` before starting to load the data (and propagate this state change as usual via observable chain which will update the view and finally display the ProgressBar) and then set it to `SearchModel (false, )` after having retrieved the new data from github backend.
+Now `SearchEngine` would first change the model to `SearchModel (true, ...)` before starting to load the data (and propagate this state change as usual via observable chain which will update the view and finally display the ProgressBar) and then set it to `SearchModel (false, ...)` after having retrieved the new data from github backend.
 
 # Screen Orientation Changes
 [Sir Tony Hoare](https://en.wikipedia.org/wiki/Tony_Hoare#Apologies_and_retractions) introduced null references in ALGOL W back in 1965. Retrospective he call this his _"Billion Dollar Mistake"_ (NullpointerException). I think android's _"Billion Dollar Mistake"_ is to destroy the whole Activity on screen orientation changes. Dealing with screen orientation changes that way it is today in android is really painful. Furthermore, it makes software architecture on android much harder then it has to be.
