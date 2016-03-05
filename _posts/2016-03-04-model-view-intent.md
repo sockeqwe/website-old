@@ -39,7 +39,7 @@ However, in the original MVC the controller may or may not also manipulate the v
 
 <small>Source: cycle.js.org</small>
 
-Do you see the unidirectional flow? The cycle? The next question is how do we establish such a circle? Well, as you have seen above, the computer takes an input and converts it to an output (display / view). The human, sees the output from computer and takes it as Input and produces Output (UI widgets events like a click on a button) which then will be again the input for the computer. So the concept of taking a input and have an output seems to be familiar, doesn't it? Yes it's a (mathematically) function. We can establish that with **functional programming**.
+Do you see the unidirectional flow? The cycle? The next question is how do we establish such a circle? Well, as you have seen above, the computer takes an input and converts it to an output (display / view). The human, sees the output from computer and takes it as Input and produces Output (UI widgets events like a click on a button) which then will be again the input for the computer. So the concept of taking a input and have an output seems to be familiar, doesn't it? Yes it's a (mathematical) function. We can establish that with **functional programming**.
 
 So what we basically want to have is a chain of functions like this:
 
