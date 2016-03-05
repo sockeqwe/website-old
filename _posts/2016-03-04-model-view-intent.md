@@ -258,7 +258,7 @@ class SearchEngine(private val githubBackend: GithubBackend) {
 }
 ```
 
-`SearchEngine` get a `GithubBackend` and offers a `search(String) : Observable<SearchModel>` for the outside. This basically is our `model()` function, responsible to change the model. However, we don't want to hardcode that again in our presenter. So we use Dagger to provide and inject a `modelFunc()` to other components, in our case to the `SearchPresenter`:
+`SearchEngine` get a `GithubBackend` and offers a `search(String) : Observable<SearchModel>` for the outside. SearchEngine is our business logic, just functional by providing a `search()` function with one input (search string) and an output (Observable<SearchModel>). In our `model()` function then we call search engine's function, who is responsible to change the model. However, we don't want to hardcode that again in our presenter. So we use Dagger to provide and inject a `modelFunc()` to other components, in our case to the `SearchPresenter`:
 
 ```java
 @Module
@@ -313,7 +313,7 @@ class SearchPresenter @Inject constructor(
 }
 ```
 
-That's it. we still have `view( model( intent() ) )`, but this time the view, presenter and "business logic" is super slim, decoupled, testable and maintainable.j
+That's it. we still have `view( model( intent() ) )`, but this time the view, presenter and "business logic" is super slim, decoupled, testable and maintainable.
 
 # The problem with side effects
 Are we done now? Almost. We haven't discussed yet who is responsible to display and hide the `ProgressBar` while loading in background data. In MVP it would be the responsibility from `Presenter` to coordinate the view's state ... ah, the View's state ... do you hear the  alarm bells ringing?
