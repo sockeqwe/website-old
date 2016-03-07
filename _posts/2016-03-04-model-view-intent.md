@@ -214,7 +214,7 @@ class SearchPresenter : MvpBasePresenter<SearchView>() {
 }
 ```
 
-Alright, so now the Presenter uses the View's `serachIntent()` method and connects it to the model. Are we done? No, the presenter contains the "business logic" code (model() function). So there is one separation of concern still missing. We will refactor that in a minute. Let's continue with this little statement: `.subscribe(view.showData(), view.showError())`. Well, in MVP the Presenter tells the view what to display. So what are this two methods? This methods are part of the `SearchView` interface that I have omitted before:
+Alright, so now the Presenter uses the View's `serachIntent()` method and connects it to the model. Are we done? No, the presenter contains the "business logic" code (model() function). So there is one separation of concern still missing. We will refactor that in a minute. Let's continue with this little statement: `.subscribe(view.showData(), view.showError())`. Well, in MVP the Presenter tells the view what to display. So basically this is our `view()` function. So what are this two methods? This methods are part of the `SearchView` interface that I have omitted before:
 
 ```java
 interface SearchView : MvpView {
