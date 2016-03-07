@@ -258,7 +258,7 @@ class SearchEngine(private val githubBackend: GithubBackend) {
 }
 ```
 
-`SearchEngine` get a `GithubBackend` and offers a `search(String) : Observable<SearchModel>` for the outside. SearchEngine is our business logic, just functional by providing a `search()` function with one input (search string) and an output (Observable<SearchModel>). In our `model()` function then we call search engine's function, who is responsible to change the model. However, we don't want to hardcode that again in our presenter. So we use Dagger to provide and inject a `modelFunc()` to other components, in our case to the `SearchPresenter`:
+`SearchEngine` get a `GithubBackend` and offers a `search(String) : Observable<SearchModel>` for the outside. SearchEngine is our business logic, just functional by providing a `search()` function with one input (search string) and an output (`Observable<SearchModel>``). In our `model()` function then we call search engine's function, who is responsible to change the model. However, we don't want to hardcode that again in our presenter. So we use Dagger to provide and inject a `modelFunc()` to other components, in our case to the `SearchPresenter`:
 
 ```java
 @Module
