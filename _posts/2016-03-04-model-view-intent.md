@@ -47,7 +47,7 @@ So what we basically want to have is a chain of functions like this:
 
 
 - `intent()`: This function takes the input from the user (i.e. UI events, like click events) and translate it to "something" that will be passed as parameter to `model()` function. This could be a simple string to set a value of the model to or more complex data structure like an `Actions` or `Commands`. Here in this blog post we will stick with the word `Action`.
-- `model()`: The model function takes the output from `intent()` as input to manipulate the model. The output of this function is a new model (state changed). So it should not update an already existing model. **We want immutability!** We don't change an already existing one. We copy the existing one and change the state (and afterwards it can not be changed anymore). This function is the only peace of your code that is allowed to change a Model object. Then this new immutable Model is the output of this function.
+- `model()`: The model function takes the output from `intent()` as input to manipulate the model. The output of this function is a new model (state changed). So it should not update an already existing model. **We want immutability!** We don't change an already existing one. We copy the existing one and change the state (and afterwards it can not be changed anymore). This function is the only piece of your code that is allowed to change a Model object. Then this new immutable Model is the output of this function.
 - `view()`: This method takes the model returned from `model()` function and gives it as input to the  `view()` function. Then the view simply displays this model somehow.
 
 But what about the cycle, one might ask? This is where reactive programming (RxJava, observer pattern) comes in.
