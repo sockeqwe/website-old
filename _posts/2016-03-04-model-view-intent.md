@@ -317,7 +317,7 @@ class SearchPresenter @Inject constructor(
 }
 ```
 
-That's it. we still have `view( model( intent() ) )`, but this time the view, presenter and "business logic" are super slim, decoupled, testable and maintainable.
+That's it. we still have `view( model( intent() ) )`, but this time the view, presenter and "business logic" are super slim, decoupled, reusable, testable and maintainable.
 
 # The problem with side effects
 Are we done now? Almost. We haven't discussed yet who is responsible to display and hide the `ProgressBar` while loading in background data. In MVP it would be the responsibility from `Presenter` to coordinate the view's state ... ah, the View's state ... do you hear the  alarm bells ringing?
