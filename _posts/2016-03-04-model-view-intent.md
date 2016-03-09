@@ -376,7 +376,7 @@ class SearchPresenter @Inject constructor(
 }
 ```
 
-What's wrong with that code? I mean we do that in MVP all the time, right? The problem is that now our whole system has two states: The view's state and the state of the model itself. Moreover, the view's state is caused by a side effect. Do you remember the definition of `model()` function? Only the model() function is allowed to change the internal application state (with side effects). But the code shown above contradicts with that principle.
+What's wrong with that code? I mean we do that in MVP all the time, right? **The problem is that now our whole system has two states**: The view's state and the state of the model itself. Moreover, the view's state is caused by a side effect. Do you remember the definition of `model()` function? Only the model() function is allowed to change the internal application state (with side effects). But the code shown above contradicts with that principle.
 
 So how to solve that? From my point of view there are two options:
 
