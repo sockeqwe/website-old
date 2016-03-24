@@ -82,6 +82,7 @@ Of course we can spice up the code shown above with dependency injection and wit
 
 ```java
 class TrackingActivity extends MvpActivity implements TrackingView {
+  
     @Inject @LightCycle GpsTracker tracker;
 
     @Override
