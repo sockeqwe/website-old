@@ -28,7 +28,7 @@ For example let's assume we want to build an app that displays the user's curren
 So far so good. As already said, to not drain the battery too much we want to stop GPS tracking when the display is off, in other words stop GPS Tracking in `Activity.onPause()` and resume when `Activity.onResume()`. Read this sentence carefully again. Do you get it? It's not the Presenter who needs onPause() and onResume() lifecycle events. Rather the "business logic", the `GpsTracker`, needs these lifecycle events.
 
 But how do we implement that? Should we simply forward `Activity.onPause()` to `Presenter.onPause()` which then calls `GpsTracker.stop()`? So we do need a Presenter with lifecycle methods otherwise we couldn't forward the pause events the way down to `GpsTracker.stop()`, right?
-I think there is a better way. As already said, is not the responsibility of the presenter to handle lifecycle events. Actually, there is already a component that is responsible for lifecycle events: the Activity (or Fragment). So instead of forwarding Activity.onPause() and Activity.onResume() to the presenter, just do something like this:
+I think there is a better way. As already said, is not the responsibility of the Presenter to handle lifecycle events. Actually, there is already a component that is responsible for lifecycle events: the Activity (or Fragment). So instead of forwarding Activity.onPause() and Activity.onResume() to the presenter, just do something like this:
 
 ```java
 class TrackingActivity extends MvpActivity implements TrackingView {
