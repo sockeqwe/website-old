@@ -70,8 +70,8 @@ class TrackingPresenter extends MvpBasePresenter<TrackingView>
 
 
   @Override
-  public void onGpsLocationUpdated(GpsPosition postion){
-    view.showCurrentPosition(postion.getLat(), position.getLng());
+  public void onGpsLocationUpdated(GpsPosition position){
+    view.showCurrentPosition(position.getLat(), position.getLng());
   }
 }
 ```
