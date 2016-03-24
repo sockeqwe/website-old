@@ -54,7 +54,7 @@ class TrackingActivity extends MvpActivity implements TrackingView {
 }
 ```
 
-As you see, the trick is that the `GpsTracker` is "bound" to the Activity's lifecycle directly in the component that is responsible for managing lifecycle events: the Activity! Then we pass the GpsTracker to the Presenter as constructor parameter.
+As you see, the trick is that the `GpsTracker` is "bound" to the Activity's lifecycle directly in the component that is responsible for managing lifecycle: the Activity! Then we pass the GpsTracker to the Presenter as constructor parameter.
 Furthermore, now `TrackingPresenter` fulfills the single responsibility from my previous definition: It's only responsible to update the View.
 
 ```java
