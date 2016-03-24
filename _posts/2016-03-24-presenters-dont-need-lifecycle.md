@@ -94,7 +94,7 @@ class TrackingActivity extends MvpActivity implements TrackingView {
 }
 ```
 
-Are you looking for more examples? Another user of Mosby (MVP library) has asked me a similar question on github for a music player app he is working on. I gave a similar answer [there](https://github.com/sockeqwe/mosby/issues/124)
+Are you looking for more examples? Another user of Mosby (MVP library) has asked me a similar question on github for a music player app he is working on. I gave a similar  [answer](https://github.com/sockeqwe/mosby/issues/124).
 
 Of course this is only my personal opinion and there are exceptions and you may really need lifecycle events in your Presenters, but I think in 99% your business logic needs lifecycle events and not your Presenters.
 
