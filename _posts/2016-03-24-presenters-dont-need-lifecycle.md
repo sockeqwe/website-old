@@ -13,7 +13,7 @@ tags: [android, software-architecture, design-patterns]
 
 I have been asked several times why Presenters in [Mosby](https://github.com/sockeqwe/mosby) (MVP library) don't have lifecycle callback methods like onCreate(Bundle), onResume() etc. Also the awesome guys over at SoundCloud have published a library called [LightCycle](https://github.com/soundcloud/lightcycle) that helps break logic out of Activity or Fragments into smaller containers bound to the parents Activity's or Fragment's lifecycle. While this library is great and helpful they also mention in their [examples](https://github.com/soundcloud/lightcycle/blob/master/examples/real-world/src/main/java/com/soundcloud/lightcycle/sample/real_world/HeaderPresenter.java) that this library can be used in MVP to bring lifecycle to Presenters. I, personally, think that Presenters don't need lifecycle callback methods and in this blog post I will discuss why.
 
-Alright, before we get started, think of the definition and the rule of a `Presenter` in MVP. I will give you my definition:
+Alright, before we get started, think of the definition and the rule of a `Presenter` in MVP. Here is my definition:
 
 > The Presenter is responsible to coordinate the view, transform Model into "PresentationModel" so that the View can display data more convenient and to be the bridge to the "business logic" to retrieve data that should be displayed in the View. MVP is all about separation of concerns.
 
