@@ -152,7 +152,7 @@ class LifecycleController  extends DefaultActivityLightCycle {
 }
 ```
 
-and then we tread the Activity as `TrackingView` as we already did before:
+and then we treat the Activity as `TrackingView` as we already did before:
 
 ```java
 class TrackingActivity extends MvpActivity implements TrackingView {
