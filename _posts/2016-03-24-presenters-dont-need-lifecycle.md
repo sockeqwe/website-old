@@ -106,6 +106,7 @@ Last but not least I want to say that the intention of this blog post is not to 
 As some people pointed out correctly (see also [reddit](https://www.reddit.com/r/androiddev/comments/4bs4lz/presenters_dont_need_lifecycle_events_hannes/) ) the code snipped shown above causes that the `TrackingView` (TrackingActivity) has knowledge of `GpsTracker` which definitely feels dangerous. What I wanted to demonstrate is that there is already a component responsible for lifecycle management in your app and it's not the Presenter. I didn't say that `GpsTracker` should be used or manipulated from `TrackingView` directly. That should still be the job of the `TrackingPresenter`. However, yes, `TrackingActivity` now has a reference to `GpsTracker` and could be misused. The real problem is that `Activty` is `View` and `lifecycle manager` at the same time. I see two solutions for that problem:
 
   1. **Separate View and lifecycle responsibility:** How do we do that? Well we have to move either View responsibility or lifecycle management out of Activity. Obviously we can't remove the lifecycle management from Activity easily, but we can introduce an additional layer which then is really just a `TrackingView`:
+  
   ```java
 class TrackingActivity extends MvpActivity<TrackignView, TrackingPresenter> {
 
