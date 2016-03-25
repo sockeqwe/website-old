@@ -133,7 +133,7 @@ class TrackingActivity extends MvpActivity<TrackignView, TrackingPresenter> {
 
  2. **Hide GpsTracker from View:** This seems a like a work around, but from my experience this is the simpler and a more practical solution. What was the original problem? The problem was that `TrackingActivity` has a reference to `GpsTracker` and therefore one could access and misuse `GpsTracker`. How to solve this problem? Introducing an additional layer seems to me like getting the fire brigade to extinguish a candle. So why not simply "hide" `GpsTracker` from `TrackingActivity` like this:
 
-```java
+ ```java
 class LifecycleController  extends DefaultActivityLightCycle {
   private GpsTracker tracker;
 
@@ -150,11 +150,11 @@ class LifecycleController  extends DefaultActivityLightCycle {
     tracker.start();
   }
 }
-```
+ ```
 
-and then we tread the Activity as `TrackingView` as we already did before:
+ and then we tread the Activity as `TrackingView` as we already did before:
 
-```java
+ ```java
 class TrackingActivity extends MvpActivity implements TrackingView {
 
     @Inject @LightCycle LifecycleController lifecycleController;
@@ -164,9 +164,9 @@ class TrackingActivity extends MvpActivity implements TrackingView {
           return new TrackingPresenter(tracker);
      }
 }
-```
+ ```
 
-By doing so `TrackingActivity` no longer has a reference to `GpsTracker` that can be misused without the burden of an additional layer.
+ By doing so `TrackingActivity` no longer has a reference to `GpsTracker` that can be misused without the burden of an additional layer.
 
 Please note, that in this blog post we are talking about business logic components like `GpsTracker` that are lifecycle aware. Obviously, I don't want you to do that for all your business logic components even if they are not lifecycle aware at all. That is nonsense. The "traditional" MVP approach is quite good. I was just advocating against making Presenter lifecycle aware when the business logic is the component that is lifecycle aware.
 
