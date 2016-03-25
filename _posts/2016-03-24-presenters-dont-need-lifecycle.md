@@ -101,3 +101,73 @@ Of course this is only my personal opinion and there are exceptions and you may 
 So the moral of the story is: You should avoid lifecycle aware components as much as possible. Doesn't matter if business logic (Model) or Presenter. It's my general advise. Lifecycle only introduces undesired complexity. But if you really really really need components that are lifecycle aware, then most likely the business logic (Model) should be lifecycle aware and not the Presenter.
 
 Last but not least I want to say that the intention of this blog post is not to discredit SoundCloud's LigthCycle! I just wanted to say that from my point of view the LightCycle [examples](https://github.com/soundcloud/lightcycle/blob/master/examples/real-world/src/main/java/com/soundcloud/lightcycle/sample/real_world/HeaderPresenter.java) (having Presenters with lifecycle callback methods in general) are not my cup of tea. I think this is mainly caused by the fact that my definition of a Presenter (i.e. I also don't want to have android SDK dependencies like `Bundle` in my Presenters) is entirely different from SoundClouds definition of a Presenter.
+
+### Update
+As some people pointed out correctly (see also [reddit](https://www.reddit.com/r/androiddev/comments/4bs4lz/presenters_dont_need_lifecycle_events_hannes/) ) the code snipped shown above causes that the `TrackingView` (TrackingActivity) has knowledge of `GpsTracker` which definitely feels dangerous. What I wanted to demonstrate is that there is already a component responsible for lifecycle management in your app and it's not the Presenter. I didn't say that `GpsTracker` should be used or manipulated from `TrackingView` directly. That should still be the job of the `TrackingPresenter`. However, yes, `TrackingActivity` now has a reference to `GpsTracker` and could be misused. The real problem is that `Activty` is `View` and `lifecycle manager` at the same time. I see two solutions for that problem:
+
+1. **Separate View and lifecycle responsibility:** How do we do that? Well we have to move either View responsibility or lifecycle management out of Activity. Obviously we can't remove the lifecycle management from Activity easily, but we can introduce an additional layer which then is really just a `TrackingView`:
+
+```java
+class TrackingActivity extends MvpActivity<TrackignView, TrackingPresenter> {
+
+   @Inject @LightCycle GpsTracker tracker;
+   TrackingView view;
+
+   public void onCreate(n){
+     super.onCreate(b);
+     setContentView(R.layout.activity_tracking);
+     view = (TrackingView) findViewById(R.id.tracking_view);
+   }
+
+   @Override // called by Mosby, same as before
+   public TrackingPresenter createPresenter(){ ... }
+
+   @Override // called by Mosby to connect view with presenter
+   public TrackingView getMvpView(){
+     return view;
+   }
+}
+```
+
+The thing here is we introduce an extra layer View. This can be something like `TrackingLayout extends FrameLayout implements TrackingView` so you can use it directly in xml layouts or could build some kind of "wrapper class" that gets the root layout from Activity and internally handles UI widgets or whatever works best for you. This approach might be the cleanest solution because now we have truly single responsibility even in the Activity (lifecycle only). But this solution comes with a price: an additional layer. I don't know about you but for me adding yet another layer is the beginning of over-engineering. And there are still some dependencies an activity has to offer to the view layer like what if you need a Bundle in View (do you really want to work with BaseSavedState)? What if the view needs a reference to the Window to set some flags like hide navigation bar, immersive mode or shared element transitions. Maybe we could use dependency injection like Dagger to solve that kind of problems? Maybe, but soon or later you will be caught by dependency injection library so that we can't do anything without dagger anymore, which sucks. So even if in theory introducing a dedicated "view" layer seems to be a good idea it's not my recommended solution.
+
+2. **Hide GpsTracker from View:** This seems a like a work around, but from my experience this is the simpler and a more practical solution. What was the original problem? The problem was that `TrackingActivity` has a reference to `GpsTracker` and therefore one could access and misuse `GpsTracker`. How to solve this problem? Introducing an additional layer seems to me like getting the fire brigade to extinguish a candle. So why not simply "hide" `GpsTracker` from `TrackingActivity` like this:
+
+```java
+class LifecycleController  extends DefaultActivityLightCycle {
+  private GpsTracker tracker;
+
+  @Inject
+  public LifecycleController(GpsTracker tracker){ ... }
+
+  @Override
+  public void onPause(){
+    tracker.stop();
+  }
+
+  @Override
+  public void onResume(){
+    tracker.start();
+  }
+}
+```
+
+and then we tread the Activity as `TrackingView` as we already did before:
+
+```java
+class TrackingActivity extends MvpActivity implements TrackingView {
+
+    @Inject @LightCycle LifecycleController lifecycleController;
+
+    @Override
+    public void createPresenter(){ // Called by Mosby
+          return new TrackingPresenter(tracker);
+     }
+}
+```
+
+By doing so `TrackingActivity` no longer has a reference to `GpsTracker` that can be misused without the burden of an additional layer.
+
+Please note, that in this blog post we are talking about business logic components like `GpsTracker` that are lifecycle aware. Obviously, I don't want you to do that for all your business logic components even if they are not lifecycle aware at all. That is nonsense. The "traditional" MVP approach is quite good. I was just advocating against making Presenter lifecycle aware when the business logic is the component that is lifecycle aware.
+
+<small>I apologize for having inserted this solution discussed in the "Update" section after having published the blog posts. Initially I was too lazy to formalize all that things out. I'm sorry.</small>
