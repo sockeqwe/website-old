@@ -170,4 +170,4 @@ By doing so `TrackingActivity` no longer has a reference to `GpsTracker` that ca
 
 Please note, that in this blog post we are talking about business logic components like `GpsTracker` that are lifecycle aware. Obviously, I don't want you to do that for all your business logic components even if they are not lifecycle aware at all. That is nonsense. The "traditional" MVP approach is quite good. I was just advocating against making Presenter lifecycle aware when the business logic is the component that is lifecycle aware.
 
-<small>I apologize for having inserted this solution discussed in the "Update" section after having published the blog posts. Initially I was too lazy to formalize all that things out. I'm sorry.</small>
+<small>I apologize for having inserted this solution discussed in the "Update" section after having published the blog posts. Initially I was too lazy to write all that things down. I'm sorry.</small>
