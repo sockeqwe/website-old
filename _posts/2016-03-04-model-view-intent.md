@@ -242,7 +242,7 @@ class SearchActivity : SearchView, MvpActivity<SearchView, SearchPresenter>() {
 }
 ```
 
-So what we now have and what we didn't had before doing the refactoring is a entirely decoupled View. All the View has to provide is an `Observable<String>` as `intent()` function. Today the output of `searchIntent()` comes from na `EditText` widget and use `debounce()` operator. Tomorrow it could be something entirely different (i.e. a dropdown menu with a list of strings to chose from) and you don't have to touch (and therefore can't break) anything else of your existing source code except the View (`SearchActivity`). The same is valid for the way how the view is "rendered" / displayed. All that view related code lives in `SearchActivity`. Today it uses a `RecyclerView` to display the "model", but tomorrow it could be another custom UI widget or a ListView. I guess you get the point.
+So what we now have and what we didn't had before doing the refactoring is a entirely decoupled View. All the View has to provide is an `Observable<String>` as `intent()` function. Today the output of `searchIntent()` comes from an `EditText` widget and use `debounce()` operator. Tomorrow it could be something entirely different (i.e. a dropdown menu with a list of strings to chose from) and you don't have to touch (and therefore can't break) anything else of your existing source code except the View (`SearchActivity`). The same is valid for the way how the view is "rendered" / displayed. All that view related code lives in `SearchActivity`. Today it uses a `RecyclerView` to display the "model", but tomorrow it could be another custom UI widget or a ListView. I guess you get the point.
 
 Back to our Presenter's source code: as already said, currently the `Presenter` contains all the business logic. One of the main pitfalls with that is that presenter is not testable (how to mock parts of our business logic) and we can't reuse that business logic for other Presenter because it's hard coded. Let's refactor that code. First we introduce a `SearchEngine`:
 
@@ -258,7 +258,7 @@ class SearchEngine(private val githubBackend: GithubBackend) {
 }
 ```
 
-`SearchEngine` get a `GithubBackend` and offers a `search(String) : Observable<SearchModel>` for the outside. SearchEngine is our business logic, just functional by providing a `search()` function with one input (search string) and an output (`Observable<SearchModel>`). In our `model()` function then we call search engine's function, who is responsible to change the "model". The model is basically the search result (initial state is empty list as search result).However, we don't want to hardcode that again in our Presenter.
+`SearchEngine` gets a `GithubBackend` and offers a `search(String) : Observable<SearchModel>` for the outside. SearchEngine is our business logic, just functional by providing a `search()` function with one input (search string) and an output (`Observable<SearchModel>`). In our `model()` function then we call search engine's function, who is responsible to change the "model". The model is basically the search result (initial state is empty list as search result).However, we don't want to hardcode that again in our Presenter.
 
  > What if instead of objects we injection functions?
 
