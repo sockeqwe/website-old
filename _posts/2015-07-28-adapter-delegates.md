@@ -274,13 +274,6 @@ I guess you get the point. Instead of inheriting Joe had defined a delegate for 
 public interface AdapterDelegate<T> {
 
   /**
-   * Get the view type integer. Must be unique within every Adapter
-   *
-   * @return the integer representing the view type
-   */
-  public int getItemViewType();
-
-  /**
    * Called to determine whether this AdapterDelegate is the responsible for the given data
    * element.
    *
@@ -331,6 +324,7 @@ public class AdapterDelegatesManager<T> {
 {% endhighlight %}
 
 The idea is to register `AdapterDelegates` to an `AdapterDelegatesManager`. The `AdapterDelegatesManager` internally has the logic to determine the right `AdapterDelegate` for the given view type and to call the corresponding delegate methods. So applying that to `NewsTipAdapter` the code looks like this:
+
 {% highlight java %}
 public class NewsTipAdapter extends RecyclerView.Adapter{
 
@@ -342,8 +336,8 @@ public class NewsTipAdapter extends RecyclerView.Adapter{
   AdapterDelegatesManager delegates = new AdapterDelegatesManager();
 
   public NewsTipAdapter(){
-    delegates.add(new NewsTeaserAdapterDelegate(VIEW_TYP_NEWS_TEASER));
-    delegates.add(new PetFoodTipAdapterDelegate(VIEW_TYP_FOOD_TIP));
+    delegates.add(new NewsTeaserAdapterDelegate()); // Assigns internally ViewType integer
+    delegates.add(new PetFoodTipAdapterDelegate());
   }
 
   @Override public int getItemViewType(int position) {
@@ -360,31 +354,29 @@ public class NewsTipAdapter extends RecyclerView.Adapter{
 }
 {% endhighlight %}
 
-I guess you can imagine how other adapters of MyLittleZoo app looks now. There is an `AdvertisementAdapterDelegate`, `NewsTeaserAdapterDelegate`, `PetFoodTipAdapterDelegate` and `AccessoryAdapterDelegate`. From now on adapters can be composed with that view types (AdapterDelegates) that are really needed. Another advantage is that you also have moved out the functionality of inflating layout, creating view holder and binding view holder from one huge  adapter class (spagehtti code? god object anti pattern?) into separated, modular and reusable AdapterDelegates. Have you noticed how slim adapters code looks now and that you have a separation of concerns that makes things more extendable and more decoupled? Another nice side effect is that more team members can work in parallel together on the same "adapter" without fearing complex merge conflicts because not everybody is touching the huge adapter file but rather team members can work on dedicated AdapterDelegate files simultaneously.
+I guess you can imagine how other adapters of MyLittleZoo app looks now. There is an `AdvertisementAdapterDelegate`, `NewsTeaserAdapterDelegate`, `PetFoodTipAdapterDelegate` and `AccessoryAdapterDelegate`. From now on adapters can be composed with that view types (AdapterDelegates) that are really needed. Another advantage is that you also have moved out the functionality of inflating layout, creating view holder and binding view holder from one huge  adapter class (spaghetti code? god object anti pattern?) into separated, modular and reusable AdapterDelegates. Have you noticed how slim adapters code looks now and that you have a separation of concerns that makes things more extendable and more decoupled? Another nice side effect is that more team members can work in parallel together on the same "adapter" without fearing complex merge conflicts because not everybody is touching the huge adapter file but rather team members can work on dedicated AdapterDelegate files simultaneously.
 
 Joe was happy, the product manager was happy and the users of the app were happy. Everybody was happy.
 Actually, Joe was so happy that he had decided to put `AdapterDelegates` in an own library and open source it. All's well that ends well.
 
 [You can find AdapterDelegates on Github](https://github.com/sockeqwe/AdapterDelegates) and is available in maven central.
 
-P.S. The `AdapterDelegates` libarary also provides a base class `ListDelegationAdapter` that already puts together `RecyclerView.Adapter` methods with `AdapterDelegatesManager` methods so that you can reduce the amount of writing boilerplate code even more:
+P.S. The `AdapterDelegates` library also provides a base class `ListDelegationAdapter` that already puts together `RecyclerView.Adapter` methods with `AdapterDelegatesManager` methods so that you can reduce the amount of writing boilerplate code even more:
 
 {% highlight java %}
 public class NewsTipAdapter extends ListDelegationAdapter {
 
-  final int VIEW_TYP_NEWS_TEASER = 0;
-  final int VIEW_TYP_FOOD_TIP = 1;
-
   public NewsTipAdapter(){
     // delegatesManager is a field defined in super class
-    delegatesManager.add(new NewsTeaserAdapterDelegate(VIEW_TYP_NEWS_TEASER));
-    delegatesManager.add(new PetFoodTipAdapterDelegate(VIEW_TYP_FOOD_TIP));
+    // ViewType integer is assigned internally by delegatesManager
+    delegatesManager.add(new NewsTeaserAdapterDelegate());
+    delegatesManager.add(new PetFoodTipAdapterDelegate());
   }
 
 }
 {% endhighlight %}
 
-Check out the library on [Github](https://github.com/sockeqwe/AdapterDelegates) for more details
+Check out the library on [Github](https://github.com/sockeqwe/AdapterDelegates) for more details.
 
 
 **Disclaimer:** Joe is not a real person nor is MyLittleZoo Inc. a real company. Both are creatures of my imagination. Please note also that the code snippets shown in this blog post may not compile. It's kind of java alike pseudo code to give you an idea of how real code could look like.
