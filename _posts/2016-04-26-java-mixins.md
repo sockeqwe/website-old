@@ -116,7 +116,7 @@ class AircraftCarrier
 end
 ```
 
-With Mixins we can compose `AircraftCarrier` by "including" the functionality of Ship and Airport without inheritance. Ship definition has been omitted for better readability but I guess you can imagine how the code for `module Ship` will look like. Please note that this is not multiple inheritance as C++ offers. Mixins are a different concept. The Ruby programming language has native support for Mixins. What about other languages like Scala? Scala has support for Mixins as well. In Scala those are called Traits. Traits are Mixins just with some slightly different properties from a programming language designers point of view like Mixins require linearization while Traits are flattened and Traits traditionally don't contain states. But that should worry you too much. For the sake of simplicity we can say Mixins and Traits are the same.
+With Mixins we can compose `AircraftCarrier` by "including" the functionality of Ship and Airport without inheritance. Ship definition has been omitted for better readability but I guess you can imagine how the code for `module Ship` will look like. Please note that this is not multiple inheritance as C++ offers. Mixins are a different concept. The Ruby programming language has native support for Mixins. What about other languages like Scala? Scala has support for Mixins as well. In Scala those are called Traits. Traits are Mixins just with some slightly different properties from a programming language designers point of view like Mixins require linearization while Traits are flattened and Traits traditionally don't contain states. But that shouldn't worry you too much. For the sake of simplicity we can say Mixins and Traits are the same.
 
 ```scala
 trait Ship {
