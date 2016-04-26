@@ -21,7 +21,7 @@ public class Ship {
   List<Cargo> cargoes;
 
   public void addCargo(Cargo c){
-    cargoes.add(l);
+    cargoes.add(c);
   }
 
   public void removeCargo(Cargo c){
@@ -58,7 +58,7 @@ So what alternatives do we have to make `AircraftCarrier` be a `Ship` and a `Air
 However, java does support multiple inheritance on interfaces and allows classes to implement arbitrary many interfaces. So let' convert `Ship` and `Airport` to interfaces:
 
 ```java
-public class Ship {
+public interface Ship {
   void addCargo(Cargo c);
   void removeCargo(Cargo c);
 }
