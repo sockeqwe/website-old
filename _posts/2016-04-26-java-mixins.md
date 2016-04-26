@@ -11,7 +11,7 @@ categories:
 tags: [android, java, design-patterns]
 ---
 
-Starting in Android N Google has added some java 8 features. One of those features is the ability to add default methods to interfaces. Surprisingly (since java 8 has already been released 2 years ago) I haven't found good articles describing the advantage of default methods for interfaces: Mixins.
+Starting in Android N Google has added some java 8 language features. One of those features is the ability to add default methods to interfaces. Surprisingly (since java 8 has already been released 2 years ago) I haven't found good articles describing the advantage of default methods for interfaces: **Mixins!**
 
 Let's straight jump into a simple example. Let's say we have a class `Ship`. A `Ship` can carry `Cargo`. Let's model that in Java like this:
 
