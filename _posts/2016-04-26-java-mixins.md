@@ -192,7 +192,7 @@ class MilitaryHouseboat implements House, Ship, Airport { ... }
 
 I guess you get the point. With java 8 and interfaces default methods we can use Mixins instead of inheritance. kotlin also offers Mixins by interfaces with default methods:
 
-```kotlin
+```scala
 interface Ship {
   val cargoes : List<Cargo>
 
