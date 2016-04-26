@@ -55,7 +55,7 @@ class AircraftCarrier extends Airport, Ship // doesn't compile
 
 So what alternatives do we have to make `AircraftCarrier` be a `Ship` and a `Airport` at the same time? Well, we could use delegation ("favor composition over inheritance") or some tricks from  [aspect](https://javadeveloperslife.wordpress.com/2013/06/17/Mixins-with-pure-java/)  orientated programming, but none of them are really natively supported by java programming language.
 
-However, java does support multiple inheritance on interfaces and allows classes to implement arbitrary many interfaces. So let' convert `Ship` and `Airport` to interfaces:
+However, java does support multiple inheritance on interfaces and allows classes to implement arbitrary many interfaces. So let's convert `Ship` and `Airport` to interfaces:
 
 ```java
 public class Ship {
