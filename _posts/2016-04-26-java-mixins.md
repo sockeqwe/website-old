@@ -146,11 +146,11 @@ public interface Airport {
   // To be implemented in subclass
   List<Aircraft> getAircrafts();
 
-  void land(Aircraft aircraft) {
+  default void land(Aircraft aircraft) {
     getAircrafts().add(aircraft);
   }
 
-  void depart(Aircraft aircraft) {
+  default void depart(Aircraft aircraft) {
     getAircrafts.remove(aircraft);
   }
 }
@@ -211,7 +211,7 @@ class AircraftCarrier : Ship, Airport {
 }
 ```
 
-I assume you get the point why Mixins may be a better choice than traditional inheritance. But how does that help in android development. In android we always have to extend from Activity or Fragment, which are obviously two different base classes. With Mixins, we can share code between both classes that extends from Activity and classes that extends from Fragment. Sure this is not the main use case of Mixins (delegation might be a better choice) because those methods defined in the Mixin will be used internally from the Fragment or Activity himself which are implementing the Mixin interface, but it is a valid option though.
+I assume you get the point why Mixins may be a better choice than traditional inheritance. But how does that help in android development. In android we always have to extend from Activity or Fragment, which are obviously two different base classes. With Mixins, we can share code between both classes that extends from Activity and classes that extends from Fragment. Sure this is not the main use case of Mixins (delegation might be a better choice) because those methods defined in the Mixin will be used internally from the Fragment or Activity himself which are implementing the Mixin interface, but it is a valid option though. Default methods on Android requires **min sdk 24 (Android N)** and Jack as compiler.
 
 See the moral of the story is it is good to have an alternative to inheritance and I have the feeling that unfortunately Mixins via interfaces with default implementation are not used that much in the java world.
 
