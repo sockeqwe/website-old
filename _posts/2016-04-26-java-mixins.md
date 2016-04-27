@@ -217,4 +217,4 @@ See the moral of the story is it is good to have an alternative to inheritance a
 
 My general advice about inheritance:
 
-> inheritance doesn't scale well! Use inheritance for inheriting properties but not for inheriting functionality!
+> Inheritance doesn't scale well! Use inheritance for inheriting properties but not for inheriting functionality! Mixins are better suited for "inheriting" functionality.
