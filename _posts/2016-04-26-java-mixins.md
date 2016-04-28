@@ -1,11 +1,11 @@
 ---
 layout: post
 published: true
-title: Mixins in Java
+title: Mixins as alternative to inheritance in Java 8
 mathjax: false
 featured: false
 comments: true
-headline: Mixins in Java
+headline: Mixins as alternative to inheritance in Java 8
 categories:
   - Android
 tags: [android, java, design-patterns]
