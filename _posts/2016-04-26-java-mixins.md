@@ -93,7 +93,7 @@ class AircraftCarrier implements Ship, Airport {
 
 But now we have to implement the methods from each interface manually. Not a big deal in this simple example because it's basically just one line of code for each method but I guess you get the point.
 
-How does Ruby programmers deal with inheritance? Experienced ruby programmers don't use inheritance for such things. They use Mixins:
+How does Ruby programmers deal with inheritance? Experienced Ruby programmers don't use inheritance for such things. They use Mixins:
 
 ```ruby
 module Airport  # for simplicity: module is same as class
@@ -116,7 +116,7 @@ class AircraftCarrier
 end
 ```
 
-With Mixins we can compose `AircraftCarrier` by "including" the functionality of Ship and Airport without inheritance. Ship definition has been omitted for better readability but I guess you can imagine how the code for `module Ship` will look like. Please note that this is not multiple inheritance as C++ offers. Mixins are a different concept. The Ruby programming language has native support for Mixins. What about other languages like Scala? Scala has support for Mixins as well. In Scala those are called Traits. Traits are Mixins just with some slightly different properties from a programming language designers point of view like Mixins require linearization while Traits are flattened and Traits traditionally don't contain states. But that shouldn't worry you too much. For the sake of simplicity we can say Mixins and Traits are the same.
+With Mixins we can compose `AircraftCarrier` by "including" (or mixing in) the functionality of Ship and Airport without inheritance. Ship definition has been omitted for better readability but I guess you can imagine how the code for `module Ship` will look like. Please note that this is not multiple inheritance as C++ offers ([diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem)). Mixins are a different concept. The Ruby programming language has native support for Mixins. What about other languages like Scala? Scala has support for Mixins as well. In Scala those are called Traits. Traits are Mixins just with some slightly different properties from a programming language designers point of view like Mixins require linearization while Traits are flattened and Traits traditionally don't contain states. But that shouldn't worry you too much. For the sake of simplicity we can say Mixins and Traits are the same.
 
 ```scala
 trait Ship {
@@ -190,7 +190,7 @@ class Houseboat implements House, Ship { ... }
 class MilitaryHouseboat implements House, Ship, Airport { ... }
 ```
 
-I guess you get the point. With java 8 and interfaces default methods we can use Mixins instead of inheritance. kotlin also offers Mixins by interfaces with default methods:
+I guess you get the point. With Java 8 and default methods for interfaces we can use Mixins instead of inheritance. kotlin also offers Mixins via interfaces with default methods:
 
 ```scala
 interface Ship {
@@ -211,7 +211,7 @@ class AircraftCarrier : Ship, Airport {
 }
 ```
 
-I assume you get the point why Mixins may be a better choice than traditional inheritance. But how does that help in android development. In android we always have to extend from Activity or Fragment, which are obviously two different base classes. With Mixins, we can share code between both classes that extends from Activity and classes that extends from Fragment. Sure this is not the main use case of Mixins (delegation might be a better choice) because those methods defined in the Mixin will be used internally from the Fragment or Activity himself which are implementing the Mixin interface, but it is a valid option though.Unfortunately, interfaces with default methods on Android requires **min sdk 24 (Android N)** and Jack as compiler.
+Hopefully you see that Mixins may be a better choice than traditional inheritance. But how does that help in android development. In android we always have to extend from Activity or Fragment, which are obviously two different base classes. With Mixins, we can share code between both classes that extends from Activity and classes that extends from Fragment. Sure this is not the main use case of Mixins (delegation might be a better choice) because those methods defined in the Mixin will be used internally from the Fragment or Activity himself which are implementing the Mixin interface, but it is a valid option though. Unfortunately, interfaces with default methods on Android requires **min sdk 24 (Android N)** and Jack as compiler.
 
 See the moral of the story is it is good to have an alternative to inheritance and I have the feeling that unfortunately Mixins via interfaces with default implementation are not used that much in the java world.
 
