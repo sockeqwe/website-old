@@ -149,7 +149,9 @@ class TrackingLifecycleDelegate implements LifecycleDelegate {
 }
 
 class KikNewsListFragment extends Fragment {
+
   List<LifecycleDelegate> lifecycleDelegates = new ArrayList<>();
+  
   { // Initializer block
     lifecycleDelegates.add(new TrackingLifecycleDelegate("Kicker app NewsListScreen"));
   }
