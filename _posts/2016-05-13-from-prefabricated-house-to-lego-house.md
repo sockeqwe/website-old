@@ -74,13 +74,13 @@ We from the android team decided to take on this problem. Things got completely 
 
 We started to brainstorm and we made an interesting observation: Actually, writing a Presenter is super easy and can be done within a few minutes. So let's remove the Presenters from shared library and let every app have their own Presenters. The same is true for our http library: communicating with a backend with Retrofit just requires to define a service interface with some Retrofit annotations. That takes only a few minutes. Also the "Model" classes like `NewsList` were part of the shared library. Defining your own Model class for each app is not a huge deal and is also not really time intensive. Obviously, those things (Presenter, http and "model" classes) weren't the biggest issue, but removing that from shared library pointed us towards to a general solution we really like: Only keep that things in a shared library that are time intensive to code again and again. We came to the conclusion that the most time consuming thing for us was writing RecyclerView ViewHolders and corresponding XML layout files. Also, time intensive was to implement all the lifecycle aware stuff like tracking and so on and **NOT** implementing a Fragment or Activity class per se.
 
-Once we realized that, the solution was obvious: We don't want to build a prefabricated house, we want to build a Lego house where we can only take those Lego pieces we really need for that app. In other words: we needed a **Lego kit** containing ViewHolders and XML layouts and also a plugin mechanism to hook in tracking and advertisement into Fragment's lifecycle.
+Once we realized that the solution was obvious: We don't want to build a prefabricated house, we want to build a Lego house where we can only take those Lego pieces we really need for that app. In other words: we needed a **Lego kit** containing ViewHolders and XML layouts and also a plugin mechanism to hook in tracking and advertisement into Fragment's lifecycle.
 
 So we decided to deprecate the shared library and build two libraries: One containing ViewHolders, one containing plugin components for lifecycle. Another thing was very clear to us:
 
  > Favor composition over inheritance
 
- We didn't wanted to make the same mistake again: a god alike `NewsListFragment`
+ We didn't wanted to make the same mistake again: a god alike `NewsListFragment` to extend from.
 
  First, let's talk about how we decided to deal with `ViewHolder`. Well, there is a library of mine which I have build in this context called [AdapterDelegates](https://github.com/sockeqwe/AdapterDelegates). The idea is simple: defining a delegate for each RecyclerView's ViewType / ViewHolder which does the job of inflating xml layout and binding the data:
 
