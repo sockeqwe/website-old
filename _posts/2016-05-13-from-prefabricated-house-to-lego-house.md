@@ -154,6 +154,7 @@ class KikNewsListFragment extends Fragment {
     lifecycleDelegates.add(new TrackingLifecycleDelegate("Kicker app NewsListScreen"));
   }
 
+  @Override
   public void onResume(){
     super.onResume();
     for (LifecycleDelegate l : lifecycleDelegates){
@@ -161,6 +162,7 @@ class KikNewsListFragment extends Fragment {
     }
   }
 
+  // Same for other lifecycle methods
   ...
 }
 ```
