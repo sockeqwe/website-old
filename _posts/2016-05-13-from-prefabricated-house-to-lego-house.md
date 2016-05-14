@@ -52,7 +52,7 @@ A few months later we started building a new app called "Tippspiel app" also for
 
 ![Tippspiel](/images/legohouse/kicker-meinverein-tippspiel.png)
 
-Tippspiel looks similar to kicker and MeinVerein app. Actually, is uses the same `NewsListFragment`. Guess what: Tippspiel app has advertisement but not the feature XY. So what actually should `NewsListFragment` provide? Clearly we should introduce a inheritance hierarchy like this:
+Tippspiel looks similar to kicker and MeinVerein app. Actually, is uses the same `NewsListFragment`. However, apart from displaying a list of news in the same way as kicker and MeinVerein this app has nothing in common with the other apps. But guess what: Tippspiel app has advertisement in the NewsList but not the feature XY. So what actually should `NewsListFragment` provide? Clearly we should introduce a inheritance hierarchy like this:
 
 ![Tippspiel](/images/legohouse/inheritance-newslistfragment.png)
 
