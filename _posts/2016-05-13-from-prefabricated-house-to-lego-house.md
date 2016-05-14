@@ -47,7 +47,7 @@ Unfortunately, the devil is in the detail. While kicker app has advertisement, M
 ![No advertisement](/images/legohouse/no-advertisement-feature.png)
 
 Those are just two of many UI differences between both apps that has been envoled over the time.
-Sure, it's our fault because the inheritance hierarchy is incorrect: The shared library shouldn't provide a NewsListFragment with advertisement and feature XY build in but that should be rather a `AdvertismentNewsListFragment extends NewsListFragment` in the kicker app only, right?
+Sure, it's our fault because the inheritance hierarchy is incorrect: The shared library shouldn't provide a NewsListFragment with advertisement and feature XY build in but there should be rather a `AdvertismentNewsListFragment extends NewsListFragment` in the kicker app only, right?
 A few months later we started building a new app called "Tippspiel app" also for _Olympia Verlag_ that looks like this:
 
 ![Tippspiel](/images/legohouse/kicker-meinverein-tippspiel.png)
