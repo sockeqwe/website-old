@@ -26,7 +26,7 @@ interface Repository<T> {
 }
 ```
 
-What is the `Specification` class? Basically `Specification` is just an interface like this:
+What is the `Specification` type? Basically `Specification` is just an interface like this:
 
 ```java
 interface Specification { }
