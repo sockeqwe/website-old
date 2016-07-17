@@ -36,7 +36,7 @@ interface SqlSpecification extends Specification {
 }
 ```
 
-Then we could have concrete `Specification` to query all list of `News` from SqliteDatabase, ordered by date, like this:
+Then we could have concrete `Specification` to query all list of `News` from SQLite database, ordered by date, like this:
 
 ```java
 class NewestNewsesSqlSpecification implements SqlSpecification {
@@ -52,7 +52,7 @@ class NewestNewsesSqlSpecification implements SqlSpecification {
 }
 ```
 
-Another example of a `Specification` shows the following:
+Another example of a `Specification` looks as follows:
 
 ```java
 public class NewsByIdSqlSpecification implements SqlSpecification {
@@ -98,7 +98,7 @@ public class NewsSqlRepository implements Repository<News> {
 }
 ```
 
-Again, all code snipped shown above are borrowed from [Krzychu Kosobudzki blog post](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006#.h7cm2b24q).
+Again, all code snippets shown above are borrowed from [Krzychu Kosobudzki blog post](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006#.h7cm2b24q).
 
 
 Usually you use `NewsRepository` i.e. in your Presenter (MVP) or use case / interactor if you are following the clean architecture like this: `newsRepository.query(new NewestNewsesSqlSpecification())`.
