@@ -36,7 +36,7 @@ interface SqlSpecification extends Specification {
 }
 ```
 
-Then we could have concrete `Specification` to query all list of `News` from SqliteDatabase ordered by date like this:
+Then we could have concrete `Specification` to query all list of `News` from SqliteDatabase, ordered by date, like this:
 
 ```java
 class NewestNewsesSqlSpecification implements SqlSpecification {
