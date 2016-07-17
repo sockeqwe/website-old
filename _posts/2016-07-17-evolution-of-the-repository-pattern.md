@@ -138,7 +138,7 @@ Second Question: **What are the benefits of abstractions like `Specification`?**
         return newses;
     }
 }
- ```
+```
 
 As you see there is another subtype of `Specification` for Realm:
 
