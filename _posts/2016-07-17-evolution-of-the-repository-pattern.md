@@ -187,7 +187,7 @@ Martin Fowler et al. don't make a statement about Repository Pattern and changin
 
  > adding this layer helps minimize duplicate query logic.
 
-So the original definition of the repository pattern is all about minimizing duplicate query logic and not to build an abstraction layer to change the underlying database.
+So the original definition of the repository pattern is all about minimizing duplicate query logic and not necessarily to build an abstraction layer to change the underlying database.
 
 I don't want to blame anybody. This is not a Android related problem, we also see that quite often in Java EE world, especially in spring framework powered backends.
 
