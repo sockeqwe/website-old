@@ -11,7 +11,7 @@ categories:
 tags: [android, software-architecture]
 ---
 
-A listener from our podcast called [The Context](https://github.com/artem-zinnatullin/TheContext-Podcast) that Artem Zinnatullin and I run asked me, if I can give him an example of the Repository Pattern. So I googled around and stumbled upon some blog posts and found out that the term Repository Pattern is used and described in many different ways. In this blog post I want give you a brief history of the Repository Pattern and I want to discuss why I think the Repository Pattern could lead to over abstraction and over engineering.
+A listener from our podcast, [The Context](https://github.com/artem-zinnatullin/TheContext-Podcast), that Artem Zinnatullin and I run asked me, if I can give him an example of the Repository Pattern. So I googled around and stumbled upon some blog posts and found out that the term Repository Pattern is used and described in many different ways. In this blog post I want give you a brief history of the Repository Pattern and I want to discuss why I think the Repository Pattern could lead to over abstraction and over engineering.
 
 Before we get started, I wanted to say that the term `Repository Pattern` is used and defined in different ways in different contexts and different programming languages. Therefore, I split this post into two parts: In the first part I want to discuss why I think the  "original" definition of the Repository Pattern is an over engineered abstraction you very very rarely need and in the second part I want to show a common solution that may be a better choice for the average use case.
 
