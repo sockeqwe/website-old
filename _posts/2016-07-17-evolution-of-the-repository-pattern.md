@@ -163,7 +163,7 @@ public class NewsByIdSpecification implements RealmSpecification {
 }
 ```
 
-The problem is, that whoever calls `newsRepository.query(...)` has to know whether it has to pass in a `NewestNewsesSqlSpecification` or `NewestNewsesRealmSpecification`. So is it really that easy to change your implementation from SQLite to Realm? No, it's not because you have to change the specifications everywhere from `FooSqlSpecification` to `FooRealmSpecification`. There is also one big code smell coming along with this:
+The problem is that whoever calls `newsRepository.query(...)` has to know whether it has to pass in a `NewestNewsesSqlSpecification` or `NewestNewsesRealmSpecification`. So is it really that easy to change your implementation from SQLite to Realm? No, it's not because you have to change the specifications everywhere from `FooSqlSpecification` to `FooRealmSpecification`. There is also one big code smell coming along with this:
 
 ```java
 @Override
