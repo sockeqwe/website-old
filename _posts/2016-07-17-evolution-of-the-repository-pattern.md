@@ -197,7 +197,7 @@ In android development the term Repository Pattern is quite often used in combin
 
 > All data needed for the application comes from this layer through a Repository implementation (the interface is in the domain layer) that uses a Repository Pattern with a strategy that, through a factory, picks different data sources depending on certain conditions.
 
-![Repository Pattern](/images/repositoy_pattern.png)
+![Repository Pattern](/images/repository_pattern.png)
 
 > The idea behind all this is that the data origin is transparent for the client, which does not care if the data is coming from memory, disk or the cloud, the only truth is that the data will arrive and will be got.
 
