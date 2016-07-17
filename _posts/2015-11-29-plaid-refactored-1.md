@@ -449,6 +449,6 @@ As always, there are better ways to implement such an app. Especially, the `Item
 
 As always, feedback and suggestions are very welcome!
 
-In the [next (second) part](http://hannesdorfmann.com/android/plaid-refactored-2/) of this series of blog posts about refactoring the Plaid app we will go "truly reactive" by using the real power of RxJava. Stay tuned.
+In the [next (second) part](http://hannesdorfmann.com/android/plaid-refactored-2) of this series of blog posts about refactoring the Plaid app we will go "truly reactive" by using the real power of RxJava. Stay tuned.
 
-**Update:** The [second part](http://hannesdorfmann.com/android/plaid-refactored-2/) is online.
+**Update:** The [second part](http://hannesdorfmann.com/android/plaid-refactored-2) is online.
