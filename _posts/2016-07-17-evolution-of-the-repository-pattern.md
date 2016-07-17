@@ -224,7 +224,7 @@ class UserDataRepository implements UserRepository {
 }
 ```
 
-An `UserDataStore` is, as the name already suggests, responsible to load a User from a store like Disk or a backend (cloud).
+An `UserDataStore` is, as the name already suggests, responsible to load a User from a store like disk or a backend (cloud).
 
 ```java
 interface UserDataStore {
