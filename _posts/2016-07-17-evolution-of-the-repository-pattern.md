@@ -201,7 +201,7 @@ In android development the term Repository Pattern is quite often used in combin
 
 > The idea behind all this is that the data origin is transparent for the client, which does not care if the data is coming from memory, disk or the cloud, the only truth is that the data will arrive and will be got.
 
-As you can see here, the term `Repository Pattern` is used to describe something slightly different. You can see it even more clear if you check out Fernando's [Clean Architecture Sample Project](https://github.com/android10/Android-CleanArchitecture/tree/master/data/src/main/java/com/fernandocejas/android10/sample/data/repository) on Github. In his sample he uses RxJava. For my blog post I have removed RxJava in the code snippets below for better understanding if you don't have RxJava knowledge. I have also simplified the code a little bit to focus on the important things. For example Fernando wants to load an User by his id:
+As you can see here, the term `Repository Pattern` is used to describe something slightly different. You can see it even more clear if you check out Fernando's [Clean Architecture Sample Project](https://github.com/android10/Android-CleanArchitecture/tree/master/data/src/main/java/com/fernandocejas/android10/sample/data/repository) on Github. In his sample he uses RxJava. For my blog post I have removed RxJava in the code snippets below for better understanding if you don't have prior RxJava knowledge. I have also simplified the code a little bit to focus on the important things. For example Fernando wants to load an User by his id:
 
 ```java
 interface UserRepository {
