@@ -192,7 +192,7 @@ So the original definition of the repository pattern is all about minimizing dup
 I don't want to blame anybody. This is not a Android related problem, we also see that quite often in Java EE world, especially in spring framework powered backends.
 
 
-# The evolution of the Repository Pattern Term
+# Evolution of the term Repository Pattern
 In android development the term Repository Pattern is quite often used in combination with Clean Architecture. So did Fernando Cejas in his excellent blog post [Architecting Android…The clean way?](http://fernandocejas.com/2014/09/03/architecting-android-the-clean-way/) (scroll down to "Data layer" section). Interesting enough, he also links to the original definition of the Repository Pattern by Martin Fowler et al. However, Fernando Cejas says:
 
 > All data needed for the application comes from this layer through a Repository implementation (the interface is in the domain layer) that uses a Repository Pattern with a strategy that, through a factory, picks different data sources depending on certain conditions.
