@@ -113,7 +113,7 @@ Second Question: **What are the benefits of abstractions like `Specification`?**
 
  - Single responsibility: This class is responsible to create a "criteria". In the case of `NewestNewsesSqlSpecification` this criteria is translated to an SQL string.
  - Hide implementation details: The SQL Statement is hidden in `NewestNewsesSqlSpecification`, so that no other class has to know about SQL at all.
- - We can reuse Specifications: Imagine a Specification with a SQL WHERE clause. We could define such a Specification once and reuse it whenever we need such different WHERE clause based specifications.
+ - We can reuse Specifications: Imagine a Specification with a SQL WHERE clause. We could define such a Specification once and reuse it whenever we need a different WHERE clause based specification.
 
 
  What are the disadvantages with that extra abstraction layer?
