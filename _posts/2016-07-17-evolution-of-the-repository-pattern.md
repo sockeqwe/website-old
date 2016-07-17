@@ -119,7 +119,7 @@ Second Question: **What are the benefits of abstractions like `Specification`?**
  What are the disadvantages with that extra abstraction layer?
  Well, now whoever calls `newsRepository.query(new NewestNewsesSqlSpecification())` has to know which `Specification` to pass in. Furthermore, developers begin to over abstract that pattern again. For Example, Krzychu Kosobudzki says that with the repository pattern we can change concrete implementation as requirements changes. He gives the example of using Realm instead of SQLite database:
 
- ```java
+```java
  public class NewsRealmRepository implements Repository<News> {
 
     @Override
