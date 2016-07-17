@@ -101,7 +101,7 @@ public class NewsSqlRepository implements Repository<News> {
 Again, all code snipped shown above are borrowed from [Krzychu Kosobudzki blog post](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006#.h7cm2b24q).
 
 
-We use `NewsRepository` i.e. in your Presenter (MVP) or use case / interactor if you are following the clean architecture like this: `newsRepository.query(new NewestNewsesSqlSpecification())`.
+Usually you use `NewsRepository` i.e. in your Presenter (MVP) or use case / interactor if you are following the clean architecture like this: `newsRepository.query(new NewestNewsesSqlSpecification())`.
 
 So far so good. Before we continue, I want to ask you two essential questions:
 
