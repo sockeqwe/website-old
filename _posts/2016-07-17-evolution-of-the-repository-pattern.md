@@ -183,7 +183,7 @@ public List<News> query(Specification specification) {
 
 Whenever you are programming against an interface but you have to cast an interface to a concrete class, in 95% of the time you are doing something wrong!
 
-Martin Fowler et al. don't make a statement about Repository Pattern and changing concrete implementation (i.e. SQLite to Realm). Fowler et al, describe the repository pattern  as
+Martin Fowler et al. didn't make a statement about Repository Pattern and changing concrete implementation (i.e. SQLite to Realm). Fowler et al, describe the repository pattern  as
 
  > adding this layer helps minimize duplicate query logic.
 
