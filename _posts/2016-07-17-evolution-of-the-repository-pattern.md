@@ -105,11 +105,11 @@ Usually you use `NewsRepository` i.e. in your Presenter (MVP) or use case / inte
 
 So far so good. Before we continue, I want to ask you two essential questions:
 
-The first question: **Why and when do we use the repository pattern?** I want to link to the book [Patterns of Enterprise Application Architecture](http://martinfowler.com/eaaCatalog/repository.html) by Martin Fowler et al.
+First question: **Why and when do we use the repository pattern?** I want to link to the book [Patterns of Enterprise Application Architecture](http://martinfowler.com/eaaCatalog/repository.html) by Martin Fowler et al.
 
 > The Repository will carry out the appropriate operations behind the scenes. Conceptually, a Repository encapsulates the set of objects persisted in a data store and the operations performed over them, providing a more object-oriented view of the persistence layer. Repository also supports the objective of achieving a clean separation and one-way dependency between the domain and data mapping layers.
 
-The second Question: **What are the benefits of this abstraction like `Specification`?**
+Second Question: **What are the benefits of this abstraction like `Specification`?**
  - Single responsibility: This class is responsible to create a "criteria". In the case of `NewestNewsesSqlSpecification` this criteria is translated to an SQL string.
  - Hide implementation details: The SQL Statement is hidden in `NewestNewsesSqlSpecification`, so that no other class has to know about SQL at all.
  - We can reuse Specifiations: Imagine a Specification with a SQL WHERE clause. We could define such a Specification once and reuse it whenever we need such different WHERE clause based specifications.
