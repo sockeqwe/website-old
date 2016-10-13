@@ -107,4 +107,4 @@ So you, as user of this library, can checkout the source code and understand eas
 
 TL;DR: For a library project it is okay to use abstract class instead of interface, if you restrict yourself to design abstract classes like interfaces and only add empty default implementations but no default implementation that changes state or behavior of this class (and in consequence of all subclasses).
 
-<small>Please note that this is very specific to library project and not a general advise to prefer abstract classes over interfaces</small>
+<small>Please note that this is very specific to library projects and not a general advise to prefer abstract classes over interfaces</small>
