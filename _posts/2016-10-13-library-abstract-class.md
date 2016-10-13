@@ -66,7 +66,7 @@ With that said, you are wondering why I have switched from `interface AdapterDel
 That is exactly the case for my AdapterDelegates library. I depend on the RecyclerView's Adapter API which, obviously, is not designed nor maintained by me. Concrete example:
 Few releases back a new method `onBindViewHolder(VH holder, int position, List<Object> payloads)` has been added to `RecyclerView.Adapter` class to support payloads. AdapterDelegates 2.0 interface only contained the method signature `onBindViewHolder(VH holder, int position)` (without payloads).  If I want to add this method to `interface AdapterDelegate<T>` in version 2.1 everybody using my library would have to go into his source code and implement this method too. Otherwise his / her code wouldn't compile.
 
-What if you decide to update to version 2.1 (with payload support) but a third party dependency of your app still depends on version 2.0 (without payload support)?
+What if you decide to update your app to version 2.1 (with payload support) but a third party library of your app still depends on version 2.0 (without payload support)?
 
 ![dependencies](/images/adapterdelegates/dependencies.png)
 
