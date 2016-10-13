@@ -102,7 +102,7 @@ public abstract class AdapterDelegate<T> {
 }
 ```
 
-So you, as user of this library, can checkout the source code and see that there is no shared state or behavior with your own subclass.
+So you, as user of this library, can checkout the source code and understand easily that there is no shared state or behavior with your own subclass.
 
 
 TL;DR: For a library project it is okay to use abstract class instead of interface, if you restrict yourself to design abstract classes like interfaces and only add empty default implementations but no default implementation that changes state or behavior of this class (and in consequence of all subclasses).
