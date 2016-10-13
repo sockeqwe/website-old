@@ -77,7 +77,7 @@ That is a very good strategy you should follow when publishing your own library.
 
 Therefore, I have decided to switch to `abstract class AdapterDelegate<T>` because most likely the development team behind RecyclerView will add new methods to introduce new optional features. At least that was the case in the past. By using abstract class instead of an interface I can add this methods "silently" in a minor version update (not major version update) by providing a default implementation, which abstract classes allow me to do, but interfaces don't (before java 8).
 
-Now you may roll your eyes and ask: What about all that inheritance shared state and behavior nonsense I told you before and that you can't be sure that by inheriting from a super class you aren't breaking anything without checking super class source code.
+Now you may roll your eyes and ask: What about all that inheritance shared state and behavior nonsense you told me before and that I can't be sure that by inheriting from a super class I am not breaking something without checking the source code of the super class.
 
 Well, that still is true. However, I as a library developer restrict myself to define `abstract class AdapterDelegate<T>` just like I would define an interface by using abstract methods except the fact that for newer optional features I will provide an empty default implementation:
 
