@@ -1,11 +1,11 @@
 ---
 layout: post
 published: true
-title: Why a library developer may should consider using abstract class instead of interface
+title: Why a library developer should consider using abstract class instead of interface
 mathjax: false
 featured: false
 comments: true
-headline: Why a library developer may should consider using abstract class instead of interface
+headline: Why a library developer should consider using abstract class instead of interface
 categories:
   - Android
 tags: [android, java]
@@ -75,7 +75,7 @@ Then your code will compile but your app will crash at runtime. Why? Because the
 To avoid such problems Jake Wharton suggested to change package name and maven group id in his blog post [Java Interoperability Policy for Major Version Updates](http://jakewharton.com/java-interoperability-policy-for-major-version-updates/).
 That is a very good strategy you should follow when publishing your own library. But what is a major version update? In my case, every time RecyclerView's Adapter API changes that would be a major version update for my AdapterDelegates library too because I may have to add new methods to the `interface AdapterDelegate<T>`. That wouldn't be very convenient for the users of my library.
 
-Therefore, I have decided to switch to `abstract class AdapterDelegate<T>` because most likely the development team behind RecyclerView will add new methods to introduce new optional features. At least that was the case in the past. By using abstract class instead of an interface I can add this methods "silently" in a minor version update (not major version update) by providing a default implementation, which abstract classes allow me to do, but interfaces don't (before java 8).
+Therefore, I have decided to switch to `abstract class AdapterDelegate<T>` because most likely the development team behind RecyclerView will add new methods to introduce new optional features. At least that was the case in the past. By using abstract class instead of an interface I can add this methods "silently" in a minor version update (not major version update) by providing a default implementation, which abstract classes allow me to do, but interfaces don't (before java 8, available in android starting at API level 24).
 
 Now you may roll your eyes and ask: What about all that inheritance shared state and behavior nonsense you told me before and that I can't be sure that by inheriting from a super class I am not breaking something without checking the source code of the super class.
 
