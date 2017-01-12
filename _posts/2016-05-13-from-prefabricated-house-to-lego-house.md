@@ -40,39 +40,39 @@ Overall our shared library looks like this, i.e. to load and display a list of n
 
 ![NewsListFragment](/images/legohouse/NewsListFragment.png)
 
-Basically we used `NewsListFragment` directly in kicker app and `MVNewsListFragment extends NewsListFragment` in MeinVerein app with some overridden methods to achieve our goals. Looks reasonable, doesn't it?
+Basically we used _NewsListFragment_ directly in kicker app and _MVNewsListFragment extends NewsListFragment_ in MeinVerein app with some overridden methods to achieve our goals. Looks reasonable, doesn't it?
 
 Unfortunately, the devil is in the detail. While kicker app has advertisement, MeinVerein app has not advertisement because it's a paid app. Also some features available in kicker App are not available MeinVerein app.
 
 ![No advertisement](/images/legohouse/no-advertisement-feature.png)
 
 Those are just two of many UI differences between both apps that has been envoled over the time.
-Sure, it's our fault because the inheritance hierarchy is incorrect: The shared library shouldn't provide a NewsListFragment with advertisement and feature XY build in but there should be rather a `AdvertismentNewsListFragment extends NewsListFragment` in the kicker app only, right?
+Sure, it's our fault because the inheritance hierarchy is incorrect: The shared library shouldn't provide a NewsListFragment with advertisement and feature XY build in but there should be rather a _AdvertismentNewsListFragment extends NewsListFragment_ in the kicker app only, right?
 A few months later we started building a new app called "Tippspiel app" also for _Olympia Verlag_ that looks like this:
 
 ![Tippspiel](/images/legohouse/kicker-meinverein-tippspiel.png)
 
-Tippspiel looks similar to kicker and MeinVerein app. Actually, is uses the same `NewsListFragment`. However, apart from displaying a list of news in the same way as kicker and MeinVerein this app has nothing in common with the other apps. Tippspiel app has advertisement in the NewsList but not the feature XY. So what actually should `NewsListFragment` provide? Clearly we should introduce a inheritance hierarchy like this:
+Tippspiel looks similar to kicker and MeinVerein app. Actually, is uses the same _NewsListFragment_. However, apart from displaying a list of news in the same way as kicker and MeinVerein this app has nothing in common with the other apps. Tippspiel app has advertisement in the NewsList but not the feature XY. So what actually should _NewsListFragment_ provide? Clearly we should introduce a inheritance hierarchy like this:
 
 ![Tippspiel](/images/legohouse/inheritance-newslistfragment.png)
 
-So should we put `NewsListFragment `, `AdvertisementNewsListFragment `, `FeatureXYNewsListFragment ` and `AdvertismenetFeatureXYNewsListFragment ` into the shared library so that we can choose the right base class that matches the requirements for the app like MeinVerein `MVNewsListFragment extends NewsListFragment` (no advertisement, no feature XY), kicker `KikNewsListFragment extends AdvertismenetFeatureXYNewsListFragment ` (advertisement and feature XY) and Tippspiel `TPNewsListFragment extends AdvertisementNewsListFragment `(advertiesment only)? You see, inheritance doesn't solve that problem, because for each feature you would have to introduce a new class in your inheriatance hierarchy and there are so many possible combinations for advertisement support, feature A, feature B, feature XY etc. Single inheritance as in java doesn't scale. I have written an blog post [Mixins as alternative to inheritance](http://hannesdorfmann.com/android/java-mixins) that you may find useful in this context.
+So should we put _NewsListFragment _, _AdvertisementNewsListFragment _, _FeatureXYNewsListFragment _ and _AdvertismenetFeatureXYNewsListFragment _ into the shared library so that we can choose the right base class that matches the requirements for the app like MeinVerein _MVNewsListFragment extends NewsListFragment_ (no advertisement, no feature XY), kicker _KikNewsListFragment extends AdvertismenetFeatureXYNewsListFragment _ (advertisement and feature XY) and Tippspiel _TPNewsListFragment extends AdvertisementNewsListFragment _(advertiesment only)? You see, inheritance doesn't solve that problem, because for each feature you would have to introduce a new class in your inheriatance hierarchy and there are so many possible combinations for advertisement support, feature A, feature B, feature XY etc. Single inheritance as in java doesn't scale. I have written an blog post [Mixins as alternative to inheritance](http://hannesdorfmann.com/android/java-mixins) that you may find useful in this context.
 
 But wait ... there is more: lately we have worked on the newest member of _Olympia Verlag_ apps called Nordbayern app (another magazine):
 
 ![Tippspiel](/images/legohouse/kicker-meinverein-tippspiel-nordbayern.png)
 
-So we decided to keep one single `NewsListFragment` in the shared library that has advertisement support and all features already implemented. Our solution for that problem was to extend from the "super provide everything NewsListFragment" but then inject a feature XY component that does nothing (stub) via dagger if the feature XY is not supported in the app. For Example, MeinVerein App doesn't have feature XY, so we injected a featureXY component that does nothing in MeinVerein app whereas kicker app uses the build in feature XY component that does something useful. We thought about this as some kind of workaround to "remove unused" functionality. That made our shared libraries code confusing and debugging wasn't easy because you didn't know if a invoked method of a feature component does something useful or is just a stub. But we hadn't a better solution.
+So we decided to keep one single _NewsListFragment_ in the shared library that has advertisement support and all features already implemented. Our solution for that problem was to extend from the "super provide everything NewsListFragment" but then inject a feature XY component that does nothing (stub) via dagger if the feature XY is not supported in the app. For Example, MeinVerein App doesn't have feature XY, so we injected a featureXY component that does nothing in MeinVerein app whereas kicker app uses the build in feature XY component that does something useful. We thought about this as some kind of workaround to "remove unused" functionality. That made our shared libraries code confusing and debugging wasn't easy because you didn't know if a invoked method of a feature component does something useful or is just a stub. But we hadn't a better solution.
 
-But wait ... there is more: When we started to build our prefabricated house (a.k.a shared library) we were under the very naive illusion that now we only have to write one unit test for the `NewsListFragment` from shared library once for all apps and also if we would detect a bug in NewsListFragment we would fix it once for all apps. The reality was quite the opposite. Since, every app extended from `NewsListFragment` but has overridden some methods in the concrete apps fragment, we couldn't be sure that the bugfix really fixed the problem in all apps and that the fragment is working as expected. Moreover, with every change or new feature we added to shared library's `NewsListFragment` we had to fear that this will break things in other apps extending from this fragment. Our daily work flow was something like this: Write some code in share library (~ 10 minutes of work), test that each app is still working properly (~ 10 minutes of work for each app thanks to gradle incredible fast build time). So we spent around 1 hour for a code change doable in 10 minutes.
+But wait ... there is more: When we started to build our prefabricated house (a.k.a shared library) we were under the very naive illusion that now we only have to write one unit test for the _NewsListFragment_ from shared library once for all apps and also if we would detect a bug in NewsListFragment we would fix it once for all apps. The reality was quite the opposite. Since, every app extended from _NewsListFragment_ but has overridden some methods in the concrete apps fragment, we couldn't be sure that the bugfix really fixed the problem in all apps and that the fragment is working as expected. Moreover, with every change or new feature we added to shared library's _NewsListFragment_ we had to fear that this will break things in other apps extending from this fragment. Our daily work flow was something like this: Write some code in share library (~ 10 minutes of work), test that each app is still working properly (~ 10 minutes of work for each app thanks to gradle incredible fast build time). So we spent around 1 hour for a code change doable in 10 minutes.
 
-But wait ... there is more: until now we only talked about UI related things. But there are some other stuff like Tracking which are tight to lifecycle, one app has multiple tracking for some strange reason, another app uses an advertisement sdk which is also lifecycle aware and you have to call some methods like `advertismentView.stop()` in `Fragment.onDestroyView()` etc. Put all those things and dependencies into `NewsListFragment` in shared lib? It was a nightmare.
+But wait ... there is more: until now we only talked about UI related things. But there are some other stuff like Tracking which are tight to lifecycle, one app has multiple tracking for some strange reason, another app uses an advertisement sdk which is also lifecycle aware and you have to call some methods like _advertismentView.stop()_ in _Fragment.onDestroyView()_ etc. Put all those things and dependencies into _NewsListFragment_ in shared lib? It was a nightmare.
 
 
 ## The need of a Lego kit
 We from the android team decided to take on this problem. Things got completely out of hand and we were slowed down by our shared library which actually should help us go fast. To be fair, when we started with the shared library it wasn't predictable that we were going to build so many apps based on this shared library in the future and that requirements and features were that completely different from app to app.
 
-We started to brainstorm and we made an interesting observation: Actually, writing a Presenter is super easy and can be done within a few minutes. So let's remove the Presenters from shared library and let every app have their own Presenters. The same is true for our http library: communicating with a backend with Retrofit just requires to define a service interface with some Retrofit annotations. That takes only a few minutes. Also the "Model" classes like `NewsList` were part of the shared library. Defining your own Model class for each app is not a huge deal and is also not really time intensive. Obviously, those things (Presenter, http and "model" classes) weren't the biggest issue, but removing that from shared library pointed us towards to a general solution: Only keep that things in a shared library that are time intensive to code again and again. We came to the conclusion that the most time consuming thing for us was writing RecyclerView ViewHolders and corresponding XML layout files. Also, time intensive was to implement all the lifecycle aware stuff like tracking and so on and **NOT** implementing a Fragment or Activity class per se.
+We started to brainstorm and we made an interesting observation: Actually, writing a Presenter is super easy and can be done within a few minutes. So let's remove the Presenters from shared library and let every app have their own Presenters. The same is true for our http library: communicating with a backend with Retrofit just requires to define a service interface with some Retrofit annotations. That takes only a few minutes. Also the "Model" classes like _NewsList_ were part of the shared library. Defining your own Model class for each app is not a huge deal and is also not really time intensive. Obviously, those things (Presenter, http and "model" classes) weren't the biggest issue, but removing that from shared library pointed us towards to a general solution: Only keep that things in a shared library that are time intensive to code again and again. We came to the conclusion that the most time consuming thing for us was writing RecyclerView ViewHolders and corresponding XML layout files. Also, time intensive was to implement all the lifecycle aware stuff like tracking and so on and **NOT** implementing a Fragment or Activity class per se.
 
 Once we realized that the solution was obvious: We don't want to build a prefabricated house, we want to build a Lego house with only those Lego pieces we really need for that house / app. In other words: we needed a **Lego kit** containing ViewHolders and XML layouts and also a plugin mechanism to hook in tracking and advertisement into Fragment's lifecycle.
 
@@ -80,11 +80,11 @@ So we decided to deprecate the shared library and build two libraries: One conta
 
  > Favor composition over inheritance
 
- We didn't wanted to make the same mistake again: a god alike `NewsListFragment` to extend from.
+ We didn't wanted to make the same mistake again: a god alike _NewsListFragment_ to extend from.
 
- First, let's talk about how we decided to deal with `ViewHolder`. Well, there is a library of mine which I have build in this context called [AdapterDelegates](https://github.com/sockeqwe/AdapterDelegates). The idea is simple: defining a delegate for each RecyclerView's ViewType / ViewHolder which does the job of inflating xml layout and binding the data:
+ First, let's talk about how we decided to deal with _ViewHolder_. Well, there is a library of mine which I have build in this context called [AdapterDelegates](https://github.com/sockeqwe/AdapterDelegates). The idea is simple: defining a delegate for each RecyclerView's ViewType / ViewHolder which does the job of inflating xml layout and binding the data:
 
-```java
+{% highlight java %}
  public class BigNewsItemAdapterDelegate extends AbsListItemAdapterDelegate<BigNewsItem, NewsViewHolder> {
 
      @Override public NewsViewHolder onCreateViewHolder(ViewGroup parent) {
@@ -96,13 +96,13 @@ So we decided to deprecate the shared library and build two libraries: One conta
        loadImage(vh.image, item.getImageUrl());
      }
 }
-```
+{% endhighlight %}
 
-So we defined all those AdapterDelegates like `BigNewsItemAdapterDelegate`,  `VideoNewsItemDelegate`, `SlideshowNewsItemDelegate` etc. and put them in a library.
+So we defined all those AdapterDelegates like _BigNewsItemAdapterDelegate_,  _VideoNewsItemDelegate_, _SlideshowNewsItemDelegate_ etc. and put them in a library.
 
-Now kicker's `KikNewsListFragment` looks like this:
+Now kicker's _KikNewsListFragment_ looks like this:
 
-```java
+{% highlight java %}
 @Override
 public void onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle b){
     ...
@@ -116,9 +116,9 @@ public void onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle b){
 
    rv.setAdapter(adapter);
 }
-```
+{% endhighlight %}
 
-Please note that the `AdvertisementDelegate()` is not part of the library, because this one is used in kicker app and but not in MeinVerein app. I guess you know how the code of Fragments of the other apps  look like, right? They reuse the same AdapterDelegates, the same xml layouts etc. However, to be really independent every AdapterDelegate has a tiny companion class for holding the required data to be displayed in a ViewHolder as well, i.e. `BigNewsItemAdapterDelegate` has a `BigNewsItem`, `VideoNewsItemDelegate` has a `VideoNewsItem` and so on.
+Please note that the _AdvertisementDelegate()_ is not part of the library, because this one is used in kicker app and but not in MeinVerein app. I guess you know how the code of Fragments of the other apps  look like, right? They reuse the same AdapterDelegates, the same xml layouts etc. However, to be really independent every AdapterDelegate has a tiny companion class for holding the required data to be displayed in a ViewHolder as well, i.e. _BigNewsItemAdapterDelegate_ has a _BigNewsItem_, _VideoNewsItemDelegate_ has a _VideoNewsItem_ and so on.
 
 So at some point we have to map the data coming from backend to this companion object. This is where a MVP based App pays of. This is the responsibility of the Presenter. We transform the "model" into a "presentation model". Overall the architecture looks like this:
 
@@ -126,7 +126,7 @@ So at some point we have to map the data coming from backend to this companion o
 
 And for the Tracking stuff? Favor composition over inheritance!
 
-```java
+{% highlight java %}
 interface LifecycleDelegate {
   void onCreate();
   void onPause();
@@ -167,9 +167,9 @@ class KikNewsListFragment extends Fragment {
   // Same for other lifecycle methods
   ...
 }
-```
+{% endhighlight %}
 
-Now we can share `TrackingLifecycleDelegate` with all apps. Overall it looks like this:
+Now we can share _TrackingLifecycleDelegate_ with all apps. Overall it looks like this:
 
 ![Tippspiel](/images/legohouse/alldelegates-architecture.png)
 
