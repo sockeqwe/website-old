@@ -23,8 +23,8 @@ In this blog post I will show you how to write a little **atlas app** entirely w
 # Flow for navigation
 The app itself will be a single Activity. As already said, there are basically two screens the user can navigate to:
 
-- `CountriesListLayout`: Displays a list of countries. The user can click on a country to display details about this country.
-- `CountryDetailsLayout`: Displays details about a certain country like population, currency and some photos.
+- **CountriesListLayout**: Displays a list of countries. The user can click on a country to display details about this country.
+- **CountryDetailsLayout**: Displays details about a certain country like population, currency and some photos.
 
 ## Dispatcher and Keys
 To integrate flow in your activity you have to do the following (kotlin programming language):
@@ -54,9 +54,9 @@ class MainActivity : AppCompatActivity() {
 }
 {% endhighlight %}
 
-Let's start with an easy thing to spot: We override `onBackPressed()` to forward the press of android's back button to Flow.
+Let's start with an easy thing to spot: We override **onBackPressed()** to forward the press of android's back button to Flow.
 
-Just for completeness, `R.layout.activity_main` is just a FrameLayout "container":
+Just for completeness, **R.layout.activity_main** is just a FrameLayout "container":
 
 {% highlight xml %}
 <?xml version="1.0" encoding="utf-8"?>
@@ -68,9 +68,9 @@ Just for completeness, `R.layout.activity_main` is just a FrameLayout "container
     />
 {% endhighlight %}
 
-Next, we will focus on how to configure Flow. To install Flow in our Activity we have to override `attachBaseContext()`. Why? Well, internally Flow will create a [ContextWrapper](https://developer.android.com/reference/android/content/ContextWrapper.html) and we have to use that special context wrapper returned by Flow for our Activity by calling `super.attachBaseContext(flowContextWrapper)`.
+Next, we will focus on how to configure Flow. To install Flow in our Activity we have to override **attachBaseContext()**. Why? Well, internally Flow will create a [ContextWrapper](https://developer.android.com/reference/android/content/ContextWrapper.html) and we have to use that special context wrapper returned by Flow for our Activity by calling **super.attachBaseContext(flowContextWrapper)**.
 
-Flow is highly customizable which on one hand is great and allows you to be very flexible. On the other hand that means that you have to write some "boilerplate" code. To tell Flow how to navigate in our app we have to define a `Dispatcher`. The Dispatcher is responsible to "dispatch" changes on Flow's navigation (history) stack.
+Flow is highly customizable which on one hand is great and allows you to be very flexible. On the other hand that means that you have to write some "boilerplate" code. To tell Flow how to navigate in our app we have to define a **Dispatcher**. The Dispatcher is responsible to "dispatch" changes on Flow's navigation (history) stack.
 
 {% highlight java %}
 class AtlasAppDispatcher(private val activity: Activity) : Dispatcher {
@@ -110,8 +110,8 @@ class AtlasAppDispatcher(private val activity: Activity) : Dispatcher {
 {% endhighlight %}
 
 Alright, let's discuss some key aspects of the code shown above:
-As you see we have to implement Flow's interface `Dispatcher` with the method `dispatch()`. This method will be invoked whenever we use Flow to navigate through the app and we have to specify (manually) how to apply the navigation changes to your view. In the Atlas app we have a "container" (FrameLayout) and whenever we navigate from screen to the next screen (or back to previous screen) we simply remove the current screen from the container and add the new screen.
-Flow gives us a `Traversal` object as parameter which contains all the information we need to apply navigation stack changes. We get a "key" `destination = traversal.destination.top()` from Flow. Every "screen" is identified by a key and you have to make a mapping from key to a android.view.View like we do here:
+As you see we have to implement Flow's interface **Dispatcher** with the method **dispatch()**. This method will be invoked whenever we use Flow to navigate through the app and we have to specify (manually) how to apply the navigation changes to your view. In the Atlas app we have a "container" (FrameLayout) and whenever we navigate from screen to the next screen (or back to previous screen) we simply remove the current screen from the container and add the new screen.
+Flow gives us a **Traversal** object as parameter which contains all the information we need to apply navigation stack changes. We get a "key" **destination = traversal.destination.top()** from Flow. Every "screen" is identified by a key and you have to make a mapping from key to a android.view.View like we do here:
 
 {% highlight java %}
 val layoutRes = when (destination) {
@@ -120,7 +120,7 @@ val layoutRes = when (destination) {
   else -> throw IllegalStateException("Unknown screen $destination")
 }
 {% endhighlight %}
-You may ask yourself "what is a key"? Basically everything (java.lang.Object) can be used as a key for a screen in Flow. It seems to be good practice that "keys" are named with "Screen" suffix. In our atlas app we have two "screens" we can navigate to. Hence we have two "key" classes named `CountriesScreen` and `CountryDetailsScreen`. This "key" classes have two responsibilities: First, as already discussed a key maps to an android view, and second the key contains all the required data the screen needs to display. I think that can be compared to fragment arguments. For example the `CountryDetailsScreen` contains an id (country id) which then is used in the corresponding view to load the data for the given country id.
+You may ask yourself "what is a key"? Basically everything (java.lang.Object) can be used as a key for a screen in Flow. It seems to be good practice that "keys" are named with "Screen" suffix. In our atlas app we have two "screens" we can navigate to. Hence we have two "key" classes named **CountriesScreen** and **CountryDetailsScreen**. This "key" classes have two responsibilities: First, as already discussed a key maps to an android view, and second the key contains all the required data the screen needs to display. I think that can be compared to fragment arguments. For example the **CountryDetailsScreen** contains an id (country id) which then is used in the corresponding view to load the data for the given country id.
 
 {% highlight java %}
 class CountryDetailsScreen(val countryId: Int) : Parcelable {
@@ -144,7 +144,7 @@ class CountryDetailsScreen(val countryId: Int) : Parcelable {
 }
 {% endhighlight %}
 
-I guess I know your next question: "Why do we need to implement the parcelable interface?". I have said earlier that "everything" can be a key and that's still true. However, at some point (during process death, i.e. activity gets destroyed while in background) Flow has to save your keys persistently in a Bundle (as Parcelable) to be able to restore the navigation stack history after your activity gets restarted (i.e. activity comes in the foreground again). Therefore, we have to provide a `KeyParceler` to Flow which is responsible to write and read a "key" as parcelable. The easiest way to do so is to make the "key" like `CountryDetailsScreen` itself parcelable because then our `KeyParceler` implementation is basically just casting the "key" object like we do in our atlas app:
+I guess I know your next question: "Why do we need to implement the parcelable interface?". I have said earlier that "everything" can be a key and that's still true. However, at some point (during process death, i.e. activity gets destroyed while in background) Flow has to save your keys persistently in a Bundle (as Parcelable) to be able to restore the navigation stack history after your activity gets restarted (i.e. activity comes in the foreground again). Therefore, we have to provide a **KeyParceler** to Flow which is responsible to write and read a "key" as parcelable. The easiest way to do so is to make the "key" like **CountryDetailsScreen** itself parcelable because then our **KeyParceler** implementation is basically just casting the "key" object like we do in our atlas app:
 
 {% highlight java %}
 class AtlasAppKeyParceler : KeyParceler {
@@ -153,7 +153,7 @@ class AtlasAppKeyParceler : KeyParceler {
 }
 {% endhighlight %}
 
-<small>Please note that the type `Any` is kotlins equivalent to java.lang.Object </small>
+<small>Please note that the type **Any** is kotlins equivalent to java.lang.Object </small>
 
 To sum it up, to use Flow in our Activity we have to do:
 
@@ -172,7 +172,7 @@ class MainActivity : AppCompatActivity() {
 }
 {% endhighlight %}
 
-With `.defaultKey(CountriesScreen())` we specify what is our start key / screen:
+With **.defaultKey(CountriesScreen())** we specify what is our start key / screen:
 
 {% highlight java %}
 class CountriesScreen : Parcelable // Doesn't have any data, it's just an empty object
@@ -185,7 +185,7 @@ We haven't discussed yet how to build the UI without Fragments. We simply write 
 Mosby is a Model-View-Presenter (MVP) library for Android. For our atlas app we will use Mosby 3.0, which is not released at the time of writing this blog post. However, 3.0.0-SNAPSHOT is available and changes until the final 3.0 release will mainly be "under the hood". In other words, the API is mostly stable (and compatible to Mosby 2.0).
 
 ## Screen orientation changes
-One of the most loved features of Mosby is that Presenters can survive screen orientation changes. Additionally, Mosby has a tiny companion object to the Presenter and View called `ViewState`. Typically, in MVP (passive view) the Presenter coordinates the View. So the Presenter tells the View to display a ProgressBar like `view.showLoading()` while loading data and then the RecyclerView `view.showContent()` once the data has been loaded. Mosby's ViewState is some kind of hook sitting between Presenter and View and keeps track of all the methods the presenter has invoked on the view. The idea is that after a screen orientation change we can "apply" the ViewState and invoke the same methods on the View to get back to the UI state as before the screen orientation change.
+One of the most loved features of Mosby is that Presenters can survive screen orientation changes. Additionally, Mosby has a tiny companion object to the Presenter and View called **ViewState**. Typically, in MVP (passive view) the Presenter coordinates the View. So the Presenter tells the View to display a ProgressBar like **view.showLoading()** while loading data and then the RecyclerView **view.showContent()** once the data has been loaded. Mosby's ViewState is some kind of hook sitting between Presenter and View and keeps track of all the methods the presenter has invoked on the view. The idea is that after a screen orientation change we can "apply" the ViewState and invoke the same methods on the View to get back to the UI state as before the screen orientation change.
 
 If you have used Mosby 2.0 before this is nothing new to you. This feature was already available for Activities and Fragments. With Mosby 3.0 this feature is now fully supported for subclasses of android.view.ViewGroup like FrameLayout, RelativeLayout and so on (there was already partial support for that in Mosby 2.0).
 
@@ -257,7 +257,7 @@ class CountriesListLayout(c: Context, atts: AttributeSet) : CountriesView, MvpVi
 }
 {% endhighlight %}
 
-For more details about Mosby you should read [Mosby's documentation](http://hannesdorfmann.com/mosby/). As you might have already noticed we extend from `MvpViewStateFrameLayout` which is provided by Mosby. Since Mosby follows the delegation principle is quite easy to make every ViewGroup work Mosby. All you have to do is to implement `ViewGroupViewStateDelegateCallback` in your custom ViewGroup class and forward "lifecycle events" like `onAttachedToWindow()` and `onDetachedFromWindow()` to Mosby's `ViewGroupMvpDelegate`. This sounds more complex than it actually is. Let's have a look at `MvpViewStateFrameLayouts` source code:
+For more details about Mosby you should read [Mosby's documentation](http://hannesdorfmann.com/mosby/). As you might have already noticed we extend from **MvpViewStateFrameLayout** which is provided by Mosby. Since Mosby follows the delegation principle is quite easy to make every ViewGroup work Mosby. All you have to do is to implement **ViewGroupViewStateDelegateCallback** in your custom ViewGroup class and forward "lifecycle events" like **onAttachedToWindow()** and **onDetachedFromWindow()** to Mosby's **ViewGroupMvpDelegate**. This sounds more complex than it actually is. Let's have a look at **MvpViewStateFrameLayouts** source code:
 
 {% highlight java %}
 public abstract class MvpViewStateFrameLayout<V, P>
@@ -282,7 +282,7 @@ public abstract class MvpViewStateFrameLayout<V, P>
 }
 {% endhighlight %}
 
-The `CountriesPresenter` loads a List<Country> from Atlas (business logic, injected by dagger 2) and we use RxJava to connect the dots:
+The **CountriesPresenter** loads a List<Country> from Atlas (business logic, injected by dagger 2) and we use RxJava to connect the dots:
 
 {% highlight java %}
 class CountriesPresenter @Inject constructor(val atlas: Atlas) : MvpBasePresenter<CountriesView>() {
@@ -316,9 +316,9 @@ The screen displaying a country details is basically the same and therefore not 
 # Summary
 The aim of this blog post was to demonstrate that we can build an app without Fragments by using Flow for navigation and Mosby for MVP. Both, Flow and Mosby can deal with process deaths (Activity destroyed in background), however, Mosby requires to make the ViewState parcelable (that means that the loaded data, i.e. list of country, has to implement parcelable as well, see [documentation](hannesdorfmann.com/mosby/)). I, personally, think that 95% of app developers just want that their app survive screen orientation changes painlessly and therefore a "simple view state" (not implementing parcelable) is enough (if process death occurs then data will be reloaded entirely).
 
-Depending on your app, Flow may requires you to write a lot of code (especially for `Dispatcher`). Nevertheless, Flow is really powerful (still in 1.0-alpha) and we haven't discussed all features of Flow in detail like complex dispatchers with views on top of each other like dialogs or cases where you don't have a single "container" to display a view but rather something similar as child-fragments (Fragment's in Fragments) with back button support  or Flow services or how does Flow save the instance state (you have to save and restore that manually, see `AtlasAppDispatcher`). Also "keys" have to override `equals()` and `hashCode()` properly. In a nutshell: Flow is not designed for android dev beginners, but the benefit of Flow is huge (if you hate fragments)!
+Depending on your app, Flow may requires you to write a lot of code (especially for **Dispatcher**). Nevertheless, Flow is really powerful (still in 1.0-alpha) and we haven't discussed all features of Flow in detail like complex dispatchers with views on top of each other like dialogs or cases where you don't have a single "container" to display a view but rather something similar as child-fragments (Fragment's in Fragments) with back button support  or Flow services or how does Flow save the instance state (you have to save and restore that manually, see **AtlasAppDispatcher**). Also "keys" have to override **equals()** and **hashCode()** properly. In a nutshell: Flow is not designed for android dev beginners, but the benefit of Flow is huge (if you hate fragments)!
 
-If you are looking for something more simple then Flow you might find  [Pancakes](https://github.com/mattlogan/Pancakes) interesting which is also a navigation stack library but not as powerful as Flow. With `Pancakes` you would provide a `ViewFactory` for each "screen" like this:
+If you are looking for something more simple then Flow you might find  [Pancakes](https://github.com/mattlogan/Pancakes) interesting which is also a navigation stack library but not as powerful as Flow. With **Pancakes** you would provide a **ViewFactory** for each "screen" like this:
 
 
 {% highlight java %}
