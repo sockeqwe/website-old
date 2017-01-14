@@ -15,7 +15,7 @@ Starting in Android N Google has added some java 8 language features. One of tho
 
 Let's straight jump into a simple example. Let's say we have a class `Ship`. A `Ship` can carry `Cargo`. Let's model that in Java like this:
 
-```java
+{% highlight java %}
 public class Ship {
 
   List<Cargo> cargoes;
@@ -28,11 +28,11 @@ public class Ship {
     cargoes.remove(c);
   }
 }
-```
+{% endhighlight %}
 
 We also have an `Airport` where `Aircrafts` can land and depart:
 
-```java
+{% highlight java %}
 public class Airport {
 
   List<Aircraft> aircrafts;
@@ -45,19 +45,19 @@ public class Airport {
     aircrafts.remove(a);
   }
 }
-```
+{% endhighlight %}
 
 Given that, what if we want to have another class that is `Airport` and `Ship` at the same time? Unrealistic? What about an `AircraftCarrier`. Since java doesn't support multiple inheritance we can't declare a class `AircraftCarrier` that extends from `Airport` and `Ship`:
 
-```java
+{% highlight java %}
 class AircraftCarrier extends Airport, Ship // doesn't compile
-```
+{% endhighlight %}
 
 So what alternatives do we have to make `AircraftCarrier` be a `Ship` and a `Airport` at the same time? Well, we could use delegation ("favor composition over inheritance") or some tricks from  [aspect](https://javadeveloperslife.wordpress.com/2013/06/17/Mixins-with-pure-java/)  orientated programming, but none of them are really natively supported by java programming language.
 
 However, java does support multiple inheritance on interfaces and allows classes to implement arbitrary many interfaces. So let's convert `Ship` and `Airport` to interfaces:
 
-```java
+{% highlight java %}
 public interface Ship {
   void addCargo(Cargo c);
   void removeCargo(Cargo c);
@@ -89,13 +89,13 @@ class AircraftCarrier implements Ship, Airport {
     cargoes.remove(c);
   }
 }
-```
+{% endhighlight %}
 
 But now we have to implement the methods from each interface manually. Not a big deal in this simple example because it's basically just one line of code for each method but I guess you get the point.
 
 How does Ruby programmers deal with inheritance? Experienced Ruby programmers don't use inheritance for such things. They use Mixins:
 
-```ruby
+{% highlight ruby %}
 module Airport  # for simplicity: module is same as class
 
   @aircrafts = Array.new    # variable
@@ -114,11 +114,11 @@ class AircraftCarrier
   include Ship
   include Airport
 end
-```
+{% endhighlight %}
 
 With Mixins we can compose `AircraftCarrier` by "including" (or mixing in) the functionality of Ship and Airport without inheritance. Ship definition has been omitted for better readability but I guess you can imagine how the code for `module Ship` will look like. Please note that this is not multiple inheritance as C++ offers ([diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem)). Mixins are a different concept. The Ruby programming language has native support for Mixins. What about other languages like Scala? Scala has support for Mixins as well. In Scala those are called Traits. Traits are Mixins just with some slightly different properties from a programming language designers point of view like Mixins require linearization while Traits are flattened and Traits traditionally don't contain states. But that shouldn't worry you too much. For the sake of simplicity we can say Mixins and Traits are the same.
 
-```scala
+{% highlight scala %}
 trait Ship {
   val cargoes : ListBuffer[Cargo]
 
@@ -130,17 +130,17 @@ trait Ship {
     cargoes -= c
   }
 }
-```
+{% endhighlight %}
 
 And then with Scala we can do something like this:
 
-```scala
+{% highlight scala %}
 class AircraftCarrier with Ship with Airport
-```
+{% endhighlight %}
 
 See the thing is both, Ruby and Scala, natively have language support for Mixins. But what about java? With Java 8 and default methods for interfaces we can do pretty the same thing:
 
-```java
+{% highlight java %}
 public interface Airport {
 
   // To be implemented in subclass
@@ -154,11 +154,11 @@ public interface Airport {
     getAircrafts.remove(aircraft);
   }
 }
-```
+{% endhighlight %}
 
 We will do the same for `Ship` (interface with default method implementations) and then we can do something like this:
 
-```java
+{% highlight java %}
 class AircraftCarrier implements Ship, Airport {
 
   List<Aircraft> aircrafts = new ArrayList<>();
@@ -174,25 +174,25 @@ class AircraftCarrier implements Ship, Airport {
     return cargoes;
   }
 }
-```
+{% endhighlight %}
 
-```java
+{% highlight java %}
 AircraftCarrier carrier = new AircraftCarrier();
 carrier.addCargo(c);
 carrier.land(a);
-```
+{% endhighlight %}
 
 Moreover, now we can compose new classes even more easily and without traditional inheritance:
 
-```java
+{% highlight java %}
 class Houseboat implements House, Ship { ... }
 
 class MilitaryHouseboat implements House, Ship, Airport { ... }
-```
+{% endhighlight %}
 
 I guess you get the point. With Java 8 and default methods for interfaces we can use Mixins instead of inheritance. kotlin also offers Mixins via interfaces with default methods:
 
-```scala
+{% highlight scala %}
 interface Ship {
   val cargoes : List<Cargo>
 
@@ -209,7 +209,7 @@ class AircraftCarrier : Ship, Airport {
   override val cargoes = ArrayList()
   override val aircrafts = ArrayList()
 }
-```
+{% endhighlight %}
 
 Hopefully you see that Mixins may be a better choice than traditional inheritance. But how does that help in android development. In android we always have to extend from Activity or Fragment, which are obviously two different base classes. With Mixins, we can share code between both classes that extends from Activity and classes that extends from Fragment. Sure this is not the main use case of Mixins (delegation might be a better choice) because those methods defined in the Mixin will be used internally from the Fragment or Activity himself which are implementing the Mixin interface, but it is a valid option though. Unfortunately, interfaces with default methods on Android requires **min sdk 24 (Android N)** and Jack as compiler.
 
