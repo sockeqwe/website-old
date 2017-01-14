@@ -17,7 +17,7 @@ In my last blog post I have introduced [FragmentArgs](http://hannesdorfmann.com/
 
 Parcelable is a extreme fast way to serialize objects on Android. Unfortunately the developer has to implement both the **Parcelable interface** and the **CREATOR** for each model class. You may ask yourself: "Does not someone else could write that code for me?". Annotation processing can be used to generate java code and it is possible to generate **Parcelable** code. There are already two good libraries that are doing this job: [Parceler](https://github.com/johncarl81/parceler) and [AutoParcel](https://github.com/frankiesardo/auto-parcel). However I ended up by writing my own annotation processor called [ParcelablePlease](https://github.com/sockeqwe/ParcelablePlease) and I want to explain why.
 
-##Parceler
+## Parceler
 Parceler seems to be the easiest way to make classes Parcelable. All you have to do is to annotate your class with **@Parcel**. However the class itself will not implement the Parcelable interface. The Parceler annotation processor creates a wrapper class for each **@Parcel** annotated class and this generated class implements Parcelable and is responsible to set the values of the real model class (annotated with @Parcel) and vice versa. Hence the model class itself is not an instance of **Parcelable** and you have to wrap and unwrap the real model class:
 
 {% highlight java %}
@@ -41,7 +41,7 @@ Example example = Parcels.unwrap(getIntent().getExtras().get("example"))
 
 The downside is that **Parceler** is not compatible with other libraries who require a **Parcelable** object like [FragmentArgs](http://hannesdorfmann.com/android/fragmentargs) does. That's the reason why in the most of my apps I can't use Parceler.
 
-##AutoParcel
+## AutoParcel
 AutoParcel is an annotation processor, inspired by Google's AutoValue to generate parcelable classes. The idea of AutoValue is that you declare an abstract class with abstract methods. This abstract methods are detected by an annotation processor at compile time. Furthermore, the annotation processor creates a class that extends from this abstract class and implements the missing abstract methods (and generates the fields). Additionally AutoValue generates **null-checks**, **toString()**, **hashCode()**, **equals()** and other methods for you. Basically it does something similar like [project lombok](http://www.projectlombok.org) by using annotation processing instead of magic byte code manipulation (weaving). Like the name already suggests, AutoParcel does pretty the same with the goal to generate the **Parcelable** code for you. So a class using AutoParcel looks like this:
 
 {% highlight java %}
@@ -61,7 +61,7 @@ As you can see **SomeModel** is an abstract class and the full implementation of
 
 **Update:** Since AutoValue 1.3 supports extensions AutoParcel is not needed anymore because you can directly use AutoValue with Parcelable extension and Gson extension.
 
-##ParcelablePlease
+## ParcelablePlease
 At the end I ended up by writing a small Annotation Processor called [ParcelablePlease](https://github.com/sockeqwe/ParcelablePlease). The goal was to support the most scenarios you face in real world apps. Hence it's not that powerful as AutoValue is (I only spend few hours on this project), but it will directly implement the Parcelable interface on the model class to avoid to run into the same problems as Parceler or AutoParcel.
 Simply annotate your model class with **@ParcelablePlease**:
 
@@ -139,7 +139,7 @@ public class Person implements Parcelable {
 
 Note that java.util.Date is already supported by ParcelablePlease. The example above is just to give you an idea of how a implementation of @Bagger and ParcelBagger could look like. More inforation can be found at the [ParcelablePlease github site](https://github.com/sockeqwe/ParcelablePlease)
 
-##Conclusion
+## Conclusion
 Annotation Processor can reduce writing boilerplate code to make a class **Parcelable**. **AutoParcel** is a very promising approach. Unfortunately there are issues with other third party libraries. I really would love to use **AutoParcel** but right now (from my point of view) it's not the best solution for the most of my apps. In the meantime you may find **ParcelablePlase** useful. However, I will keep an eye on you AutoParcel!
 
 In my next post I want to talk about [AnnotatedAdapter](http://hannesdorfmann.com/android/AnnotatedAdapter/), an annotation processor for RecyclerView's adapter.
