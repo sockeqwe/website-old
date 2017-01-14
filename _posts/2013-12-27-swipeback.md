@@ -44,7 +44,7 @@ The problems with this approach are:
 2. ActionBar: The ActionBar is as default not part of a fragment, but it's part of the activity. So you can not (by using a ViewPager) use the default ActionBar to swipe back to the previous Fragment, because the ActionBar will remain sticky. So you have to implement you own ActionBar and attach that to the fragments view.
 
 ## SwipeBack
-My approach can be used for activities. It does pretty the same as the android menu drawers do. It adds an additional layout and slides the content or the window to the side. It's pretty the same as many android navigation drawer libraries do. So we will use `overridePendingTransition()` to start an activity and we will override `onBackPressed()` and setting there the reverse animation. For instance we can use a slide-in animation when starting an Activity and a slide-out animation onBackPressed. So far so good. SwipeBack will detect the swipe gesture for you and slide the activity or window content. It will show a "hint" to give the user feedback that by dropping the finger from screen the Activity will be finished by triggering `onBackPressed()`.
+My approach can be used for activities. It does pretty the same as the android menu drawers do. It adds an additional layout and slides the content or the window to the side. It's pretty the same as many android navigation drawer libraries do. So we will use **overridePendingTransition()** to start an activity and we will override **onBackPressed()** and setting there the reverse animation. For instance we can use a slide-in animation when starting an Activity and a slide-out animation onBackPressed. So far so good. SwipeBack will detect the swipe gesture for you and slide the activity or window content. It will show a "hint" to give the user feedback that by dropping the finger from screen the Activity will be finished by triggering **onBackPressed()**.
 
 ### Examples
 
@@ -61,7 +61,7 @@ alt="kicker" width="240" height="180" border="10" /></a>
 
 ## How to use it
 You simply have to set it up in you Activities onCreate() method.
-Instead of `Activity.setContentView()` call `SwipeBack.setContentView()`. It's not supported yet to build it from xml.
+Instead of **Activity.setContentView()** call **SwipeBack.setContentView()**. It's not supported yet to build it from xml.
 
 {% highlight java %}
 public class SwipeBackActivity extends FragmentActivity {
