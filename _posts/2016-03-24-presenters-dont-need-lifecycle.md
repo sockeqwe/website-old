@@ -30,7 +30,7 @@ So far so good. As already said, to not drain the battery too much we want to st
 But how do we implement that? Should we simply forward `Activity.onPause()` to `Presenter.onPause()` which then calls `GpsTracker.stop()`? So we do need a Presenter with lifecycle methods otherwise we couldn't forward the pause events the way down to `GpsTracker.stop()`, right?
 I think there is a better way. As already said, is not the responsibility of the Presenter to handle lifecycle events. Actually, there is already a component that is responsible for lifecycle events: the Activity (or Fragment). So instead of forwarding Activity.onPause() and Activity.onResume() to the presenter, just do something like this:
 
-```java
+{% highlight java %}
 class TrackingActivity extends MvpActivity implements TrackingView {
      private GpsTracker tracker;
 
@@ -52,12 +52,12 @@ class TrackingActivity extends MvpActivity implements TrackingView {
           return new TrackingPresenter(tracker);
      }
 }
-```
+{% endhighlight %}
 
 As you see, the trick is that the `GpsTracker` is "bound" to the Activity's lifecycle directly in the component that is responsible for managing lifecycle: the Activity! Then we pass the GpsTracker to the Presenter as constructor parameter.
 Furthermore, now `TrackingPresenter` fulfills the single responsibility from my previous definition: It's only responsible to update the View.
 
-```java
+{% highlight java %}
 class TrackingPresenter extends MvpBasePresenter<TrackingView>
                         implements GpsUpdateListener{
 
@@ -74,13 +74,13 @@ class TrackingPresenter extends MvpBasePresenter<TrackingView>
     view.showCurrentPosition(position.getLat(), position.getLng());
   }
 }
-```
+{% endhighlight %}
 
 That's it. **Single responsibility for all your components!**
 
 Of course we can spice up the code shown above with dependency injection and with LightCycle:
 
-```java
+{% highlight java %}
 class TrackingActivity extends MvpActivity implements TrackingView {
 
     @Inject @LightCycle GpsTracker tracker;
@@ -92,7 +92,7 @@ class TrackingActivity extends MvpActivity implements TrackingView {
           return getComponent().trackingPresenter(); // Dagger 2
      }
 }
-```
+{% endhighlight %}
 
 Are you looking for more examples? Another user of Mosby (MVP library) has asked me a similar question on github for a music player app he is working on. I gave a similar  [answer](https://github.com/sockeqwe/mosby/issues/124).
 
@@ -107,7 +107,7 @@ As some people pointed out correctly (see also [reddit](https://www.reddit.com/r
 
 - **Separate View and lifecycle responsibility:** How do we do that? Well we have to move either View responsibility or lifecycle management out of Activity. Obviously we can't remove the lifecycle management from Activity easily, but we can introduce an additional layer which then is really just a `TrackingView`:
 
-```java
+{% highlight java %}
 class TrackingActivity extends MvpActivity<TrackignView, TrackingPresenter> {
 
    @Inject @LightCycle GpsTracker tracker;
@@ -127,14 +127,14 @@ class TrackingActivity extends MvpActivity<TrackignView, TrackingPresenter> {
      return view;
    }
 }
-```
+{% endhighlight %}
 
 The thing here is we introduce an extra View layer. This can be something like `TrackingLayout extends FrameLayout implements TrackingView` so you can use it directly in xml layout or you could build some kind of "wrapper class" that gets the root layout from Activity and internally manages UI widgets or whatever works best for you. This approach might be the cleanest solution because now we have truly single responsibility even in the Activity (lifecycle only). But this solution comes with a price: an additional layer. I don't know about you but for me adding yet another layer is the beginning of over-engineering. And there are still some dependencies an activity has to offer to the view layer like what if you need a Bundle in View (do you really want to work with BaseSavedState)? What if the view needs a reference to the Window to set some flags like hide navigation bar, immersive mode or shared element transitions. Maybe we could use dependency injection like Dagger to solve that kind of problem? Yes, but soon or later you will be caught by dependency injection library so that we can't do anything without dagger anymore, which sucks. So even if in theory introducing a dedicated "view" layer seems to be a good idea it's not my recommended solution.
 
 
 - **Hide GpsTracker from View:** This seems a like a work around, but from my experience this is the simpler and a more practical solution. What was the original problem? The problem was that `TrackingActivity` has a reference to `GpsTracker` and therefore one could access and misuse `GpsTracker`. How to solve this problem? Introducing an additional layer seems to me like getting the fire brigade to extinguish a candle. Why not simply "hide" `GpsTracker` from `TrackingActivity` like this:
 
-```java
+{% highlight java %}
 class LifecycleController  extends DefaultActivityLightCycle {
   private GpsTracker tracker;
 
@@ -151,11 +151,11 @@ class LifecycleController  extends DefaultActivityLightCycle {
     tracker.start();
   }
 }
-```
+{% endhighlight %}
 
 and then we treat the Activity as `TrackingView` as we already did before:
 
-```java
+{% highlight java %}
 class TrackingActivity extends MvpActivity implements TrackingView {
 
     @Inject @LightCycle LifecycleController lifecycleController;
@@ -165,7 +165,7 @@ class TrackingActivity extends MvpActivity implements TrackingView {
           return new TrackingPresenter(tracker);
      }
 }
-```
+{% endhighlight %}
 
 By doing so `TrackingActivity` no longer has a reference to `GpsTracker` that can be misused without the burden of an additional layer.
 
