@@ -29,7 +29,7 @@ The app itself will be a single Activity. As already said, there are basically t
 ## Dispatcher and Keys
 To integrate flow in your activity you have to do the following (kotlin programming language):
 
-```java
+{% highlight java %}
 class MainActivity : AppCompatActivity() {
 
   override fun attachBaseContext(baseContext: Context) {
@@ -52,13 +52,13 @@ class MainActivity : AppCompatActivity() {
       setContentView(R.layout.activity_main)
   }
 }
-```
+{% endhighlight %}
 
 Let's start with an easy thing to spot: We override `onBackPressed()` to forward the press of android's back button to Flow.
 
 Just for completeness, `R.layout.activity_main` is just a FrameLayout "container":
 
-```xml
+{% highlight xml %}
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -66,13 +66,13 @@ Just for completeness, `R.layout.activity_main` is just a FrameLayout "container
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     />
-```
+{% endhighlight %}
 
 Next, we will focus on how to configure Flow. To install Flow in our Activity we have to override `attachBaseContext()`. Why? Well, internally Flow will create a [ContextWrapper](https://developer.android.com/reference/android/content/ContextWrapper.html) and we have to use that special context wrapper returned by Flow for our Activity by calling `super.attachBaseContext(flowContextWrapper)`.
 
 Flow is highly customizable which on one hand is great and allows you to be very flexible. On the other hand that means that you have to write some "boilerplate" code. To tell Flow how to navigate in our app we have to define a `Dispatcher`. The Dispatcher is responsible to "dispatch" changes on Flow's navigation (history) stack.
 
-```java
+{% highlight java %}
 class AtlasAppDispatcher(private val activity: Activity) : Dispatcher {
 
   override fun dispatch(traversal: Traversal, callback: TraversalCallback) {
@@ -107,22 +107,22 @@ class AtlasAppDispatcher(private val activity: Activity) : Dispatcher {
     callback.onTraversalCompleted() // Tell Flow that we are done
   }
 }
-```
+{% endhighlight %}
 
 Alright, let's discuss some key aspects of the code shown above:
 As you see we have to implement Flow's interface `Dispatcher` with the method `dispatch()`. This method will be invoked whenever we use Flow to navigate through the app and we have to specify (manually) how to apply the navigation changes to your view. In the Atlas app we have a "container" (FrameLayout) and whenever we navigate from screen to the next screen (or back to previous screen) we simply remove the current screen from the container and add the new screen.
 Flow gives us a `Traversal` object as parameter which contains all the information we need to apply navigation stack changes. We get a "key" `destination = traversal.destination.top()` from Flow. Every "screen" is identified by a key and you have to make a mapping from key to a android.view.View like we do here:
 
-```java
+{% highlight java %}
 val layoutRes = when (destination) {
   is CountriesScreen -> R.layout.screen_countries
   is CountryDetailsScreen -> R.layout.screen_countrydetails
   else -> throw IllegalStateException("Unknown screen $destination")
 }
-```
+{% endhighlight %}
 You may ask yourself "what is a key"? Basically everything (java.lang.Object) can be used as a key for a screen in Flow. It seems to be good practice that "keys" are named with "Screen" suffix. In our atlas app we have two "screens" we can navigate to. Hence we have two "key" classes named `CountriesScreen` and `CountryDetailsScreen`. This "key" classes have two responsibilities: First, as already discussed a key maps to an android view, and second the key contains all the required data the screen needs to display. I think that can be compared to fragment arguments. For example the `CountryDetailsScreen` contains an id (country id) which then is used in the corresponding view to load the data for the given country id.
 
-```java
+{% highlight java %}
 class CountryDetailsScreen(val countryId: Int) : Parcelable {
 
   private constructor(p: Parcel) : this(p.readInt())
@@ -142,22 +142,22 @@ class CountryDetailsScreen(val countryId: Int) : Parcelable {
     }
   }
 }
-```
+{% endhighlight %}
 
 I guess I know your next question: "Why do we need to implement the parcelable interface?". I have said earlier that "everything" can be a key and that's still true. However, at some point (during process death, i.e. activity gets destroyed while in background) Flow has to save your keys persistently in a Bundle (as Parcelable) to be able to restore the navigation stack history after your activity gets restarted (i.e. activity comes in the foreground again). Therefore, we have to provide a `KeyParceler` to Flow which is responsible to write and read a "key" as parcelable. The easiest way to do so is to make the "key" like `CountryDetailsScreen` itself parcelable because then our `KeyParceler` implementation is basically just casting the "key" object like we do in our atlas app:
 
-```java
+{% highlight java %}
 class AtlasAppKeyParceler : KeyParceler {
   override fun toParcelable(key: Any?): Parcelable = key as Parcelable
   override fun toKey(parcelable: Parcelable) : Any = parcelable
 }
-```
+{% endhighlight %}
 
 <small>Please note that the type `Any` is kotlins equivalent to java.lang.Object </small>
 
 To sum it up, to use Flow in our Activity we have to do:
 
-```java
+{% highlight java %}
 class MainActivity : AppCompatActivity() {
 
   override fun attachBaseContext(baseContext: Context) {
@@ -170,13 +170,13 @@ class MainActivity : AppCompatActivity() {
   }
   ...
 }
-```
+{% endhighlight %}
 
 With `.defaultKey(CountriesScreen())` we specify what is our start key / screen:
 
-```java
+{% highlight java %}
 class CountriesScreen : Parcelable // Doesn't have any data, it's just an empty object
-```
+{% endhighlight %}
 
 # MVP with Mosby
 Alright, so far we have talked about how to setup Flow as navigation stack replacement.
@@ -192,7 +192,7 @@ If you have used Mosby 2.0 before this is nothing new to you. This feature was a
 Let's have a look how we have implemented the screen that displays a list of countries:
 
 
-```java
+{% highlight java %}
 class CountriesListLayout(c: Context, atts: AttributeSet) : CountriesView, MvpViewStateFrameLayout<CountriesView, CountriesPresenter>(
     c, atts) {
 
@@ -255,11 +255,11 @@ class CountriesListLayout(c: Context, atts: AttributeSet) : CountriesView, MvpVi
     adapter.notifyDataSetChanged()
   }
 }
-```
+{% endhighlight %}
 
 For more details about Mosby you should read [Mosby's documentation](http://hannesdorfmann.com/mosby/). As you might have already noticed we extend from `MvpViewStateFrameLayout` which is provided by Mosby. Since Mosby follows the delegation principle is quite easy to make every ViewGroup work Mosby. All you have to do is to implement `ViewGroupViewStateDelegateCallback` in your custom ViewGroup class and forward "lifecycle events" like `onAttachedToWindow()` and `onDetachedFromWindow()` to Mosby's `ViewGroupMvpDelegate`. This sounds more complex than it actually is. Let's have a look at `MvpViewStateFrameLayouts` source code:
 
-```java
+{% highlight java %}
 public abstract class MvpViewStateFrameLayout<V, P>
     extends FrameLayout implements ViewGroupViewStateDelegateCallback<V, P> {
 
@@ -280,11 +280,11 @@ public abstract class MvpViewStateFrameLayout<V, P>
   abstract P createPresenter();
 
 }
-```
+{% endhighlight %}
 
 The `CountriesPresenter` loads a List<Country> from Atlas (business logic, injected by dagger 2) and we use RxJava to connect the dots:
 
-```java
+{% highlight java %}
 class CountriesPresenter @Inject constructor(val atlas: Atlas) : MvpBasePresenter<CountriesView>() {
 
   var subscription: Subscription? = null
@@ -308,7 +308,7 @@ class CountriesPresenter @Inject constructor(val atlas: Atlas) : MvpBasePresente
     }
   }
 }
-```
+{% endhighlight %}
 
 As already said, in Mosby the Presenter survives screen orientation changes and the view gets simply attached and detached from the presenter. Mosby is smart enough to detect when the user has been navigated to another screen so that the Presenter will be destroyed permanently.
 The screen displaying a country details is basically the same and therefore not worth posting the code here again. You can checkout the whole sample code on [github](https://github.com/sockeqwe/mosby/tree/master/sample-flow).
@@ -321,14 +321,14 @@ Depending on your app, Flow may requires you to write a lot of code (especially 
 If you are looking for something more simple then Flow you might find  [Pancakes](https://github.com/mattlogan/Pancakes) interesting which is also a navigation stack library but not as powerful as Flow. With `Pancakes` you would provide a `ViewFactory` for each "screen" like this:
 
 
-```java
+{% highlight java %}
 class CountriesListLayoutFactory implements ViewFactory {
     @Override
     public View createView(Context context, ViewGroup container) {
         return LayoutInflater.from(context).inflate(R.layout.screen_countries, container, false);
     }
 }
-```
+{% endhighlight %}
 
 Mosby should work with Pancakes  (and any other navigation stack library) as great as with Flow.
 
