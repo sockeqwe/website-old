@@ -64,13 +64,13 @@ Sounds quite complex, I know, but once you are into it it's not that hard anymor
 
 Let's have a look at a very naive implementation (kotlin). We will use Jake Whartons [RxBinding library](https://github.com/JakeWharton/RxBinding) to get RxJava Observables from `SearchView` widget. Our data model class looks like this:
 
-```java
+{% highlight java %}
 data class SearchModel(val searchTerm: String, val results: List<GithubRepo>)
-```
+{% endhighlight %}
 
 And our main Actvitiy:
 
-```java
+{% highlight java %}
 class SearchActivity : AppCompatActivity() {
 
   val githubBackend : GitHubBackend = ... ; // Retrofit for Github Rest API
@@ -122,7 +122,7 @@ class SearchActivity : AppCompatActivity() {
 
   }
 }
-```
+{% endhighlight %}
 
 That's a lot of code isn't it. I hope you could follow that code and find my comments helpful.
 In a nutshell: `intent()` function basically listens to SearchView Text changes and gives the query string (kind of action to tell the model to search for that string) to the `model()` function.
@@ -143,14 +143,14 @@ In this sample we will use [Mosby](https://github.com/sockeqwe/mosby), a MVP lib
 
 So the MVP View Interface will offer a `intent()` function, in our case we call this method `searchIntent()` function:
 
-```java
+{% highlight java %}
 interface SearchView : MvpView {
   fun searchIntent(): Observable<String> // intent() function
 }
-```
+{% endhighlight %}
 Next our Activity will become a MVP View (implements `SearchView`). That means, everything that is not related to updating the UI or generate UI events will be removed.
 
-```java
+{% highlight java %}
 class SearchActivity : SearchView, MvpActivity<SearchView, SearchPresenter>() {
 
   val editSearch: android.widget.SearchView by bindView(R.id.searchView)
@@ -178,12 +178,12 @@ class SearchActivity : SearchView, MvpActivity<SearchView, SearchPresenter>() {
   // dependency injection via dagger
   override fun createPresenter(): SearchPresenter = App.getComponent(this).searchPresenter()
 }
-```
+{% endhighlight %}
 
 Ah, looks much better now, doesn't it? Let's continue with the Presenter.
 The Presenters responsibility is to coordinate the view and to be the "bridge" to the business logic. In Mosby, a Presenter has two methods, `attachView()` (called from activity.onCreate() ) and `detachView()` (called from activity.onDestroy()).
 
-```java
+{% highlight java %}
 class SearchPresenter : MvpBasePresenter<SearchView>() {
 
   lateinit var subscription: Subscription
@@ -212,19 +212,19 @@ class SearchPresenter : MvpBasePresenter<SearchView>() {
     subscription.unsubscribe()
   }
 }
-```
+{% endhighlight %}
 
 Alright, so now the Presenter uses the View's `serachIntent()` method and connects it to the model. Are we done? No, the presenter contains the "business logic" code (model() function). So there is one separation of concern still missing. We will refactor that in a minute. Let's continue with this little statement: `.subscribe(view.showData(), view.showError())`. Basically this is our `view()` function. In MVP the Presenter tells the view what to display ("renders" the View). So what are this two methods? This methods are part of the `SearchView` interface that I have omitted before:
 
-```java
+{% highlight java %}
 interface SearchView : MvpView {
   fun searchIntent(): Observable<String> // intent() function
   fun showData(): (SearchModel) -> Unit // RxJava Action1
   fun showError(): (Throwable) -> Unit  // RxJava Action1
 }
-```
+{% endhighlight %}
 
-```java
+{% highlight java %}
 class SearchActivity : SearchView, MvpActivity<SearchView, SearchPresenter>() {
 
   ...
@@ -240,13 +240,13 @@ class SearchActivity : SearchView, MvpActivity<SearchView, SearchPresenter>() {
      it.printStackTrace()
    }
 }
-```
+{% endhighlight %}
 
 So what we now have and what we didn't had before doing the refactoring is a entirely decoupled View. All the View has to provide is an `Observable<String>` as `intent()` function. Today the output of `searchIntent()` comes from an `EditText` widget and use `debounce()` operator. Tomorrow it could be something entirely different (i.e. a dropdown menu with a list of strings to chose from) and you don't have to touch (and therefore can't break) anything else of your existing source code except the View (`SearchActivity`). The same is valid for the way how the view is "rendered" / displayed. All that view related code lives in `SearchActivity`. Today it uses a `RecyclerView` to display the "model", but tomorrow it could be another custom UI widget or a ListView. I guess you get the point.
 
 Back to our Presenter's source code: as already said, currently the `Presenter` contains all the business logic. One of the main pitfalls with that is that presenter is not testable (how to mock parts of our business logic) and we can't reuse that business logic for other Presenter because it's hard coded. Let's refactor that code. First we introduce a `SearchEngine`:
 
-```java
+{% highlight java %}
 class SearchEngine(private val githubBackend: GithubBackend) {
 
   fun search(query: String): Observable<SearchModel> =
@@ -256,7 +256,7 @@ class SearchEngine(private val githubBackend: GithubBackend) {
         githubBackend.getRepositories(query).map { SearchModel(query, it.items) }
       }
 }
-```
+{% endhighlight %}
 
 `SearchEngine` gets a `GithubBackend` and offers a `search(String) : Observable<SearchModel>` for the outside. SearchEngine is our business logic, just functional by providing a `search()` function with one input (search string) and an output (`Observable<SearchModel>`). In our `model()` function then we call search engine's function, who is responsible to change the "model". The model is basically the search result (initial state is empty list as search result). However, we don't want to hardcode that again in our Presenter.
 
@@ -264,7 +264,7 @@ class SearchEngine(private val githubBackend: GithubBackend) {
 
 So we use dependency injection (Dagger) to provide and inject a `modelFunc()` to other components, in this case to the `SearchPresenter`:
 
-```java
+{% highlight java %}
 @Module
 class ApplicationModule {
 
@@ -285,11 +285,11 @@ class ApplicationModule {
         stringObservable.startWith("").flatMap { queryString -> searchEngine.search(queryString) }
       }
 }
-```
+{% endhighlight %}
 
 The important bit here is `providesModelFunc()` which offers a Lambda `Observable<String> -> Observable<SearchModel>`. Since lambdas are just anonymous functions (kind of) we take this lambda and inject it into `SearchPresenter`:
 
-```java
+{% highlight java %}
 class SearchPresenter @Inject constructor(
                       val modelFunc: (Observable<String>) -> Observable<SearchModel>
                     ) : MvpBasePresenter<SearchView>() {
@@ -315,7 +315,7 @@ class SearchPresenter @Inject constructor(
     subscription.unsubscribe()
   }
 }
-```
+{% endhighlight %}
 
 That's it. we still have `view( model( intent() ) )`, but this time the view, presenter and "business logic" are super slim, decoupled, reusable, testable and maintainable.
 
@@ -324,7 +324,7 @@ Are we done now? Almost. We haven't discussed yet who is responsible to display 
 
 Let's see, how could we do that in MVP? We would simply add a method to the MVP View interface like this:
 
-```java
+{% highlight java %}
 interface SearchView : MvpView {
   ...
   fun showLoading(): (Any) -> Unit  // RxJava Action1
@@ -343,11 +343,11 @@ class SearchActivity : SearchView, MvpActivity<SearchView, SearchPresenter>() {
      loadingView.visibility = View.VISIBLE
    }
 }
-```
+{% endhighlight %}
 
 Then the presenter could do something like this:
 
-```java
+{% highlight java %}
 class SearchPresenter @Inject constructor(
                       val modelFunc: (Observable<String>) -> Observable<SearchModel>
                     ) : MvpBasePresenter<SearchView>() {
@@ -374,7 +374,7 @@ class SearchPresenter @Inject constructor(
     subscription.unsubscribe()
   }
 }
-```
+{% endhighlight %}
 
 What's wrong with that code? I mean we do that in MVP all the time, right? **The problem is that now our whole system has two states**: The view's state and the state of the model itself. Moreover, the view's state is caused by a side effect. Do you remember the definition of `model()` function? Only the model() function is allowed to change the internal application state (with side effects). But the code shown above contradicts with that principle.
 
@@ -384,12 +384,12 @@ So how to solve that? From my point of view there are two options:
 
 **The second option** and in my opinion the better option is to have one Model that also propagates his state changes, i.e. before loading data from github the `model()` function would change the model to it's internal state "loading":
 
-```java
+{% highlight java %}
 data class SearchModel(
       val isLoading: Boolean, // true while loading data, false when done
       val searchTerm: String,
       val results: List<GithubRepo>)
-```
+{% endhighlight %}
 
 Now `SearchEngine` would first change the model to `SearchModel (true, ...)` before starting to load the data (and propagate this state change as usual via observable chain which will update the view and finally display the ProgressBar) and then set it to `SearchModel (false, ...)` after having retrieved the new data from github backend.
 
