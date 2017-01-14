@@ -13,7 +13,7 @@ tags: [android, java, design-patterns]
 
 Starting in Android N Google has added some java 8 language features. One of those features is the ability to add default methods to interfaces. Surprisingly (since java 8 has already been released 2 years ago) I haven't found good articles describing the advantage of default methods for interfaces: **Mixins!**
 
-Let's straight jump into a simple example. Let's say we have a class `Ship`. A `Ship` can carry `Cargo`. Let's model that in Java like this:
+Let's straight jump into a simple example. Let's say we have a class *Ship*. A *Ship* can carry *Cargo*. Let's model that in Java like this:
 
 {% highlight java %}
 public class Ship {
@@ -30,7 +30,7 @@ public class Ship {
 }
 {% endhighlight %}
 
-We also have an `Airport` where `Aircrafts` can land and depart:
+We also have an *Airport* where *Aircrafts* can land and depart:
 
 {% highlight java %}
 public class Airport {
@@ -47,15 +47,15 @@ public class Airport {
 }
 {% endhighlight %}
 
-Given that, what if we want to have another class that is `Airport` and `Ship` at the same time? Unrealistic? What about an `AircraftCarrier`. Since java doesn't support multiple inheritance we can't declare a class `AircraftCarrier` that extends from `Airport` and `Ship`:
+Given that, what if we want to have another class that is *Airport* and *Ship* at the same time? Unrealistic? What about an *AircraftCarrier*. Since java doesn't support multiple inheritance we can't declare a class *AircraftCarrier* that extends from *Airport* and *Ship*:
 
 {% highlight java %}
 class AircraftCarrier extends Airport, Ship // doesn't compile
 {% endhighlight %}
 
-So what alternatives do we have to make `AircraftCarrier` be a `Ship` and a `Airport` at the same time? Well, we could use delegation ("favor composition over inheritance") or some tricks from  [aspect](https://javadeveloperslife.wordpress.com/2013/06/17/Mixins-with-pure-java/)  orientated programming, but none of them are really natively supported by java programming language.
+So what alternatives do we have to make *AircraftCarrier* be a *Ship* and a *Airport* at the same time? Well, we could use delegation ("favor composition over inheritance") or some tricks from  [aspect](https://javadeveloperslife.wordpress.com/2013/06/17/Mixins-with-pure-java/)  orientated programming, but none of them are really natively supported by java programming language.
 
-However, java does support multiple inheritance on interfaces and allows classes to implement arbitrary many interfaces. So let's convert `Ship` and `Airport` to interfaces:
+However, java does support multiple inheritance on interfaces and allows classes to implement arbitrary many interfaces. So let's convert *Ship* and *Airport* to interfaces:
 
 {% highlight java %}
 public interface Ship {
@@ -116,7 +116,7 @@ class AircraftCarrier
 end
 {% endhighlight %}
 
-With Mixins we can compose `AircraftCarrier` by "including" (or mixing in) the functionality of Ship and Airport without inheritance. Ship definition has been omitted for better readability but I guess you can imagine how the code for `module Ship` will look like. Please note that this is not multiple inheritance as C++ offers ([diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem)). Mixins are a different concept. The Ruby programming language has native support for Mixins. What about other languages like Scala? Scala has support for Mixins as well. In Scala those are called Traits. Traits are Mixins just with some slightly different properties from a programming language designers point of view like Mixins require linearization while Traits are flattened and Traits traditionally don't contain states. But that shouldn't worry you too much. For the sake of simplicity we can say Mixins and Traits are the same.
+With Mixins we can compose *AircraftCarrier* by "including" (or mixing in) the functionality of Ship and Airport without inheritance. Ship definition has been omitted for better readability but I guess you can imagine how the code for *module Ship* will look like. Please note that this is not multiple inheritance as C++ offers ([diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem)). Mixins are a different concept. The Ruby programming language has native support for Mixins. What about other languages like Scala? Scala has support for Mixins as well. In Scala those are called Traits. Traits are Mixins just with some slightly different properties from a programming language designers point of view like Mixins require linearization while Traits are flattened and Traits traditionally don't contain states. But that shouldn't worry you too much. For the sake of simplicity we can say Mixins and Traits are the same.
 
 {% highlight scala %}
 trait Ship {
@@ -156,7 +156,7 @@ public interface Airport {
 }
 {% endhighlight %}
 
-We will do the same for `Ship` (interface with default method implementations) and then we can do something like this:
+We will do the same for *Ship* (interface with default method implementations) and then we can do something like this:
 
 {% highlight java %}
 class AircraftCarrier implements Ship, Airport {
