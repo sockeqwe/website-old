@@ -41,7 +41,7 @@ public class MyFragment extends Fragment {
 
 > What's wrong with that? I have tested it on my device and it worked like a charm?
 
-It may have worked, but did you try to rotate your device from portrait to landscape? Your app will crash with `NullPointerException` as soon as you try to acces _id or title_ .
+It may have worked, but did you try to rotate your device from portrait to landscape? Your app will crash with **NullPointerException** as soon as you try to access _id or title_ .
 
 > It's ok, my app is locked in portrait. So I will never run into this problem.
 
@@ -49,11 +49,11 @@ It may have worked, but did you try to rotate your device from portrait to lands
 
 > I see, so I have to save them in onSaveInstanceState(Bundle)?
 
-**NO**. The official docs are a little bit unclear, but `onSaveInstanceState(Bundle)` should be used exactly the same way you do with `Activity.onSaveInstanceState(Bundle)`: you use this method to save the instance state "temporarly", for instance to handle screen orientation changes (from portrait to landscape and vice versa). That means the fragments instance state is not stored persistently which is required when the app is killed in the background and restored when it comes back to the foreground again. It's pretty the same as activities work: `Activity.onSaveInstanceState(Bundle)` is used for "temporarly" saving the instance state, whereas the long persistent parameters are passed through the intents extra data.
+**NO**. The official docs are a little bit unclear, but **onSaveInstanceState(Bundle)** should be used exactly the same way you do with **Activity.onSaveInstanceState(Bundle)**: you use this method to save the instance state "temporarly", for instance to handle screen orientation changes (from portrait to landscape and vice versa). That means the fragments instance state is not stored persistently which is required when the app is killed in the background and restored when it comes back to the foreground again. It's pretty the same as activities work: **Activity.onSaveInstanceState(Bundle)** is used for "temporarly" saving the instance state, whereas the long persistent parameters are passed through the intents extra data.
 
 > So should I save these Fragment arguments in the Activities Intent?
 
-No, Fragment has it's own mechanism for this. There are two methods: `Fragment.setArguments(Bundle)` and `Fragment.getArguments()` and you have to use these methods to ensure that the arguments will be stored persistently, even if the app is destroyed and restored. But that's the painful part I have mentioned above. It's a lot of code you have to write. First, you have to create a `Bundle`, then you have to set the key / value pairs and finally to call `Fragment.setArguments()`. Unfortunately you are not done yet but you have to read the values out of the Bundle with `Fragment.getArguments()`. Something like this:
+No, Fragment has it's own mechanism for this. There are two methods: **Fragment.setArguments(Bundle)** and **Fragment.getArguments()** and you have to use these methods to ensure that the arguments will be stored persistently, even if the app is destroyed and restored. But that's the painful part I have mentioned above. It's a lot of code you have to write. First, you have to create a **Bundle**, then you have to set the key / value pairs and finally to call **Fragment.setArguments()**. Unfortunately you are not done yet but you have to read the values out of the Bundle with **Fragment.getArguments()**. Something like this:
 
 {% highlight java %}
 public class MyFragment extends Fragment {
@@ -127,7 +127,7 @@ public class MyFragment extends Fragment {
 {% endhighlight %}
 
 
-`FragmentArgs` generates the boilerplate code for you just by annotating fields of your Fragment class. In your Activity you will use the generated `Builder` class _(the name of your fragment with "Builder" suffix)_ instead of `new MyFragment()` or a static `MyFragment.newInstance(int id, String title)` method.
+**FragmentArgs** generates the boilerplate code for you just by annotating fields of your Fragment class. In your Activity you will use the generated **Builder** class _(the name of your fragment with "Builder" suffix)_ instead of **new MyFragment()** or a static **MyFragment.newInstance(int id, String title)** method.
 
 For example:
 
@@ -155,7 +155,7 @@ public class MyActivity extends Activity {
 }
 {% endhighlight %}
 
-You may have noticed the statement `FragmentArgs.inject(this);` in  `Fragment.onCreate(Bundle)`. In this call your fragment gets connected to the generated code. You may ask yourself: _"Do I have to override onCreate(Bundle) in every Fragment to add the inject() method call?"_ . The answer is no. A powerful feature is that `FragmentArgs.inject(this);` supports inheritance. You simply need to insert this line into your _base fragment_ and extend all your fragments from this base fragment:
+You may have noticed the statement **FragmentArgs.inject(this);** in  **Fragment.onCreate(Bundle)**. In this call your fragment gets connected to the generated code. You may ask yourself: _"Do I have to override onCreate(Bundle) in every Fragment to add the inject() method call?"_ . The answer is no. A powerful feature is that **FragmentArgs.inject(this);** supports inheritance. You simply need to insert this line into your _base fragment_ and extend all your fragments from this base fragment:
 
 {% highlight java %}
 public class BaseFragment extends Fragment {
