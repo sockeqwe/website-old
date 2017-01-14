@@ -34,7 +34,7 @@ Hence, we will use [SQLBrite](https://github.com/square/sqlbrite) from Square wh
 
 We define a class `Source` like this:
 
-```java
+{% highlight java %}
 @ObjectMappable
 class Source() { // Unfortunately data class are not supported yet by sqlbrite-dao
 
@@ -74,11 +74,11 @@ class Source() { // Unfortunately data class are not supported yet by sqlbrite-d
     @Column(SourceDao.COL.NAME_RES)
     var nameRes: Int = -1
   }
-```
+{% endhighlight %}
 
 `@ObjectMappable` and `@Column` are annotations from the SQLBrite-DAO's annotation processor. Next we define a DAO to manipulate and query `Source` from database like this:
 
-```java
+{% highlight java %}
 class SourceDao : Dao() {
 
     object COL {
@@ -153,14 +153,14 @@ class SourceDao : Dao() {
         return defer { update(TABLE, cv, "${COL.ID} = ?", sourceId.toString()) }
     }
 }
-```
+{% endhighlight %}
 
 SQLBrite-DAO provides a simple SQL syntax so auto completion in your IDE works and the annotation processor generates a class `SourceMapper` to deal with `Cursor` and `ContetnValues` and SQLBrite wraps that all into RxJava so we can work with Observable.
 
 ## SourceFilterFragment in MVP
 In the current implementation the right drawer with list of sources is integrated in `HomeActivity`. We will refactor that and apply MVP here as well. We implement `SourceFilterFragment implmenets SourceFilterView` and `SourceFilterPresenter` that subscribes to `SourceDao` like this:
 
-```java
+{% highlight java %}
 class SourceFilterPresenter(val sourceDao: SourceDao, val presentationModelMapper: (List<Source>) -> List<SourceFilterPresentationModel>) : RxPresenter<SourceFilterView, List<SourceFilterPresentationModel>>() {
 
     fun loadSources() {
@@ -192,7 +192,7 @@ class SourceFilterPresenter(val sourceDao: SourceDao, val presentationModelMappe
 
     }
 }
-```
+{% endhighlight %}
 
 The original intention of MVP was that the Presenter transforms the Model into a `PresentationModel` which will be displayed in the View. We don't display `List<Source>` in `SourceFilerView` but rather `SourceFilterPresentationModel`. This presentation model is optimized for the view. Do we always need a PresentationModel in MVP? It depends. If your Model is just a POJO than it should be fine to display the Model directly in the View, but please don't "leak" application layer models into the view. Soon or later you will call a method of the application layer model from the View. By having a PresentationModel the view has absolutely no knowledge of the application layer models. However, we use a `SourceFilterPresentationModel` because we have the problem that our `Source` is simply not ready to be displayed in a RecyclerView. The Source class can either have a `int nameRes` (which is `R.string.something`) in case that it is a predefined Source or a `String name` if the Source has been added by the user of the app (more about that later). Furthermore, Source class only contains a `backendId` but we want to display a cell with an icon and title like this:
 
@@ -200,7 +200,7 @@ The original intention of MVP was that the Presenter transforms the Model into a
 
 To display such an item we have to "map" the `backendId` to an icon and for the title "map" `nameRes` to a String or use `name` as the title. Of course you can do that in RecyclerView's adapter in `onBindViewHolder()` but then the complexity of the adapter increases. Furthermore, if you do that in adapters onBindViewHolder() method this "mapping" will be done on androids main ui thread and will be executed during scrolling. That might not be an issue in our use case, but if you have to do some more complex things like sorting elements or compute some properties to be displayed, then you can run into trouble. So we pass a function `presentationModelMapper: (List<Source>) -> List<SourceFilterPresentationModel>` as constructor parameter of `SourceFilterPresenter` and then use RxJava's `map()` operator to map `List<Source>` to `List<SourceFilterPresentationModel>`. Another nice thing about RxJava is it's threading model. Actually, we are doing this mapping async on the background thread that is querying the database and then give the view the resulting PresentationModel on the main ui thread. This mapping function looks like this:
 
-```java
+{% highlight java %}
 class BackendManager {
 
     object ID {
@@ -237,7 +237,7 @@ class SourceToPresentationModelMapper(private val context: Context, private val 
         return presentationModels
     }
 }
-```
+{% endhighlight %}
 
 This is yet another way to define a function (as an class) in kotlin. I just wanted to play around a little bit with kotlin.
 
@@ -277,7 +277,7 @@ Please note that we have established an observable unidirectional bottom-up data
 
 But there is a better way, a truly reactive way: We don't have to tell the `HomePresenter` about changes at all. How? Well, the HomePresenter is already observing `ItemsLoader`. So the `HomePresenter` doesn't really care about "source changes". All the HomePresenter is interested in is receiving items from his `onNext()` subscriber-callback and display them via `HomeView`. So when a `Source` is changed new items to display will be emitted. Easy (in theory), right? But what does it actually takes to build something like that? Good news: We already have almost everything we need. The `RouteCallerFatory.getAllBackendCallers()` already returns an `Observable<List<RouteCaller>>` (please note that this is an `Observable`). The `Router` passes this Observable to the ItemsLoader and the HomePresenter subscribes on it. So as already said, to bring new items to the HomePresenter's `onNext()` callback we have to emit new items. Which kind of items? New `List<RouteCaller>` because each RouteCaller will be executed by `ItemsLoader` (Page) to load Items from backend endpoints and finally emit the loaded items to `HomePresenter`. In other words: To make the Routing "reactive" we have to make our `RouteCallerFatory` "reactive" by observing the database (SQLBrite) and emitting the updated `RouteCaller` when a Source has been enabled or disabled:
 
-```java
+{% highlight java %}
 class HomeDribbbleCallerFactory(private val backend: DribbbleService, sourceDao: SourceDao) : RouteCallerFactory<List<PlaidItem>> {
 
     private val backendCalls = ArrayMap<Long, RouteCaller<List<PlaidItem>>>()
@@ -394,7 +394,7 @@ class HomeDribbbleCallerFactory(private val backend: DribbbleService, sourceDao:
     }
 
 }
-```
+{% endhighlight %}
 
 As you see, our `HomeDribbbleCallerFactory` is observing our database (`sourceDao.getSourcesForBackend()`) and whenever the database has been changed because the user has enabled/disabled a Source or have added a new one (custom search) `sources.map(mapSourcesToBackendCalls)` will be called again and emits a new `List<RouteCaller>` with the updated routes to call. Next the `ItemsLoader` (via `Router` and `FirstPage`) will reacting on the new emitted `List<RouteCaller>` and load new Items which finally triggers `HomePresenter's onNext()` callback with the new loaded items. It sounds more complicated than it actually is. Have a look at the following graphically representation:
 
@@ -414,7 +414,7 @@ Using an android `Service` is definitely the way to go to ensure that the story 
 
 Don't worry, we can implement that in a "truly reactive" way without additional work to integrate it into our already refactored code. Let's do it step by step. First we have to implement offline support, so we have to save the story we will post on Designer News somehow locally on our device: We use a SQLite database for that and SQLBrite + SQLBrite-DAO again. Let's define a simple data class `NewDesignerNewsStory` that represents a story that we will post on Designer News afterwards:
 
-```java
+{% highlight java %}
 @ObjectMappable
 class NewDesignerNewsStory : PlaidItem {
 
@@ -439,7 +439,7 @@ class NewDesignerNewsStory : PlaidItem {
     @Column(StoryDao.COL.STATE)
     var state = State.NOT_SUBMITTED
   }
-```
+{% endhighlight %}
 
 Furthermore, we implement `StoryDao` which is responsible to insert a `NewDesignerNewsStory`, update the state of a `NewDesignerNewsStory`. I'm not going to show the code for that because I guess you know how this SQL statements will look like. Next we will refactor `PostStoryService` to use `StoryDao` to query the local database for not submitted Posts and post them:
 
