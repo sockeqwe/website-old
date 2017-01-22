@@ -20,7 +20,6 @@ layout: none
 <author>
   <name>{{ site.owner.name }}</name>
   <uri>{{ site_url }}/</uri>
-  <email>{{ site.owner.email }}</email>
 </author>
 {% for post in site.posts limit:20 %}
 
@@ -35,16 +34,11 @@ layout: none
   <author>
     <name>{{ site.owner.name }}</name>
     <uri>{{ site_url }}</uri>
-    <email>{{ site.owner.email }}</email>
   </author>
   {% for tag in post.tags %}<category scheme="{{ site_url }}/tags/#{{ tag | uri_escape }}" term="{{ tag }}" />{% endfor %}
   <content type="html">
-  {% if add_protocol %}
-    {{ post.content | xml_escape | replace: site.url, site_url }}
-  {% else %}
-    {{ post.content | xml_escape }}
-  {% endif %}
-  &lt;p&gt;&lt;a href=&quot;{{ site_url }}{{ post.url }}&quot;&gt;{{ post.title }}&lt;/a&gt; was originally published by {{ site.owner.name }} at &lt;a href=&quot;{{ site_url }}&quot;&gt;{{ site.title }}&lt;/a&gt; on {{ post.date | date: "%B %d, %Y" }}.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;{{ site_url }}{{ post.url }}&quot;&gt;{{ post.title }}&lt;/a&gt; was originally published by {{ site.owner.name }} at &lt;a href=&quot;{{ site_url }}&quot;&gt;{{ site.title }}&lt;/a&gt; on {{ post.date | date: "%B %d, %Y" }}.&lt;/p&gt;
+  </content>
 </entry>
 {% endfor %}
 </feed>
