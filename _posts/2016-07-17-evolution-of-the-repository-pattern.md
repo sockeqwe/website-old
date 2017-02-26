@@ -17,7 +17,7 @@ Before we get started, I wanted to say that the term _Repository Pattern_ is use
 
 # The original Repository Pattern
 As far as I know the repository pattern was first introduced by Martin Fowler et al. in the book  [Patterns of Enterprise Application Architecture](http://martinfowler.com/eaaCatalog/repository.html).
-[This blog post](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006#.h7cm2b24q) by Krzychu Kosobudzki or [this blog post](http://panavtec.me/what-is-the-repository-pattern-and-why-im-not-going-to-use-it-on-android) Christian Panadero give an example of the usage of this pattern in the context of android development. In my opinion the original repository pattern is a over engineered abstraction layer you very very rarely need. Especially on Android. What do I mean with over engineered? Let's have a look at the example from Krzychu Kosobudzki's blog post:
+[This blog post](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006#.h7cm2b24q) by Krzychu Kosobudzki or [this blog post](http://panavtec.me/what-is-the-repository-pattern-and-why-im-not-going-to-use-it-on-android) Christian Panadero give an example of the usage of this pattern in the context of android development. In my opinion the original repository pattern is an over engineered abstraction layer you very very rarely need. Especially on Android. What do I mean with over engineered? Let's have a look at the example from Krzychu Kosobudzki's blog post:
 
 {% highlight java %}
 interface Repository<T> {
