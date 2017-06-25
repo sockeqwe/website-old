@@ -98,7 +98,7 @@ Well, ViewModel is "only" kept across screen orientation changes.
 On the other hand UI widgets like EditText store and restore their own state.
 Do you see the conflict potential?
 Just for fun, let's also add android data binding into this equation:
-the problem is that data binding will override the value of the restored UI widget.
+the problem is that data binding will override the value of the restored UI widget (Update: this problem might be [addressed](https://github.com/googlesamples/android-architecture-components/issues/47#issuecomment-310928267) in the future).
 
 I'm not really answering  Rebecca's question because the previous answer that has seemed to be so obvious is actually not that obvious anymore. So which one is the source of truth? Should the ViewModel's state be persisted too (see [this post](https://proandroiddev.com/customizing-the-new-viewmodel-cf28b8a7c5fc) by [Danny Preussler](https://twitter.com/PreusslerBerlin))? Which one wins the state restoration race?
 
