@@ -1,11 +1,11 @@
 ---
 layout: post
 published: true
-title: Architecure Components - I'm not a purist but ...
+title: Architecture Components - I'm not a purist but ...
 mathjax: false
 featrued: false
 comments: true
-headline: Architecure Components - I'm not a purist but ...
+headline: Architecture Components - I'm not a purist but ...
 categories:
   - Android
 tags: [android]
