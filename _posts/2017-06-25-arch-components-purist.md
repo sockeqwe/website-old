@@ -69,7 +69,7 @@ public class SearchViewModel extends ViewModel {
 }
 {% endhighlight %}
 
-**getResults()** is used to represent the search results of the first "page" whereas **getLoadingModeStatus()** is used for consecutive pagingation.
+**getResults()** is used to represent the search results whereas **getLoadingMoreStatus()** is used for consecutive pagingation.
 
 Why not just one **LiveData&lt;State&gt; getState()**? Wouldn't it make state management especially in a multi threaded environment more predictable and deterministic?
 
