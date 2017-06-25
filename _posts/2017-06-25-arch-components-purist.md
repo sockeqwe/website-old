@@ -10,7 +10,7 @@ categories:
   - Android
 tags: [android]
 ---
-At I/O 2017 Google surprised us with a new initiative: [Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html). I really appreciate this initiative. In this blog post I would like to share my thoughts about ViewModel and some pitfalls you might stumble upon when using ViewModel and LiveData.
+At I/O 2017 Google surprised us with a new initiative: [Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html). I really appreciate this initiative. In this blog post I would like to share my thoughts about ViewModel and some pitfalls you might stumble upon when using ViewModel and LiveData by taking a look at the official Google samples.
 
 ## The State Problem
 It is not a secret that I'm a big fan of [Model-View-Intent (MVI)](http://hannesdorfmann.com/android/mosby3-mvi-1).
@@ -71,7 +71,7 @@ public class SearchViewModel extends ViewModel {
 
 **getResults()** is used to represent the search results of the first "page" whereas **getLoadingModeStatus()** is used for consecutive pagingation.
 
-Why not just one **LiveData&lt;State&gt; getState();**? Wouldn't it make state management especially in a multi threaded environment more predictable and deterministic?
+Why not just one **LiveData&lt;State&gt; getState()**? Wouldn't it make state management especially in a multi threaded environment more predictable and deterministic?
 
 I'm not a purist but it leaves a stale after-taste ...
 
