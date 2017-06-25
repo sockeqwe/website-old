@@ -55,7 +55,8 @@ public class Resource<T> {
 }
 {% endhighlight %}
 
-A **Resource** is used for example to wrap a http response i.e. **Resource&lt;ApiResponse&gt;** (where ApiResponse holds the json parsed data returned from github.com). Btw. if you use Kotlin, you should take a look at **sealed classes**.
+A **Resource** is used for example to wrap a http response i.e. **Resource&lt;ApiResponse&gt;** (ApiResponse holds the json parsed data returned from github.com).
+Btw. if you use Kotlin, you should take a look at **sealed classes**.
 
 I'm super happy to see such state management related code in official Google samples and
 encourage developers to build your apps with proper state management in mind.
