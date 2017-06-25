@@ -110,8 +110,8 @@ I'm not a purist but it leaves a stale after-taste ...
 
 > Sometimes the ViewModel needs to invoke an action using an Activity (for example to show a snack bar or to navigate to a new activity). Using MVP it's easy to implement it because the presenter has a reference to the Activity. The ViewModel doesn't contain a reference to the Activity, what's the best way to implement this feature?
 
-What he means is an "action" that takes place only one time like displaying a SnackBar or Toast.
-But if you would model this problem in MVVM you would have a **LiveData&lt;String&gt; getSnackBarErrorMessage()**  in your ViewModel and the View subscribes to it.
+What he means is an "action" that takes place only one time like displaying a SnackBar or a Toast.
+If you would model this problem in MVVM you would have a **LiveData&lt;String&gt; getSnackBarErrorMessage()**  in your ViewModel and the View subscribes to it.
 If the emitted String (error message) is null, don't display a SnackBar, otherwise display it.
 The problem he is facing is that this flag must be cleared somehow
 otherwise the SnackBar is shown again after a screen orientation change because LiveData is emitting the latest (cached) value when the view (re)subscribes to it.
