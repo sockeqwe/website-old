@@ -20,7 +20,7 @@ On the other hand MVVM and MVP don't talk about state management although it can
 For example Laimonas Turauskas from Instacart wrote a [blog post](https://tech.instacart.com/lce-modeling-data-loading-in-rxjava-b798ac98d80)
 how they do state management in their MVP based app.
 Fortunately, Google's MVVM samples show how to do that with ViewModel and LiveData too.
-Take a look at [this example](https://github.com/googlesamples/android-architecture-components) which is an app that let's you browse Github. It's a very simplified Github client that uses Githubs REST API to display some data about git repositories and users in this app.
+Take a look at [this example](https://github.com/googlesamples/android-architecture-components) which is an app that let's you browse Github. It's a very simplified Github client that uses Githubs REST API to display some data about git repositories and users.
 
 {% highlight java %}
 public enum Status {
