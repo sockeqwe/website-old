@@ -88,7 +88,7 @@ I'm not a purist but it leaves a stale after-taste ...
 [Rebecca Franks](https://twitter.com/riggaroo) who seems to be working on a sample app
 (with LiveData and Architecture Components) asked an interesting question in a public slack chat about a Google TODO app example, more specific about the screen where the user can create a new TODO Task:  
 
-> Is there a reason why the Fragment passes information back to the ViewModel when calling `saveTask(title, description)`. The ViewModel has the title and description already, so does that need to be passed into the saveTask(title, description) method explicitly?
+> Is there a reason why the Fragment passes information back to the ViewModel when calling **saveTask(title, description)**. The ViewModel has the title and description already, so does that need to be passed into the saveTask(title, description) method explicitly?
 
 The code she is referring to can be found [here](https://github.com/googlesamples/android-architecture/blob/dev-todo-mvvm-live/todoapp/app/src/main/java/com/example/android/architecture/blueprints/todoapp/addedittask/AddEditTaskFragment.java#L111).
 At first glance the answer seems to be obvious: _"No, there is no reason to pass that information back from View to the ViewModel because the ViewModel already holds this information."_
