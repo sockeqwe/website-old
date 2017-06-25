@@ -133,7 +133,7 @@ I'm not a purist but it leaves a stale after-taste ...
 As you see, even in such small sample apps like a Github client or a TODO app we face some tricky edge cases.
 From my point of view this is not related to any architectural pattern of your choice.
 It doesn't matter if you prefer MVVM with the new Architecure Components or MVP or MVI or whatever else.
-This kind of problems are just the symptoms of a much deeper issue we face but maybe haven't thought about it yet: proper state management. Hence you can call me a purist.
+This kind of problems are just the symptoms of a much deeper issue we face but maybe haven't thought about it yet: proper state management. I guess I am a purist when it comes to state management.
 
 Google's Architecture Components are awesome and this blog post is by no means a critique on that library nor on the examples Google (and many other external contributors) provided us.
 I just think that with the introduction of Architecture Components we (including Android Developers from around the world and Google Developers) have a very unique chance
