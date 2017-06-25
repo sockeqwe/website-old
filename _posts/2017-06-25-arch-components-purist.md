@@ -106,7 +106,7 @@ I'm not really answering  Rebecca's question because the previous answer that ha
 I'm not a purist but it leaves a stale after-taste ...
 
 ## The "SingleLiveEvent" problem
-[Fabio Collini](https://twitter.com/fabiocollini) raised an interesting [question](https://github.com/googlesamples/android-architecture-components/issues/63) about the Google's sample github client app that is powered by the new Architecture Components:
+[Fabio Collini](https://twitter.com/fabiocollini) raised another very interesting [question](https://github.com/googlesamples/android-architecture-components/issues/63) about the Google's sample github client app that is powered by the new Architecture Components:
 
 > Sometimes the ViewModel needs to invoke an action using an Activity (for example to show a snack bar or to navigate to a new activity). Using MVP it's easy to implement it because the presenter has a reference to the Activity. The ViewModel doesn't contain a reference to the Activity, what's the best way to implement this feature?
 
