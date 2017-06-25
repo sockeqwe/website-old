@@ -77,7 +77,7 @@ I'm not a purist but it leaves a stale after-taste ...
 
 ## The mantra problem
 **LiveData** seems to be a very simplified version of RxJava's **Observable**.
-LiveData data is lifecycle aware so that we as developer don't have to unsubscribe explicitly as we have to do with RxJava's Observable. Both implement the Observer pattern.
+LiveData is lifecycle aware so that we as developer don't have to unsubscribe explicitly as we have to do with RxJava's Observable. Both implement the Observer pattern.
 LiveData doesn't provide all this fancy functional reactive programming operators as RxJava does although architecture components provides some functional concepts via **Transformations** helper class such as **Transformations.map()** and **Transformations.swithMap()**.
 
 Quite often I hear developers saying how much they like functional reactive programming and pure functions without side effects but then we write code like **someLiveData.setValue(...)**.
