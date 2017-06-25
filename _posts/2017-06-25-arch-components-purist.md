@@ -131,7 +131,7 @@ I'm not a purist but it leaves a stale after-taste ...
 
 ## Conclusion: I'm a purist
 As you see, even in such small sample apps like a Github client or a TODO app we face some tricky edge cases.
-From my point of view this is not related to any architectural pattern of our choice.
+From my point of view this is not related to any architectural pattern of your choice.
 It doesn't matter if you prefer MVVM with the new Architecure Components or MVP or MVI or whatever else.
 This kind of problems are just the symptoms of a much deeper issue we face but maybe haven't thought about it yet: proper state management.
 
