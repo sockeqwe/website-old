@@ -95,7 +95,7 @@ At first glance the answer seems to be obvious: _"No, there is no reason to pass
 Is that always true?
 
 Well, ViewModel is "only" kept across screen orientation changes.
-On the other hand UI widgets stores and restores their own state.
+On the other hand UI widgets like EditText store and restore their own state.
 Do you see the conflict potential?
 Just for fun, let's also add android data binding into this equation and let me quote [Yigit Boyar](https://twitter.com/yigitboyar):
 
