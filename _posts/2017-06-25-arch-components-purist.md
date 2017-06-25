@@ -137,5 +137,8 @@ This kind of problems are just the symptoms of a much deeper issue we face but m
 Google's Architecture Components are awesome and this blog post is by no means a critique on that library nor on the examples Google (and many other external contributors) provided us.
 I just think that with the introduction of Architecture Components we (including Android Developers from around the world and Google Developers) have a very unique chance
 to create examples that can be considered as a reference implementation.
-These are a great starting point for any Junior Android developer by agreeing on the importance of state management regardless if you are a purist or not.
-Finally, this would help a lot developers avoiding pain points in the future from lessons we have learned the hard way in the past. Let's reflect that in official Google examples. They are open source, let's contribute!
+These are great starting point for any Junior Android developer.
+By agreeing on the importance of state management, regardless if you are a purist or not, such a reference implementation could
+help a lot developers avoiding pain points in the future from lessons we have already learned the hard way in the past.
+Let's reflect that in official Google examples.
+They are open source, let's contribute!
