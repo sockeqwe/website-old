@@ -123,7 +123,7 @@ This prevents the SnackBar to appear a second time after screen orientation chan
 At the same time developer are arguing that we should focus on immutability but guess what:
 SingleLiveEvent is not immutable and also has side effects in it (setting the value to null).
 Well, SingleLiveEvent seems to solve this problem, but isn't it just hiding the real underlying problem (hint: state management)?
-On the other hand, at the end of the day a user of the app doesn't care about immutability as long as the app works as expected. So shouldn't we developer don't care about immutability too as long as we get the job done somehow?
+On the other hand, at the end of the day a user of your app doesn't care about immutability as long as the app works as expected. So shouldn't we developer don't care about immutability too as long as we get the job done somehow?
 Btw. I have commented on that issue too and suggested an [alternative solution](https://github.com/googlesamples/android-architecture-components/issues/63#issuecomment-310422475)
 
 I'm not a purist but it leaves a stale after-taste ...
