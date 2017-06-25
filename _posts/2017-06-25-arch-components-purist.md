@@ -116,7 +116,7 @@ If the emitted String (error message) is null, don't display a SnackBar, otherwi
 The problem he is facing is that this flag must be cleared somehow
 otherwise the SnackBar is shown again after a screen orientation change because LiveData is emitting the latest (cached) value when the view (re)subscribes to it.
 
-In the Google samples they have added a class called [SingleLiveEvent](https://github.com/googlesamples/android-architecture/blob/dev-todo-mvvm-live/todoapp/app/src/main/java/com/example/android/architecture/blueprints/todoapp/SingleLiveEvent.java).
+In the Google samples they have added a class called [SingleLiveEvent extends LiveData](https://github.com/googlesamples/android-architecture/blob/dev-todo-mvvm-live/todoapp/app/src/main/java/com/example/android/architecture/blueprints/todoapp/SingleLiveEvent.java).
 The idea is that once an event has been dispatched it sets the internal value to null.
 This prevents the SnackBar to appear a second time after screen orientation change since the error message string has been set internally to null.
 
