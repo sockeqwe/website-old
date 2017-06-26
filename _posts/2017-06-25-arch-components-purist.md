@@ -122,9 +122,7 @@ The idea is that once an event has been dispatched it  ~~sets the internal value
 doesn't dispatch the value (Update: I was wrong, it doesn't set the value internally to null, thanks Jose Alcérreca for the hint).
 This prevents the SnackBar to appear a second time after screen orientation change.
 
-Well, SingleLiveEvent seems to solve this problem, but isn't it just hiding the real underlying problem (hint: state management)?
-On the other hand, at the end of the day a user of your app doesn't care about immutability as long as the app works as expected. So should we developers care about immutability as long as we get the job done somehow?
-Btw. I have commented on that issue too and suggested an [alternative solution](https://github.com/googlesamples/android-architecture-components/issues/63#issuecomment-310422475)
+Well, SingleLiveEvent seems to solve this problem, but isn't it just hiding the real underlying problem (hint: state management)? Btw. I have commented on that issue too and suggested an [alternative solution](https://github.com/googlesamples/android-architecture-components/issues/63#issuecomment-310422475)
 
 I'm not a purist but it leaves a stale after-taste ...
 
