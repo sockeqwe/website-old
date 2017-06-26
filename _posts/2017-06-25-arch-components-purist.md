@@ -118,11 +118,10 @@ The problem he is facing is that this flag must be cleared somehow
 otherwise the SnackBar is shown again after a screen orientation change because LiveData is emitting the latest (cached) value when the view (re)subscribes to it.
 
 In the Google samples they have added a class called [SingleLiveEvent extends LiveData](https://github.com/googlesamples/android-architecture/blob/dev-todo-mvvm-live/todoapp/app/src/main/java/com/example/android/architecture/blueprints/todoapp/SingleLiveEvent.java).
-The idea is that once an event has been dispatched it sets the internal value to null.
-This prevents the SnackBar to appear a second time after screen orientation change since the error message string has been set internally to null.
+The idea is that once an event has been dispatched it  ~~sets the internal value to null~~
+doesn't dispatch the value (Update: I was wrong, it doesn't set the value internally to null, thanks Jose Alcérreca for the hint).
+This prevents the SnackBar to appear a second time after screen orientation change.
 
-At the same time developer are arguing that we should focus on immutability but guess what:
-SingleLiveEvent is not immutable and also has side effects in it (setting the value to null).
 Well, SingleLiveEvent seems to solve this problem, but isn't it just hiding the real underlying problem (hint: state management)?
 On the other hand, at the end of the day a user of your app doesn't care about immutability as long as the app works as expected. So should we developers care about immutability as long as we get the job done somehow?
 Btw. I have commented on that issue too and suggested an [alternative solution](https://github.com/googlesamples/android-architecture-components/issues/63#issuecomment-310422475)
