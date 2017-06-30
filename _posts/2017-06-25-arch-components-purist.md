@@ -122,7 +122,12 @@ The idea is that once an event has been dispatched it  ~~sets the internal value
 doesn't dispatch the value (Update: I was wrong, it doesn't set the value internally to null, thanks Jose Alcérreca for the hint).
 This prevents the SnackBar to appear a second time after screen orientation change.
 
-Well, SingleLiveEvent seems to solve this problem, but isn't it just hiding the real underlying problem (hint: state management)? Btw. I have commented on that issue too and suggested an [alternative solution](https://github.com/googlesamples/android-architecture-components/issues/63#issuecomment-310422475)
+Well, SingleLiveEvent seems to solve this problem, but isn't it just hiding the real underlying problem (hint: state management)?
+
+Additionally, if we introduce something like a SingeLiveEvent because of showing something only
+once (i.e SnackBar) wouldn't we then leak an implementation detail from the View Layer down to underlying layers like ViewModel or business logic?
+What if one day we would like to change the way such a message is displayed from SnackBar to TextView, which layers would we have to change? Only the View Layer?
+Btw. I have commented on that issue too and suggested an [alternative solution](https://github.com/googlesamples/android-architecture-components/issues/63#issuecomment-310422475)
 
 I'm not a purist but it leaves a stale after-taste ...
 
