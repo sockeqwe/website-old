@@ -126,7 +126,7 @@ Well, SingleLiveEvent seems to solve this problem, but isn't it just hiding the 
 
 Additionally, if we introduce something like a SingeLiveEvent because of showing something only
 once (i.e SnackBar) wouldn't we then leak an implementation detail from the View Layer down to underlying layers like ViewModel or business logic?
-What if one day we would like to change the way such a message is displayed from SnackBar to TextView, which layers would we have to change? Only the View Layer?
+What if one day we would like to change the way such a message is displayed from SnackBar to TextView, which layers would we have to change? Only the View (UI) layer?
 Btw. I have commented on that issue too and suggested an [alternative solution](https://github.com/googlesamples/android-architecture-components/issues/63#issuecomment-310422475)
 
 I'm not a purist but it leaves a stale after-taste ...
