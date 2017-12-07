@@ -5,7 +5,7 @@ permalink: /about/index.html
 tags: [Hannes, Dorfmann]
 ---
 
-My name is **Hannes Dorfmann** and I'm software engineer (mainly Android) and contributor of many open source projects. I'm Android lead developer at [Freeltics](https://www.freeletics.com). 
+My name is **Hannes Dorfmann** and I'm software engineer (mainly Android) and contributor of many open source projects. I'm Android lead developer at [Freeletics](https://www.freeletics.com). 
 This is my personal blog where I publish technical articles about android, software architecture, user interfaces and user experience.
 I'm a sports enthusiast. I love football (don't call it soccer!!!).
 
