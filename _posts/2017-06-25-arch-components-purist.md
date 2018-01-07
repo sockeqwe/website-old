@@ -8,7 +8,7 @@ comments: true
 headline: Architecture Components - I'm not a purist but ...
 categories:
   - Android
-tags: [android]
+tags: [android, software-architecture]
 ---
 At I/O 2017 Google surprised us with a new initiative: [Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html). I really appreciate this initiative. In this blog post I would like to share my thoughts about ViewModel and some pitfalls you might stumble upon when using ViewModel and LiveData by taking a look at the official Google samples.
 

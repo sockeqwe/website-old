@@ -8,7 +8,7 @@ comments: true
 headline: The evolution of the Repository Pattern - Be aware of over abstraction
 categories:
   - Android
-tags: [android, software-architecture]
+tags: [android, software-architecture, design-patterns]
 ---
 
 A listener from our podcast, [The Context](https://github.com/artem-zinnatullin/TheContext-Podcast), that Artem Zinnatullin and I run asked me, if I can give him an example of the Repository Pattern. So I googled around and stumbled upon some blog posts and found out that the term Repository Pattern is used and described in many different ways. In this blog post I want give you a brief history of the Repository Pattern and I want to discuss why I think the Repository Pattern could lead to over abstraction and over engineering.
