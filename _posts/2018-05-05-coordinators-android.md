@@ -475,7 +475,7 @@ I dont know, ultimately it's your app and you know best if there is need for the
 Maybe it's good idea is to create a small sample application to try this pattern out.
 
 ## FAQ
- - What about Model-View-Intent? Does the Coordinator pattern works with MVI too? Sure, take a look [here](http://hannesdorfmann.com/android/mosby3-mvi-8)
- - What if I don't want to use Fragments at all? How hard is it to write my own back stack following Coordinator pattern and just using ViewGroups? Stay tuned, I'm working on a prove of concept and will share it in my blog.
+ - What about Model-View-Intent? Does the Coordinator pattern work well with MVI too? Sure, take a look [here](http://hannesdorfmann.com/android/mosby3-mvi-8)
+ - What if I don't want to use Fragments at all? How hard is it to write my own back stack that plays nice with the Coordinator pattern (i.e. just using custom ViewGroups)? Stay tuned, I'm working on a prove of concept and will share it in my blog. Hint: Finite state machines FTW.
  - Do I have to use a single Activity? No, use whatever you want to do. You can have multiple activities with multiple fragments, whatever works best for you. These implementation details are hidden behind the Navigator class
  - Do I have to have one giant Navigator class? Absolutely not! Create multiple Navigator classes (i.e. one for each flow) to keep them small and maintainable.
