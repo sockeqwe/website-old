@@ -25,7 +25,7 @@ The goals of this pattern is:
 Before we get deeper into what the Coordinator Pattern is and how it can be implemented, let's take a look at what the current state of in-app navigation in android development is.
 
 ## Navigation logic in Activity or Fragments
-Since the Android SDK requires an Context to start a new Activity (or FragmentManager to put a new Fragment on the back stack) it's quite common to put in-app navigation code directly into your Activity like this (you can find such code in the official android ¢[guides](https://developer.android.com/training/basics/firstapp/starting-activity) provided by Google):
+Since the Android SDK requires an Context to start a new Activity (or FragmentManager to put a new Fragment on the back stack) it's quite common to put in-app navigation code directly into your Activity like this (you can find such code in the official android [guides](https://developer.android.com/training/basics/firstapp/starting-activity) provided by Google):
 
 {% highlight java %}
 class ShoppingCartActivity : Activity() {  
