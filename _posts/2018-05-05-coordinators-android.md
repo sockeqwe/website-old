@@ -158,11 +158,11 @@ Shouldn't it be just the glue to present data?
 That's why we introduce a Coordinator. 
 Yet another level of abstraction? 
 Is it really worthwhile? 
-Well, maybe not for a small app but for more complex apps or apps that run A/B tests this could be useful. 
+Maybe not for a small app but for more complex apps or apps that run A/B tests this could be useful. 
 Even if a user can create an account and sign in you have already some major navigation logic -
 somewhere you have to check if the user is logged in or not and navigate to the login screen or to the main screen, right?
 A Coordinator can be useful in this case.
-Also note, that Coordinators are not helping you to write less code, they help you to organize in-app navigation related code by giving it a home (and take that responsibility out of View or ViewModel).
+Also note that Coordinators are not helping you to write less code, they help you to organize in-app navigation related code by giving it a home (and take that responsibility out of View or ViewModel).
 
 A Coordinator just knows to which screen to go next. For example by clicking on the checkout button the Coordinator get's notified and knows where to go next (Checkout). 
 It's that simple. 
