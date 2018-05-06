@@ -393,7 +393,7 @@ class OnboardingFlowCoordinator(
 {% endhighlight %}
 
 Onboarding starts with  **OnboardingFlowCoordinator.start()** which shows WelcomeFragment (WelcomeViewModel).
-Once the use clicks the "next button" **OnboardingFlowCoordinator.welcomeShown()** is invoked which then shows the next screen (PersonalInterestFragment + PersonalInterestViewModel) where the user can choose personal preferences, in that case news categories he is interested in.
+Once the use clicks the "next button" **OnboardingFlowCoordinator.welcomeShown()** is invoked which then shows the next screen (PersonalInterestFragment + PersonalInterestViewModel) where the user can set categories of news he is interested in.
 Once categories are selected and user clicked "next button" **OnboardingFlowCoordinator.onboardingCompleted()** is invoked which is then actually invoking **RootFlowCoordinator.onboardingCompleted()** which then starts then calls **NewsFlowCoordinator.start()**.
 This is how we solve parent-child relations with coordinators: with lambdas (or callbacks).
 
