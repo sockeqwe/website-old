@@ -194,7 +194,7 @@ class NewsFlowCoordinator (val navigator : Navigator) {
 {% endhighlight %}
 
 A Flow contains one or more screens. 
-In our case the "NewsFlow" consists of two screens: news list and read the full news article.
+In our case the "news flow" consists of two screens: news list and read the full news article.
 That's it. It's so simple we don't need a library. 
 Whenever we start the app, we call **NewsFlowCoordinator.start()** to show the list of all news articles. 
 Once the user clicks on a news article we show that news article.
