@@ -244,7 +244,7 @@ If you are not an Kotlin expert let me quickly explain you what's going on here.
 Whenever the user clicks on a item in the news list **viewModel.newsArticleClicked(id)** gets called which then invokes **onNewsItemClicked(id)** which is actually the function **readNewsArticle(id)** of NewsFlowCoordinator. 
 So a click on a news list item triggers eventually **NewsFlowCoordinator.readNewsArticle(id)**.
 
-The next question is how is **Navigator** implemented?
+The next question is: how is **Navigator** implemented?
 This is mostly left as an exercise for the reader because it depends on your concrete use case and personal preferences.
 In this example we use a single Activity with multiple Fragments (each screen is a Fragment with corresponding ViewModel). 
 Hence a very naive implementation could look like this:
