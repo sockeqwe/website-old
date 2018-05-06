@@ -440,8 +440,8 @@ You can find the source code [on Github](https://github.com/sockeqwe/Coordinator
 </p>
 
 **Pro Tip:**
-You can use kotlin to create readable DSL's for your Coordinators. 
-This makes your in-app navigation code even more readable because basically you a creating navigation graph by the help of Kotlin DSL's.
+With Kotlin you can create nice DSLs for your Coordinators. 
+This makes your in-app navigation code even more readable because basically you are creating a navigation graph.
 
 {% highlight java %}
 newsFlowCoordinator(navigator, abTest) {
