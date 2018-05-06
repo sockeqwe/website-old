@@ -466,7 +466,7 @@ newsFlowCoordinator(navigator, abTest) {
 
 
 ## Conclusion
-Coordinators can help you to organize in-app navigation logic so that these parts are loosely coupled components with single responsibility and great testability. 
+Coordinators can help you to organize in-app navigation logic by creating loosely coupled components with single responsibility and great testability. 
 Coordinators can be scoped similar to singleton because they are stateless and you don't create new navigation flows at runtime, therefore you can "hard code" all your in app navigation flows with very readable Kotlin DSL's. 
 Are Coordinators on Android ready for prime time? 
 As already said, this is not a library, this is just an idea and concept. 
