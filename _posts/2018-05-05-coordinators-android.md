@@ -428,8 +428,8 @@ class NewsFlowCoordinator (
 
 Again, no navigation logic is in your View or ViewModel but rather the Coordinator knows how to deal with A/B tests.
 Do you have to add the **InAppPurchaseFragment** to the onboarding flow too? 
-You can do that because the InAppPurchaseFragment nor the corresponding ViewModel is coupled to navigation related code.
-It is possible to reuse them in other flows.
+You can do that because the InAppPurchaseFragment nor the corresponding ViewModel is coupled to navigation related code and therefore it is possible to reuse Fragments and ViewModel in other flows.
+All we have to pass to the ViewModel is a different lambda as navigation callback.
 Is your A/B test bigger than just adding one screen, for example two different onboarding flows you want to A/B test? 
 No problem, just create a OnboardingFlowACoordinator and OnboardingFlowBCoordinator. 
 
