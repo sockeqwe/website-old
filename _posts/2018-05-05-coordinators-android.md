@@ -287,7 +287,7 @@ class MainActivity : AppCompatActivity() {
 }
 {% endhighlight %}
 
-Again, the presented Navigator implementation is not perfect at all. 
+The presented Navigator implementation is not perfect at all. 
 The focus of this blog post is the Coordniator Pattern, not the Navigator implementation.
 One thing to note though is that since Navigator and NewsFlowCoordinator are stateless they can be in application wide scope (think @Singleton scope in Dagger) and can be instantiated for example in Application.onCreate().
 
