@@ -202,7 +202,7 @@ We still have a Navigator (we will talk about it in a minute) where we delegate 
 A Coordinator is completely stateless, independent from the underlying back stack implementation and follows single responsibility principle: It just handles where to go next.
 
 The next question is how do we connect a Coordinator with our ViewModel? 
-We follow the push don't pull principle: We pass into the ViewModel a lambda (think callback or click-listener) that is triggered once the user clicks on a news article in the list like that:
+We follow the push don't pull principle: We pass a lambda (think callback or click-listener) into the ViewModel that is triggered once the user clicks on a news article in the UI like that:
 
 {% highlight java %}
 class NewsListViewModel(
