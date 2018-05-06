@@ -320,7 +320,7 @@ class LoginFlowCoordinator(
 class LoginViewModel(
   val usermanager: Usermanager,
   var onSignUpClicked: (() -> Unit)?,
-  var onForgotPasswordClicked: (() -> Unit)?
+  var onForgotPasswordClicked: ( () -> Unit )?
 ) {
   fun login(username : String, password : String){
     usermanager.login(username, password)
