@@ -16,7 +16,6 @@ The [Coordinator Pattern](http://khanlou.com/2015/01/the-coordinator/) is a comm
 which seems to be inspired by [Application Controller](https://martinfowler.com/eaaCatalog/applicationController.html) (part of the book [Patterns of Enterprise Application Architecture](https://martinfowler.com/books/eaa.html) Martin Fowler et al.).
 
 The goals of this pattern is:
-
 - Avoiding so called Massive ViewControllers (think God-Activity) with way to much responsibilities.
 - Give in-app navigation flow logic a home.
 - Reuse ViewControllers (think Activity of Fragments) because they are not coupled to in-app navigation.
