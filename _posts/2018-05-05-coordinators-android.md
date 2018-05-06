@@ -176,7 +176,7 @@ Therefore, I would like to go back to the roots of a Coordinator: A Coordinator 
 Finally: let's talk about concrete Coordinators. 
 Let's say we have to build a small application for a newspaper with a simple in-app navigation flow:
 As a user you see a list of news articles.
-Once you click on a article the app opens a new screen where you can read the full article.
+Once you click on an article the app opens a new screen where you can read the full article.
 
 ![NewsFlow](/images/coordinators/NewsSimpleFlow.png)
 
