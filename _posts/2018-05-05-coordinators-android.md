@@ -164,7 +164,8 @@ somewhere you have to check if the user is logged in or not and navigate to the 
 A Coordinator can be useful in this case.
 Also note that Coordinators are not helping you to write less code, they help you to organize in-app navigation related code by giving it a home (and take that responsibility out of View or ViewModel).
 
-A Coordinator just knows to which screen to go next. For example by clicking on the checkout button the Coordinator gets notified and knows where to go next (Checkout). 
+The idea is simple: a Coordinator just knows to which screen to go next. 
+For example by clicking on the checkout button the Coordinator gets notified and knows where to go next (Checkout). 
 It's that simple. 
 However, in iOS development it seems to be common to use Coordinator to create ViewControllers, service locator (or dependency injection) and back stack management. 
 That's quite a bit for a Coordinator (single responsibility?). 
