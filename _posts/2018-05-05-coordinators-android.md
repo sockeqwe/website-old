@@ -164,7 +164,7 @@ somewhere you have to check if the user is logged in or not and navigate to the 
 A Coordinator can be useful in this case.
 Also note that Coordinators are not helping you to write less code, they help you to organize in-app navigation related code by giving it a home (and take that responsibility out of View or ViewModel).
 
-A Coordinator just knows to which screen to go next. For example by clicking on the checkout button the Coordinator get's notified and knows where to go next (Checkout). 
+A Coordinator just knows to which screen to go next. For example by clicking on the checkout button the Coordinator gets notified and knows where to go next (Checkout). 
 It's that simple. 
 However, in iOS development it seems to be common to use Coordinator to create ViewControllers, service locator (or dependency injection) and back stack management. 
 That's quite a bit for a Coordinator (single responsibility?). 
@@ -227,7 +227,7 @@ class NewsListViewModel(
 {% endhighlight %}
 
 **onNewsItemClicked: (Int) -> Unit** is just a lambda that takes an integer as input and returns Unit. 
-We pass it as nullable, hence the surounding **( ... )?** into our ViewModel, to be able to clear the reference to that lambda and to avoid memory leaks.
+We pass it as nullable, hence the surrounding **( ... )?** into our ViewModel, to be able to clear the reference to that lambda and to avoid memory leaks.
 The next question is: what is actually happening by invoking this lambda? 
 It's the navigation flow handler, in other words: a callback to the **NewsFlowCoordinator**.
 Whoever creates the **NewsListViewModel** (i.e. Dagger) has to pass in the function **NewsFlowCoordinator::readNewsArticle** like this:
