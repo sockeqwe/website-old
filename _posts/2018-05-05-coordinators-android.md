@@ -18,7 +18,7 @@ which seems to be inspired by [Application Controller](https://martinfowler.com/
 The goals of this pattern is:
 - Avoiding so called Massive ViewControllers (think God-Activity) with way to much responsibilities.
 - Give in-app navigation flow logic a home.
-- Reuse ViewControllers (think Activity of Fragments) because they are not coupled to in-app navigation.
+- Reuse ViewControllers (think Activity or Fragments) because they are not coupled to in-app navigation.
 
 
 Before we get deeper into what the Coordinator Pattern is and how it can be implemented, let's take a look at what the current state of in-app navigation in android development is.
