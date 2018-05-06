@@ -199,7 +199,7 @@ That's it. It's so simple we don't need a library.
 Whenever we start the app, we call **NewsFlowCoordinator.start()** to show the list of all news articles. 
 Once the user clicks on a news article **NewsFlowCoordinator.readNewsArticle(id)**  gets called and that news article gets displayed.
 We still have a Navigator (we will talk about it in a minute) where we delegate the actual "screen swapping" work to.
-This a Coordinator is completely stateless, independent from the underlying back stack implementation and follows single responsibility principle: It just handles where to go next.
+A Coordinator is completely stateless, independent from the underlying back stack implementation and follows single responsibility principle: It just handles where to go next.
 
 The next question is how do we connect a Coordinator with our ViewModel? 
 We follow the push don't pull principle: We don't pass pass into the ViewModel a lambda (think callback or click-listener) that is triggered once the user clicks on a news article in the list like that:
