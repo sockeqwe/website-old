@@ -319,7 +319,7 @@ class LoginFlowCoordinator(
 {% highlight java %}
 class LoginViewModel(
   val usermanager: Usermanager,
-  var onSignUpClicked: (() -> Unit)?,
+  var onSignUpClicked: ( () -> Unit )?,
   var onForgotPasswordClicked: ( () -> Unit )?
 ) {
   fun login(username : String, password : String){
@@ -330,9 +330,9 @@ class LoginViewModel(
 }
 {% endhighlight %}
 
-There are two interesting parts in **LoginViewModel**: First for every kind of navigation we define it's own lambda (sign up and forgot password) that gets invoked once the user clicks on the corresponding UI widget.
+There are two things in **LoginViewModel** worthwhile to discuss: First for every kind of navigation we define it's own lambda (sign up and forgot password) that gets invoked once the user clicks on the corresponding UI widget.
 But why is there no "login successful" lambda? 
-Although this is yet another implementation detail (there totally could be a "login successful" lambda) I think it makes more sense to do the following: We add a new **RootFlowCoordinator**  and observer the usermanager (business logic) for changes:
+Although this is yet another implementation detail (there totally could be a "login successful" lambda) I think it makes more sense to do the following: We add a new **RootFlowCoordinator**  and observer the Usermanager (business logic) for changes:
 
 {% highlight java %}
 class RootFlowCoordinator(
