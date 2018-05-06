@@ -10,10 +10,10 @@ categories:
   - Android
 tags: [android, software-architecture, in-app-navigation]
 ---
-Over the last years we have established best practices for writing android apps: clean architecture, use case, MVP, MVVM, MVI, and so on. But what about in-app navigation? In this blog post I would like to talk about the Coordinator Pattern and how we can apply this pattern in android development to organize our in-app navigation code.
+Over the last years we have established best practices for writing android apps: clean architecture, architectural patterns like MVP, MVVM, MVI, Repository Pattern and so on. But what about in-app navigation? In this blog post I would like to talk about the Coordinator Pattern and how we could apply this pattern in android development to organize our in-app navigation code.
  
 The [Coordinator Pattern](http://khanlou.com/2015/01/the-coordinator/) is a common pattern in iOS development introduced by Soroush Khanlou to help organizing in-app navigation code, 
-which seems to be inspired by [Application Controller](https://martinfowler.com/eaaCatalog/applicationController.html) (part of the book [Patterns of Enterprise Application Architecture]/(https://martinfowler.com/books/eaa.html) Martin Fowler et al.).
+which seems to be inspired by [Application Controller](https://martinfowler.com/eaaCatalog/applicationController.html) (part of the book [Patterns of Enterprise Application Architecture](https://martinfowler.com/books/eaa.html) Martin Fowler et al.).
 
 The goals of this pattern is:
 
