@@ -362,11 +362,12 @@ class RootFlowCoordinator(
 }
 {% endhighlight %}
 
-As the name already suggests, RootFlowCoordinator becomes our new starting point (not NewsFlowCoordinator.start() anymore).
-Let's take a closer look at the **RootFlowCoordinator**. 
+As the name already suggests, **RootFlowCoordinator** becomes our new starting point (not NewsFlowCoordinator.start() anymore).
+Let's take a closer look at the RootFlowCoordinator. 
 As already mentioned RootFlowCoordinator observes the **Usermanager** whether or not the current user is authenticated.
 If user is not authenticated, then we start the **LoginFlowCoordinator**. 
-If the user is authenticated (note that if the login in LoginFragment was successful it will propagated to this piece of code, hence no "login successful" lambda in LoginViewModel) then we check if the user already did the onboarding (we will talk about it in a minute) and start the **NewsFlowCoordinator**, otherwise we start the **OnboardingFlowCoordinator**.
+If the user is authenticated (note that if the login in LoginFragment was successful it will propagated to this piece of code, hence no "login successful" lambda in LoginViewModel) then we check if the user already did the onboarding (we will talk about it in a minute) and start the **NewsFlowCoordinator**, otherwise we start the **OnboardingFlowCoordinator**. 
+Please note that starting a coordinator doesnt mean creating a new instance, it means calling the start() method.
 Let's take a look at the Onboarding flow
 
 ![OnboardingFlow](/images/coordinators/OnboardingFlow.png)
