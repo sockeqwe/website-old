@@ -75,7 +75,7 @@ Let me ask you a question: if you use MVP or MVVM where do you put in-app naviga
 
 - The layer below Presenter (let's call it business logic)? Not a good idea because the chances are high that you are going to reuse or share parts of your business logic in other different ViewModels or Presenters.
 
-- In View layer? Do you like playing ping pong between View and Presenter (or ViewModel)
+- In View layer? Do you like playing ping pong between View and Presenter (or ViewModel)?
 
 {% highlight java %}
 class ShoppingCartActivity : ShoppingCartView, Activity() {
