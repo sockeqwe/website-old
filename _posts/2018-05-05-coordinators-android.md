@@ -10,10 +10,10 @@ categories:
   - Android
 tags: [android, software-architecture, in-app-navigation]
 ---
-Over the last years we have established best practices for writing android apps: clean architecture, architectural patterns like MVP, MVVM, MVI, Repository Pattern and so on. But what about in-app navigation? In this blog post I would like to talk about the Coordinator Pattern and how we could apply this pattern in android development to organize our in-app navigation code.
+Over the last years we have established best practices for writing android apps: clean architecture, architectural patterns like MVP, MVVM, MVI, Repository pattern and so on. But what about in-app navigation? In this blog post I would like to talk about the Coordinator pattern and how we could apply this pattern in android development to organize our in-app navigation code.
  
-The [Coordinator Pattern](http://khanlou.com/2015/01/the-coordinator/) is a common pattern in iOS development introduced by Soroush Khanlou to help organizing in-app navigation code, 
-which seems to be inspired by [Application Controller](https://martinfowler.com/eaaCatalog/applicationController.html) (part of the book [Patterns of Enterprise Application Architecture](https://martinfowler.com/books/eaa.html) Martin Fowler et al.).
+The [Coordinator pattern](http://khanlou.com/2015/01/the-coordinator/) is a common pattern in iOS development introduced by Soroush Khanlou to help organizing in-app navigation code, 
+which seems to be inspired by [Application Controller](https://martinfowler.com/eaaCatalog/applicationController.html) (part of the book [patterns of Enterprise Application Architecture](https://martinfowler.com/books/eaa.html) Martin Fowler et al.).
 
 The goals of this pattern is:
 - Avoiding so called Massive ViewControllers (think God-Activity) with way to much responsibilities.
@@ -21,7 +21,7 @@ The goals of this pattern is:
 - Reuse ViewControllers (think Activity or Fragments) because they are not coupled to in-app navigation.
 
 
-Before we get deeper into what the Coordinator Pattern is and how it can be implemented, let's take a look at what the current state of in-app navigation in android development is.
+Before we get deeper into what the Coordinator pattern is and how it can be implemented, let's take a look at what the current state of in-app navigation in android development is.
 
 ## Navigation logic in Activity or Fragments
 Since the Android SDK requires an Context to start a new Activity (or FragmentManager to put a new Fragment on the back stack) it's quite common to put in-app navigation code directly into your Activity like this (you can find such code in the official android [guides](https://developer.android.com/training/basics/firstapp/starting-activity) provided by Google):
@@ -172,7 +172,7 @@ That's quite a bit for a Coordinator (single responsibility?).
 On Android the operating system instantiates Activities, we have Dagger for dependency injection and we can use Activity or Fragment back stack.
 Therefore, I would like to go back to the roots of a Coordinator: A Coordinator just knows where to go next.
 
-## Case Study: A newspaper app using the Coordinator Pattern
+## Case Study: A newspaper app using the Coordinator pattern
 Finally: let's talk about concrete Coordinators. 
 Let's say we have to build a small application for a newspaper with a simple in-app navigation flow:
 As a user you see a list of news articles.
@@ -288,7 +288,7 @@ class MainActivity : AppCompatActivity() {
 {% endhighlight %}
 
 The presented Navigator implementation is not perfect at all. 
-The focus of this blog post is the Coordinator Pattern, not the Navigator implementation.
+The focus of this blog post is the Coordinator pattern, not the Navigator implementation.
 One thing to note though is that since Navigator and NewsFlowCoordinator are stateless they can be in application wide scope (think @Singleton scope in Dagger) and can be instantiated for example in Application.onCreate().
 
 So let's add user authentication functionality to our newspaper app. 
@@ -475,7 +475,7 @@ I dont know, ultimately it's your app and you know best if there is need for the
 Maybe it's good idea is to create a small sample application to try this pattern out.
 
 ## FAQ
- - What about Model-View-Intent? Does the Coordinator Pattern works with MVI too? Sure, take a look [here](http://hannesdorfmann.com/android/mosby3-mvi-8)
- - What if I don't want to use Fragments at all? How hard is it to write my own back stack following Coordinator Pattern and just using ViewGroups? Stay tuned, I'm working on a prove of concept and will share it in my blog.
+ - What about Model-View-Intent? Does the Coordinator pattern works with MVI too? Sure, take a look [here](http://hannesdorfmann.com/android/mosby3-mvi-8)
+ - What if I don't want to use Fragments at all? How hard is it to write my own back stack following Coordinator pattern and just using ViewGroups? Stay tuned, I'm working on a prove of concept and will share it in my blog.
  - Do I have to use a single Activity? No, use whatever you want to do. You can have multiple activities with multiple fragments, whatever works best for you. These implementation details are hidden behind the Navigator class
  - Do I have to have one giant Navigator class? Absolutely not! Create multiple Navigator classes (i.e. one for each flow) to keep them small and maintainable.
