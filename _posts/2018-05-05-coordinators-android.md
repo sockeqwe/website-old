@@ -471,8 +471,8 @@ Coordinators can be scoped similar to singleton because they are stateless and y
 Are Coordinators on Android ready for prime time? 
 As already said, this is not a library, this is just an idea and concept. 
 Is this idea applicable in your app?
-I think so but ultimately it's your app and you know best if there is need for the Coordinator pattern and how easy it is to integrate it into your existing app architecture.
-Maybe it's good idea is to create a small sample application to try out this pattern.
+I dont know, ultimately it's your app and you know best if there is need for the Coordinator pattern and how easy it is to integrate it into your existing app architecture.
+Maybe it's good idea is to create a small sample application to try this pattern out.
 
 ## FAQ
  - What about Model-View-Intent? Does the Coordinator Pattern works with MVI too? Sure, take a look [here](http://hannesdorfmann.com/android/mosby3-mvi-8)
