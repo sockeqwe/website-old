@@ -1,11 +1,11 @@
 ---
 layout: post
 published: true
-title: Organizing In-App Navigation with Coordinators
+title: In-App Navigation with Coordinators
 mathjax: false
 featrued: false
 comments: true
-headline: Organizing In-App Navigation with Coordinators
+headline: In-App Navigation with Coordinators
 categories:
   - Android
 tags: [android, software-architecture, in-app-navigation]
