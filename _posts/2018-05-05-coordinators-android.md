@@ -333,7 +333,8 @@ class LoginViewModel(
 There are two things in **LoginViewModel** worthwhile to discuss: First for every kind of navigation we define it's own lambda (sign up and forgot password) that gets invoked once the user clicks on the corresponding UI widget.
 But why is there no "login successful" lambda? 
 How do we trigger navigation to next screen after the user is authenticated?  
-This is yet another implementation detail (there totally could be a "login successful" lambda) I think it makes more sense to do the following: We add a new **RootFlowCoordinator**  and observe the Usermanager (business logic) for changes:
+This is yet another implementation detail (there totally could be a "login successful" lambda) I think it makes more sense to do the following: We add a new **RootFlowCoordinator**  and observe the **Usermanager** (business logic) for changes. 
+The Usermanager provides API to sign in and to subscribe (observe, i.e. RxJava) for the current user.
 
 {% highlight java %}
 class RootFlowCoordinator(
