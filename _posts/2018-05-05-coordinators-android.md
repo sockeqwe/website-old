@@ -151,7 +151,7 @@ Please note that the code snipped shown above can be translated to Presenter too
 Also, we ignore the fact that Navigator could leak the Activity if it internally holds a reference to it (that is solvable somehow with a workaround).
 
 ## Coordinators
-So where do we put in-app navigation logic? Business Logic is not a good idea (as described above) and playing ping-pong between View and ViewModel (or Presenter) might work but doesn't seem to be a elegant solution. 
+So where do we put in-app navigation logic? Business Logic is not a good idea (as described above) and playing ping pong between View and ViewModel (or Presenter) might work but doesn't seem to be a elegant solution. 
 Moreover, View still has navigation related responsibilities even if it's just calling **navigator**. 
 Therefore, doing navigation in the ViewModel seems to be a considerable alternative but is it really the responsibility of the ViewModel (or Presenter) to care about navigation? 
 Shouldn't it be just the glue to present data?
