@@ -295,7 +295,7 @@ So let's add user authentication functionality to our newspaper app.
 We define a new login screen (LoginFragment + LoginViewModel, we skip "forgot password" and "sign up" in this blog post) and a LoginFlowCoordinator.  
 Why not add this functionality to **NewsFlowCoordinator**?
 We don't want to have a God-Coordinator, right? 
-Also login is a different navigation flow then reading news, isn't it?
+Also, login related screens belong to a different navigation flow (not reading news), right?
 
 {% highlight java %}
 class LoginFlowCoordinator(
