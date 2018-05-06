@@ -71,7 +71,7 @@ Okay slightly better but can we do it even better?
 
 
 ## Navigation in MVVM or MVP
-Let me ask you a question: if you use MVP or MVVM wher do you put in-app navigation logic? 
+Let me ask you a question: if you use MVP or MVVM where do you put in-app navigation logic? 
 
 - The layer below Presenter (let's call it business logic)? Not a good idea because the chances are high that you are going to reuse or share parts of your business logic in other different ViewModels or Presenters.
 
