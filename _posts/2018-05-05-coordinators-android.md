@@ -228,7 +228,7 @@ class NewsListViewModel(
 {% endhighlight %}
 
 **onNewsItemClicked: (Int) -> Unit** is just a lambda that takes an integer as input and returns Unit. 
-We pass it as nullable, hence the surrounding **( ... )?** into our ViewModel, to be able to clear the reference to that lambda and to avoid memory leaks.
+We pass that lambda as nullable into our ViewModel, hence the surrounding **( ... )?**. This allows us to clear the reference to that lambda to avoid memory leaks.
 The next question is: what is actually happening by invoking this lambda? 
 It's the navigation flow handler, in other words: a callback to the **NewsFlowCoordinator**.
 Whoever creates the **NewsListViewModel** (i.e. Dagger) has to pass in the function **NewsFlowCoordinator::readNewsArticle** like this:
