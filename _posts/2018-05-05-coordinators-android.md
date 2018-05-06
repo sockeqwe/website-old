@@ -332,8 +332,7 @@ class LoginViewModel(
 
 There are two interesting parts in **LoginViewModel**: First for every kind of navigation we define it's own lambda (sign up and forgot password) that gets invoked once the user clicks on the corresponding UI widget.
 But why is there no "login successful" lambda? 
-Although this is yet another implementation detail and there totally could be a "login successful" lambda,
-but I think it makes more sense to do the following: We add a **RootFlowCoordinator** and observer the usermanager for changes:
+Although this is yet another implementation detail (there totally could be a "login successful" lambda) I think it makes more sense to do the following: We add a new **RootFlowCoordinator**  and observer the usermanager (business logic) for changes:
 
 {% highlight java %}
 class RootFlowCoordinator(
@@ -361,6 +360,7 @@ class RootFlowCoordinator(
 }
 {% endhighlight %}
 
+As the name already suggests, RootFlowCoordinator becomes our new starting point (not NewsFlowCoordinator.start() anymore).
 Let's take a closer look at the **RootFlowCoordinator**. 
 As already mentioned RootFlowCoordinator observes the **Usermanager** whether or not the current user is authenticated.
 If user is not authenticated, then we start the **LoginFlowCoordinator**. 
