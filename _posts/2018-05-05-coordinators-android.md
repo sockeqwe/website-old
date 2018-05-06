@@ -291,7 +291,7 @@ The presented Navigator implementation is not perfect at all.
 The focus of this blog post is the Coordinator Pattern, not the Navigator implementation.
 One thing to note though is that since Navigator and NewsFlowCoordinator are stateless they can be in application wide scope (think @Singleton scope in Dagger) and can be instantiated for example in Application.onCreate().
 
-So let's add user authentication functionality to this sample app. 
+So let's add user authentication functionality to our newspaper app. 
 We define a new login screen (LoginFragment + LoginViewModel, we skip Forgot Password and sign up in this blog post) and a LoginFlowCoordinator.  
 Why not add this functionality to **NewsFlowCoordinator**?
 We don't want to have a God-Coordinator, right? 
