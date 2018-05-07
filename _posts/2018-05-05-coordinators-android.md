@@ -479,3 +479,13 @@ Maybe it's good idea is to create a small sample application to try this pattern
  - What if I don't want to use Fragments at all? How hard is it to write my own back stack that plays nice with the Coordinator pattern (i.e. just using custom ViewGroups)? Stay tuned, I'm working on a prove of concept and will share it in my blog. Hint: Finite state machines FTW.
  - Do I have to use a single Activity? No, use whatever you want to do. You can have multiple activities with multiple fragments, whatever works best for you. These implementation details are hidden behind the Navigator class
  - Do I have to have one giant Navigator class? Absolutely not! Create multiple Navigator classes (i.e. one for each flow) to keep them small and maintainable.
+ - What about animations like shared element transitions? 
+ Don't put them directly into your Fragment (or Activity or ViewGroup, whatever you use in your app) because if you do so your Fragment is highly coupled to the "previous" or "next" fragment and that is exactly what we want to avoid. 
+Put shared element transition code (or animation code in general) in your Navigator. 
+But how dows a Navigator knows when it's time to start the animation? 
+Let's assume you have to navigate from **Fragment A** to **Fragment B** and you want to show a shared element transition. 
+Add a [FragmentLifecycleCallback](https://developer.android.com/reference/android/support/v4/app/FragmentManager.FragmentLifecycleCallbacks) to Fragment so that you can listen for **onFragmentViewCreated(v : View)**. 
+Next do pretty the same as you would do directly in your Fragment: 
+Add a **OnPreDrawListener** to wait until everything is ready and call `startPostponedEnterTransition()`. 
+You can apply the same idea for Activities by using [ActivityLifecycleCallbacks](https://developer.android.com/reference/android/app/Application.ActivityLifecycleCallbacks) or ViewGroups with OnHierarchyChangeListener and others.
+Just be careful to unregister listeners to avoid memory leaks. 
