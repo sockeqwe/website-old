@@ -486,6 +486,6 @@ But how dows a Navigator knows when it's time to start the animation?
 Let's assume you have to navigate from **Fragment A** to **Fragment B** and you want to show a shared element transition. 
 Add a [FragmentLifecycleCallback](https://developer.android.com/reference/android/support/v4/app/FragmentManager.FragmentLifecycleCallbacks) to Fragment so that you can listen for **onFragmentViewCreated(v : View)**. 
 Next do pretty the same as you would do directly in your Fragment: 
-Add a **OnPreDrawListener** to wait until everything is ready and call `startPostponedEnterTransition()`. 
+Add a **OnPreDrawListener** to wait until everything is ready and call **startPostponedEnterTransition()**. 
 You can apply the same idea for Activities by using [ActivityLifecycleCallbacks](https://developer.android.com/reference/android/app/Application.ActivityLifecycleCallbacks) or ViewGroups with OnHierarchyChangeListener and others.
 Just be careful to unregister listeners to avoid memory leaks. 
