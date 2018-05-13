@@ -472,10 +472,11 @@ Are Coordinators on Android ready for prime time?
 As already said, this is not a library, this is just an idea and concept. 
 Is this idea applicable in your app?
 I dont know, ultimately it's your app and you know best if there is need for the Coordinator pattern and how easy it is to integrate it into your existing app architecture.
-Maybe it's good idea is to create a small sample application to try this pattern out.
+Maybe it's a good idea to create a small sample application to try this pattern out.
 
 ## FAQ
  - What about Model-View-Intent? Does the Coordinator pattern work well with MVI too? Sure, take a look [here](http://hannesdorfmann.com/android/mosby3-mvi-8)
+ - What about **Navigation Controller** from Android Jetpack? This is an implementation detail. Instead of using Navigator use Navigation Controller (or inside your Navigator implementation: rather than a FragmentTransactions directly use use Navigation Controller).
  - What if I don't want to use Fragments at all? How hard is it to write my own back stack that plays nice with the Coordinator pattern (i.e. just using custom ViewGroups)? Stay tuned, I'm working on a prove of concept and will share it in my blog. Hint: Finite state machines FTW.
  - Do I have to use a single Activity? No, use whatever you want to do. You can have multiple activities with multiple fragments, whatever works best for you. These implementation details are hidden behind the Navigator class
  - Do I have to have one giant Navigator class? Absolutely not! Create multiple Navigator classes (i.e. one for each flow) to keep them small and maintainable.
